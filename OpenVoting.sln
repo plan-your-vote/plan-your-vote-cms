@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{AD23A804-F15B-46E8-8CF9-00FA2A8EE98D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "Web\Web.csproj", "{AD23A804-F15B-46E8-8CF9-00FA2A8EE98D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{F32E8920-DF9C-4F4E-8D42-D3B42A429EC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{F32E8920-DF9C-4F4E-8D42-D3B42A429EC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spa", "Spa\Spa.csproj", "{35A3F588-3BE4-41BA-A5C5-96D7EAA3F722}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spa", "Spa\Spa.csproj", "{35A3F588-3BE4-41BA-A5C5-96D7EAA3F722}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelLibrary", "ModelLibrary\ModelLibrary.csproj", "{782D1B2B-1574-4F5E-874C-415400C3B848}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{35A3F588-3BE4-41BA-A5C5-96D7EAA3F722}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35A3F588-3BE4-41BA-A5C5-96D7EAA3F722}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35A3F588-3BE4-41BA-A5C5-96D7EAA3F722}.Release|Any CPU.Build.0 = Release|Any CPU
+		{782D1B2B-1574-4F5E-874C-415400C3B848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{782D1B2B-1574-4F5E-874C-415400C3B848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{782D1B2B-1574-4F5E-874C-415400C3B848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{782D1B2B-1574-4F5E-874C-415400C3B848}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
