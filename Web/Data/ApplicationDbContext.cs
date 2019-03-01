@@ -26,12 +26,12 @@ namespace Web.Data
                 modelBuilder.Entity<IssueOption>().HasKey(io => new { io.IssueTitle, io.OptionTitle });
             }
 
-            DbSet<BallotIssue> BallotIssues { get; set; }
-            DbSet<CandiateRace> CandiateRaces { get; set; }
-            DbSet<Candidate> Candidates { get; set; }
-            DbSet<Contact> Contacts { get; set; }
-            DbSet<IssueOption> IssueOptions { get; set; }
-            DbSet<Organization> Organizations { get; set; }
-            DbSet<Race> Races { get; set; }
+            public DbSet<BallotIssue> BallotIssues { get; set; }
+            public DbSet<CandiateRace> CandiateRaces { get; set; }
+            public DbSet<Candidate> Candidates { get; set; }
+            public DbSet<Contact> Contacts { get; set; }
+            public DbSet<IssueOption> IssueOptions { get; set; }
+            public DbSet<Organization> Organizations { get; set; }
+            public DbSet<Race> Races { get; set; }
         }
 }
