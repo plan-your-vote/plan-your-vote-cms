@@ -1,0 +1,23 @@
+[
+  {
+    "candidateId": 1,
+    "firstName": "Mike",
+    "lastName": "Hansen",
+    "picture": "https://vancouver.ca/plan-your-vote/img/mayor1.jpg",
+    "organization": ""
+  },
+  {
+    "candidateId": 2,
+    "firstName": "John",
+    "lastName": "Yano",
+    "picture": "https://vancouver.ca/plan-your-vote/img/mayor2.jpg",
+    "organization": ""
+  },
+  {
+    "candidateId": 3,
+    "firstName": "David",
+    "lastName": "Chen",
+    "picture": "https://vancouver.ca/plan-your-vote/img/mayor3_large.jpg",
+    "organization": "ProVancouver"
+  }
+]
