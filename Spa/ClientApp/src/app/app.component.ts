@@ -4,10 +4,11 @@ import { TranslateService } from './services/translate.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-  title = 'app';
+
+  title = 'ClientApp';
 
   constructor(private translate: TranslateService) {
     translate.use('en').then(() => {
@@ -18,4 +19,5 @@ export class AppComponent {
   setLang(lang: string) {
     this.translate.use(lang);
   }
+
 }

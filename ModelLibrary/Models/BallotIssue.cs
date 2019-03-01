@@ -9,7 +9,7 @@ namespace ModelLibrary.Models
     {
         [Key]
         string issueTitle { get; set; }
-        string desciption { get; set; }
+        string description { get; set; }
         
         List<IssueOption> options { get; set; }
     }
