@@ -8,8 +8,8 @@ namespace ModelLibrary.Models
     public class Race
     {
         [Key]
-        string positionName { get; set; }
-        int numberNeeded { get; set; }
+        public string PositionName { get; set; }
+        public int NumberNeeded { get; set; }
 
         public List<CandiateRace> CandidateRaces { get; } = new List<CandiateRace>();
     }
