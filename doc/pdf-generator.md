@@ -3,37 +3,10 @@ This document let you to set up Angular PDF Generator on the project and how to 
 
 ## Table of Contents
 - [Angular Library](#angular-library)
-- [Set Up](#set-up)
+- [How to Use](#how-to-use)
 
 ## Angular Library
-The project will be using `angular-pdf-generator` which resides on npm.
+The project will be using `jspdf` and `html2canvas` which resides on npm.
 
-## Set Up
-- Run `$ npm install angular-pdf-generator --save`
-- In `App.Module`, do like following code.
-```
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
- 
-import { AppComponent } from './app.component';
- 
-// Import your library
-import { SampleModule } from 'angular-pdf-generator';
- 
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
- 
-    // Specify your library as an import
-    LibraryModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-```
-
-The Guide is from this [website](https://www.npmjs.com/package/angular-pdf-generator).
+## How to Use
+You can look up this [website](https://www.c-sharpcorner.com/article/convert-html-to-pdf-using-angular-6/),
