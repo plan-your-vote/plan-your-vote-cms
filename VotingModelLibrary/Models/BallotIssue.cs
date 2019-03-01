@@ -6,11 +6,11 @@ using System.Text;
 namespace ModelLibrary.Models
 {
     public class BallotIssue
-    {
+    {   
         [Key]
-        string issueTitle { get; set; }
-        string desciption { get; set; }
+        public string IssueTitle { get; set; }
+        public string Description { get; set; }
         
-        List<IssueOption> options { get; set; }
+        ICollection<IssueOption> options { get; set; }
     }
 }
