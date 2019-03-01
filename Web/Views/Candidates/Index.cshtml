@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.LastName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Picture)
+                <img width="80" height="80" src="@Html.DisplayFor(modelItem => item.Picture)">
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Biography)
@@ -49,7 +49,7 @@
                 @Html.DisplayFor(modelItem => item.Organization.Name)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a> |
+                <!--<a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a>|--> 
                 <a asp-action="Details" asp-route-id="@item.CandidateId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.CandidateId">Delete</a>
             </td>
