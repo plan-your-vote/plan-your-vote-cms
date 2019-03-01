@@ -33,5 +33,5 @@ namespace Web.Data
             DbSet<IssueOption> IssueOptions { get; set; }
             DbSet<Organization> Organizations { get; set; }
             DbSet<Race> Races { get; set; }
-        }
+    }
 }
