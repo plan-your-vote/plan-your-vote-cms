@@ -260,3 +260,6 @@ paket-files/
 __pycache__/
 *.pyc
 .vscode/
+
+# for mac users
+*.DS_Store
