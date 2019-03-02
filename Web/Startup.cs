@@ -53,7 +53,7 @@ namespace Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, ApplicationDbContext context, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -88,6 +88,7 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            DummyData.Initialize(context);
         }
     }
 }
