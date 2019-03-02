@@ -8,9 +8,9 @@ namespace ModelLibrary.Models
     public class Organization
     {
         [Key]
-        string name { get; set; }
-        string description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
 
-        List<Candidate> members { get; set; }
+        List<Candidate> Members { get; set; }
     }
 }
