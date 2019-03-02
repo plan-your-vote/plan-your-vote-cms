@@ -1,4 +1,4 @@
-<body>
+<body id="ConvertibleContent">
   <app-nav-menu></app-nav-menu>
   <div class="container">
     <h3>
@@ -8,6 +8,7 @@
     <div>
       <button (click)="setLang('kr')">Language: KR</button>
       <button (click)="setLang('en')">Language: EN</button>
+      <button (click)="generatePdf()">Try PDF</button>
     </div>
 
     <router-outlet></router-outlet>
