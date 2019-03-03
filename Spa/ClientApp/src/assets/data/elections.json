@@ -1,0 +1,32 @@
+[
+    {
+        "VoteTitle": "BCIT President Election 2019",
+        "VoteDescription": "Vote or we continue to email you",
+        "VoteDate": "March 31, 2019",
+        "LogoURL": "https://www.turningtechnologies.ca/wp-content/uploads/2016/04/bcit-logo.png",
+        "PageBackgroundColor": "#CCFFCC",
+        "PageTextColor": "#000000",
+        "PageFontSize": "1em",
+        "PageFontFamily": "Roboto"
+    },
+    {
+        "VoteTitle": "Vancouver Municiple Election 2019",
+        "VoteDescription": "Choose your favourite person",
+        "VoteDate": "October 22, 2018",
+        "LogoURL": "https://www.underconsideration.com/brandnew/archives/city_of_vancouver_logo.png",
+        "PageBackgroundColor": "#FF0000",
+        "PageTextColor": "#FFFFFF",
+        "PageFontSize": "1.5em",
+        "PageFontFamily": "Arial"
+    },
+    {
+        "VoteTitle": "Canadian Federal Election 2020",
+        "VoteDescription": "Please cast your vote",
+        "VoteDate": "December 25, 2019",
+        "LogoURL": "https://upload.wikimedia.org/wikipedia/en/thumb/c/cf/Flag_of_Canada.svg/1280px-Flag_of_Canada.svg.png",
+        "PageBackgroundColor": "#99CCFF",
+        "PageTextColor": "#990000",
+        "PageFontSize": "0.8em",
+        "PageFontFamily": "Comic Sans"
+    }
+]
