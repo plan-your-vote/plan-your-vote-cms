@@ -21,6 +21,8 @@ import { TranslatePipe } from './pipes/translate.pipe';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { CandidateItemComponent } from './components/candidate-item/candidate-item.component';
+import { CandidateListComponent } from './components/candidate-list/candidate-list.component';
 
 export function setupTranslateFactory(service: TranslateService): Function {
   return () => service.use('en');
@@ -33,7 +35,9 @@ export function setupTranslateFactory(service: TranslateService): Function {
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    TranslatePipe
+    TranslatePipe,
+    CandidateItemComponent,
+    CandidateListComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
