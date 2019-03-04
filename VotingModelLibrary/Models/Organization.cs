@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace ModelLibrary.Models
+namespace VotingModelLibrary.Models
 {
     public class Organization
     {
         [Key]
+        public int OrganizationId { get; set; }
+
         public string Name { get; set; }
         public string Description { get; set; }
 
-        List<Candidate> Members { get; set; }
+        public List<Candidate> Candidates { get; set; }
     }
 }
