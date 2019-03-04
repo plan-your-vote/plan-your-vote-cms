@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShareService } from '@ngx-share/core';
 
 @Component({
   selector: 'app-footer-menu',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(public share: ShareService) { }
 
   ngOnInit() {
   }
