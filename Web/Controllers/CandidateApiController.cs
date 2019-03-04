@@ -11,58 +11,58 @@ using Web.Data;
 
 namespace Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/candidates")]
     [ApiController]
-    public class BallotIssuesController : ControllerBase
+    public class CandidatesApiController : ControllerBase
     {
 
         private readonly ApplicationDbContext _context;
 
-        public BallotIssuesController(ApplicationDbContext context)
+        public CandidatesApiController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/BallotIssues
+        // GET: api/Candidates
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<BallotIssue>>> Get()
+        public async Task<ActionResult<IEnumerable<Candidate>>> Get()
         {
-            return await _context.BallotIssues.ToListAsync();
+            return await _context.Candidates.ToListAsync();
         }
 
-        // GET: api/BallotIssues/5
+        // GET: api/Candidates/1
         [HttpGet("{id}")]
-        public async Task<ActionResult<BallotIssue>> GetBallotIssue(int id)
+        public async Task<ActionResult<Candidate>> GetCandidate(int id)
         {
-            var issue = await _context.BallotIssues.FindAsync(id);
+            var candidate = await _context.Candidates.FindAsync(id);
 
-            if (issue == null)
+            if (candidate == null)
             {
                 return NotFound();
             }
 
-            return issue;
+            return candidate;
         }
 
-        // POST: api/BallotIssues
+        // POST: api/Candidates
         [HttpPost]
-        public async Task<ActionResult<BallotIssue>> PostBallotIssue(BallotIssue issue)
+        public async Task<ActionResult<Candidate>> PostCandidate(Candidate candidate)
         {
-            _context.BallotIssues.Add(issue);
+            _context.Candidates.Add(candidate);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetBallotIssue", new { id = issue.BallotIssueId}, issue);
+            return CreatedAtAction("GetCandidate", new { id = candidate.CandidateId}, candidate);
         }
 
-        // PUT: api/BallotIssues/5
+        // PUT: api/Candidates/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBallotIssue(int id, BallotIssue issue)
+        public async Task<IActionResult> PutCandidate(int id, Candidate candidate)
         {
-            if (id != issue.BallotIssueId)
+            if (id != candidate.CandidateId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(issue).State = EntityState.Modified;
+            _context.Entry(candidate).State = EntityState.Modified;
 
             try
             {
@@ -83,25 +83,25 @@ namespace Web.Controllers
             return NoContent();
         }
 
-        // DELETE: api/BallotIssues/5
+        // DELETE: api/Candidates/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<BallotIssue>> DeleteBallotIssue(int id)
+        public async Task<ActionResult<Candidate>> DeleteCandidate(int id)
         {
-            var issue = await _context.BallotIssues.FindAsync(id);
-            if (issue == null)
+            var candidate = await _context.Candidates.FindAsync(id);
+            if (candidate == null)
             {
                 return NotFound();
             }
 
-            _context.BallotIssues.Remove(issue);
+            _context.Candidates.Remove(candidate);
             await _context.SaveChangesAsync();
 
-            return issue;
+            return candidate;
         }
 
         private bool IssueExists(int id)
         {
-            return _context.BallotIssues.Any(e => e.BallotIssueId == id);
+            return _context.Candidates.Any(e => e.CandidateId == id);
         }
 
     }
