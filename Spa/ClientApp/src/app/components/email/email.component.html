@@ -1,0 +1,6 @@
+<div><label>E-mail Address: </label><input [(ngModel)]="emailaddress" /></div>
+<div><label>Subject: </label><input [(ngModel)]="subject" /></div>
+<div><label>Message: </label><input [(ngModel)]="message" /></div>
+<div>
+  <button (click)="sendReminderEmail()">Send Reminder Email</button> <!-- Requires email user to be logged into Gmail and allow sending E-mails from sources -->
+</div>
