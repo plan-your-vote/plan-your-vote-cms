@@ -222,6 +222,8 @@ namespace Web.Data.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<int>("OrganizationId");
+
                     b.Property<string>("OrganizationName");
 
                     b.Property<string>("Picture");

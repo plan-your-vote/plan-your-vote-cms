@@ -14,7 +14,7 @@ namespace ModelLibrary.Models
         public string Picture { get; set; }
         public string Biography { get; set; }
        
-        public string OrganizationName { get; set; }
+        public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
 
         public List<CandiateRace> CandidateRaces { get; } = new List<CandiateRace>();

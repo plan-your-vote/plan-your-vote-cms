@@ -2,7 +2,7 @@
 
 namespace Web.Data.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class First : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,6 +79,7 @@ namespace Web.Data.Migrations
                     LastName = table.Column<string>(nullable: true),
                     Picture = table.Column<string>(nullable: true),
                     Biography = table.Column<string>(nullable: true),
+                    OrganizationId = table.Column<int>(nullable: false),
                     OrganizationName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>

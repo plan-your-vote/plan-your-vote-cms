@@ -62,7 +62,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string firstName, string lastName, IFormFile image, string biography,string organizationName) {
+        public async Task<IActionResult> Create(string firstName, string lastName, IFormFile image, string biography,int organizationId) {
             var fileName = "";
             if(image != null) {
                 fileName = Path.Combine(WebHostEn.WebRootPath + "\\images\\", GenerateImageId() + Path.GetFileName(image.FileName));
@@ -75,14 +75,14 @@ namespace Web.Controllers
             candidate.LastName = lastName;
             candidate.Picture = fileName;
             candidate.Biography = biography;
-            candidate.OrganizationName = organizationName;
+            candidate.OrganizationId = organizationId;
             if (ModelState.IsValid)
             {
                 _context.Add(candidate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganizationName"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationName);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationId);
             return View(candidate);
         }
 
@@ -108,7 +108,7 @@ namespace Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["OrganizationName"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationName);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationId);
             return View(candidate);
         }
 
@@ -117,7 +117,7 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,FirstName,LastName,Picture,Biography,OrganizationName")] Candidate candidate)
+        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,FirstName,LastName,Picture,Biography,OrganizationId")] Candidate candidate)
         {
             if (id != candidate.CandidateId)
             {
@@ -144,7 +144,7 @@ namespace Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganizationName"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationName);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationId);
             return View(candidate);
         }
 
