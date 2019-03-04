@@ -25,6 +25,7 @@ import { CandidateItemComponent } from './components/candidate-item/candidate-it
 import { CandidateListComponent } from './components/candidate-list/candidate-list.component';
 import { MapComponentComponent } from './components/map-component/map-component.component';
 import { EmailComponent } from './components/email/email.component';
+import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 
 export function setupTranslateFactory(service: TranslateService): Function {
   return () => service.use('en');
@@ -41,7 +42,8 @@ export function setupTranslateFactory(service: TranslateService): Function {
     CandidateItemComponent,
     CandidateListComponent,
     MapComponentComponent,
-    EmailComponent
+    EmailComponent,
+    FooterMenuComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
