@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace ModelLibrary.Models
+namespace VotingModelLibrary.Models
 {
     public class Race
     {
         [Key]
+        public int RaceId { get; set; }
+
         public string PositionName { get; set; }
         public int NumberNeeded { get; set; }
 
-        public List<CandiateRace> CandidateRaces { get; } = new List<CandiateRace>();
+        public List<CandidateRace> CandidateRaces { get; set; }
     }
 }

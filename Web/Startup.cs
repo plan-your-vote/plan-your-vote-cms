@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -14,6 +15,7 @@ using Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Web.Models;
 
 namespace Web
 {
@@ -29,6 +31,14 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("EmailPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -36,9 +46,16 @@ namespace Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
+
+            string executableLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = Path.GetDirectoryName(executableLocation).Split("bin")[0];
+            string cs = Configuration.GetConnectionString("DefaultConnection");
+            string[] csSplit = cs.Split("=");
+            cs = csSplit[0] + "=" + path + csSplit[1];
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(cs));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
@@ -53,7 +70,7 @@ namespace Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, ApplicationDbContext context, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -67,6 +84,7 @@ namespace Web
                 app.UseHsts();
             }
 
+            app.UseCors("EmailPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
@@ -88,6 +106,7 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            DummyData.Initialize(context);
         }
     }
 }

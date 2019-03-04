@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
-namespace ModelLibrary.Models
+namespace VotingModelLibrary.Models
 {
     public class BallotIssue
-    {   
+    {
         [Key]
-        public string IssueTitle { get; set; }
+        public int BallotIssueId { get; set; }
+
+        public string BallotIssueTitle { get; set; }
         public string Description { get; set; }
-        
-        ICollection<IssueOption> options { get; set; }
+
+        public List<IssueOption> BallotIssueOptions { get; set; }
     }
 }
