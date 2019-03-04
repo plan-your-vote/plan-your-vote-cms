@@ -12,7 +12,6 @@ namespace VotingModelLibrary.Models
         public string LastName { get; set; }
         public string Picture { get; set; }
         public string Biography { get; set; }
-
         public int OrganizationId { get; set; }
         public Organization Organization { get; set; }
 

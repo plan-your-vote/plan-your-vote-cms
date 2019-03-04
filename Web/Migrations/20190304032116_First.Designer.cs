@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web.Data;
 
-namespace Web.Data.Migrations
+namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190304032116_First")]
+    partial class First
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -177,41 +179,21 @@ namespace Web.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.BallotIssue", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.BallotIssue", b =>
                 {
-                    b.Property<string>("IssueTitle")
+                    b.Property<int>("BallotIssueId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("BallotIssueTitle");
 
                     b.Property<string>("Description");
 
-                    b.HasKey("IssueTitle");
+                    b.HasKey("BallotIssueId");
 
                     b.ToTable("BallotIssues");
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.CandiateRace", b =>
-                {
-                    b.Property<int>("CandidateId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("CandidateId1");
-
-                    b.Property<string>("IopIssues");
-
-                    b.Property<string>("PlatformInfo");
-
-                    b.Property<string>("PositionName");
-
-                    b.HasKey("CandidateId");
-
-                    b.HasIndex("CandidateId1");
-
-                    b.HasIndex("PositionName");
-
-                    b.ToTable("CandiateRaces");
-                });
-
-            modelBuilder.Entity("ModelLibrary.Models.Candidate", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.Candidate", b =>
                 {
                     b.Property<int>("CandidateId")
                         .ValueGeneratedOnAdd();
@@ -222,63 +204,101 @@ namespace Web.Data.Migrations
 
                     b.Property<string>("LastName");
 
-                    b.Property<string>("OrganizationName");
+                    b.Property<int>("OrganizationId");
 
                     b.Property<string>("Picture");
 
                     b.HasKey("CandidateId");
 
-                    b.HasIndex("OrganizationName");
+                    b.HasIndex("OrganizationId");
 
                     b.ToTable("Candidates");
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.Contact", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.CandidateRace", b =>
                 {
+                    b.Property<int>("CandidateRaceId")
+                        .ValueGeneratedOnAdd();
+
                     b.Property<int>("CandidateId");
 
-                    b.Property<string>("Type");
+                    b.Property<string>("PlatformInfo");
 
-                    b.Property<string>("Value");
+                    b.Property<string>("PositionName");
 
-                    b.HasKey("CandidateId", "Type");
+                    b.Property<int>("RaceId");
+
+                    b.Property<string>("TopIssues");
+
+                    b.HasKey("CandidateRaceId");
+
+                    b.HasIndex("CandidateId");
+
+                    b.HasIndex("RaceId");
+
+                    b.ToTable("CandidateRaces");
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.Contact", b =>
+                {
+                    b.Property<int>("ContactId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CandidateId");
+
+                    b.Property<string>("ContactMethod");
+
+                    b.Property<string>("ContactValue");
+
+                    b.HasKey("ContactId");
+
+                    b.HasIndex("CandidateId");
 
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.IssueOption", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.IssueOption", b =>
                 {
-                    b.Property<string>("IssueTitle");
+                    b.Property<int>("IssueOptionId")
+                        .ValueGeneratedOnAdd();
 
-                    b.Property<string>("OptionTitle");
+                    b.Property<int>("BallotIssueId");
 
-                    b.Property<string>("OptionInfo");
+                    b.Property<string>("IssueOptionInfo");
 
-                    b.HasKey("IssueTitle", "OptionTitle");
+                    b.Property<string>("IssueOptionTitle");
+
+                    b.HasKey("IssueOptionId");
+
+                    b.HasIndex("BallotIssueId");
 
                     b.ToTable("IssueOptions");
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.Organization", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.Organization", b =>
                 {
-                    b.Property<string>("Name")
+                    b.Property<int>("OrganizationId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Description");
 
-                    b.HasKey("Name");
+                    b.Property<string>("Name");
+
+                    b.HasKey("OrganizationId");
 
                     b.ToTable("Organizations");
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.Race", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.Race", b =>
                 {
-                    b.Property<string>("PositionName")
+                    b.Property<int>("RaceId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("NumberNeeded");
 
-                    b.HasKey("PositionName");
+                    b.Property<string>("PositionName");
+
+                    b.HasKey("RaceId");
 
                     b.ToTable("Races");
                 });
@@ -328,37 +348,40 @@ namespace Web.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.CandiateRace", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.Candidate", b =>
                 {
-                    b.HasOne("ModelLibrary.Models.Candidate", "Candidate")
-                        .WithMany("CandidateRaces")
-                        .HasForeignKey("CandidateId1");
-
-                    b.HasOne("ModelLibrary.Models.Race")
-                        .WithMany("CandidateRaces")
-                        .HasForeignKey("PositionName");
+                    b.HasOne("VotingModelLibrary.Models.Organization", "Organization")
+                        .WithMany("Candidates")
+                        .HasForeignKey("OrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.Candidate", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.CandidateRace", b =>
                 {
-                    b.HasOne("ModelLibrary.Models.Organization", "Organization")
-                        .WithMany()
-                        .HasForeignKey("OrganizationName");
+                    b.HasOne("VotingModelLibrary.Models.Candidate", "Candidate")
+                        .WithMany("CandidateRaces")
+                        .HasForeignKey("CandidateId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("VotingModelLibrary.Models.Race", "Race")
+                        .WithMany("CandidateRaces")
+                        .HasForeignKey("RaceId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.Contact", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.Contact", b =>
                 {
-                    b.HasOne("ModelLibrary.Models.Candidate", "Candidate")
-                        .WithMany()
+                    b.HasOne("VotingModelLibrary.Models.Candidate", "Candidate")
+                        .WithMany("Contacts")
                         .HasForeignKey("CandidateId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ModelLibrary.Models.IssueOption", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.IssueOption", b =>
                 {
-                    b.HasOne("ModelLibrary.Models.BallotIssue", "Issue")
-                        .WithMany()
-                        .HasForeignKey("IssueTitle")
+                    b.HasOne("VotingModelLibrary.Models.BallotIssue", "BallotIssue")
+                        .WithMany("BallotIssueOptions")
+                        .HasForeignKey("BallotIssueId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
