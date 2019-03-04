@@ -6,8 +6,16 @@
     </h3>
 
     <div>
-      <button (click)="setLang('kr')">Language: KR</button>
-      <button (click)="setLang('en')">Language: EN</button>
+      <button (click)="setLang('en')" class="btn btn-warning">English</button>
+      <button (click)="setLang('kr')" class="btn btn-primary">
+        Korean 한국어
+      </button>
+      <button (click)="setLang('zh-cn')" class="btn btn-dark">
+        Simplified Chinese 简体中文
+      </button>
+      <button (click)="setLang('zh-tc')" class="btn btn-info">
+        Traditional Chinese 繁體中文
+      </button>
     </div>
 
     <router-outlet></router-outlet>
