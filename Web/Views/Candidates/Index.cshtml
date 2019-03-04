@@ -1,4 +1,4 @@
-@model IEnumerable<ModelLibrary.Models.Candidate>
+@model IEnumerable<VotingModelLibrary.Models.Candidate>
 
 @{
     ViewData["Title"] = "Candidates Info";
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Organization.Name)
             </td>
             <td>
-                <!--<a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a>|--> 
+                <!--<a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a>|
                 <a asp-action="Details" asp-route-id="@item.CandidateId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CandidateId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.CandidateId">Delete</a>-->
             </td>
         </tr>
 }
