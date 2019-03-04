@@ -11,6 +11,8 @@ export class CandidateService {
   constructor(private http: HttpClient) {}
 
   getCandidates() {
-    return this.http.get<Candidate[]>('../assets/data/candidates.json');
+    //return this.http.get<Candidate[]>('../assets/data/candidates.json');
+    //TODO: Take this from localhost to the actual endpoint 
+    return this.http.get<Candidate[]>('https://localhost:44307/api/candidates');  
   }
 }
