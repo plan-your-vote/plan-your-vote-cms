@@ -15,6 +15,7 @@ using Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
+using Web.Models;
 
 namespace Web
 {
@@ -30,12 +31,22 @@ namespace Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(o => o.AddPolicy("EmailPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            }));
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
 
             string executableLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
             string path = Path.GetDirectoryName(executableLocation).Split("bin")[0];
@@ -73,6 +84,7 @@ namespace Web
                 app.UseHsts();
             }
 
+            app.UseCors("EmailPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
