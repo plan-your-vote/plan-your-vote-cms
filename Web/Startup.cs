@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -36,9 +37,14 @@ namespace Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            string executableLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            string path = Path.GetDirectoryName(executableLocation).Split("bin")[0];
+            string cs = Configuration.GetConnectionString("DefaultConnection");
+            string[] csSplit = cs.Split("=");
+            cs = csSplit[0] + "=" + path + csSplit[1];
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(cs));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
@@ -53,7 +59,7 @@ namespace Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, ApplicationDbContext context, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -88,6 +94,7 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            DummyData.Initialize(context);
         }
     }
 }
