@@ -4,12 +4,14 @@
     <h3>
       {{ 'TITLE' | translate }}
     </h3>
-
     <div>
       <button (click)="setLang('kr')">Language: KR</button>
       <button (click)="setLang('en')">Language: EN</button>
+      <button (click)="generatePdf()">Try PDF</button>
     </div>
-
-    <router-outlet></router-outlet>
+    <br />
+    <div class="row">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </body>

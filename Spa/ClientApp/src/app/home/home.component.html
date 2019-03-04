@@ -1,2 +1,36 @@
 <h1>Hello, world!</h1>
 <app-map-component></app-map-component>
+<button mat-raised-button (click)="nextElection()" color="primary">Next Election</button>
+<br />
+<mat-divider></mat-divider>
+
+<div class="home-component" [style.background-color]="currentElection?.PageBackgroundColor"
+    [style.color]="currentElection?.PageTextColor" [style.font-size]="currentElection?.PageFontSize"
+    [style.font-family]="currentElection?.PageFontFamily">
+
+    <h1>Hello, Vancouver!</h1>
+    <br />
+    <mat-divider></mat-divider>
+
+    <div style="height: 130px;">
+        <img [src]="( currentElection?.LogoURL )" width="300px" height="auto" />
+    </div>
+    <br />
+
+    <mat-card class="mat-elevation-z4" [style.color]="currentElection?.PageTextColor"
+        [style.font-size]="currentElection?.PageFontSize" [style.font-family]="currentElection?.PageFontFamily">
+        <mat-card-header>
+            <mat-card-title>
+                <h3>{{ currentElection?.VoteTitle }}</h3>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <dl>
+                <dt>Description:</dt>
+                <dd>{{ currentElection?.VoteDescription }}</dd>
+                <dt>Date:</dt>
+                <dd>{{ currentElection?.VoteDate }}</dd>
+            </dl>
+        </mat-card-content>
+    </mat-card>
+</div>

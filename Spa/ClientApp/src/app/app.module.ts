@@ -2,6 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
+  MatSnackBarModule, MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule,
+  MatSortModule, MatRippleModule } from '@angular/material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,7 +45,21 @@ export function setupTranslateFactory(service: TranslateService): Function {
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MatListModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatButtonModule, 
+    MatCardModule,
+    MatInputModule,
+    MatDialogModule,
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    MatRippleModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [
     TranslateService,
