@@ -27,7 +27,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Candidate>>> Get()
         {
-            return await _context.Candidates.Include(c => c.Organization).ToListAsync();
+            return await _context.Candidates.ToListAsync();
         }
 
         // GET: api/Candidates/1

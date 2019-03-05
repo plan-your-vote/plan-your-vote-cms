@@ -11,8 +11,8 @@ export class CandidateService {
   constructor(private http: HttpClient) {}
 
   getCandidates() {
-    //return this.http.get<Candidate[]>('../assets/data/candidates.json');
-    //TODO: Take this from localhost to the actual endpoint 
-    return this.http.get<Candidate[]>('https://localhost:44307/api/candidates');  
+    //return this.http.get<Candidate[]>('../assets/data/candidates.json');                     //DUMMY DATA
+	  return this.http.get<Candidate[]>('https://localhost:44307/api/candidates');               //DEV AND TESTING
+    //return this.https.get<Candidate[]>('http://vote-web.azurewebsites.net/api/candidates');  //PRODUCTION
   }
 }
