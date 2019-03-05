@@ -8,13 +8,11 @@ import { PdfService } from './services/pdf.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent {
-
-  title = 'ClientApp';
-
-  constructor(private translate: TranslateService, private pdfService: PdfService) {
-    translate.use('en').then(() => {
-      console.log(translate.data);
-    });
+  constructor(
+    private translate: TranslateService,
+    private pdfService: PdfService
+  ) {
+    translate.use('en');
   }
 
   setLang(lang: string) {
@@ -23,9 +21,8 @@ export class AppComponent {
 
   generatePdf() {
     var pdfData: object = {
-      "demoText": new Date().toLocaleString()
+      demoText: new Date().toLocaleString()
     };
     this.pdfService.pdf(pdfData, new Date().getHours().toString());
   }
-
 }
