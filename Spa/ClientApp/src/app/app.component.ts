@@ -55,5 +55,4 @@ export class AppComponent implements OnInit {
     };
     this.pdfService.pdf(pdfData, new Date().getHours().toString());
   }
-
 }
