@@ -6,6 +6,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatSnackBarModule, MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule,
   MatSortModule, MatRippleModule } from '@angular/material';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,10 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { CandidateItemComponent } from './components/candidate-item/candidate-item.component';
 import { CandidateListComponent } from './components/candidate-list/candidate-list.component';
+import { MapComponentComponent } from './components/map-component/map-component.component';
+import { EmailComponent } from './components/email/email.component';
+import { FooterMenuComponent } from './footer-menu/footer-menu.component';
+
 
 export function setupTranslateFactory(service: TranslateService): Function {
   return () => service.use('en');
@@ -37,7 +42,11 @@ export function setupTranslateFactory(service: TranslateService): Function {
     FetchDataComponent,
     TranslatePipe,
     CandidateItemComponent,
-    CandidateListComponent
+    CandidateListComponent,
+    MapComponentComponent,
+    EmailComponent,
+    FooterMenuComponent
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -57,7 +66,8 @@ export function setupTranslateFactory(service: TranslateService): Function {
     MatRippleModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ShareButtonsModule
   ],
   providers: [
     TranslateService,
