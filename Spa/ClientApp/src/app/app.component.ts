@@ -17,19 +17,16 @@ export class AppComponent implements OnInit {
   title = 'ClientApp';
 
   constructor(
-    private translate: TranslateService, 
+    private translate: TranslateService,
     private pdfService: PdfService,
     private electionApi: ElectionService
-    ) {
-    translate.use('en').then(() => {
-      console.log(translate.data);
-    });
+  ) {
+    translate.use('en');
 
     this.index = 0;
-    this.electionApi.getElections()
-      .subscribe(res => {
-        this.data = res;
-      });
+    this.electionApi.getElections().subscribe(res => {
+      this.data = res;
+    });
   }
 
   ngOnInit(): void {
@@ -38,7 +35,7 @@ export class AppComponent implements OnInit {
 
   public nextElection(): void {
     this.currentElection = this.data[this.index];
-    if (this.index != this.data.length-1) {
+    if (this.index != this.data.length - 1) {
       this.index++;
     } else {
       this.index = 0;
@@ -51,7 +48,7 @@ export class AppComponent implements OnInit {
 
   generatePdf() {
     var pdfData: object = {
-      "demoText": new Date().toLocaleString()
+      demoText: new Date().toLocaleString()
     };
     this.pdfService.pdf(pdfData, new Date().getHours().toString());
   }
