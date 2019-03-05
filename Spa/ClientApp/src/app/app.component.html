@@ -1,4 +1,7 @@
-<body>
+<body [style.background-color]="currentElection?.PageBackgroundColor"
+    [style.color]="currentElection?.PageTextColor" 
+    [style.font-size]="currentElection?.PageFontSize"
+    [style.font-family]="currentElection?.PageFontFamily">
   <app-nav-menu></app-nav-menu>
   <div class="container">
     <h3>
@@ -19,6 +22,37 @@
     </div>
     <button (click)="generatePdf()">Try PDF</button>
     <br />
+
+    <div class="style-test-button">
+      <button mat-raised-button (click)="nextElection()" color="accent">Change Style</button>
+    </div>
+
+    <div>
+      <div style="height: 130px;">
+        <img [src]="( currentElection?.LogoURL )" width="300px" height="auto" />
+      </div>
+      <br />
+
+      <mat-card class="mat-elevation-z4" 
+          [style.color]="currentElection?.PageTextColor"
+          [style.font-size]="currentElection?.PageFontSize" 
+          [style.font-family]="currentElection?.PageFontFamily">
+        <mat-card-header>
+          <mat-card-title>
+            <h3>{{ currentElection?.VoteTitle }}</h3>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <dl>
+            <dt>Description:</dt>
+            <dd>{{ currentElection?.VoteDescription }}</dd>
+            <dt>Date:</dt>
+            <dd>{{ currentElection?.VoteDate }}</dd>
+          </dl>
+        </mat-card-content>
+    </mat-card>
+    </div>
+
     <div class="row">
       <router-outlet></router-outlet>
     </div>
