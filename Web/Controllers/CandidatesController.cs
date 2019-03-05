@@ -64,18 +64,18 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(string firstName, string lastName, IFormFile image, string biography,int organizationId) {
             var fileName = "";
+            var nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
             if(image != null) {
-                fileName = Path.Combine(WebHostEn.WebRootPath + "\\images\\", GenerateImageId() + Path.GetFileName(image.FileName));
+                fileName = "wwwroot\\" + nameOfile;
                 image.CopyTo(new FileStream(fileName, FileMode.Create));
                 ViewData["ImagePath"] = fileName;
             }
-            
             var candidate = new Candidate();
             candidate.FirstName = firstName;
             candidate.LastName = lastName;
-            candidate.Picture = fileName;
+            candidate.Picture = nameOfile;
             candidate.Biography = biography;
-            candidate.OrganizationId = organizationId;
+            candidate.OrganizationId = 1;
             if (ModelState.IsValid)
             {
                 _context.Add(candidate);
