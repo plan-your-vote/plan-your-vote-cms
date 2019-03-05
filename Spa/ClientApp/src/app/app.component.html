@@ -23,12 +23,14 @@
     <button (click)="generatePdf()">Try PDF</button>
     <br />
 
-    <div class="style-test-button">
+    <div class="style-demo-button">
       <button mat-raised-button (click)="nextElection()" color="accent">Change Style</button>
     </div>
 
     <div>
-      <div style="height: 130px;">
+      <br />
+      <mat-divider></mat-divider>
+      <div class="election-details-demo">
         <img [src]="( currentElection?.LogoURL )" width="300px" height="auto" />
       </div>
       <br />
@@ -53,6 +55,8 @@
     </mat-card>
     </div>
 
+    <br />
+    <mat-divider></mat-divider>
     <div class="row">
       <router-outlet></router-outlet>
     </div>
