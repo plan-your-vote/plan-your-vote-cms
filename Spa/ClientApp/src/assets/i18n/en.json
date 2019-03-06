@@ -1,4 +1,6 @@
 {
   "TITLE": "Test: Multilanguage support",
-  "LANGUAGE": "English"
+  "LANGUAGE": "English",
+  "TERMS_OF_USE": "Terms of Use",
+  "PRIVACY_POLICY": "Privacy Policy"
 }
