@@ -6,9 +6,12 @@ import { TranslateService } from 'src/app/services/translate.service';
   pure: false
 })
 export class TranslatePipe implements PipeTransform {
-  constructor(private translate: TranslateService) {}
+  constructor(private translate: TranslateService) { }
 
-  transform(key: any): any {
-    return this.translate.data[key] || key;
+  transform(param: string): any {
+    var params = param.split(".");
+    var component = params[0];
+    var key = params[1];
+    return this.translate.data[component][key] || key;
   }
 }

@@ -12,13 +12,13 @@ import zhtc from 'src/assets/i18n/zh-tc.json';
 export class TranslateService {
   data: any = {};
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   use(lang: string): Promise<{}> {
     return new Promise<{}>((resolve, reject) => {
       switch (lang) {
         case 'kr':
-          this.data = Object.assign({}, kr || {});
+          this.data = kr;
           return resolve(this.data);
         case 'zh-cn':
           this.data = Object.assign({}, zhcn || {});

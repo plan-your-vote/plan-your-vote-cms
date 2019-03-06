@@ -1,6 +1,10 @@
 {
-  "TITLE": "Test: Multilanguage support",
-  "LANGUAGE": "English",
-  "TERMS_OF_USE": "Terms of Use",
-  "PRIVACY_POLICY": "Privacy Policy"
+  "APP": {
+    "TITLE": "Test: Multilanguage support",
+    "LANGUAGE": "English"
+  },
+  "FOOTER": {
+    "TERMS_OF_USE": "Terms of Use",
+    "PRIVACY_POLICY": "Privacy Policy"
+  }
 }
