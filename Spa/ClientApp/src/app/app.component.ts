@@ -3,6 +3,7 @@ import { TranslateService } from './services/translate.service';
 import { PdfService } from './services/pdf.service';
 import { Election } from './models/election';
 import { ElectionService } from './services/election.service';
+import { Inject, LOCALE_ID } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -19,10 +20,10 @@ export class AppComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private pdfService: PdfService,
-    private electionApi: ElectionService
+    private electionApi: ElectionService,
+    @Inject(LOCALE_ID) public locale: string
   ) {
-    translate.use('en');
-
+    translate.use(locale);
     this.index = 0;
     this.electionApi.getElections().subscribe(res => {
       this.data = res;
