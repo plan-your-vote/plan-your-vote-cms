@@ -16,7 +16,8 @@ export class TranslateService {
     "en",
     "ko",
     "zh-CN",
-    "zh-TW"
+    "zh-TW",
+    "zh-HK",
   ];
 
   constructor(private http: HttpClient) { }
