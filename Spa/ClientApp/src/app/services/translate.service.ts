@@ -25,7 +25,7 @@ export class TranslateService {
     return new Promise<{}>((resolve, reject) => {
       switch (lang) {
         case 'ko':
-          this.data = ko;
+          this.data = Object.assign({}, ko || {});
           return resolve(this.data);
         case 'zh-CN':
           this.data = Object.assign({}, zhcn || {});
