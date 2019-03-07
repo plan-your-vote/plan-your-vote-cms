@@ -12,6 +12,11 @@ export class TranslatePipe implements PipeTransform {
     var params = param.split(".");
     var component = params[0];
     var key = params[1];
-    return this.translate.data[component][key] || key;
+    if (this.translate.data[component]) {
+      return this.translate.data[component][key] || key;
+    } else {
+      console.error("Please check language resource files");
+      return key;
+    }
   }
 }

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import en from 'src/assets/i18n/en.json';
-import kr from 'src/assets/i18n/kr.json';
-import zhcn from 'src/assets/i18n/zh-cn.json';
-import zhtc from 'src/assets/i18n/zh-tc.json';
+import ko from 'src/assets/i18n/ko.json';
+import zhcn from 'src/assets/i18n/zh-CN.json';
+import zhtw from 'src/assets/i18n/zh-TW.json';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +12,29 @@ import zhtc from 'src/assets/i18n/zh-tc.json';
 export class TranslateService {
   data: any = {};
 
+  languages = [
+    "en",
+    "ko",
+    "zh-CN",
+    "zh-TW"
+  ];
+
   constructor(private http: HttpClient) { }
 
   use(lang: string): Promise<{}> {
+    if (lang.includes("en-")) {
+      lang = "en";
+    }
     return new Promise<{}>((resolve, reject) => {
       switch (lang) {
-        case 'kr':
-          this.data = kr;
+        case 'ko':
+          this.data = ko;
           return resolve(this.data);
-        case 'zh-cn':
+        case 'zh-CN':
           this.data = Object.assign({}, zhcn || {});
           return resolve(this.data);
-        case 'zh-tc':
-          this.data = Object.assign({}, zhtc || {});
+        case 'zh-TW':
+          this.data = Object.assign({}, zhtw || {});
           return resolve(this.data);
         case 'en':
         default:
