@@ -48,12 +48,13 @@ namespace Web
 
             services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
 
-            string executableLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = Path.GetDirectoryName(executableLocation).Split("bin")[0];
-            string cs = Configuration.GetConnectionString("DefaultConnection");
-            string[] csSplit = cs.Split("=");
-            cs = csSplit[0] + "=" + path + csSplit[1];
+            // I was unable to scaffold bcoz of these lines
+            //string executableLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
+            //string path = Path.GetDirectoryName(executableLocation).Split("bin")[0];
+            //string[] csSplit = cs.Split("=");
+            //cs = csSplit[0] + "=" + path + csSplit[1];
 
+            string cs = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(cs));
 
