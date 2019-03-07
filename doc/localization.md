@@ -18,6 +18,14 @@ It's very simple!
 ### Developers
 1. Make sure you have a component you want to add.
 2. Let's say your component is `event.component.ts`.
-3. Add `EVENT` key in [this file if you are English speaker](../Spa/ClientApp/src/assets/i18n/en.json).
+3. Add `EVENT` key in [this file if you are English speaker](../Spa/ClientApp/src/assets/i18n/en.json). This is also a naming convention. If you're component's name is `event`, your key for texts should be `EVENT`. The following is the sample, and of course, key should be capitalized.
+```
+...
+"EVENT": {
+    "TITLE": "Event",
+    "DESCRIPTION": "This is the event."
+},
+...
+```
 4. Then add texts using meaningful key.
-4. All good!
+5. All good!

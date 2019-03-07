@@ -31,6 +31,7 @@ export class TranslateService {
           this.data = Object.assign({}, zhcn || {});
           return resolve(this.data);
         case 'zh-TW':
+        case 'zh-HK':
           this.data = Object.assign({}, zhtw || {});
           return resolve(this.data);
         case 'en':
