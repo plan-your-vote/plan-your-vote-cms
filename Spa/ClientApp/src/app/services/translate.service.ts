@@ -22,9 +22,6 @@ export class TranslateService {
   constructor(private http: HttpClient) { }
 
   use(lang: string): Promise<{}> {
-    if (lang.includes("en-")) {
-      lang = "en";
-    }
     return new Promise<{}>((resolve, reject) => {
       switch (lang) {
         case 'ko':
