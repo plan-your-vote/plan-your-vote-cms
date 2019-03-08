@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { ShareService } from '@ngx-share/core';
 import { TranslateService } from '../services/translate.service';
+import { CandidateService } from '../services/candidate.service';
+import { Candidate } from 'src/app/models/candidate';
 
 @Component({
   selector: 'app-footer-menu',
