@@ -48,14 +48,8 @@ namespace Web
 
             services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
 
-            string executableLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string path = Path.GetDirectoryName(executableLocation).Split("bin")[0];
-            string cs = Configuration.GetConnectionString("DefaultConnection");
-            string[] csSplit = cs.Split("=");
-            cs = csSplit[0] + "=" + path + csSplit[1];
-
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(cs));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
