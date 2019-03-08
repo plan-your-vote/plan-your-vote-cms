@@ -45,10 +45,6 @@ export class AppComponent implements OnInit {
     }
   }
 
-  setLang(lang: string) {
-    this.translate.use(lang);
-  }
-
   /**
    * Attached to 'Try PDF' button.
    * Currently passing all candidates.
