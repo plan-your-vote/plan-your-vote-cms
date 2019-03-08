@@ -74,7 +74,7 @@ namespace Web
             candidate.LastName = lastName;
             candidate.Picture = nameOfile;
             candidate.Biography = biography;
-            candidate.OrganizationId = 1;
+            candidate.OrganizationId = organizationId;
             if (ModelState.IsValid)
             {
                 _context.Add(candidate);
