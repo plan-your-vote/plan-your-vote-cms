@@ -20,7 +20,8 @@ export class FooterMenuComponent implements OnInit {
     firstName: '',
     lastName: '',
     picture: '',
-    organization: ''
+    organization: '',
+    selected: false
   };
 
   constructor(public share: ShareService,
