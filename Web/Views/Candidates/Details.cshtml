@@ -38,8 +38,20 @@
             @Html.DisplayNameFor(model => model.Organization)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Organization.OrganizationId)
+            @Html.DisplayFor(model => model.Organization.Name)
         </dd>
+        @*
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Contacts)
+        </dt>
+        <dd class="col-sm-10">
+            @foreach (var i in Model.Contacts)
+            {
+                @i.ContactMethod 
+                @i.ContactValue
+            }
+        </dd>
+        *@
     </dl>
 </div>
 <div>

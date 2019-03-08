@@ -10,23 +10,22 @@ using Web.Data;
 
 namespace Web
 {
-    public class CandidatesController : Controller
+    public class BallotIssuesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public CandidatesController(ApplicationDbContext context)
+        public BallotIssuesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Candidates
+        // GET: BallotIssues
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Candidates.Include(c => c.Organization);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.BallotIssues.ToListAsync());
         }
 
-        // GET: Candidates/Details/5
+        // GET: BallotIssues/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +33,39 @@ namespace Web
                 return NotFound();
             }
 
-            var candidate = await _context.Candidates
-                .Include(c => c.Organization)
-                .FirstOrDefaultAsync(m => m.CandidateId == id);
-            if (candidate == null)
+            var ballotIssue = await _context.BallotIssues
+                .FirstOrDefaultAsync(m => m.BallotIssueId == id);
+            if (ballotIssue == null)
             {
                 return NotFound();
             }
 
-            return View(candidate);
+            return View(ballotIssue);
         }
 
-        // GET: Candidates/Create
+        // GET: BallotIssues/Create
         public IActionResult Create()
         {
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId");
             return View();
         }
 
-        // POST: Candidates/Create
+        // POST: BallotIssues/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CandidateId,FirstName,LastName,Picture,Biography,OrganizationId")] Candidate candidate)
+        public async Task<IActionResult> Create([Bind("BallotIssueId,BallotIssueTitle,Description")] BallotIssue ballotIssue)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(candidate);
+                _context.Add(ballotIssue);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
-            return View(candidate);
+            return View(ballotIssue);
         }
 
-        // GET: Candidates/Edit/5
+        // GET: BallotIssues/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +73,22 @@ namespace Web
                 return NotFound();
             }
 
-            var candidate = await _context.Candidates.FindAsync(id);
-            if (candidate == null)
+            var ballotIssue = await _context.BallotIssues.FindAsync(id);
+            if (ballotIssue == null)
             {
                 return NotFound();
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
-            return View(candidate);
+            return View(ballotIssue);
         }
 
-        // POST: Candidates/Edit/5
+        // POST: BallotIssues/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,FirstName,LastName,Picture,Biography,OrganizationId")] Candidate candidate)
+        public async Task<IActionResult> Edit(int id, [Bind("BallotIssueId,BallotIssueTitle,Description")] BallotIssue ballotIssue)
         {
-            if (id != candidate.CandidateId)
+            if (id != ballotIssue.BallotIssueId)
             {
                 return NotFound();
             }
@@ -102,12 +97,12 @@ namespace Web
             {
                 try
                 {
-                    _context.Update(candidate);
+                    _context.Update(ballotIssue);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CandidateExists(candidate.CandidateId))
+                    if (!BallotIssueExists(ballotIssue.BallotIssueId))
                     {
                         return NotFound();
                     }
@@ -118,11 +113,10 @@ namespace Web
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
-            return View(candidate);
+            return View(ballotIssue);
         }
 
-        // GET: Candidates/Delete/5
+        // GET: BallotIssues/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +124,30 @@ namespace Web
                 return NotFound();
             }
 
-            var candidate = await _context.Candidates
-                .Include(c => c.Organization)
-                .FirstOrDefaultAsync(m => m.CandidateId == id);
-            if (candidate == null)
+            var ballotIssue = await _context.BallotIssues
+                .FirstOrDefaultAsync(m => m.BallotIssueId == id);
+            if (ballotIssue == null)
             {
                 return NotFound();
             }
 
-            return View(candidate);
+            return View(ballotIssue);
         }
 
-        // POST: Candidates/Delete/5
+        // POST: BallotIssues/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var candidate = await _context.Candidates.FindAsync(id);
-            _context.Candidates.Remove(candidate);
+            var ballotIssue = await _context.BallotIssues.FindAsync(id);
+            _context.BallotIssues.Remove(ballotIssue);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CandidateExists(int id)
+        private bool BallotIssueExists(int id)
         {
-            return _context.Candidates.Any(e => e.CandidateId == id);
+            return _context.BallotIssues.Any(e => e.BallotIssueId == id);
         }
     }
 }

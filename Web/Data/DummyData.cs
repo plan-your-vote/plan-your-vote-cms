@@ -60,6 +60,11 @@ namespace Web.Data
                     Name = "_ORGANIZATION_MIKE_HANSEN_",
                     Description = "_DESCRIPTION_",
                 },
+                new Organization()
+                {
+                    Name = "Coalition Vancouver",
+                    Description = "Coalition is 100% for the people!",
+                }
             };
         }
 
@@ -72,6 +77,21 @@ namespace Web.Data
                     PositionName = "Mayor",
                     NumberNeeded = 1,
                 },
+                new Race
+                {
+                    PositionName = "Councillor",
+                    NumberNeeded = 10,
+                },
+                new Race
+                {
+                    PositionName = "Park Commisioner",
+                    NumberNeeded = 7,
+                },
+                new Race
+                {
+                    PositionName = "School Trustee",
+                    NumberNeeded = 9,
+                }
             };
         }
 
@@ -83,7 +103,7 @@ namespace Web.Data
                 {
                     FirstName = "Jason",
                     LastName= "Lamarche",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor0_large.jpg",
+                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor0.jpg",
                     Biography = @"Jason Lamarche loves Vancouver and has lived here for 21 years. Jason was born in Ottawa, Ontario.
 
 Jason attended Langara and UBC with eight years experience at TD Bank, HSBC, CIBC. Jason was an executive for Canada's largest retail Cannabis distributor.
@@ -95,10 +115,18 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 {
                     FirstName = "Mike",
                     LastName = "Hansen",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor1_large.jpg",
+                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor1.jpg",
                     Biography = @"Been in housing construction most of my life, truck driver, stock promoter and various other business. Founded the Canadian Hemp Growers Assoc. in 1996. 2005 on record at Senate Committee on national defence saying, ""terrorists"" are smuggling guns/drugs into Canada. 2005 Harm Reduction Pilot Project/monopolizing heroin to save lives, Men On Down Town East Society and Two Ravens Opioid Project.",
                     OrganizationId = 2,
                 },
+                new Candidate
+                {
+                    FirstName = "Wai",
+                    LastName = "Young",
+                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor12.jpg",
+                    Biography = @"Wai has lived in Vancouver for over 50 years and is a community advocate, business owner, and past Member of Parliament with over three decades of civic and policy leadership. She is a birth mother of twins and a foster parent to seven children. She holds a degree in Sociology with post graduate work in Urban Planning and Mass Communications.",
+                    OrganizationId = 3
+                }
             };
         }
 
@@ -129,6 +157,18 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     ContactMethod = "Email",
                     ContactValue = "mikec.hansen@gmail.com",
                 },
+                new Contact()
+                {
+                    CandidateId = 3,
+                    ContactMethod = "Tel",
+                    ContactValue = "555-555-5555"
+                },
+                new Contact()
+                {
+                    CandidateId = 3,
+                    ContactMethod = "Email",
+                    ContactValue = "wai@young.ca"
+                }
             };
         }
 
@@ -152,6 +192,13 @@ Jason is a true independent and will not accept donations from voters or busines
 ILLEGAL MIGRANT CONTROL
 //PRO SMALL CANADA BUSINESS",
                 },
+                new CandidateRace()
+                {
+                    RaceId = 1,
+                    CandidateId = 3, 
+                    PositionName = "Mayor",
+                    PlatformInfo = @"Wai Young and Coalition Vancouver are 100% for the People. With over 35 years of policy experience working with community, governments & business she is ready to lead. She is proven, experienced, and inclusive. As a former MP who brought many important infrastructure projects to the city, she understands the comprehensive issues facing Vancouver. She will bring back mutual respect on the streets and clean up our city."
+                }
             };
         }
 
