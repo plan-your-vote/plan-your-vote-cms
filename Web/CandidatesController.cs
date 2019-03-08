@@ -1,27 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VotingModelLibrary.Models;
 using Web.Data;
 
-namespace Web.Controllers
+namespace Web
 {
     public class CandidatesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IHostingEnvironment WebHostEn;
 
-        public CandidatesController(ApplicationDbContext context, IHostingEnvironment en)
+        public CandidatesController(ApplicationDbContext context)
         {
             _context = context;
-            WebHostEn = en;
         }
 
         // GET: Candidates
@@ -53,7 +48,7 @@ namespace Web.Controllers
         // GET: Candidates/Create
         public IActionResult Create()
         {
-            ViewData["OrganizationName"] = new SelectList(_context.Organizations, "Name", "Name");
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId");
             return View();
         }
 
@@ -62,38 +57,17 @@ namespace Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string firstName, string lastName, IFormFile image, string biography,int organizationId) {
-            var fileName = "";
-            var nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
-            if(image != null) {
-                fileName = "wwwroot\\" + nameOfile;
-                image.CopyTo(new FileStream(fileName, FileMode.Create));
-                ViewData["ImagePath"] = fileName;
-            }
-            var candidate = new Candidate();
-            candidate.FirstName = firstName;
-            candidate.LastName = lastName;
-            candidate.Picture = nameOfile;
-            candidate.Biography = biography;
-            candidate.OrganizationId = 1;
+        public async Task<IActionResult> Create([Bind("CandidateId,FirstName,LastName,Picture,Biography,OrganizationId")] Candidate candidate)
+        {
             if (ModelState.IsValid)
             {
                 _context.Add(candidate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
             return View(candidate);
         }
-
-        public static string GenerateImageId()
-        {
-            Random R=new Random();
-            string strDateTimeNumber = DateTime.Now.ToString("yyyyMMddHHmmssms");
-            string strRandomResult = R.Next(1, 1000).ToString();
-            return strDateTimeNumber + strRandomResult;
-        }
-
 
         // GET: Candidates/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -108,7 +82,7 @@ namespace Web.Controllers
             {
                 return NotFound();
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
             return View(candidate);
         }
 
@@ -144,7 +118,7 @@ namespace Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationId);
+            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
             return View(candidate);
         }
 

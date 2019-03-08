@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { ShareService } from '@ngx-share/core';
+import { TranslateService } from '../services/translate.service';
 
 @Component({
   selector: 'app-footer-menu',
@@ -8,9 +9,21 @@ import { ShareService } from '@ngx-share/core';
 })
 export class FooterMenuComponent implements OnInit {
 
-  constructor(public share: ShareService) { }
+  languages: string[] = [];
+  defaultLanguage: string = window.navigator.language.includes("en-") ? "en" : window.navigator.language;
+
+  constructor(public share: ShareService,
+    private translateService: TranslateService,
+    @Inject(LOCALE_ID) public locale: string) {
+    this.languages = translateService.languages;
+    // translateService.use(this.defaultLanguage);
+  }
 
   ngOnInit() {
+  }
+
+  onLangChange(event) {
+    this.translateService.use(event.target.value);
   }
 
 }

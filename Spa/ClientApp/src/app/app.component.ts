@@ -21,8 +21,7 @@ export class AppComponent implements OnInit {
     private pdfService: PdfService,
     private electionApi: ElectionService
   ) {
-    translate.use('en');
-
+    translate.use(window.navigator.language);
     this.index = 0;
     this.electionApi.getElections().subscribe(res => {
       this.data = res;
