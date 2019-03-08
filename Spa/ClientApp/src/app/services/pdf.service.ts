@@ -51,11 +51,14 @@ export class PdfService {
 
     this.doc.text(pdfData["dateTime"], 10, 10);
       
-    pdfData["candidates"].forEach(candidate => {
-      //this.doc.addPage();
-      this.doc.text(candidate.firstName, 10, 20);
-    });
-    
+    // pdfData["candidates"].forEach(candidate => {
+    //   //this.doc.addPage();
+    //   this.doc.text(candidate.firstName, 10, 20);
+    // });
+
+    //Hard coded for demo purposes
+    this.doc.text(pdfData["candidates"][0].firstName, 10, 20);
+    this.doc.text(pdfData["candidates"][0].lastName, 10, 30);
     this.getBase64Image('https://vancouver.ca/plan-your-vote/img/mayor1.jpg', function(base64image) {
       console.log(base64image);
       this.doc.addImage(base64image, 'JPEG', 15, 40, 180, 160);
