@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from './services/translate.service';
 import { PdfService } from './services/pdf.service';
 import { Election } from './models/election';
 import { Candidate } from './models/candidate';
@@ -20,12 +19,10 @@ export class AppComponent implements OnInit {
   title = 'ClientApp';
 
   constructor(
-    private translate: TranslateService,
     private pdfService: PdfService,
     private electionApi: ElectionService,
     private candidatesApi: CandidateService
   ) {
-    translate.use(window.navigator.language);
     this.index = 0;
     this.electionApi.getElections().subscribe(res => {
       this.data = res;

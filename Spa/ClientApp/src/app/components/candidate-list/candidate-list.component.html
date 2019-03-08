@@ -17,6 +17,7 @@
           <td>{{ c.lastName }}</td>
           <td><img src="{{ c.picture }}" /></td>
           <td>{{ c.biography }}</td>
+          <button type="button" (click)="onSelect(c)"class="glyphicon glyphicon-check">{{ c.selected ? 'Cancel' : 'Select' }}</button>
         </tr>
       </tbody>
     </table>
