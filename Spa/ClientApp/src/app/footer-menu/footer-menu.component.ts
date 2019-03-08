@@ -13,24 +13,29 @@ export class FooterMenuComponent implements OnInit {
 
   languages: string[] = [];
   defaultLanguage: string = window.navigator.language.includes("en-") ? "en" : window.navigator.language;
-  candidates: Candidate[] = [];
-  description: string;
+  website = 'https://vancouver.ca/plan-your-vote/index.aspx';
+  description = "I voted"
+  candidate: Candidate = {
+    candidateId: null,
+    firstName: '',
+    lastName: '',
+    picture: '',
+    organization: ''
+  };
 
   constructor(public share: ShareService,
               private translateService: TranslateService,
               private candidateService: CandidateService,
               @Inject(LOCALE_ID) public locale: string) {
     this.languages = translateService.languages;
-    // translateService.use(this.defaultLanguage);
   }
 
-  getCandidates(): void {
-    this.candidateService.getCandidates().subscribe(data => (this.candidates = data));
+  getCandidate(id: number) {
+    this.candidateService.getCandidate(id).subscribe(data => (this.candidate = data));
   }
 
   ngOnInit() {
-    this.getCandidates();
-    this.description = this.candidates[0].firstName;
+    this.getCandidate(1);
   }
 
   onLangChange(event) {
