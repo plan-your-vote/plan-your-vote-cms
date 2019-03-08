@@ -6,19 +6,6 @@
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Migrations\20190302010109_InitialSeedDatabase.cs" />
-    <Compile Remove="Migrations\20190302010109_InitialSeedDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20190302011614_InitialSeedDatabase.cs" />
-    <Compile Remove="Migrations\20190302011614_InitialSeedDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20190302012454_InitialSeedDatabase.cs" />
-    <Compile Remove="Migrations\20190302012454_InitialSeedDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20190302012919_InitialSeedDatabase.cs" />
-    <Compile Remove="Migrations\20190302012919_InitialSeedDatabase.Designer.cs" />
-    <Compile Remove="Migrations\20190302013204_InitialSeedDatabase.cs" />
-    <Compile Remove="Migrations\20190302013204_InitialSeedDatabase.Designer.cs" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
