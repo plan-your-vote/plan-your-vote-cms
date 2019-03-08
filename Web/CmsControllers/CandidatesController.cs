@@ -22,7 +22,7 @@ namespace Web
         // GET: Candidates
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Candidates.Include(c => c.Organization);
+            var applicationDbContext = _context.Candidates.Include(c => c.Organization).Include(c => c.Contacts);
             return View(await applicationDbContext.ToListAsync());
         }
 
