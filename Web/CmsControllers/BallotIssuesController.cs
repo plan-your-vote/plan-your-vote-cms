@@ -70,13 +70,16 @@ namespace Web
 
                 foreach(string title in model.OptionsTitles)
                 {
-                    IssueOption opt = new IssueOption
+                    if(title != null && title.Length > 0)
                     {
-                        BallotIssueId = issue.BallotIssueId,
-                        IssueOptionTitle = title,
-                        IssueOptionInfo = title,
-                    };
-                    _context.Add(opt);
+                        IssueOption opt = new IssueOption
+                        {
+                            BallotIssueId = issue.BallotIssueId,
+                            IssueOptionTitle = title,
+                            IssueOptionInfo = title,
+                        };
+                        _context.Add(opt);
+                    }
                 }
 
                 await _context.SaveChangesAsync();
