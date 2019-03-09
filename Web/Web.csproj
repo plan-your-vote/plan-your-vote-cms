@@ -6,6 +6,14 @@
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Models\ViewHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="CmsControllers\ViewHelper.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
