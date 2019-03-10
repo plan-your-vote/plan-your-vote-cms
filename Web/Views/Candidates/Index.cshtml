@@ -27,7 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Organization)
             </th>
-            <th></th>
+            <th class="col-sm-2"></th>
         </tr>
     </thead>
     <tbody>
@@ -50,8 +50,8 @@
                     @Html.DisplayFor(modelItem => item.Organization.Name)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.CandidateId">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CandidateId">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.CandidateId">Delete</a>
                 </td>
             </tr>

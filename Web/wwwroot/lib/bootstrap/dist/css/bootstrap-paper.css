@@ -1403,7 +1403,7 @@ body {
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 13px;
     line-height: 1.846;
-    color: #666666;
+    color: #333333;
     background-color: #e2e2e2;
 }
 
@@ -1517,7 +1517,7 @@ h6,
     font-family: inherit;
     font-weight: 400;
     line-height: 1.1;
-    color: #444444;
+    color: #333333;
 }
 
     h1 small,
@@ -6577,6 +6577,7 @@ button.list-group-item-danger {
     border: 1px solid transparent;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    padding: 8px;
 }
 
 .panel-body {
