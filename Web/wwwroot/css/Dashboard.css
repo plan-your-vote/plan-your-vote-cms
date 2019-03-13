@@ -1571,7 +1571,7 @@ a {
         -o-transition: all .3s linear;
         transition: all .3s linear;
         position: absolute;
-        top: -10px;
+        top: -25px;
         right: 10px;
         z-index: 0;
         font-size: 90px;

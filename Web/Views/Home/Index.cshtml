@@ -16,7 +16,7 @@
     <br/>
 </section>
 
-<section class="content text-center">
+<section class="content align-content-center">
     <div class="row">
         <div class="col-lg-4 col-xs-6">
             <div class="small-box bg-aqua">
@@ -24,9 +24,9 @@
                     <h3>@Model.CandidatesCount</h3>
                     <p>Candidates</p>
                 </div>
-                @*<div class="icon">
-                    <i class="material-icons">person</i>
-                </div>*@
+                <div class="icon">
+                    <i class="material-icons" style="font-size: 80px;">people</i>
+                </div>
                 <a class="small-box-footer" asp-area="" asp-controller="Candidates" asp-action="Index">
                     More info <i class="material-icons">chevron_right</i>
                 </a>
@@ -38,6 +38,9 @@
                     <h3>@Model.ContactsCount<sup style="font-size: 20px"></sup></h3>
                     <p>Contacts</p>
                 </div>
+                <div class="icon">
+                    <i class="material-icons" style="font-size: 80px;">account_box</i>
+                </div>
                 <a class="small-box-footer" asp-area="" asp-controller="Contacts" asp-action="Index">
                     More info <i class="material-icons">chevron_right</i>
                 </a>
@@ -48,6 +51,9 @@
                 <div class="inner">
                     <h3>@Model.BallotIssuesCount</h3>
                     <p>Ballot Issues</p>
+                </div>
+                <div class="icon">
+                    <i class="material-icons" style="font-size: 80px;">format_list_bulleted</i>
                 </div>
                 <a class="small-box-footer" asp-area="" asp-controller="BallotIssues" asp-action="Index">
                     More info <i class="material-icons">chevron_right</i>
