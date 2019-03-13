@@ -43,8 +43,8 @@ html {
 
 body {
     /* Margin bottom by footer height */
-    margin-bottom: 60px;
-    /*background-color: #e2e2e2 !important;*/
+    /*margin-bottom: 60px;*/
+    background-color: #e2e2e2 !important;
 }
 .footer {
   position: absolute;
@@ -58,4 +58,17 @@ body {
 
 .btn-link.logout:hover {
     background-color: transparent !important;
+}
+
+.small-box-footer .material-icons {
+    vertical-align: middle !important;
+}
+
+.inner h3 {
+    color: white !important;
+}
+
+.icon .material-icons {
+    font-size: 80px !important;
+    top: -25px;
 }
