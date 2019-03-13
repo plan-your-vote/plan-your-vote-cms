@@ -4687,7 +4687,7 @@ table.text-center, table.text-center td, table.text-center th {
 }
 
 .bg-aqua, .callout.callout-info, .alert-info, .label-info, .modal-info .modal-body {
-    background-color: #00c0ef !important
+    background-color: #2196f3 !important
 }
 
 .bg-blue {
@@ -4752,7 +4752,7 @@ table.text-center, table.text-center td, table.text-center th {
 }
 
 .bg-aqua-active, .modal-info .modal-header, .modal-info .modal-footer {
-    background-color: #00a7d0 !important
+    background-color: #2196f3 !important
 }
 
 .bg-blue-active {

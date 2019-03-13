@@ -72,3 +72,7 @@ body {
     font-size: 80px !important;
     top: -25px;
 }
+
+.small-box {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+}
