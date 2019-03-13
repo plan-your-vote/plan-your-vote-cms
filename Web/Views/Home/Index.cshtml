@@ -1,8 +1,56 @@
-﻿@{
+﻿@model Web.ViewModels.DashboardViewModel;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Plan Your Vote - CMS</h1>
-    <p>Use this tool to populate your databaes with Candidates, Positions (Races) to elect for etc.</p>
+    <p>Use this tool to populate your database with Candidates, Positions (Races) to elect for etc.</p>
 </div>
+
+<br/>
+
+<section class="content-header">
+    <h1>Dashboard</h1>
+    <br/>
+</section>
+
+<section class="content text-center">
+    <div class="row">
+        <div class="col-lg-4 col-xs-6">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>@Model.CandidatesCount</h3>
+                    <p>Candidates</p>
+                </div>
+                @*<div class="icon">
+                    <i class="material-icons">person</i>
+                </div>*@
+                <a class="small-box-footer" asp-area="" asp-controller="Candidates" asp-action="Index">
+                    More info <i class="fa fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xs-6">
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>@Model.ContactsCount<sup style="font-size: 20px"></sup></h3>
+                    <p>Contacts</p>
+                </div>
+                <a class="small-box-footer" asp-area="" asp-controller="Contacts" asp-action="Index">
+                    More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xs-6">
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>@Model.BallotIssuesCount</h3>
+                    <p>Ballot Issues</p>
+                </div>
+                <a class="small-box-footer" asp-area="" asp-controller="BallotIssues" asp-action="Index">
+                    More info <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
