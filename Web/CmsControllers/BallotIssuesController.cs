@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VotingModelLibrary.Models;
 using Web.Data;
+using Web.Models;
 
 namespace Web
 {
@@ -34,6 +36,7 @@ namespace Web
             }
 
             var ballotIssue = await _context.BallotIssues
+                .Include(b => b.BallotIssueOptions)
                 .FirstOrDefaultAsync(m => m.BallotIssueId == id);
             if (ballotIssue == null)
             {
@@ -45,7 +48,7 @@ namespace Web
 
         // GET: BallotIssues/Create
         public IActionResult Create()
-        {
+        { 
             return View();
         }
 
@@ -54,15 +57,35 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BallotIssueId,BallotIssueTitle,Description")] BallotIssue ballotIssue)
+        public async Task<IActionResult> Create([Bind("BallotIssueId,BallotIssueTitle,Description,OptionsTitles")] BallotIssueCreate model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(ballotIssue);
+                BallotIssue issue = new BallotIssue
+                {
+                    BallotIssueTitle = model.BallotIssueTitle,
+                    Description = model.Description
+                };
+                _context.Add(issue);
+
+                foreach(string title in model.OptionsTitles)
+                {
+                    if(title != null && title.Length > 0)
+                    {
+                        IssueOption opt = new IssueOption
+                        {
+                            BallotIssueId = issue.BallotIssueId,
+                            IssueOptionTitle = title,
+                            IssueOptionInfo = title,
+                        };
+                        _context.Add(opt);
+                    }
+                }
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ballotIssue);
+            return View(model);
         }
 
         // GET: BallotIssues/Edit/5

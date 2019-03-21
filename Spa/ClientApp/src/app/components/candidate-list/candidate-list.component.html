@@ -12,12 +12,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let c of candidates">
+        <tr *ngFor="let c of candidates; let i = index" >
           <td>{{ c.firstName }}</td>
           <td>{{ c.lastName }}</td>
           <td><img src="{{ c.picture }}" /></td>
           <td>{{ c.biography }}</td>
-          <button type="button" (click)="onSelect(c)"class="glyphicon glyphicon-check">{{ c.selected ? 'Cancel' : 'Select' }}</button>
+          <button type="button" (click)="onSelect(i,c)"  [attr.id]="'candidate-btn'+i" class="glyphicon glyphicon-check btn btn-sm {{ c.selected ? 'btn-danger' : 'btn-success' }}">{{ c.selected ? 'Cancel' : 'Select' }}</button>
         </tr>
       </tbody>
     </table>
