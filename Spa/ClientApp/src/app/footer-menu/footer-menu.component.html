@@ -25,7 +25,7 @@
       </div>
       <div class="col-sm">
         <select id="footer-select-lang" (change)="onLangChange($event)" [(ngModel)]="defaultLanguage">
-          <option *ngFor="let language of languages">
+          <option *ngFor="let language of languages" [ngValue]="language">
             {{language}}
           </option>
         </select>
