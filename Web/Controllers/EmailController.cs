@@ -27,7 +27,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Email email)
+        public ActionResult Post([FromBody] Email email)
         {
             bool success = SendEmail(email.EmailAddress, email.Subject, email.Message);
 
