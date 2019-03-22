@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
   MatSnackBarModule, MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule,
-  MatSortModule, MatRippleModule } from '@angular/material';
+  MatSortModule, MatRippleModule, MatExpansionModule } from '@angular/material';
+import { ShareButtonsModule } from '@ngx-share/buttons';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,6 +27,9 @@ import { CandidateItemComponent } from './components/candidate-item/candidate-it
 import { CandidateListComponent } from './components/candidate-list/candidate-list.component';
 import { MapComponentComponent } from './components/map-component/map-component.component';
 import { EmailComponent } from './components/email/email.component';
+import { FooterMenuComponent } from './footer-menu/footer-menu.component';
+import { IcsfileComponent } from './components/icsfile/icsfile.component';
+
 
 export function setupTranslateFactory(service: TranslateService): Function {
   return () => service.use('en');
@@ -41,10 +46,14 @@ export function setupTranslateFactory(service: TranslateService): Function {
     CandidateItemComponent,
     CandidateListComponent,
     MapComponentComponent,
-    EmailComponent
+    EmailComponent,
+    FooterMenuComponent,
+    IcsfileComponent
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
@@ -53,6 +62,7 @@ export function setupTranslateFactory(service: TranslateService): Function {
     MatToolbarModule,
     MatButtonModule, 
     MatCardModule,
+    MatExpansionModule,
     MatInputModule,
     MatDialogModule,
     MatTableModule,
@@ -61,7 +71,8 @@ export function setupTranslateFactory(service: TranslateService): Function {
     MatRippleModule,
     MatSortModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ShareButtonsModule
   ],
   providers: [
     TranslateService,

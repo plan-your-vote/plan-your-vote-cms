@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({ "Content-Type": "application/json",
@@ -15,9 +16,10 @@ export class EmailService {
   constructor(private http: HttpClient) { }
 
   sendReminderEmail(emailAddress: string, subject: string, message: string) {
+    let url = environment.emailUrl;
+
     this.http
-      .post<string>(
-        "https://localhost:44307/api/email",
+      .post<string>(url,
         {
           EmailAddress: emailAddress,
           Subject: subject,
