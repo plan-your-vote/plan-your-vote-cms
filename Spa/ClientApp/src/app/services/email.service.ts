@@ -5,10 +5,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
   providedIn: "root"
 })
 export class EmailService {
-  
-  constructor(private http: HttpClient) {}
 
-  // Creates errors in promise
+  constructor(private http: HttpClient) { }
+
   sendReminderEmail(emailAddress: string, subject: string, message: string) {
     this.http
       .post<string>(
@@ -18,9 +17,7 @@ export class EmailService {
           Subject: subject,
           Message: message,
         },
-        { headers: new HttpHeaders({ "Content-Type": "application/json", "Access-Control-Allow-Origin": "EmailPolicy"}) }
-      )
-      .toPromise()
-      .catch();
+        { headers: new HttpHeaders({ "Content-Type": "application/json", "Access-Control-Allow-Origin": "EmailPolicy" }) }
+      ).subscribe();
   }
 }
