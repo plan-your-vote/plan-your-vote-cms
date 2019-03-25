@@ -29,8 +29,16 @@ export class EmailComponent implements OnInit {
       console.log("NO EMAIL");
 
     } else if (regexp.test(this.emailaddress)) {
-      this.emailService.sendReminderEmail(this.emailaddress, this.subject, this.message);
-      console.log("EMAIL SENT");
+
+
+      if (this.subject == null || this.subject.length == 0) {
+        this.emailService.sendReminderEmail(this.emailaddress, "Email Reminder: Election", "Default Message"); //Default Message Email
+        console.log("DEFAULT EMAIL SENT");
+      } else {
+        this.emailService.sendReminderEmail(this.emailaddress, this.subject, this.message); //Custom Subject Line
+        console.log("CUSTOM EMAIL SENT");
+
+      }
     } else{
       //handle error
       //send warning

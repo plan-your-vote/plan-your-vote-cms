@@ -3,8 +3,8 @@
     <tr>
       <td><label>E-mail Address: </label></td>
       <td><input [(ngModel)]="emailaddress" name="email" ng-required="true" ng-minlength="5" /></td>
-      <td *ngIf="invalidemail"><label>Invalid Email</label></td>
-      <td *ngIf="noemail"><label>No Email</label></td>
+      <td class="warningLabel" *ngIf="invalidemail"><label>Invalid Email</label></td>
+      <td class="warningLabel" *ngIf="noemail"><label>No Email</label></td>
     </tr>
     <tr>
       <td><label>Subject: </label></td>
