@@ -1,7 +1,7 @@
 {
   "default":
   {
-    "Message": "Default Message",
-    "Subject": "Default Subject"
+    "message": "Your custom message here",
+    "subject": "Your custom subject here"
   }
 }
