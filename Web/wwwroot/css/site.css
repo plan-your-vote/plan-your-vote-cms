@@ -42,8 +42,9 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    /*margin-bottom: 60px;*/
+    background-color: #e2e2e2 !important;
 }
 .footer {
   position: absolute;
@@ -53,4 +54,25 @@ body {
   /* Set the fixed height of the footer here */
   height: 60px;
   line-height: 60px; /* Vertically center the text there */
+}
+
+.btn-link.logout:hover {
+    background-color: transparent !important;
+}
+
+.small-box-footer .material-icons {
+    vertical-align: middle !important;
+}
+
+.inner h3 {
+    color: white !important;
+}
+
+.icon .material-icons {
+    font-size: 80px !important;
+    top: -25px;
+}
+
+.small-box {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
 }

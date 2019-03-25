@@ -17,6 +17,7 @@
     "@angular/compiler": "~7.2.0",
     "@angular/core": "~7.2.0",
     "@angular/forms": "~7.2.0",
+    "@angular/http": "^7.2.10",
     "@angular/material": "^7.3.3",
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
@@ -31,7 +32,7 @@
     "core-js": "^2.5.4",
     "jspdf": "^1.5.3",
     "ol": "^5.3.1",
-    "rxjs": "~6.3.3",
+    "rxjs": "^6.3.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },

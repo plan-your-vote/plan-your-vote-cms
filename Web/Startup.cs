@@ -55,7 +55,7 @@ namespace Web
             // cs = csSplit[0] + "=" + path + csSplit[1];
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(cs));
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)

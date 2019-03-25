@@ -1,15 +1,15 @@
-@model IEnumerable<VotingModelLibrary.Models.Candidate>
+﻿@model IEnumerable<VotingModelLibrary.Models.Candidate>
 
 @{
-    ViewData["Title"] = "Candidates Info";
+    ViewData["Title"] = "Index";
 }
 
-<h1>Candidates Info</h1>
+<h1>Index</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table panel panel-default">
     <thead>
         <tr>
             <th>
@@ -27,33 +27,34 @@
             <th>
                 @Html.DisplayNameFor(model => model.Organization)
             </th>
-            <th></th>
+            <th class="col-sm-2"></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                <img width="80" height="80" src="@Html.DisplayFor(modelItem => item.Picture)">
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Biography)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Organization.Name)
-            </td>
-            <td>
-                <!--<a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a>|
-                <a asp-action="Details" asp-route-id="@item.CandidateId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.CandidateId">Delete</a>-->
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    <img width="80" height="80" src="@Html.DisplayFor(modelItem => item.Picture)">
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Biography)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Organization.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CandidateId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.CandidateId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CandidateId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
