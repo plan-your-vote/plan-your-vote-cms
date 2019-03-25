@@ -266,3 +266,4 @@ __pycache__/
 
 # for mac users
 *.DS_Store
+commit counter.txt
