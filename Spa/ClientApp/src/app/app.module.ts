@@ -29,6 +29,8 @@ import { MapComponentComponent } from './components/map-component/map-component.
 import { EmailComponent } from './components/email/email.component';
 import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { IcsfileComponent } from './components/icsfile/icsfile.component';
+import { JSONParserService } from './services/jsonparser.service';
+import { HttpModule } from '@angular/http';
 
 
 export function setupTranslateFactory(service: TranslateService): Function {
@@ -55,6 +57,7 @@ export function setupTranslateFactory(service: TranslateService): Function {
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpModule,
     AppRoutingModule,
     FormsModule,
     MatListModule,
@@ -81,7 +84,9 @@ export function setupTranslateFactory(service: TranslateService): Function {
       useFactory: setupTranslateFactory,
       deps: [TranslateService],
       multi: true
-    }
+    },
+    JSONParserService
+    
   ],
   bootstrap: [AppComponent]
 })
