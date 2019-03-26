@@ -81,12 +81,10 @@ namespace Web
             services.Configure<RequestLocalizationOptions>(opts => {
                 var supportedCultures = new List<CultureInfo> {
                     new CultureInfo("en"),
-                    new CultureInfo("en-US"),
                     new CultureInfo("fr"),
-                    new CultureInfo("fr-FR"),
                   };
 
-                opts.DefaultRequestCulture = new RequestCulture("en-US");
+                opts.DefaultRequestCulture = new RequestCulture("en");
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;
             });
