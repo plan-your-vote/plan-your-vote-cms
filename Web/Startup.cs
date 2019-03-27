@@ -71,7 +71,7 @@ namespace Web
                 {
                     Title = "VotingTool API",
                     Version = "v1",
-                    Description = "VotingTool Backend REST API Service Documentation"
+                    Description = "VotingTool Backend REST API Service Documentation\nhttps://github.com/CstHub/votingtool"
                 });
 
             });
