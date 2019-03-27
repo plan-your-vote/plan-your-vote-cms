@@ -65,11 +65,19 @@ namespace Web
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Info { Title = "VotingTool API", Version = "v1" });
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "VotingTool API",
+                    Version = "v1",
+                    Description = "VotingTool Backend REST API Service Documentation"
+                });
+
             });
 
-            services.AddLocalization(opts => {
+            services.AddLocalization(opts =>
+            {
                 opts.ResourcesPath = "Resources";
             });
 
@@ -78,7 +86,8 @@ namespace Web
                 .AddDataAnnotationsLocalization()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.Configure<RequestLocalizationOptions>(opts => {
+            services.Configure<RequestLocalizationOptions>(opts =>
+            {
                 var supportedCultures = new List<CultureInfo> {
                     new CultureInfo("en"),
                     new CultureInfo("fr"),
@@ -113,10 +122,11 @@ namespace Web
 
             app.UseAuthentication();
 
-            //Swagger boilerplate
             app.UseSwagger();
 
-            app.UseSwaggerUI(c => {
+            // https://localhost:<port>/swagger
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "VotingTool API V1");
             });
 
