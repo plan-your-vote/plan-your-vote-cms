@@ -36,7 +36,7 @@ namespace Web.Controllers
                 return Ok();
             }
 
-            return Content("Failed Sending Reminder Email");
+            return BadRequest("Failed to send email");
         }
 
         private bool SendEmail(string emailAddress, string subject, string message)
