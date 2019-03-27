@@ -30,4 +30,9 @@
     <ProjectReference Include="..\VotingModelLibrary\VotingModelLibrary.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
 </Project>
