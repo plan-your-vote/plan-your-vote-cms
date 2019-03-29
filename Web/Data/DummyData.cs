@@ -17,6 +17,10 @@ namespace Web.Data
 
             if (context.Candidates.Any()) { return; }
 
+            var elections = GetElections().ToArray();
+            context.Elections.AddRange(elections);
+            context.SaveChanges();
+
             var organizations = GetOrganizations().ToArray();
             context.Organizations.AddRange(organizations);
             context.SaveChanges();
@@ -43,10 +47,6 @@ namespace Web.Data
 
             var issueOptions = GetIssueOptions().ToArray();
             context.IssueOptions.AddRange(issueOptions);
-            context.SaveChanges();
-
-            var elections = GetElections().ToArray();
-            context.Elections.AddRange(elections);
             context.SaveChanges();
 
             var pollingStations = GetPollingStations().ToArray();
@@ -139,7 +139,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     LastName = "Young",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor12.jpg",
                     Biography = @"Wai has lived in Vancouver for over 50 years and is a community advocate, business owner, and past Member of Parliament with over three decades of civic and policy leadership. She is a birth mother of twins and a foster parent to seven children. She holds a degree in Sociology with post graduate work in Urban Planning and Mass Communications.",
-                    OrganizationId = 3
+                    OrganizationId = 3,
                     ElectionId = 3
                 }
             };
