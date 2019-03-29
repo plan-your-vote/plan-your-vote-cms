@@ -41,7 +41,7 @@ namespace Web.CmsControllers
             {
                 return NotFound();
             }
-            ViewBag.Elections = new SelectList(_context.Elections, "ElectionId", "Name", state.currentElection);
+            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "Name");
             return View(state);
         }
 
