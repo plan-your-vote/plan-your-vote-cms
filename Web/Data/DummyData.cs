@@ -84,21 +84,25 @@ namespace Web.Data
                 {
                     PositionName = "Mayor",
                     NumberNeeded = 1,
+                    ElectionId = 1
                 },
                 new Race
                 {
                     PositionName = "Councillor",
                     NumberNeeded = 10,
+                    ElectionId = 1
                 },
                 new Race
                 {
                     PositionName = "Park Commisioner",
                     NumberNeeded = 7,
+                    ElectionId = 2
                 },
                 new Race
                 {
                     PositionName = "School Trustee",
                     NumberNeeded = 9,
+                    ElectionId = 3
                 }
             };
         }
@@ -118,6 +122,7 @@ Jason attended Langara and UBC with eight years experience at TD Bank, HSBC, CIB
 
 Jason has ten years experience in Municipal, Provincial, Federal politics; earning 37,286 votes in 2011 Vancouver Council election.",
                     OrganizationId = 1,
+                    ElectionId = 1
                 },
                 new Candidate
                 {
@@ -126,6 +131,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor1.jpg",
                     Biography = @"Been in housing construction most of my life, truck driver, stock promoter and various other business. Founded the Canadian Hemp Growers Assoc. in 1996. 2005 on record at Senate Committee on national defence saying, ""terrorists"" are smuggling guns/drugs into Canada. 2005 Harm Reduction Pilot Project/monopolizing heroin to save lives, Men On Down Town East Society and Two Ravens Opioid Project.",
                     OrganizationId = 2,
+                    ElectionId = 2
                 },
                 new Candidate
                 {
@@ -134,6 +140,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor12.jpg",
                     Biography = @"Wai has lived in Vancouver for over 50 years and is a community advocate, business owner, and past Member of Parliament with over three decades of civic and policy leadership. She is a birth mother of twins and a foster parent to seven children. She holds a degree in Sociology with post graduate work in Urban Planning and Mass Communications.",
                     OrganizationId = 3
+                    ElectionId = 3
                 }
             };
         }
@@ -220,6 +227,7 @@ ILLEGAL MIGRANT CONTROL
                     Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to transportation and technology.
 
 Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,353,000 for the following purposes?",
+                    ElectionId = 1
                 },
                 new BallotIssue()
                 {
@@ -227,6 +235,7 @@ Are you in favour of Council having the authority, without further assent of the
                     Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to capital maintenance and renovation programs for existing community facilities, civic facilities, and parks.
 
 Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $99,557,000 for the following purposes?",
+                    ElectionId = 1
                 },
             };
         }
