@@ -10,7 +10,10 @@ namespace VotingModelLibrary.Models
         [Key]
         public int ElectionId { get; set; }
 
+        [Display (Name = "Start Date")]
         public string DateStart { get; set; }
+
+        [Display(Name = "End Date")]
         public string DateEnd { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

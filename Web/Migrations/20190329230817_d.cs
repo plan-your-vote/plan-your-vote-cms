@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web.Migrations
 {
-    public partial class vote : Migration
+    public partial class d : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -253,6 +253,26 @@ namespace Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "StateSingleton",
+                columns: table => new
+                {
+                    StateId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    currentElection = table.Column<int>(nullable: false),
+                    ElectionId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StateSingleton", x => x.StateId);
+                    table.ForeignKey(
+                        name: "FK_StateSingleton_Elections_ElectionId",
+                        column: x => x.ElectionId,
+                        principalTable: "Elections",
+                        principalColumn: "ElectionId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Candidates",
                 columns: table => new
                 {
@@ -434,6 +454,11 @@ namespace Web.Migrations
                 name: "IX_Races_ElectionId",
                 table: "Races",
                 column: "ElectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StateSingleton_ElectionId",
+                table: "StateSingleton",
+                column: "ElectionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -464,6 +489,9 @@ namespace Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "PollingStations");
+
+            migrationBuilder.DropTable(
+                name: "StateSingleton");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

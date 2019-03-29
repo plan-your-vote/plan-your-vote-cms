@@ -9,8 +9,8 @@ using Web.Data;
 namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190329190229_vote")]
-    partial class vote
+    [Migration("20190329230817_d")]
+    partial class d
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -365,6 +365,22 @@ namespace Web.Migrations
                     b.ToTable("Races");
                 });
 
+            modelBuilder.Entity("VotingModelLibrary.Models.State", b =>
+                {
+                    b.Property<int>("StateId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ElectionId");
+
+                    b.Property<int>("currentElection");
+
+                    b.HasKey("StateId");
+
+                    b.HasIndex("ElectionId");
+
+                    b.ToTable("StateSingleton");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -474,6 +490,13 @@ namespace Web.Migrations
                         .WithMany()
                         .HasForeignKey("ElectionId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.State", b =>
+                {
+                    b.HasOne("VotingModelLibrary.Models.Election", "Election")
+                        .WithMany()
+                        .HasForeignKey("ElectionId");
                 });
 #pragma warning restore 612, 618
         }
