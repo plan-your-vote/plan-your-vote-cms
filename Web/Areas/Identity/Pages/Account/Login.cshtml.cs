@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
 
 namespace Web.Areas.Identity.Pages.Account
 {
@@ -17,11 +18,13 @@ namespace Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly IStringLocalizer<SharedResources> _sharedLocalizer;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, IStringLocalizer<SharedResources> sharedLocalizer)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _sharedLocalizer = sharedLocalizer;
         }
 
         [BindProperty]
@@ -36,11 +39,11 @@ namespace Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "The Email field is required.")]
+            [EmailAddress(ErrorMessage = "The Email field is not a valid e-mail address.")]           
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "The Password field is required.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -90,7 +93,7 @@ namespace Web.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, _sharedLocalizer["Invalid login attempt."]);
                     return Page();
                 }
             }
