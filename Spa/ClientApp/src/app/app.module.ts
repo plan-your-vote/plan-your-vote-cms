@@ -31,6 +31,8 @@ import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { IcsfileComponent } from './components/icsfile/icsfile.component';
 import { JSONParserService } from './services/jsonparser.service';
 import { HttpModule } from '@angular/http';
+import { ImageTopComponent } from './components/card/image-top/image-top.component';
+import { ImageOverlayComponent } from './components/card/image-overlay/image-overlay.component';
 
 
 export function setupTranslateFactory(service: TranslateService): Function {
@@ -50,7 +52,9 @@ export function setupTranslateFactory(service: TranslateService): Function {
     MapComponentComponent,
     EmailComponent,
     FooterMenuComponent,
-    IcsfileComponent
+    IcsfileComponent,
+    ImageTopComponent,
+    ImageOverlayComponent
     
   ],
   imports: [
