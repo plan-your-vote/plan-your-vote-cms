@@ -9,7 +9,7 @@ namespace BackEndTests
 {
     public class EmailTests
     {
-        private readonly IOptions<EmailConfiguration> mockEmailConfiguration;
+        private IOptions<EmailConfiguration> mockEmailConfiguration;
 
         [Fact]
         public void TestEmailAddressAtCharacter()
@@ -35,15 +35,22 @@ namespace BackEndTests
         }
 
         [Fact]
-        public void Input_Valid_Vaues()
+        public void Input_Valid_Values()
         {
-            EmailController controller = new EmailController(mockEmailConfiguration);
+            EmailController _controller = new EmailController(mockEmailConfiguration);
             string emailAddress = "test@email.com";
             string subject = "subject";
             string message = "message";
             Email email = new Email();
-            Assert.True(controller.SendEmail(emailAddress, subject, message));
+            Assert.True(_controller.SendEmail(emailAddress, subject, message));
+        }
 
+        [Fact]
+        public void Test_Null_Value_Test()
+        {
+            EmailController _controller = new EmailController(mockEmailConfiguration);
+            Email email = new Email();
+            Assert.False(_controller.SendEmail(null, null, null));
         }
     }
 }

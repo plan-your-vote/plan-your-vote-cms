@@ -9,7 +9,7 @@ namespace BackEndTests
     public class EmailConfigurationTests
     {
         [Fact]
-        public void TestEmailAddressAtCharacter()
+        public void NetworkCredNameNotNull()
         {
             EmailConfiguration emailTest = new EmailConfiguration();
             emailTest.NetworkCredName = "test";
@@ -17,18 +17,19 @@ namespace BackEndTests
         }
 
         [Fact]
-        public void TestEmailAddressIsNull()
+        public void NotNull_Network_User_Name()
         {
-            Email emailTest = new Email();
-            Assert.Null(emailTest.EmailAddress);
+            EmailConfiguration emailConfigTest = new EmailConfiguration();
+            emailConfigTest.NetworkCredUserName = "test";
+            Assert.NotNull(emailConfigTest.NetworkCredUserName);
         }
 
         [Fact]
-        public void TestEmailAddressIsNotNull()
+        public void True_Smtp_Enabled()
         {
-            Email emailTest = new Email();
-            emailTest.EmailAddress = "bob@bcit.ca";
-            Assert.NotNull(emailTest.EmailAddress);
+            EmailConfiguration emailConfigTest = new EmailConfiguration();
+            emailConfigTest.SmtpEnableSSL = true;
+            Assert.True(emailConfigTest.SmtpEnableSSL);
         }
     }
 }
