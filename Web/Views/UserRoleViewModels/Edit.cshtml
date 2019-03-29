@@ -4,21 +4,38 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Edit User Roles</h1>
 
-<h4>UserRoleViewModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="userId" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<dl class="row col-lg-6 well bs-component">
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.user.UserName)
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.user.UserName)
+    </dd>
+    @foreach (var item in ViewBag.roles)
+    {
+        <dt class="col-sm-4">
+            @item.Name
+        </dt>
+        <dd class="col-sm-4">
+            @if (!Model.roles.Contains(item))
+            {
+                @Html.ActionLink("Add", "AddUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
+                    new { @class = "btn btn-primary", @role = "button" })
+            }
+            @if (Model.roles.Contains(item))
+            {
+                @Html.ActionLink("Delete", "DeleteUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
+                    new { @class = "btn btn-danger", @role = "button" })
+            }
+        </dd>
+    }
+
+
+
+</dl>
+
 
 <div>
     <a asp-action="Index">Back to List</a>

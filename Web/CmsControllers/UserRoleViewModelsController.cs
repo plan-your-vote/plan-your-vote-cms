@@ -40,7 +40,7 @@ namespace Web.CmsControllers
                 {
                     if (ur.UserId == u.Id)
                     {
-                        roles.Add(roles.FirstOrDefault(r=>r.Id == ur.RoleId));
+                        model.roles.Add(roles.FirstOrDefault(r=>r.Id == ur.RoleId));
                     }
                 }
                 models.Add(model);
@@ -68,7 +68,7 @@ namespace Web.CmsControllers
             {
                 if (ur.UserId == id)
                 {
-                    roles.Add(roles.FirstOrDefault(r => r.Id == ur.RoleId));
+                    model.roles.Add(roles.FirstOrDefault(r => r.Id == ur.RoleId));
                 }
             }
 
@@ -81,42 +81,9 @@ namespace Web.CmsControllers
             return View(model);
         }
 
-        public async Task<IActionResult> AddRole(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var users = _context.Users.ToList();
-            var roles = _context.Roles.ToList();
-            var userrole = _context.UserRoles.ToList();
 
-            UserRoleViewModel model = new UserRoleViewModel();
-            model.userId = id;
-            model.user = users.FirstOrDefault(u => u.Id == id);
-            model.roles = new List<IdentityRole>();
-            foreach (IdentityUserRole<string> ur in userrole)
-            {
-                if (ur.UserId == id)
-                {
-                    model.roles.Add(roles.FirstOrDefault(r => r.Id == ur.RoleId));
-                }
-            }
-            foreach (IdentityRole r in model.roles)
-            {
-                roles.Remove(r);
-            }
-            if (model == null)
-            {
-                return NotFound();
-            }
-
-            ViewData["roleslist"] = new SelectList(roles,"Id","Name");
-            return View(model);
-        }
-
-        public async Task<IActionResult> Add(string id, string id2)
+        public async Task<IActionResult> AddUserRole(string id, string id2)
         {
             var role = _context.Roles.FirstOrDefault(r => r.Id == id);
             var user = _context.Users.FirstOrDefault(u => u.Id == id2);
@@ -124,9 +91,17 @@ namespace Web.CmsControllers
             iur.UserId = id2;
             iur.RoleId = id;
             await _context.UserRoles.AddAsync(iur);
+            await _context.SaveChangesAsync();
             return Redirect(Request.Headers["Referer"].ToString());
         }
 
+        public async Task<IActionResult> DeleteUserRole(string id, string id2)
+        {
+            var userrole = _context.UserRoles.FirstOrDefault(ur => ur.RoleId == id && ur.UserId == id2);
+            _context.UserRoles.Remove(userrole);
+            await _context.SaveChangesAsync();
+            return Redirect(Request.Headers["Referer"].ToString());
+        }
 
         public async Task<IActionResult> EditRole()
         {
