@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web.Data;
 
 namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190329185046_current")]
+    partial class current
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -363,22 +365,6 @@ namespace Web.Migrations
                     b.ToTable("Races");
                 });
 
-            modelBuilder.Entity("VotingModelLibrary.Models.State", b =>
-                {
-                    b.Property<int>("StateId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("ElectionId");
-
-                    b.Property<int>("currentElection");
-
-                    b.HasKey("StateId");
-
-                    b.HasIndex("ElectionId");
-
-                    b.ToTable("StateSingleton");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -488,13 +474,6 @@ namespace Web.Migrations
                         .WithMany()
                         .HasForeignKey("ElectionId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("VotingModelLibrary.Models.State", b =>
-                {
-                    b.HasOne("VotingModelLibrary.Models.Election", "Election")
-                        .WithMany()
-                        .HasForeignKey("ElectionId");
                 });
 #pragma warning restore 612, 618
         }

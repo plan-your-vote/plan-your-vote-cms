@@ -9,6 +9,7 @@ namespace Web.Data
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
         }
+        public DbSet<State> StateSingleton { get; set; }
         public DbSet<Election> Elections { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<Race> Races { get; set; }
