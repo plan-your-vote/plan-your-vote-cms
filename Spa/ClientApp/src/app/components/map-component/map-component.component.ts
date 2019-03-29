@@ -16,21 +16,19 @@ export class MapComponentComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    const cambieAnd12thLonLat = [-123.115083, 49.260472];
-    const cambieAnd12thMercator = fromLonLat(cambieAnd12thLonLat);
-
+    //Creates the map
     const map = new Map({
       layers: [
         new TileLayer({
           source: new OSM()
         })
       ],
-      target: 'map',
-      view: new View({
-        center: cambieAnd12thMercator,
-        zoom: 12
-      })
+      target: 'map'
+    });
+    //Centers map on current location
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      const coords = fromLonLat([pos.coords.longitude, pos.coords.latitude]);
+      map.getView().animate({ center: coords, zoom: 10 });
     });
   }
-
 }
