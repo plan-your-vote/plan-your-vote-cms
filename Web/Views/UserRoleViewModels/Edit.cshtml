@@ -1,0 +1,45 @@
+﻿@model Web.ViewModels.UserRoleViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit User Roles</h1>
+
+<dl class="row col-lg-6 well bs-component">
+    <dt class="col-sm-4">
+        @Html.DisplayNameFor(model => model.user.UserName)
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.user.UserName)
+    </dd>
+    @foreach (var item in ViewBag.roles)
+    {
+        <dt class="col-sm-4">
+            @item.Name
+        </dt>
+        <dd class="col-sm-4">
+            @if (!Model.roles.Contains(item))
+            {
+                <h6>No</h6>
+                @Html.ActionLink("Add", "AddUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
+                    new { @class = "btn btn-primary", @role = "button" })
+            }
+            @if (Model.roles.Contains(item))
+            {
+                <h6>Yes</h6>
+                @Html.ActionLink("Delete", "DeleteUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
+                    new { @class = "btn btn-danger", @role = "button" })
+            }
+        </dd>
+    }
+
+
+
+</dl>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
