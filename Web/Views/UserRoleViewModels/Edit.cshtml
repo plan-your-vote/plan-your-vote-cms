@@ -6,15 +6,21 @@
 
 <h1>Edit</h1>
 
-<h4>UserRoleViewModel</h4>
+<h4>
+    @Html.DisplayFor(modelItem => Model.user.UserName)
+</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="userId" />
+            @foreach (var item in Model.roles)
+            {
+                @Html.DisplayFor(modelItem => item.Name)
+            }
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Add Role" class="btn btn-primary" />
             </div>
         </form>
     </div>

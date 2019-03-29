@@ -47,9 +47,9 @@ namespace Web.CmsControllers
             }
             return View(models);
         }
-        
 
-        public async Task<IActionResult> Edit(string id)
+
+        public IActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -81,7 +81,7 @@ namespace Web.CmsControllers
             return View(model);
         }
 
-        public async Task<IActionResult> EditRole()
+        public IActionResult EditRole()
         {
 
             var roles = _context.Roles.ToList();

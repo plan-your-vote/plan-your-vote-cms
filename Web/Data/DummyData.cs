@@ -85,7 +85,7 @@ namespace Web.Data
             var user = new IdentityUser
             {
                 Email = "a@a.a",
-                UserName = "a",
+                UserName = "a@a.a",
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 
@@ -101,7 +101,7 @@ namespace Web.Data
             var user1 = new IdentityUser
             {
                 Email = "m@m.m",
-                UserName = "m",
+                UserName = "m@m.m",
                 SecurityStamp = Guid.NewGuid().ToString()
             };
 

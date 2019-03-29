@@ -4,11 +4,11 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Role Management</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
-</p>
+    <a asp-action="CreateRole">Create A New Role</a> | 
+    <a asp-action="EditRole">Role List</a></p>
 <table class="table">
     <thead>
         <tr>
@@ -18,6 +18,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.user.UserName)
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.userId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.userId">Details</a> |
