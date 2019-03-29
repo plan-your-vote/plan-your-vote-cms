@@ -21,11 +21,13 @@
         <dd class="col-sm-4">
             @if (!Model.roles.Contains(item))
             {
+                <h6>No</h6>
                 @Html.ActionLink("Add", "AddUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
                     new { @class = "btn btn-primary", @role = "button" })
             }
             @if (Model.roles.Contains(item))
             {
+                <h6>Yes</h6>
                 @Html.ActionLink("Delete", "DeleteUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
                     new { @class = "btn btn-danger", @role = "button" })
             }
