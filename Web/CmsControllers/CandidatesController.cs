@@ -85,7 +85,6 @@ namespace Web
             return View(candidate);
         }
 
-
         public static string GenerateImageId()
         {
             Random R = new Random();
