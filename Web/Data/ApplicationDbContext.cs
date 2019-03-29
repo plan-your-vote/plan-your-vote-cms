@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VotingModelLibrary.Models;
+using Web.ViewModels;
 
 namespace Web.Data
 {
