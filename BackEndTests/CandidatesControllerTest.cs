@@ -9,7 +9,7 @@ namespace BackEndTests
 {
     public class CandidatesControllerTest
     {
-        private readonly ApplicationDbContext _context;
+        // private readonly ApplicationDbContext _context;
         
         [Fact]
         public void Equal_Random_Image_Id_Value()
