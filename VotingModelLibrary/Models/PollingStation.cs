@@ -5,7 +5,7 @@ using System.Text;
 
 namespace VotingModelLibrary.Models
 {
-    class PollingStation
+    public class PollingStation
     {
         [Key]
         public int PollingStationId { get; set; }
