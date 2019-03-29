@@ -9,7 +9,7 @@ namespace Web.Data
     {
         private static ApplicationDbContext _context;
 
-        public static async Task Initialize(ApplicationDbContext context)
+        public static void Initialize(ApplicationDbContext context)
         {
             _context = context;
 
@@ -43,6 +43,14 @@ namespace Web.Data
 
             var issueOptions = GetIssueOptions().ToArray();
             context.IssueOptions.AddRange(issueOptions);
+            context.SaveChanges();
+
+            var elections = GetElections().ToArray();
+            context.Elections.AddRange(elections);
+            context.SaveChanges();
+
+            var pollingStations = GetPollingStations().ToArray();
+            context.PollingStations.AddRange(pollingStations);
             context.SaveChanges();
         }
 
@@ -251,6 +259,128 @@ Are you in favour of Council having the authority, without further assent of the
                     IssueOptionTitle = "How you plan to answer Question 2. Capital maintenance and renovation programs for existing community facilities, civic facilities, and parks",
                     IssueOptionInfo = "No",
                 },
+            };
+        }
+
+        private static List<Election> GetElections()
+        {
+            return new List<Election>()
+            {
+                new Election()
+                {
+                    ElectionId = 1,
+                    Name = "City of Vancouver 2018 Municiple Election",
+                    DateEnd = "October 21 2018",
+                    DateStart = "October 21 2018",
+                    Description = "Voting in an election is one of the most important things a citizen can do in their community and country."
+                },
+                new Election()
+                {
+                    ElectionId = 2,
+                    Name = "Canadian Federal Election, 2019",
+                    DateEnd = "October 21 2019",
+                    DateStart = "October 21 2019",
+                    Description = "The 2019 Canadian federal election is scheduled to take place on or before October 21, 2019. The October 21 date of the vote is determined by the fixed-date procedures in the Canada Elections Act"
+                },
+                new Election()
+                {
+                    ElectionId = 3,
+                    Name = "City of Vancouver 2020 Municiple Election",
+                    DateEnd = "October 21 2020",
+                    DateStart = "October 21 2020",
+                    Description = "Voting in an election is one of the most important things a citizen can do in their community and country."
+                }
+            };
+        }
+
+        private static List<PollingStation> GetPollingStations()
+        {
+            return new List<PollingStation>()
+            {
+                new PollingStation()
+                {
+                    PollingStationId = 1,
+                    ElectionId = 1,
+                    Name = "Holy Trinity Anglican Church",
+                    AdditionalInfo = "",
+                    Latitude = 49.27376,
+                    Longitute = -123.127989,
+                    Address = "1440 W 12th Avenue",
+                    WheelchairInfo = "main entrance on West 12th Ave",
+                    ParkingInfo = "street and church parking lot",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 2,
+                    ElectionId = 1,
+                    Name = "Grace Vancouver Church",
+                    AdditionalInfo = "",
+                    Latitude = 48.888,
+                    Longitute = -121.00,
+                    Address = "1696 W 7th Avenue",
+                    WheelchairInfo = "via ramp at the side entrance to the sanctuary, on West 7th Ave",
+                    ParkingInfo = "street",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 3,
+                    ElectionId = 2,
+                    Name = "Lord Tennyson Elementary School",
+                    AdditionalInfo = "",
+                    Latitude = 49.4444,
+                    Longitute = -122.555,
+                    Address = "1936 W 10th Avenue",
+                    WheelchairInfo = "south side entrance on West 11th Ave",
+                    ParkingInfo = "street",
+                    WashroomInfo = "wheelchair accessible washrooms are on the 3rd floor via chair lift",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 4,
+                    ElectionId = 2,
+                    Name = "Gathering Place Community Centre",
+                    AdditionalInfo = "Handicap parking unavailable",
+                    Latitude = 50.110,
+                    Longitute = -123.444,
+                    Address = "609 Helmcken St",
+                    WheelchairInfo = "main entrance at the corner of Helmcken St and Seymour St",
+                    ParkingInfo = "street",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 5,
+                    ElectionId = 3,
+                    Name = "False Creek Community Centre",
+                    AdditionalInfo = "",
+                    Latitude = 49.5677,
+                    Longitute = -121.127989,
+                    Address = "1318 Cartwright St",
+                    WheelchairInfo = "main entrance on Cartwright St",
+                    ParkingInfo = "street and community centre parking",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 6,
+                    ElectionId = 3,
+                    Name = "Roundhouse Community Arts Centre",
+                    AdditionalInfo = "",
+                    Latitude = 49.6999,
+                    Longitute = -124.127989,
+                    Address = "181 Roundhouse Mews",
+                    WheelchairInfo = "main entrance on Roundhouse Mews",
+                    ParkingInfo = "street parking, underground parking off Drake St",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                }
             };
         }
     }
