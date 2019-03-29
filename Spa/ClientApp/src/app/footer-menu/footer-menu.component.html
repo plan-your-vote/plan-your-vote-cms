@@ -13,13 +13,13 @@
         </ul>
       </div>
       <div class="col-sm">
-        <button shareButton="twitter" [style.backgroundColor]="share.prop.twitter.color">
+        <button mat-icon-button shareButton="twitter" [style.backgroundColor]="share.prop.twitter.color" [description]="candidate.firstName">
           <fa-icon [icon]="share.prop.twitter.icon" size="lg"></fa-icon>
         </button>
-        <button shareButton="facebook" [style.backgroundColor]="share.prop.facebook.color">
+        <button mat-icon-button shareButton="facebook" [style.backgroundColor]="share.prop.facebook.color" [description]="description">
           <fa-icon [icon]="share.prop.facebook.icon" size="lg"></fa-icon>
         </button>
-        <button shareButton="linkedin" [style.backgroundColor]="share.prop.linkedin.color">
+        <button mat-icon-button shareButton="linkedin" [style.backgroundColor]="share.prop.linkedin.color" [description]="candidate.firstName">
           <fa-icon [icon]="share.prop.linkedin.icon" size="lg"></fa-icon>
         </button>
       </div>
