@@ -1,0 +1,22 @@
+﻿@model IEnumerable<VotingModelLibrary.Models.State>
+
+@{
+    ViewData["Title"] = "Current Election";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @ViewBag.ElectionName
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.StateId">Change</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
