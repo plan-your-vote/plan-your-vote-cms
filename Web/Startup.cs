@@ -16,6 +16,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
 using Web.Models;
+using Microsoft.AspNetCore.Mvc.Razor;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.Extensions.Options;
 
 namespace Web
 {
@@ -61,10 +65,37 @@ namespace Web
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Title = "VotingTool API",
+                    Version = "v1",
+                    Description = "VotingTool Backend REST API Service Documentation\nhttps://github.com/CstHub/votingtool"
+                });
 
-            services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new Info { Title = "VotingTool API", Version = "v1" });
+            });
+
+            services.AddLocalization(opts =>
+            {
+                opts.ResourcesPath = "Resources";
+            });
+
+            services.AddMvc()
+                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                .AddDataAnnotationsLocalization()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.Configure<RequestLocalizationOptions>(opts =>
+            {
+                var supportedCultures = new List<CultureInfo> {
+                    new CultureInfo("en"),
+                    new CultureInfo("fr"),
+                  };
+
+                opts.DefaultRequestCulture = new RequestCulture("en");
+                opts.SupportedCultures = supportedCultures;
+                opts.SupportedUICultures = supportedCultures;
             });
 
         }
@@ -91,13 +122,16 @@ namespace Web
 
             app.UseAuthentication();
 
-            //Swagger boilerplate
             app.UseSwagger();
 
-            app.UseSwaggerUI(c => {
+            // https://localhost:<port>/swagger
+            app.UseSwaggerUI(c =>
+            {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "VotingTool API V1");
             });
 
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
 
             app.UseMvc(routes =>
             {
