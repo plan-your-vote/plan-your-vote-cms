@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<VotingModelLibrary.Models.Contact>
+@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = @Localizer["Index"];
 }
 
-<h1>Index</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@Localizer["Create New"]</a>
 </p>
-<table class="table">
+<table class="table panel panel-default">
     <thead>
         <tr>
             <th>
@@ -25,23 +27,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactMethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContactValue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Candidate.CandidateId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ContactId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ContactId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ContactId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContactValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Candidate.CandidateId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ContactId">@Localizer["Edit"]</a> |
+                    <a asp-action="Details" asp-route-id="@item.ContactId">@Localizer["Details"]</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ContactId">@Localizer["Delete"]</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

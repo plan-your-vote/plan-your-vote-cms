@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  emailUrl: 'http://vote-web.azurewebsites.net/api/email'
+  emailUrl: 'https://localhost:44307/api/email'
 };
 
 /*

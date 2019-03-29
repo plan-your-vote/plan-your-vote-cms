@@ -27,7 +27,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Email email)
+        public IActionResult Post([FromBody] Email email)
         {
             bool success = SendEmail(email.EmailAddress, email.Subject, email.Message);
 
@@ -36,7 +36,7 @@ namespace Web.Controllers
                 return Ok();
             }
 
-            return Content("Failed Sending Reminder Email");
+            return BadRequest("Failed to send email");
         }
 
         private bool SendEmail(string emailAddress, string subject, string message)
@@ -59,11 +59,11 @@ namespace Web.Controllers
 
             SmtpClient smtp = new SmtpClient
             {
-                Host = "smtp.gmail.com",
-                EnableSsl = true,
-                UseDefaultCredentials = false,
+                Host = emailConfiguration.Value.SmtpHost,
+                EnableSsl = emailConfiguration.Value.SmtpEnableSSL,
+                UseDefaultCredentials = emailConfiguration.Value.SmptUseDefaultCredentials,
                 Credentials = networkCred,
-                Port = 587
+                Port = emailConfiguration.Value.SmtpPort
             };
 
             try
