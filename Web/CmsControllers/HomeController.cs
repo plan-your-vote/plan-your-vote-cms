@@ -25,9 +25,10 @@ namespace Web.Controllers
         public IActionResult Index()
         {
             State s = _context.StateSingleton.Find(State.STATE_ID);
-
+            Election e = _context.Elections.Where(el => el.ElectionId == s.currentElection).First();
             DashboardViewModel dashboard = new DashboardViewModel
             {
+                ElectionName = e.Name,
                 CandidatesCount = _context.Candidates
                     .Where(c => c.ElectionId == s.currentElection)
                     .Count(),
