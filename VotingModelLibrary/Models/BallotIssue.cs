@@ -7,6 +7,8 @@ namespace VotingModelLibrary.Models
     {
         [Key]
         public int BallotIssueId { get; set; }
+        public int ElectionId { get; set; }
+        
         [Display(Name = "BallotIssue")]
         public string BallotIssueTitle { get; set; }
         [Display(Name = "Description")]
