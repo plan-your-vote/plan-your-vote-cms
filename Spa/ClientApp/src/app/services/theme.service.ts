@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
-const API_URL = "https://localhost:44307/api/themes/";
+const API_URL = 'https://localhost:5001/api/theme/';
 
 @Injectable({
   providedIn: 'root'
@@ -17,9 +17,9 @@ export class ThemeService {
 
   getUserSelection() {
     return new Promise<string>((resolve, reject) => {
-      this.http.get<string>(API_URL).subscribe(
+      this.http.get<any>(API_URL).subscribe(
         res => {
-          this.themeName = res;
+          this.themeName = res.themeName;
           resolve(this.themeName);
         },
         error => {
