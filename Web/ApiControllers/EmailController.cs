@@ -39,7 +39,7 @@ namespace Web.Controllers
             return Content("Failed Sending Reminder Email");
         }
         
-        public  bool SendEmail(string emailAddress, string subject, string message)
+        public bool SendEmail(string emailAddress, string subject, string message)
         {
             MailMessage mm = new MailMessage
             {
