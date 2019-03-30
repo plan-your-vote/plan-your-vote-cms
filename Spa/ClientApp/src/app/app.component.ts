@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { PdfService } from './services/pdf.service';
 import { Election } from './models/election';
 import { Candidate } from './models/candidate';
 import { ElectionService } from './services/election.service';
 import { CandidateService } from './services/candidate.service';
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  imports: [
+    FormsModule,
+  ]
+})
 
 @Component({
   selector: 'app-root',
