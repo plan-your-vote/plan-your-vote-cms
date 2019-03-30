@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
 
 @{
-        ViewData["Title"] = "Edit";
-    }
+    ViewData["Title"] = "Edit";
+}
 
 <h1>Edit</h1>
 
 <h4>Edit Roles</h4>
 <hr />
+<a asp-action="CreateRole">Create A New Role</a>
 
 <table class="table">
     <thead>
@@ -20,7 +21,7 @@
     </thead>
     <tbody>
         @foreach (var item in Model)
-{
+        {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
