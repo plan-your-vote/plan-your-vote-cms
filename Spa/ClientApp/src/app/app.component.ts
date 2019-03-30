@@ -4,6 +4,11 @@ import { Election } from './models/election';
 import { Candidate } from './models/candidate';
 import { ElectionService } from './services/election.service';
 import { CandidateService } from './services/candidate.service';
+import { ThemeService } from './services/theme.service';
+
+const THEME_DEFAULT = './assets/css/style0.css';
+const THEME_01 = './assets/css/style1.css';
+const THEME_02 = './assets/css/style2.css';
 
 @Component({
   selector: 'app-root',
@@ -15,10 +20,12 @@ export class AppComponent implements OnInit {
   currentElection: Election;
   candidates: Candidate[];
   index: number;
+  selectedCssFilepath: string;
 
   title = 'ClientApp';
 
   constructor(
+    private themeService: ThemeService,
     private pdfService: PdfService,
     private electionApi: ElectionService,
     private candidatesApi: CandidateService
@@ -34,6 +41,23 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.nextElection();
+    this.chooseCss('1');
+  }
+
+  chooseCss(option: string): void {
+    switch (option) {
+      case '1':
+        this.selectedCssFilepath = THEME_01;
+        break;
+      case '2':
+        this.selectedCssFilepath = THEME_02;
+        break;
+      default:
+        this.selectedCssFilepath = THEME_DEFAULT;
+        break;
+    }
+
+    this.themeService.document.getElementById('theme').setAttribute('href', this.selectedCssFilepath);
   }
 
   public nextElection(): void {
