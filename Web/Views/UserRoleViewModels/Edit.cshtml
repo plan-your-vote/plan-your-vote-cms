@@ -10,6 +10,10 @@
 <h1>
     @TempData["info"]
 </h1>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 <dl class="row col-lg-6 well bs-component">
     <dt class="col-sm-4">
         @Html.DisplayNameFor(model => model.user.UserName)
@@ -30,7 +34,7 @@
             </dd>
             <dd class="col-sm-4">
                 @Html.ActionLink(" Add  ", "AddUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
-                    new { @class = "btn btn-primary", @role = "button" })
+                    new { @class = "btn btn-primary btn-block", @role = "button" })
             </dd>
         }
         @if (Model.roles.Contains(item))
@@ -40,7 +44,7 @@
             </dd>
             <dd class="col-sm-4">
                 @Html.ActionLink("Del", "DeleteUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
-                    new { @class = "btn btn-danger", @role = "button" })
+                    new { @class = "btn btn-danger btn-block", @role = "button" })
             </dd>
         }
 
@@ -50,8 +54,4 @@
 
 </dl>
 
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
