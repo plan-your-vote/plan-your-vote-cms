@@ -6,9 +6,9 @@ import { ElectionService } from './services/election.service';
 import { CandidateService } from './services/candidate.service';
 import { ThemeService } from './services/theme.service';
 
-const THEME_DEFAULT = './assets/css/style0.css';
-const THEME_01 = './assets/css/style1.css';
-const THEME_02 = './assets/css/style2.css';
+const THEME_DEFAULT = './assets/css/default.css';
+const THEME_MAPLE = './assets/css/maple.css';
+const THEME_SNOWDROP = './assets/css/snowdrop.css';
 
 @Component({
   selector: 'app-root',
@@ -41,23 +41,27 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.nextElection();
-    this.chooseCss('1');
+    this.themeService.getUserSelection().then(themeName => {
+      this.chooseCss(themeName);
+    });
   }
 
   chooseCss(option: string): void {
     switch (option) {
-      case '1':
-        this.selectedCssFilepath = THEME_01;
+      case 'maple':
+        this.selectedCssFilepath = THEME_MAPLE;
         break;
-      case '2':
-        this.selectedCssFilepath = THEME_02;
+      case 'snowdrop':
+        this.selectedCssFilepath = THEME_SNOWDROP;
         break;
       default:
         this.selectedCssFilepath = THEME_DEFAULT;
         break;
     }
 
-    this.themeService.document.getElementById('theme').setAttribute('href', this.selectedCssFilepath);
+    this.themeService.document
+      .getElementById('theme')
+      .setAttribute('href', this.selectedCssFilepath);
   }
 
   public nextElection(): void {
