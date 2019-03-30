@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Web.Migrations
+namespace Web.Data.Migrations
 {
-    public partial class d : Migration
+    public partial class votingtoolmigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

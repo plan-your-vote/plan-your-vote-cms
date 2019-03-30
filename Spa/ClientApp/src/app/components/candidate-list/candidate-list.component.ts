@@ -23,7 +23,7 @@ export class CandidateListComponent implements OnInit {
     } else {
       this.candidates = JSON.parse(localStorage.getItem('candidates'));
     }
-    
+    alert(this.candidates[0])
   }
 
   onSelect(c: Candidate) {

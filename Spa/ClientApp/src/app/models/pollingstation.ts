@@ -35,6 +35,6 @@ export class PollingStation {
     this.wheelchairInfo     = wheelchairInfo;
     this.parkingInfo        = parkingInfo;
     this.washroomInfo       = washroomInfo;
-    this.generalAccessInfo  = generalAccessInfo;
+    this.generalAccessInfo = generalAccessInfo;
   }
 }
