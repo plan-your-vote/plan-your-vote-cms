@@ -17,13 +17,20 @@ export class MapComponentComponent implements OnInit {
   public stations: PollingStation[] = [];
 
   constructor(private pollingStationApi: PollingStationService) {}
+
   getStations(): void {
-    this.pollingStationApi.getPollingStations().subscribe(data => (this.stations = data));
-  };
+    this.pollingStationApi
+      .getPollingStations()
+      .then(pollingStations => {
+        this.stations = pollingStations;
+        console.table(this.stations);
+      })
+      .then(() => {
+        // TODO start from here, now you have pollingStations data
+      });
+  }
 
   ngOnInit() {
-    this.getStations();
-    //Creates the map
     const map = new Map({
       layers: [
         new TileLayer({
@@ -32,11 +39,13 @@ export class MapComponentComponent implements OnInit {
       ],
       target: 'map'
     });
-    //Centers map on current location
-    navigator.geolocation.getCurrentPosition(function (pos) {
+
+    // Centers map on current location
+    navigator.geolocation.getCurrentPosition(pos => {
       const coords = fromLonLat([pos.coords.longitude, pos.coords.latitude]);
       map.getView().animate({ center: coords, zoom: 10 });
     });
-    alert(this.stations[0]);
+
+    this.getStations();
   }
 }
