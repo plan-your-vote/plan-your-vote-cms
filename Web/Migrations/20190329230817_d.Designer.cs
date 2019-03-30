@@ -9,8 +9,8 @@ using Web.Data;
 namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190308045102_first")]
-    partial class first
+    [Migration("20190329230817_d")]
+    partial class d
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -188,7 +188,11 @@ namespace Web.Migrations
 
                     b.Property<string>("Description");
 
+                    b.Property<int>("ElectionId");
+
                     b.HasKey("BallotIssueId");
+
+                    b.HasIndex("ElectionId");
 
                     b.ToTable("BallotIssues");
                 });
@@ -200,6 +204,8 @@ namespace Web.Migrations
 
                     b.Property<string>("Biography");
 
+                    b.Property<int>("ElectionId");
+
                     b.Property<string>("FirstName");
 
                     b.Property<string>("LastName");
@@ -209,6 +215,8 @@ namespace Web.Migrations
                     b.Property<string>("Picture");
 
                     b.HasKey("CandidateId");
+
+                    b.HasIndex("ElectionId");
 
                     b.HasIndex("OrganizationId");
 
@@ -257,6 +265,24 @@ namespace Web.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("VotingModelLibrary.Models.Election", b =>
+                {
+                    b.Property<int>("ElectionId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DateEnd");
+
+                    b.Property<string>("DateStart");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("ElectionId");
+
+                    b.ToTable("Elections");
+                });
+
             modelBuilder.Entity("VotingModelLibrary.Models.IssueOption", b =>
                 {
                     b.Property<int>("IssueOptionId")
@@ -289,10 +315,44 @@ namespace Web.Migrations
                     b.ToTable("Organizations");
                 });
 
+            modelBuilder.Entity("VotingModelLibrary.Models.PollingStation", b =>
+                {
+                    b.Property<int>("PollingStationId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdditionalInfo");
+
+                    b.Property<string>("Address");
+
+                    b.Property<int>("ElectionId");
+
+                    b.Property<string>("GeneralAccessInfo");
+
+                    b.Property<double>("Latitude");
+
+                    b.Property<double>("Longitute");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("ParkingInfo");
+
+                    b.Property<string>("WashroomInfo");
+
+                    b.Property<string>("WheelchairInfo");
+
+                    b.HasKey("PollingStationId");
+
+                    b.HasIndex("ElectionId");
+
+                    b.ToTable("PollingStations");
+                });
+
             modelBuilder.Entity("VotingModelLibrary.Models.Race", b =>
                 {
                     b.Property<int>("RaceId")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ElectionId");
 
                     b.Property<int>("NumberNeeded");
 
@@ -300,7 +360,25 @@ namespace Web.Migrations
 
                     b.HasKey("RaceId");
 
+                    b.HasIndex("ElectionId");
+
                     b.ToTable("Races");
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.State", b =>
+                {
+                    b.Property<int>("StateId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ElectionId");
+
+                    b.Property<int>("currentElection");
+
+                    b.HasKey("StateId");
+
+                    b.HasIndex("ElectionId");
+
+                    b.ToTable("StateSingleton");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -348,8 +426,21 @@ namespace Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("VotingModelLibrary.Models.BallotIssue", b =>
+                {
+                    b.HasOne("VotingModelLibrary.Models.Election", "Election")
+                        .WithMany()
+                        .HasForeignKey("ElectionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("VotingModelLibrary.Models.Candidate", b =>
                 {
+                    b.HasOne("VotingModelLibrary.Models.Election", "Election")
+                        .WithMany()
+                        .HasForeignKey("ElectionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("VotingModelLibrary.Models.Organization", "Organization")
                         .WithMany("Candidates")
                         .HasForeignKey("OrganizationId")
@@ -383,6 +474,29 @@ namespace Web.Migrations
                         .WithMany("BallotIssueOptions")
                         .HasForeignKey("BallotIssueId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.PollingStation", b =>
+                {
+                    b.HasOne("VotingModelLibrary.Models.Election", "Election")
+                        .WithMany()
+                        .HasForeignKey("ElectionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.Race", b =>
+                {
+                    b.HasOne("VotingModelLibrary.Models.Election", "Election")
+                        .WithMany()
+                        .HasForeignKey("ElectionId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.State", b =>
+                {
+                    b.HasOne("VotingModelLibrary.Models.Election", "Election")
+                        .WithMany()
+                        .HasForeignKey("ElectionId");
                 });
 #pragma warning restore 612, 618
         }

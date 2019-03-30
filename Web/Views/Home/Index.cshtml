@@ -8,7 +8,7 @@
 
 <div class="text-center">
     <h1 class="display-4">@Localizer["Plan Your Vote - CMS"]</h1>
-    <p>@Localizer["Use this tool to populate your database with Candidates, Positions(Races) to elect for etc."]</p>
+    <h3>@Model.ElectionName</h3>
 </div>
 
 <br />
@@ -37,13 +37,13 @@
         <div class="col-lg-4 col-md-4 col-xs-6">
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>@Model.ContactsCount<sup style="font-size: 20px"></sup></h3>
-                    <p>@Localizer["Contacts"]</p>
+                    <h3>@Model.PollingStationsCount<sup style="font-size: 20px"></sup></h3>
+                    <p>@Localizer["Polling Stations"]</p>
                 </div>
                 <div class="icon">
                     <i class="material-icons">account_box</i>
                 </div>
-                <a class="small-box-footer" asp-area="" asp-controller="Contacts" asp-action="Index">
+                <a class="small-box-footer" asp-area="" asp-controller="Polling Stations" asp-action="Index">
                     @Localizer["More info"] <i class="material-icons">chevron_right</i>
                 </a>
             </div>
