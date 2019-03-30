@@ -21,11 +21,12 @@ namespace Web.ApiControllers
             _context = context;
         }
 
-        // GET: api/Themes
+        // GET: api/Theme (Returns selected theme)
+        [Route("~/api/Theme")]
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Theme>>> GetTheme()
+        public async Task<ActionResult<Theme>> GetTheme()
         {
-            return await _context.Theme.Where(t => t.Selected).ToListAsync();
+            return await _context.Theme.Where(t => t.Selected).FirstAsync();
         }
 
         // GET: api/Themes/5
