@@ -98,6 +98,14 @@ namespace Web.CmsControllers
         public async Task<IActionResult> DeleteUserRole(string id, string id2)
         {
             var userrole = _context.UserRoles.FirstOrDefault(ur => ur.RoleId == id && ur.UserId == id2);
+            var adminrole = _context.Roles.FirstOrDefault(r => r.Name == "Admin");
+            if (id==adminrole.Id)
+            {
+                if(_context.UserRoles.Count(ur => ur.RoleId == adminrole.Id)<=1){
+                    TempData["info"] = "At least 1 Admin";
+                    return Redirect(Request.Headers["Referer"].ToString());
+                }
+            }
             _context.UserRoles.Remove(userrole);
             await _context.SaveChangesAsync();
             return Redirect(Request.Headers["Referer"].ToString());

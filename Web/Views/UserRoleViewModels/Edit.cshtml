@@ -2,10 +2,14 @@
 
 @{
     ViewData["Title"] = "Edit";
+    string yes = "YES";
+    string no = "NO";
 }
 
 <h1>Edit User Roles</h1>
-
+<h1>
+    @TempData["info"]
+</h1>
 <dl class="row col-lg-6 well bs-component">
     <dt class="col-sm-4">
         @Html.DisplayNameFor(model => model.user.UserName)
@@ -18,20 +22,28 @@
         <dt class="col-sm-4">
             @item.Name
         </dt>
-        <dd class="col-sm-4">
-            @if (!Model.roles.Contains(item))
-            {
-                <h6>No</h6>
-                @Html.ActionLink("Add", "AddUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
+
+        @if (!Model.roles.Contains(item))
+        {
+            <dd class="col-sm-4">
+                @no
+            </dd>
+            <dd class="col-sm-4">
+                @Html.ActionLink(" Add  ", "AddUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
                     new { @class = "btn btn-primary", @role = "button" })
-            }
-            @if (Model.roles.Contains(item))
-            {
-                <h6>Yes</h6>
-                @Html.ActionLink("Delete", "DeleteUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
+            </dd>
+        }
+        @if (Model.roles.Contains(item))
+        {
+            <dd class="col-sm-4">
+                @yes
+            </dd>
+            <dd class="col-sm-4">
+                @Html.ActionLink("Del", "DeleteUserRole", "UserRoleViewModels", new { id = item.Id , id2 = Model.userId },
                     new { @class = "btn btn-danger", @role = "button" })
-            }
-        </dd>
+            </dd>
+        }
+
     }
 
 
