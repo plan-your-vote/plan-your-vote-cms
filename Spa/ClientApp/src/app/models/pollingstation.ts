@@ -3,7 +3,7 @@ export class PollingStation {
   name              : string;
   additionalInfo    : string;
   latitude          : number;
-  longitude         : number;
+  longitute         : number; //TEMPORARILY MISSPELLED TO MATCH API, FIX WHEN API IS FIXED
   electionId        : number;
   address           : string;
   wheelchairInfo    : string;
@@ -17,7 +17,7 @@ export class PollingStation {
     name: string,
     additionalInfo: string,
     latitude: number,
-    longitude: number,
+    longitute: number, //TEMPORARILY MISSPELLED TO MATCH API, FIX WHEN API IS FIXED
     electionId: number,
     address: string,
     wheelchairInfo: string,
@@ -29,7 +29,7 @@ export class PollingStation {
     this.name               = name;
     this.additionalInfo     = additionalInfo;
     this.latitude           = latitude;
-    this.longitude          = longitude;
+    this.longitute          = longitute; //TEMPORARILY MISSPELLED TO MATCH API, FIX WHEN API IS FIXED
     this.electionId         = electionId;
     this.address            = address;
     this.wheelchairInfo     = wheelchairInfo;
