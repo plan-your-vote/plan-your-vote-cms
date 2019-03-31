@@ -45,7 +45,7 @@ export class PdfService {
    * @param fileName name of the file to be saved
    */
   public pdf(pdfData: object, fileName: string): void {
-    //TODO: Remove this line
+    //TODO: Remove this line when complete
     console.log(pdfData);
 
     //Setup
@@ -53,25 +53,49 @@ export class PdfService {
     //Default size is 210 x 297
     const MAX_PAGE_X = 210;
     const MAX_PAGE_y = 297;
+    //Change this value to change logo size
+    const logoSize = 20;
+    //Spacing
+    const componentSpacing = 10;
+    const componentPadding = 5;
+    const titleFontSize = 20;
+    const headerFontSize = 14;
+    const defaultFontSize = 12;
+    const footerFontSize = 10;
+
     let pageX = 0;
     let pageY = 0;
     let addDateTimeTitle = () => {
-      pageX += 10;
-      pageY += 10;
+      pageX += componentSpacing;
+      pageY += componentSpacing;
       this.doc.setFontSize(8);
       this.doc.text(pdfData["dateTime"], pageX, pageY);
       this.doc.setFontSize(10);
       this.doc.text(pdfData["electionInfo"].VoteTitle, MAX_PAGE_X/2, pageY, {align:"center"});
     };
-    let addBase64Image = (base64image) => {
-      //console.log(base64image);
-      this.doc.addImage(base64image, 'JPEG', 15, 40, 180, 160);
+    let addElectionLogo = (base64image) => {
+      // avoid race conditions
+      const imageX = componentSpacing;
+      const imageY = 2 * componentSpacing;
+      // auto scales image
+      const imageData = this.doc.getImageProperties(base64image);
+      const imageRatio = imageData.width / imageData.height;
+      const pdfImageHeight = logoSize;
+      const pdfImageWidth = pdfImageHeight * imageRatio;
+      console.log(imageData);
+      this.doc.addImage(base64image, 'JPEG', imageX, imageY, pdfImageWidth, pdfImageHeight);
+      //TODO: Remove this line when complete
+      //this.doc.save(fileName);
     }
     let createFirstPage = () => {
       addDateTimeTitle();
+      pageY += componentSpacing;
       //Adds election logo to the page
       //TODO: This is Async, so saving doesn't work at the moment.
-      this.getBase64Image(pdfData["electionInfo"].LogoURL, addBase64Image);
+      this.getBase64Image(pdfData["electionInfo"].LogoURL, addElectionLogo);
+      this.doc.setFontSize(titleFontSize);
+      this.doc.text("My Summary", MAX_PAGE_X/2, pageY, {align:"center"});
+      pageY += logoSize;
     };
     let newElectionPage = () => {
       pageX = 0;
@@ -82,16 +106,16 @@ export class PdfService {
 
     createFirstPage();
       
-    pdfData["candidates"].forEach(candidate => {
-      this.doc.setFontSize(12);
-      let candidateName = candidate.firstName + " " + candidate.lastName;
-      pageY += 10;
-      this.doc.text(candidateName, pageX, pageY);
-      pageY += 5;
-      this.doc.setFontSize(10);
-      this.doc.text(candidate.organization, pageX, pageY);
-    });
+    // pdfData["candidates"].forEach(candidate => {
+    //   this.doc.setFontSize(defaultFontSize);
+    //   let candidateName = candidate.firstName + " " + candidate.lastName;
+    //   pageY += componentSpacing;
+    //   this.doc.text(candidateName, pageX, pageY);
+    //   pageY += componentPadding;
+    //   this.doc.setFontSize(footerFontSize);
+    //   this.doc.text(candidate.organization, pageX, pageY);
+    // });
     
-    this.doc.save(fileName);
+    //this.doc.save(fileName);
   }
 }
