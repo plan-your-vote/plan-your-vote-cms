@@ -34,6 +34,8 @@ export class AppComponent implements OnInit {
     this.index = 0;
     this.electionApi.getElections().subscribe(res => {
       this.data = res;
+      this.index = 0;
+      this.currentElection = this.data[this.index];
     });
     this.candidatesApi.getCandidates().subscribe(candidates => {
       this.candidates = candidates;
