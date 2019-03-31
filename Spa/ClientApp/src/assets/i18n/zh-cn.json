@@ -1,6 +1,7 @@
 {
   "APP": {
-    "TITLE": "测试：支援多种语言",
+    "TITLE": "Vancouver Votes",
+    "SUBTITLE": "Plan your vote",
     "LANGUAGE": "简体中文"
   },
   "FOOTER": {
