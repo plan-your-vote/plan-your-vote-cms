@@ -6,9 +6,10 @@ import { ElectionService } from './services/election.service';
 import { CandidateService } from './services/candidate.service';
 import { ThemeService } from './services/theme.service';
 
-const THEME_DEFAULT = './assets/css/default.css';
-const THEME_MAPLE = './assets/css/maple.css';
-const THEME_SNOWDROP = './assets/css/snowdrop.css';
+const THEME_BASE_PATH = './assets/css';
+const THEME_DEFAULT = '/default.css';
+const THEME_MAPLE = '/maple.css';
+const THEME_SNOWDROP = '/snowdrop.css';
 
 @Component({
   selector: 'app-root',
@@ -48,10 +49,10 @@ export class AppComponent implements OnInit {
 
   chooseCss(option: string): void {
     switch (option) {
-      case 'maple':
+      case 'Maple':
         this.selectedCssFilepath = THEME_MAPLE;
         break;
-      case 'snowdrop':
+      case 'Snowdrop':
         this.selectedCssFilepath = THEME_SNOWDROP;
         break;
       default:
@@ -61,7 +62,7 @@ export class AppComponent implements OnInit {
 
     this.themeService.document
       .getElementById('theme')
-      .setAttribute('href', this.selectedCssFilepath);
+      .setAttribute('href', `${THEME_BASE_PATH}${this.selectedCssFilepath}`);
   }
 
   public nextElection(): void {
