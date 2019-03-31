@@ -13,6 +13,6 @@ export class CandidateService {
   getCandidates() {
     return this.http.get<Candidate[]>('../assets/data/candidates.json');                     //DUMMY DATA
 	  //return this.http.get<Candidate[]>('https://localhost:5001/api/candidates');               //DEV AND TESTING
-    //return this.https.get<Candidate[]>('http://vote-web.azurewebsites.net/api/candidates');  //PRODUCTION
+    //return this.http.get<Candidate[]>('http://vote-web.azurewebsites.net/api/candidates');  //PRODUCTION
   }
 }

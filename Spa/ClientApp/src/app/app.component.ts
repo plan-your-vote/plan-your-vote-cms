@@ -26,6 +26,13 @@ export class AppComponent implements OnInit {
     this.index = 0;
     this.electionApi.getElections().subscribe(res => {
       this.data = res;
+      
+      //sets the current selection to the first one
+      //TODO: do this async with a promise
+      if (!this.currentElection) {
+        this.currentElection = this.data[this.index];
+        console.log(this.data);
+      }
     });
     this.candidatesApi.getCandidates().subscribe(candidates => {
       this.candidates = candidates;
@@ -33,9 +40,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.nextElection();
   }
 
+  /**
+   * TODO: I don't think this function will be relevant once the application goes forward
+   */
   public nextElection(): void {
     this.currentElection = this.data[this.index];
     if (this.index != this.data.length - 1) {
@@ -52,11 +61,23 @@ export class AppComponent implements OnInit {
    * Should rename pdf title title of current election.
    */
   generatePdf() {
+    let selectedCandidateIds = new Set();
+    
+    if (localStorage.getItem('candidates')) {
+      let selectedCandidates = JSON.parse(localStorage.getItem('candidates'));
+
+      selectedCandidates.forEach(c => {
+        selectedCandidateIds.add(c.candidateId);
+      });
+    }
+
     var pdfData: object = {
       dateTime: new Date().toLocaleString(),
-      candidates: this.candidates
+      electionInfo: this.currentElection,
+      candidates: this.candidates,
+      selectedCandidateIds: selectedCandidateIds
     };
 
-    this.pdfService.pdf(pdfData, new Date().getHours().toString());
+    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle);
   }
 }
