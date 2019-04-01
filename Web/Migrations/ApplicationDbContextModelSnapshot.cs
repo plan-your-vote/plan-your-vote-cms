@@ -495,7 +495,7 @@ namespace Web.Migrations
 
             modelBuilder.Entity("VotingModelLibrary.Models.IssueOption", b =>
                 {
-                    b.HasOne("VotingModelLibrary.Models.BallotIssue", "BallotIssue")
+                    b.HasOne("VotingModelLibrary.Models.BallotIssue")
                         .WithMany("BallotIssueOptions")
                         .HasForeignKey("BallotIssueId")
                         .OnDelete(DeleteBehavior.Cascade);
