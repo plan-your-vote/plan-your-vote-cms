@@ -33,6 +33,7 @@ import { JSONParserService } from './services/jsonparser.service';
 import { HttpModule } from '@angular/http';
 
 
+
 export function setupTranslateFactory(service: TranslateService): Function {
   return () => service.use('en');
 }

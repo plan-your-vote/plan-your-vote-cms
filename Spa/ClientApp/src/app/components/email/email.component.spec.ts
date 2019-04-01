@@ -19,7 +19,9 @@ describe('EmailComponent', () => {
     fixture.detectChanges();
   });
 
-  //it('should create', () => {
+  // it('should be invaild', async () => {
+  //   component.message = "email@email.com";
+  //   component.message.includes('@');
   //  expect(component).toBeTruthy();
-  //});
+  // });
 });

@@ -14,11 +14,11 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  //it(`should have as title 'ClientApp'`, () => {
+  // it(`should have as title 'ClientApp'`, () => {
   //  const fixture = TestBed.createComponent(AppComponent);
   //  const app = fixture.debugElement.componentInstance;
   //  expect(app.title).toEqual('ClientApp');
-  //});
+  // });
 
   //it('should render title in a h1 tag', () => {
   //  const fixture = TestBed.createComponent(AppComponent);
