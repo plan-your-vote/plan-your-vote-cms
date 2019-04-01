@@ -11,6 +11,7 @@ export class SelectionComponent implements OnInit {
   //STEP1
   step1 = "";
   step1description = "";
+  //Positions
   p0 = "";
   p1 = "";
   p2 = "";
@@ -23,6 +24,12 @@ export class SelectionComponent implements OnInit {
   p1description = "";
   p2description = "";
   p3description = "";
+  p0show: boolean = false;
+  p1show: boolean = false;
+  p2show: boolean = false;
+  p3show: boolean = false;
+
+
 
   //STEP2
   step2 = "";
@@ -77,6 +84,9 @@ export class SelectionComponent implements OnInit {
   q2i1desc = "";
   q2ans = "Unanswered";
 
+  //STEP4
+  step4 = "";
+
 
   jsonData: any;
   constructor(private dataFinder: JSONParserService) { }
@@ -90,8 +100,39 @@ export class SelectionComponent implements OnInit {
     })
   }
 
+  filterRaces(val: any) {
+    switch (val) {
+      case this.p0:
+        this.p0show = false;
+        this.p1show = true;
+        this.p2show = true;
+        this.p3show = true;
+        break;
+      case this.p1:
+        this.p0show = true;
+        this.p1show = false;
+        this.p2show = true;
+        this.p3show = true;
+        break;
+      case this.p2:
+        this.p0show = true;
+        this.p1show = true;
+        this.p2show = false;
+        this.p3show = true;
+        break;
+     default: {
+        this.p0show = false;
+        this.p1show = false;
+        this.p2show = false;
+        this.p3show = false;
+        break;
+      }
+    }
+ 
+
+  }
+
   SetQueryOptionsData(data: any) {
-    console.log("Fetching Election Data");
     this.jsonData = data;
     console.log(this.jsonData);
     this.populateStepOne();
@@ -157,7 +198,7 @@ export class SelectionComponent implements OnInit {
     this.q2i1desc = this.jsonData.default.questions.q2.programs.i1.description;
   }
     populateReview() {
-
+      this.step4 = this.jsonData.default.step4;
 
     }
 }

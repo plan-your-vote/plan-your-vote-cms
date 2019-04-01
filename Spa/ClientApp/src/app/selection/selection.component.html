@@ -3,9 +3,7 @@
   <div id="stepone" class="container">
     <div class="col-md-12">
       <hr>
-      <h3>
-        {{step1}}
-      </h3>
+      <h3>{{step1}}</h3>
       {{step1description}}
       <br />
     </div>
@@ -13,12 +11,12 @@
       <div class="col-md-12">
         <p>
           Filter by:
-          <select id="filterRace" name="race" style="padding-right: 10px; font-weight:normal;">
+          <select id="filterRace" (change)="filterRaces($event.target.value)" name="race" style="padding-right: 10px; font-weight:normal;">
             <option>All Races</option>
-            <option>{{p0}}</option>
-            <option>{{p1}}</option>
-            <option>{{p2}}</option>
-            <option>{{p3}}</option>
+            <option value="{{p0}}">{{p0}}</option>
+            <option value="{{p1}}">{{p1}}</option>
+            <option value="{{p2}}">{{p2}}</option>
+            <option value="{{p3}}">{{p3}}</option>
           </select>
         </p>
       </div>
@@ -28,11 +26,32 @@
       </div>
     </div>
     <br />
-    <div id="p0" class="col-md-11">
+    <div id="p0" class="col-md-11" *ngIf="!p0show">
       <!--TODO: Add choose functionality and then duplicate for all positions-->
-      <h2 style="font-weight: bolder;">{{p0}}</h2>
-      <h4>FOR THE ELECTION, YOU CAN VOTE FOR {{p0numCandidates}} CANDIDATE(S)</h4>
+      <h5 style="font-weight: bolder;">{{p0}}</h5>
+      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p0numCandidates}} CANDIDATE(S)</p>
       <p>{{p0description}}</p>
+      <!--TODO: WHERE CANDIDATES GO-->
+    </div>
+    <div id="p1" class="col-md-11" *ngIf="!p1show">
+      <!--TODO: Add choose functionality and then duplicate for all positions-->
+      <h5 style="font-weight: bolder;">{{p1}}</h5>
+      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p1numCandidates}} CANDIDATE(S)</p>
+      <p>{{p1description}}</p>
+      <!--TODO: WHERE CANDIDATES GO-->
+    </div>
+    <div id="p2" class="col-md-11" *ngIf="!p2show">
+      <!--TODO: Add choose functionality and then duplicate for all positions-->
+      <h5 style="font-weight: bolder;">{{p2}}</h5>
+      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p2numCandidates}} CANDIDATE(S)</p>
+      <p>{{p2description}}</p>
+      <!--TODO: WHERE CANDIDATES GO-->
+    </div>
+    <div id="p3" class="col-md-11" *ngIf="!p3show">
+      <!--TODO: Add choose functionality and then duplicate for all positions-->
+      <h5 style="font-weight: bolder;">{{p3}}</h5>
+      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p3numCandidates}} CANDIDATE(S)</p>
+      <p>{{p3description}}</p>
       <!--TODO: WHERE CANDIDATES GO-->
     </div>
   </div>
@@ -46,7 +65,7 @@
     <br />
     <div class="col-md-12">
       <div id="q0">
-        <h3>{{q0}}</h3>
+        <h5>{{q0}}</h5>
         {{q0desc}}
         <table class="table">
           <tr>
@@ -76,7 +95,7 @@
       </div>
       <br />
       <div id="q1">
-        <h3>{{q1}}</h3>
+        <h5>{{q1}}</h5>
         {{q1desc}}
         <table class="table">
           <tr>
@@ -106,7 +125,7 @@
       </div>
       <br />
       <div id="q2">
-        <h3>{{q2}}</h3>
+        <h5>{{q2}}</h5>
         <p>{{q2desc}}</p>
         <table class="table">
           <tr>
@@ -140,7 +159,7 @@
     </div>
     <br />
     <div class="col-md-12">
-      <h4>YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS</h4>
+      <h5>YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS</h5>
       <p>{{q0}}</p>
       <p><b>{{q0ans}}</b> to borrowing {{q0total}}</p>
       <p>{{q1}}</p>
