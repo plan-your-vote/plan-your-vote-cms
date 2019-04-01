@@ -52,6 +52,9 @@
                         <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "Contacts")">
                             <a class="nav-link text-white" asp-area="" asp-controller="Contacts" asp-action="Index">@Localizer["Contacts"]</a>
                         </li>
+                        <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "Races")">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Races" asp-action="Index">@Localizer["Races"]</a>
+                        </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <partial name="_LoginPartial" />
