@@ -120,6 +120,6 @@ export class AppComponent implements OnInit {
       selectedCandidateIds: selectedCandidateIds
     };
 
-    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle);
+    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle.replace(/[\W_]+/g," "));
   }
 }
