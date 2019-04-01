@@ -9,8 +9,8 @@ using Web.Data;
 namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190329230817_d")]
-    partial class d
+    [Migration("20190401224138_PlanYourVote")]
+    partial class PlanYourVote
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -131,11 +131,9 @@ namespace Web.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -166,11 +164,9 @@ namespace Web.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
@@ -379,6 +375,37 @@ namespace Web.Migrations
                     b.HasIndex("ElectionId");
 
                     b.ToTable("StateSingleton");
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.Theme.Image", b =>
+                {
+                    b.Property<string>("ThemeName");
+
+                    b.Property<string>("ID");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Format");
+
+                    b.Property<string>("Type");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("ThemeName", "ID");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.Theme.Theme", b =>
+                {
+                    b.Property<string>("ThemeName")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Selected");
+
+                    b.HasKey("ThemeName");
+
+                    b.ToTable("Themes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
