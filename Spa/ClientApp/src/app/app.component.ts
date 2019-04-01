@@ -47,6 +47,8 @@ export class AppComponent implements OnInit {
     this.themeService.getUserSelection().then(themeName => {
       this.chooseCss(themeName);
     });
+
+    const logoImage = this.themeService.getImage('BCIT Logo');
   }
 
   chooseCss(option: string): void {

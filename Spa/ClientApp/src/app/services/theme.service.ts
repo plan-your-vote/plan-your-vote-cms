@@ -30,4 +30,17 @@ export class ThemeService {
       );
     });
   }
+
+  // parameter `key` is case sensitive
+  getImage(key: string) {
+    const images = JSON.parse(localStorage.getItem('images'));
+
+    for (let i = 0; i < images.length; i++) {
+      if (images[i]['id'] === key) {
+        return images[i];
+      }
+    }
+
+    return { error: 'image not found: theme.service.ts' };
+  }
 }
