@@ -26,7 +26,7 @@ export class ElectionService {
   getElections(): Observable<Election[]> {
     return this.http.get<Election[]>(API_URL, httpOptions)
       .pipe(
-        tap(data => console.log(data)),
+        tap(),
         catchError(this.handleError('getElections', []))
       );
   }
