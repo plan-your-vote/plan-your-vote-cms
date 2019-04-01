@@ -4,7 +4,7 @@ import { Election } from 'src/app/models/election';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-const ElectionsUrl = "https://votingtoolmock.azurewebsites.net/api/bogus/election";
+const API_URL = "https://votingtoolmock.azurewebsites.net/api/bogus/election";
 
 const httpOptions = {
   headers: new HttpHeaders(
@@ -23,14 +23,10 @@ export class ElectionService {
     private http: HttpClient
   ) { }
 
-  getElectionsTemp() {
-    return this.http.get<Election[]>('../assets/data/elections.json');
-  }
-
   getElections(): Observable<Election[]> {
-    return this.http.get<Election[]>(ElectionsUrl, httpOptions)
+    return this.http.get<Election[]>(API_URL, httpOptions)
       .pipe(
-        tap(heroes => console.log('fetched election data')),
+        tap(),
         catchError(this.handleError('getElections', []))
       );
   }

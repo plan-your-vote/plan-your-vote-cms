@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190330031443_Themes3Migration.cs" />
+    <Compile Remove="Migrations\20190330031443_Themes3Migration.Designer.cs" />
     <Compile Remove="Models\ViewHelper.cs" />
   </ItemGroup>
 

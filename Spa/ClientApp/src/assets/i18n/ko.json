@@ -1,6 +1,7 @@
 {
   "APP": {
-    "TITLE": "다국어 지원 시험입니다.",
+    "TITLE": "Vancouver Votes",
+    "SUBTITLE": "Plan your vote",
     "LANGUAGE": "한국어"
   },
   "FOOTER": {
