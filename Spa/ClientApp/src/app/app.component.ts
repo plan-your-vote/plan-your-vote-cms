@@ -57,8 +57,8 @@ export class AppComponent implements OnInit {
   /**
    * Attached to 'Try PDF' button.
    * Currently passing all candidates.
-   * Need to implement a way to implement just pass in candidate selected in the future.
-   * Should rename pdf title title of current election.
+   * Needs to be divided by races instead of candidates.
+   * Needs to implement candidate selection after Greg implements.
    */
   generatePdf() {
     let selectedCandidateIds = new Set();
