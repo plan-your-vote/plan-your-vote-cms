@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using VotingModelLibrary.Models.Theme;
 using Web.Data;
-using Web.Models;
 
 namespace Web.ApiControllers
 {
@@ -24,16 +21,22 @@ namespace Web.ApiControllers
         // GET: api/Theme (Returns selected theme)
         [Route("~/api/Theme")]
         [HttpGet]
-        public async Task<ActionResult<Theme>> GetTheme()
+        public IActionResult GetTheme()
         {
-            return await _context.Theme.Where(t => t.Selected).FirstAsync();
+            Theme selectedTheme = _context.Themes.First(t => t.Selected);
+
+            return Ok(new
+            {
+                SelectedTheme = selectedTheme,
+                Images = _context.Images.Where(t => t.ThemeName == selectedTheme.ThemeName),
+            });
         }
 
         // GET: api/Themes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Theme>> GetTheme(string id)
         {
-            var theme = await _context.Theme.FindAsync(id);
+            var theme = await _context.Themes.FindAsync(id);
 
             if (theme == null)
             {
@@ -77,7 +80,7 @@ namespace Web.ApiControllers
         [HttpPost]
         public async Task<ActionResult<Theme>> PostTheme(Theme theme)
         {
-            _context.Theme.Add(theme);
+            _context.Themes.Add(theme);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetTheme", new { id = theme.ThemeName }, theme);
@@ -87,13 +90,13 @@ namespace Web.ApiControllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Theme>> DeleteTheme(string id)
         {
-            var theme = await _context.Theme.FindAsync(id);
+            var theme = await _context.Themes.FindAsync(id);
             if (theme == null)
             {
                 return NotFound();
             }
 
-            _context.Theme.Remove(theme);
+            _context.Themes.Remove(theme);
             await _context.SaveChangesAsync();
 
             return theme;
@@ -101,7 +104,7 @@ namespace Web.ApiControllers
 
         private bool ThemeExists(string id)
         {
-            return _context.Theme.Any(e => e.ThemeName == id);
+            return _context.Themes.Any(e => e.ThemeName == id);
         }
     }
 }

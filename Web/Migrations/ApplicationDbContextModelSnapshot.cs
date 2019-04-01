@@ -379,7 +379,26 @@ namespace Web.Migrations
                     b.ToTable("StateSingleton");
                 });
 
-            modelBuilder.Entity("Web.Models.Theme", b =>
+            modelBuilder.Entity("VotingModelLibrary.Models.Theme.Image", b =>
+                {
+                    b.Property<string>("ThemeName");
+
+                    b.Property<string>("ID");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Format");
+
+                    b.Property<string>("Type");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("ThemeName", "ID");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.Theme.Theme", b =>
                 {
                     b.Property<string>("ThemeName")
                         .ValueGeneratedOnAdd();
@@ -388,7 +407,7 @@ namespace Web.Migrations
 
                     b.HasKey("ThemeName");
 
-                    b.ToTable("Theme");
+                    b.ToTable("Themes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
