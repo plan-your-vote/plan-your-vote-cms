@@ -1,37 +1,67 @@
 <footer>
   <div class="container">
     <div class="row">
-      <div class="col-sm">
-        <p>&copy; {{ 'FOOTER.CITY' | translate }}</p>
-      </div>
-      <div class="col-sm">
-        <ul class="bottom-nav">
-          <li><a href="#" target="_blank">{{ 'FOOTER.TERMS_OF_USE' | translate }}
-              <span class="visuallyhidden">(opens in a new window)</span></a></li>
-          <li><a href="#" target="_blank">{{ 'FOOTER.PRIVACY_POLICY' | translate }}
-              <span class="visuallyhidden">(opens in a new window)</span></a></li>
+      <div class="col">
+        <img id="footer-logo" src="" alt="Logo" />
+        <p id="footer-copyright">
+          &copy; 2019-2020 {{ 'FOOTER.CITY' | translate }}
+        </p>
+        <ul id="footer-nav">
+          <li>
+            <a href="#" target="_blank">
+              {{ 'FOOTER.TERMS_OF_USE' | translate }}
+              <span class="visuallyhidden">(opens in a new window)</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" target="_blank">
+              {{ 'FOOTER.PRIVACY_POLICY' | translate }}
+              <span class="visuallyhidden">(opens in a new window)</span>
+            </a>
+          </li>
         </ul>
       </div>
-      <div class="col-sm">
-        <button mat-icon-button shareButton="twitter" [style.backgroundColor]="share.prop.twitter.color" [description]="Twitter">
-          <fa-icon [icon]="share.prop.twitter.icon" size="lg"></fa-icon>
-        </button>
-        <button mat-icon-button shareButton="facebook" [style.backgroundColor]="share.prop.facebook.color" [description]="Facebook">
-          <fa-icon [icon]="share.prop.facebook.icon" size="lg"></fa-icon>
-        </button>
-        <button mat-icon-button shareButton="linkedin" [style.backgroundColor]="share.prop.linkedin.color" [description]="LinkedIn">
-          <fa-icon [icon]="share.prop.linkedin.icon" size="lg"></fa-icon>
-        </button>
-      </div>
-      <div class="col-xs">
-        <select 
-          id="footer-select-lang" 
-          (change)="onLangChange($event)" 
-          [(ngModel)]="defaultLanguage" 
+      <div class="col">
+        <ul id="footer-share">
+          <li>
+            <button
+              mat-icon-button
+              shareButton="twitter"
+              [style.backgroundColor]="share.prop.twitter.color"
+              [description]="Twitter"
+            >
+              <fa-icon [icon]="share.prop.twitter.icon" size="lg"></fa-icon>
+            </button>
+          </li>
+          <li>
+            <button
+              mat-icon-button
+              shareButton="facebook"
+              [style.backgroundColor]="share.prop.facebook.color"
+              [description]="Facebook"
+            >
+              <fa-icon [icon]="share.prop.facebook.icon" size="lg"></fa-icon>
+            </button>
+          </li>
+          <li>
+            <button
+              mat-icon-button
+              shareButton="linkedin"
+              [style.backgroundColor]="share.prop.linkedin.color"
+              [description]="LinkedIn"
+            >
+              <fa-icon [icon]="share.prop.linkedin.icon" size="lg"></fa-icon>
+            </button>
+          </li>
+        </ul>
+        <select
+          id="footer-select-lang"
+          (change)="onLangChange($event)"
+          [(ngModel)]="defaultLanguage"
           class="custom-select custom-select-sm"
         >
           <option *ngFor="let language of languages" [ngValue]="language">
-            {{language}}
+            {{ language }}
           </option>
         </select>
       </div>
