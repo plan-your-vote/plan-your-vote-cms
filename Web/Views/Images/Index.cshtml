@@ -1,0 +1,57 @@
+﻿@model IEnumerable<VotingModelLibrary.Models.Theme.Image>
+@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Localizer["Index"]</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th style="word-break: break-word">
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Format)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td style="width: 600px; word-break: break-word">
+                    @Html.DisplayFor(modelItem => item.Value)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Format)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { ThemeName=item.ThemeName, ID=item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { ThemeName = item.ThemeName, ID = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { ThemeName = item.ThemeName, ID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

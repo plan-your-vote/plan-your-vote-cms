@@ -17,10 +17,11 @@ const THEME_SNOWDROP = '/snowdrop.css';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  data: Election[] = [];
+  elections: Election[] = [];
   currentElection: Election;
   candidates: Candidate[];
   index: number;
+  data: Election[] = [];
   selectedCssFilepath: string;
 
   title = 'ClientApp';
@@ -32,8 +33,11 @@ export class AppComponent implements OnInit {
     private candidatesApi: CandidateService
   ) {
     this.index = 0;
+
     this.electionApi.getElections().subscribe(res => {
+      this.elections = res;
       this.data = res;
+      this.currentElection = this.elections[this.index];
       
       //sets the current selection to the first one
       //TODO: do this async with a promise
@@ -42,6 +46,7 @@ export class AppComponent implements OnInit {
         console.log(this.data);
       }
     });
+
     this.candidatesApi.getCandidates().subscribe(candidates => {
       this.candidates = candidates;
     });
@@ -51,6 +56,8 @@ export class AppComponent implements OnInit {
     this.themeService.getUserSelection().then(themeName => {
       this.chooseCss(themeName);
     });
+
+    const logoImage = this.themeService.getImage('BCIT Logo');
   }
 
   chooseCss(option: string): void {
@@ -75,12 +82,12 @@ export class AppComponent implements OnInit {
    * TODO: I don't think this function will be relevant once the application goes forward
    */
   public nextElection(): void {
-    this.currentElection = this.data[this.index];
-    if (this.index != this.data.length - 1) {
+    if (this.index != this.elections.length - 1) {
       this.index++;
     } else {
       this.index = 0;
     }
+    this.currentElection = this.elections[this.index];
   }
 
   /**

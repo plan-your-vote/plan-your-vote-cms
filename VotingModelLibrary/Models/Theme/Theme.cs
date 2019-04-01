@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Web.Models
+namespace VotingModelLibrary.Models.Theme
 {
     public class Theme
     {

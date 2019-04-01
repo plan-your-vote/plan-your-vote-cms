@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using VotingModelLibrary.Models.Theme;
 using Web.Data;
 using Web.Models;
 using Web.ViewModels;
@@ -50,11 +51,11 @@ namespace Web.CmsControllers
 
         private string ChangeCurrentTheme(ThemesViewModel viewModel)
         {
-            Theme currentSelectedTheme = _context.Theme.Where(t => t.Selected).First();
+            Theme currentSelectedTheme = _context.Themes.Where(t => t.Selected).First();
             currentSelectedTheme.Selected = false;
             _context.Update(currentSelectedTheme);
 
-            Theme newSelectedTheme = _context.Theme.First(t => t.ThemeName == viewModel.SelectedTheme);
+            Theme newSelectedTheme = _context.Themes.First(t => t.ThemeName == viewModel.SelectedTheme);
             newSelectedTheme.Selected = true;
             _context.Update(newSelectedTheme);
 
@@ -65,7 +66,7 @@ namespace Web.CmsControllers
 
         private ThemesViewModel GetThemesViewModel()
         {
-            List<Theme> themes = _context.Theme.ToList();
+            List<Theme> themes = _context.Themes.ToList();
             List<SelectListItem> selectListItems = new List<SelectListItem>();
 
             foreach (Theme theme in themes)

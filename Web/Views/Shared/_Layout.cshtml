@@ -1,4 +1,4 @@
-@using  Microsoft.AspNetCore.Mvc.Localization
+﻿@using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
@@ -61,11 +61,14 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="UserRoleViewModels" asp-action="Index">@Localizer["User Role Management"]</a>
                             </li>
                         }
-                        <li class="nav-item @Html.IsSelected(actions: "Index", controllers: "Themes")">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Themes" asp-action="Index">@Localizer["Themes"]</a>
-                        </li>  
                         <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "PollingStations")">
                             <a class="nav-link text-white" asp-area="" asp-controller="PollingStations" asp-action="Index">@Localizer["Polling Stations"]</a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected(actions: "Index", controllers: "Images")">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Images" asp-action="Index">@Localizer["Images"]</a>
+                        </li>
+                        <li class="nav-item @Html.IsSelected(actions: "Index", controllers: "Themes")">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Themes" asp-action="Index">@Localizer["Themes"]</a>
                         </li>
                     </ul>
 
