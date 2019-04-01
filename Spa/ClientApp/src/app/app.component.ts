@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
   currentElection: Election;
   candidates: Candidate[];
   index: number;
+  data: Election[] = [];
   selectedCssFilepath: string;
 
   title = 'ClientApp';
@@ -35,7 +36,15 @@ export class AppComponent implements OnInit {
 
     this.electionApi.getElections().subscribe(res => {
       this.elections = res;
+      this.data = res;
       this.currentElection = this.elections[this.index];
+      
+      //sets the current selection to the first one
+      //TODO: do this async with a promise
+      if (!this.currentElection) {
+        this.currentElection = this.data[this.index];
+        console.log(this.data);
+      }
     });
 
     this.candidatesApi.getCandidates().subscribe(candidates => {
@@ -69,6 +78,9 @@ export class AppComponent implements OnInit {
       .setAttribute('href', `${THEME_BASE_PATH}${this.selectedCssFilepath}`);
   }
 
+  /**
+   * TODO: I don't think this function will be relevant once the application goes forward
+   */
   public nextElection(): void {
     if (this.index != this.elections.length - 1) {
       this.index++;
@@ -81,15 +93,27 @@ export class AppComponent implements OnInit {
   /**
    * Attached to 'Try PDF' button.
    * Currently passing all candidates.
-   * Need to implement a way to implement just pass in candidate selected in the future.
-   * Should rename pdf title title of current election.
+   * Needs to be divided by races instead of candidates.
+   * Needs to implement candidate selection after Greg implements.
    */
   generatePdf() {
+    let selectedCandidateIds = new Set();
+    
+    if (localStorage.getItem('candidates')) {
+      let selectedCandidates = JSON.parse(localStorage.getItem('candidates'));
+
+      selectedCandidates.forEach(c => {
+        selectedCandidateIds.add(c.candidateId);
+      });
+    }
+
     var pdfData: object = {
       dateTime: new Date().toLocaleString(),
-      candidates: this.candidates
+      electionInfo: this.currentElection,
+      candidates: this.candidates,
+      selectedCandidateIds: selectedCandidateIds
     };
 
-    this.pdfService.pdf(pdfData, new Date().getHours().toString());
+    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle);
   }
 }
