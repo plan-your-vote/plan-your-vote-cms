@@ -1,0 +1,29 @@
+﻿@model Web.ViewModels.ThemesViewModel
+@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    ViewData["Title"] = "Theme";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@Localizer["Theme"]</h1>
+
+<link rel="stylesheet" href="~/css/Themes.css" />
+
+<form asp-controller="Themes" asp-action="Index" method="post">
+    <label>Selected Theme: </label>
+    <select asp-for="SelectedTheme" asp-items="Model.Themes"></select>
+    <button type="submit">Save</button>
+    <div>
+        @if (ViewData["Error"] != null)
+        {
+            <p><strong>Error: </strong> @ViewData["Error"].ToString()</p>
+        }
+        @if (TempData["Success"] != null)
+        {
+
+            <p><strong>Success!</strong> @TempData["Success"].ToString()</p>
+        }
+    </div>
+</form>

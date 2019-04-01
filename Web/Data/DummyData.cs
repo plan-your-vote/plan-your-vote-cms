@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VotingModelLibrary.Models;
@@ -7,43 +11,117 @@ namespace Web.Data
 {
     public static class DummyData
     {
-        private static ApplicationDbContext _context;
-
-        public static async Task Initialize(ApplicationDbContext context)
+        public static async Task Initialize(IApplicationBuilder app)
         {
-            _context = context;
+            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                ApplicationDbContext context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
-            context.Database.EnsureCreated();
+                UserManager<IdentityUser> userManager = serviceScope.ServiceProvider.GetService<UserManager<IdentityUser>>();
+                RoleManager<IdentityRole> roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
 
-            if (context.Candidates.Any()) { return; }
 
-            var organizations = GetOrganizations().ToArray();
-            context.Organizations.AddRange(organizations);
-            context.SaveChanges();
+                context.Database.EnsureCreated();
 
-            var races = GetRaces().ToArray();
-            context.Races.AddRange(races);
-            context.SaveChanges();
+                if (context.Candidates.Any()) { return; }
 
-            var candidates = GetCandidates().ToArray();
-            context.Candidates.AddRange(candidates);
-            context.SaveChanges();
+                await InsertUserAsync(userManager, roleManager);
 
-            var contacts = GetContacts().ToArray();
-            context.Contacts.AddRange(contacts);
-            context.SaveChanges();
+                var elections = GetElections().ToArray();
+                context.Elections.AddRange(elections);
+                context.SaveChanges();
 
-            var candidateRaces = GetCandidateRaces().ToArray();
-            context.CandidateRaces.AddRange(candidateRaces);
-            context.SaveChanges();
+                var pollingStations = GetPollingStations().ToArray();
+                context.PollingStations.AddRange(pollingStations);
+                context.SaveChanges();
 
-            var ballotIssues = GetBallotIssues().ToArray();
-            context.BallotIssues.AddRange(ballotIssues);
-            context.SaveChanges();
+                var organizations = GetOrganizations().ToArray();
+                context.Organizations.AddRange(organizations);
+                context.SaveChanges();
 
-            var issueOptions = GetIssueOptions().ToArray();
-            context.IssueOptions.AddRange(issueOptions);
-            context.SaveChanges();
+                var races = GetRaces().ToArray();
+                context.Races.AddRange(races);
+                context.SaveChanges();
+
+                var candidates = GetCandidates().ToArray();
+                context.Candidates.AddRange(candidates);
+                context.SaveChanges();
+
+                var contacts = GetContacts().ToArray();
+                context.Contacts.AddRange(contacts);
+                context.SaveChanges();
+
+                var candidateRaces = GetCandidateRaces().ToArray();
+                context.CandidateRaces.AddRange(candidateRaces);
+                context.SaveChanges();
+
+                var ballotIssues = GetBallotIssues().ToArray();
+                context.BallotIssues.AddRange(ballotIssues);
+                context.SaveChanges();
+
+                var issueOptions = GetIssueOptions().ToArray();
+                context.IssueOptions.AddRange(issueOptions);
+                context.SaveChanges();
+            }
+        }
+
+        public static async Task InsertUserAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+
+        {
+
+            var role1 = new IdentityRole
+            {
+                Name = "Admin",
+                NormalizedName = "Admin"
+            };
+
+            var role2 = new IdentityRole
+            {
+                Name = "Member",
+                NormalizedName = "Member"
+            };
+
+            if (await roleManager.FindByNameAsync(role1.Name) == null)
+            {
+                
+                await roleManager.CreateAsync(role1);
+            }
+            if (await roleManager.FindByNameAsync(role2.Name) == null)
+            {
+                await roleManager.CreateAsync(role2);
+            }
+
+            var user = new IdentityUser
+            {
+                Email = "a@a.a",
+                UserName = "a@a.a",
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+
+            var result = await userManager.CreateAsync(user, "P@$$w0rd");
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, "Admin");
+            }
+
+            var user1 = new IdentityUser
+            {
+                Email = "m@m.m",
+                UserName = "m@m.m",
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            // var result = await userManager.CreateAsync(user);
+
+            var result1 = await userManager.CreateAsync(user1, "P@$$w0rd");
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user1, "Member");
+            }
+
         }
 
         private static List<Organization> GetOrganizations()
@@ -76,21 +154,25 @@ namespace Web.Data
                 {
                     PositionName = "Mayor",
                     NumberNeeded = 1,
+                    ElectionId = 1
                 },
                 new Race
                 {
                     PositionName = "Councillor",
                     NumberNeeded = 10,
+                    ElectionId = 1
                 },
                 new Race
                 {
                     PositionName = "Park Commisioner",
                     NumberNeeded = 7,
+                    ElectionId = 2
                 },
                 new Race
                 {
                     PositionName = "School Trustee",
                     NumberNeeded = 9,
+                    ElectionId = 3
                 }
             };
         }
@@ -110,6 +192,7 @@ Jason attended Langara and UBC with eight years experience at TD Bank, HSBC, CIB
 
 Jason has ten years experience in Municipal, Provincial, Federal politics; earning 37,286 votes in 2011 Vancouver Council election.",
                     OrganizationId = 1,
+                    ElectionId = 1
                 },
                 new Candidate
                 {
@@ -118,6 +201,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor1.jpg",
                     Biography = @"Been in housing construction most of my life, truck driver, stock promoter and various other business. Founded the Canadian Hemp Growers Assoc. in 1996. 2005 on record at Senate Committee on national defence saying, ""terrorists"" are smuggling guns/drugs into Canada. 2005 Harm Reduction Pilot Project/monopolizing heroin to save lives, Men On Down Town East Society and Two Ravens Opioid Project.",
                     OrganizationId = 2,
+                    ElectionId = 2
                 },
                 new Candidate
                 {
@@ -125,7 +209,8 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     LastName = "Young",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor12.jpg",
                     Biography = @"Wai has lived in Vancouver for over 50 years and is a community advocate, business owner, and past Member of Parliament with over three decades of civic and policy leadership. She is a birth mother of twins and a foster parent to seven children. She holds a degree in Sociology with post graduate work in Urban Planning and Mass Communications.",
-                    OrganizationId = 3
+                    OrganizationId = 3,
+                    ElectionId = 3
                 }
             };
         }
@@ -212,6 +297,7 @@ ILLEGAL MIGRANT CONTROL
                     Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to transportation and technology.
 
 Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,353,000 for the following purposes?",
+                    ElectionId = 1
                 },
                 new BallotIssue()
                 {
@@ -219,6 +305,7 @@ Are you in favour of Council having the authority, without further assent of the
                     Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to capital maintenance and renovation programs for existing community facilities, civic facilities, and parks.
 
 Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $99,557,000 for the following purposes?",
+                    ElectionId = 1
                 },
             };
         }
@@ -251,6 +338,128 @@ Are you in favour of Council having the authority, without further assent of the
                     IssueOptionTitle = "How you plan to answer Question 2. Capital maintenance and renovation programs for existing community facilities, civic facilities, and parks",
                     IssueOptionInfo = "No",
                 },
+            };
+        }
+
+        private static List<Election> GetElections()
+        {
+            return new List<Election>()
+            {
+                new Election()
+                {
+                    ElectionId = 1,
+                    Name = "City of Vancouver 2018 Municiple Election",
+                    DateEnd = "October 21 2018",
+                    DateStart = "October 21 2018",
+                    Description = "Voting in an election is one of the most important things a citizen can do in their community and country."
+                },
+                new Election()
+                {
+                    ElectionId = 2,
+                    Name = "Canadian Federal Election, 2019",
+                    DateEnd = "October 21 2019",
+                    DateStart = "October 21 2019",
+                    Description = "The 2019 Canadian federal election is scheduled to take place on or before October 21, 2019. The October 21 date of the vote is determined by the fixed-date procedures in the Canada Elections Act"
+                },
+                new Election()
+                {
+                    ElectionId = 3,
+                    Name = "City of Vancouver 2020 Municiple Election",
+                    DateEnd = "October 21 2020",
+                    DateStart = "October 21 2020",
+                    Description = "Voting in an election is one of the most important things a citizen can do in their community and country."
+                }
+            };
+        }
+
+        private static List<PollingStation> GetPollingStations()
+        {
+            return new List<PollingStation>()
+            {
+                new PollingStation()
+                {
+                    PollingStationId = 1,
+                    ElectionId = 1,
+                    Name = "Holy Trinity Anglican Church",
+                    AdditionalInfo = "",
+                    Latitude = 49.27376,
+                    Longitute = -123.127989,
+                    Address = "1440 W 12th Avenue",
+                    WheelchairInfo = "main entrance on West 12th Ave",
+                    ParkingInfo = "street and church parking lot",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 2,
+                    ElectionId = 1,
+                    Name = "Grace Vancouver Church",
+                    AdditionalInfo = "",
+                    Latitude = 48.888,
+                    Longitute = -121.00,
+                    Address = "1696 W 7th Avenue",
+                    WheelchairInfo = "via ramp at the side entrance to the sanctuary, on West 7th Ave",
+                    ParkingInfo = "street",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 3,
+                    ElectionId = 2,
+                    Name = "Lord Tennyson Elementary School",
+                    AdditionalInfo = "",
+                    Latitude = 49.4444,
+                    Longitute = -122.555,
+                    Address = "1936 W 10th Avenue",
+                    WheelchairInfo = "south side entrance on West 11th Ave",
+                    ParkingInfo = "street",
+                    WashroomInfo = "wheelchair accessible washrooms are on the 3rd floor via chair lift",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 4,
+                    ElectionId = 2,
+                    Name = "Gathering Place Community Centre",
+                    AdditionalInfo = "Handicap parking unavailable",
+                    Latitude = 50.110,
+                    Longitute = -123.444,
+                    Address = "609 Helmcken St",
+                    WheelchairInfo = "main entrance at the corner of Helmcken St and Seymour St",
+                    ParkingInfo = "street",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 5,
+                    ElectionId = 3,
+                    Name = "False Creek Community Centre",
+                    AdditionalInfo = "",
+                    Latitude = 49.5677,
+                    Longitute = -121.127989,
+                    Address = "1318 Cartwright St",
+                    WheelchairInfo = "main entrance on Cartwright St",
+                    ParkingInfo = "street and community centre parking",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                },
+                new PollingStation()
+                {
+                    PollingStationId = 6,
+                    ElectionId = 3,
+                    Name = "Roundhouse Community Arts Centre",
+                    AdditionalInfo = "",
+                    Latitude = 49.6999,
+                    Longitute = -124.127989,
+                    Address = "181 Roundhouse Mews",
+                    WheelchairInfo = "main entrance on Roundhouse Mews",
+                    ParkingInfo = "street parking, underground parking off Drake St",
+                    WashroomInfo = "",
+                    GeneralAccessInfo = ""
+                }
             };
         }
     }

@@ -24,7 +24,10 @@ namespace Web
         // GET: Candidates
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Candidates.Include(c => c.Organization).Include(c => c.Contacts);
+            State s = _context.StateSingleton.Find(State.STATE_ID);
+            var applicationDbContext = _context.Candidates
+                .Where(c => c.ElectionId == s.currentElection)
+                .Include(c => c.Organization).Include(c => c.Contacts);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -62,9 +65,10 @@ namespace Web
         public async Task<IActionResult> Create(string firstName, string lastName, IFormFile image, string biography, int organizationId)
         {
             var fileName = "";
-            var nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
+            var nameOfile = "";
             if (image != null)
             {
+                nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
                 fileName = "wwwroot\\" + nameOfile;
                 image.CopyTo(new FileStream(fileName, FileMode.Create));
                 ViewData["ImagePath"] = fileName;
@@ -75,6 +79,7 @@ namespace Web
             candidate.Picture = nameOfile;
             candidate.Biography = biography;
             candidate.OrganizationId = organizationId;
+            candidate.ElectionId = _context.StateSingleton.Find(State.STATE_ID).currentElection;
             if (ModelState.IsValid)
             {
                 _context.Add(candidate);
