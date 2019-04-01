@@ -13,18 +13,23 @@
         </ul>
       </div>
       <div class="col-sm">
-        <button mat-icon-button shareButton="twitter" [style.backgroundColor]="share.prop.twitter.color" [description]="candidate.firstName">
+        <button mat-icon-button shareButton="twitter" [style.backgroundColor]="share.prop.twitter.color" [description]="Twitter">
           <fa-icon [icon]="share.prop.twitter.icon" size="lg"></fa-icon>
         </button>
-        <button mat-icon-button shareButton="facebook" [style.backgroundColor]="share.prop.facebook.color" [description]="description">
+        <button mat-icon-button shareButton="facebook" [style.backgroundColor]="share.prop.facebook.color" [description]="Facebook">
           <fa-icon [icon]="share.prop.facebook.icon" size="lg"></fa-icon>
         </button>
-        <button mat-icon-button shareButton="linkedin" [style.backgroundColor]="share.prop.linkedin.color" [description]="candidate.firstName">
+        <button mat-icon-button shareButton="linkedin" [style.backgroundColor]="share.prop.linkedin.color" [description]="LinkedIn">
           <fa-icon [icon]="share.prop.linkedin.icon" size="lg"></fa-icon>
         </button>
       </div>
-      <div class="col-sm">
-        <select id="footer-select-lang" (change)="onLangChange($event)" [(ngModel)]="defaultLanguage">
+      <div class="col-xs">
+        <select 
+          id="footer-select-lang" 
+          (change)="onLangChange($event)" 
+          [(ngModel)]="defaultLanguage" 
+          class="custom-select custom-select-sm"
+        >
           <option *ngFor="let language of languages" [ngValue]="language">
             {{language}}
           </option>
