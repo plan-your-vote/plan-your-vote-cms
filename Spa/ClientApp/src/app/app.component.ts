@@ -17,7 +17,7 @@ const THEME_SNOWDROP = '/snowdrop.css';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  data: Election[] = [];
+  elections: Election[] = [];
   currentElection: Election;
   candidates: Candidate[];
   index: number;
@@ -32,18 +32,18 @@ export class AppComponent implements OnInit {
     private candidatesApi: CandidateService
   ) {
     this.index = 0;
+
     this.electionApi.getElections().subscribe(res => {
-      this.data = res;
-      this.index = 0;
-      this.currentElection = this.data[this.index];
+      this.elections = res;
+      this.currentElection = this.elections[this.index];
     });
+
     this.candidatesApi.getCandidates().subscribe(candidates => {
       this.candidates = candidates;
     });
   }
 
   ngOnInit(): void {
-    this.nextElection();
     this.themeService.getUserSelection().then(themeName => {
       this.chooseCss(themeName);
     });
@@ -68,12 +68,12 @@ export class AppComponent implements OnInit {
   }
 
   public nextElection(): void {
-    this.currentElection = this.data[this.index];
-    if (this.index != this.data.length - 1) {
+    if (this.index != this.elections.length - 1) {
       this.index++;
     } else {
       this.index = 0;
     }
+    this.currentElection = this.elections[this.index];
   }
 
   /**
