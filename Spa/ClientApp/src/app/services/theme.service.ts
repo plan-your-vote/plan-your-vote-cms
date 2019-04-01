@@ -19,7 +19,8 @@ export class ThemeService {
     return new Promise<string>((resolve, reject) => {
       this.http.get<any>(API_URL).subscribe(
         res => {
-          this.themeName = res.themeName;
+          this.themeName = res.selectedTheme.themeName;
+          localStorage.setItem('images', JSON.stringify(res.images));
           resolve(this.themeName);
         },
         error => {
