@@ -24,7 +24,7 @@ namespace VotingModelLibrary.Models
         [Display(Name = "Parking Info")]
         public string ParkingInfo { get; set; }
 
-        [Display(Name = "Parking Info")]
+        [Display(Name = "Washroom Info")]
         public string WashroomInfo { get; set; }
 
         [Display(Name = "General Access Info")]

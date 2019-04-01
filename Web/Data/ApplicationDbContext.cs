@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VotingModelLibrary.Models;
+using Web.ViewModels;
+using Web.Models;
 
 namespace Web.Data
 {
@@ -19,5 +21,6 @@ namespace Web.Data
         public DbSet<BallotIssue> BallotIssues { get; set; }
         public DbSet<IssueOption> IssueOptions { get; set; }
         public DbSet<PollingStation> PollingStations { get; set; }
+        public DbSet<Theme> Theme { get; set; }
     }
 }

@@ -61,9 +61,23 @@ namespace Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
+            /*
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();*/
+            services.AddIdentity<IdentityUser, IdentityRole>(
+               option =>
+               {
+                   option.Password.RequireDigit = false;
+                   option.Password.RequiredLength = 6;
+                   option.Password.RequireNonAlphanumeric = false;
+                   option.Password.RequireUppercase = false;
+                   option.Password.RequireLowercase = false;
+               }
+           ).AddEntityFrameworkStores<ApplicationDbContext>()
+           .AddDefaultTokenProviders()
+           .AddDefaultUI(UIFramework.Bootstrap4);
+
 
             services.AddSwaggerGen(c =>
             {
@@ -140,8 +154,9 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            DummyData.Initialize(app).Wait(); ;
             StateInit.Initialize(context);
-            DummyData.Initialize(context);
+            ThemesInit.Initialize(context);
         }
     }
 }

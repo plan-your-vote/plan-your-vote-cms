@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VotingModelLibrary.Models;
@@ -7,51 +11,117 @@ namespace Web.Data
 {
     public static class DummyData
     {
-        private static ApplicationDbContext _context;
-
-        public static void Initialize(ApplicationDbContext context)
+        public static async Task Initialize(IApplicationBuilder app)
         {
-            _context = context;
+            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                ApplicationDbContext context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
 
-            context.Database.EnsureCreated();
+                UserManager<IdentityUser> userManager = serviceScope.ServiceProvider.GetService<UserManager<IdentityUser>>();
+                RoleManager<IdentityRole> roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
 
-            if (context.Candidates.Any()) { return; }
 
-            var elections = GetElections().ToArray();
-            context.Elections.AddRange(elections);
-            context.SaveChanges();
+                context.Database.EnsureCreated();
 
-            var organizations = GetOrganizations().ToArray();
-            context.Organizations.AddRange(organizations);
-            context.SaveChanges();
+                if (context.Candidates.Any()) { return; }
 
-            var races = GetRaces().ToArray();
-            context.Races.AddRange(races);
-            context.SaveChanges();
+                await InsertUserAsync(userManager, roleManager);
 
-            var candidates = GetCandidates().ToArray();
-            context.Candidates.AddRange(candidates);
-            context.SaveChanges();
+                var elections = GetElections().ToArray();
+                context.Elections.AddRange(elections);
+                context.SaveChanges();
 
-            var contacts = GetContacts().ToArray();
-            context.Contacts.AddRange(contacts);
-            context.SaveChanges();
+                var pollingStations = GetPollingStations().ToArray();
+                context.PollingStations.AddRange(pollingStations);
+                context.SaveChanges();
 
-            var candidateRaces = GetCandidateRaces().ToArray();
-            context.CandidateRaces.AddRange(candidateRaces);
-            context.SaveChanges();
+                var organizations = GetOrganizations().ToArray();
+                context.Organizations.AddRange(organizations);
+                context.SaveChanges();
 
-            var ballotIssues = GetBallotIssues().ToArray();
-            context.BallotIssues.AddRange(ballotIssues);
-            context.SaveChanges();
+                var races = GetRaces().ToArray();
+                context.Races.AddRange(races);
+                context.SaveChanges();
 
-            var issueOptions = GetIssueOptions().ToArray();
-            context.IssueOptions.AddRange(issueOptions);
-            context.SaveChanges();
+                var candidates = GetCandidates().ToArray();
+                context.Candidates.AddRange(candidates);
+                context.SaveChanges();
 
-            var pollingStations = GetPollingStations().ToArray();
-            context.PollingStations.AddRange(pollingStations);
-            context.SaveChanges();
+                var contacts = GetContacts().ToArray();
+                context.Contacts.AddRange(contacts);
+                context.SaveChanges();
+
+                var candidateRaces = GetCandidateRaces().ToArray();
+                context.CandidateRaces.AddRange(candidateRaces);
+                context.SaveChanges();
+
+                var ballotIssues = GetBallotIssues().ToArray();
+                context.BallotIssues.AddRange(ballotIssues);
+                context.SaveChanges();
+
+                var issueOptions = GetIssueOptions().ToArray();
+                context.IssueOptions.AddRange(issueOptions);
+                context.SaveChanges();
+            }
+        }
+
+        public static async Task InsertUserAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+
+        {
+
+            var role1 = new IdentityRole
+            {
+                Name = "Admin",
+                NormalizedName = "Admin"
+            };
+
+            var role2 = new IdentityRole
+            {
+                Name = "Member",
+                NormalizedName = "Member"
+            };
+
+            if (await roleManager.FindByNameAsync(role1.Name) == null)
+            {
+                
+                await roleManager.CreateAsync(role1);
+            }
+            if (await roleManager.FindByNameAsync(role2.Name) == null)
+            {
+                await roleManager.CreateAsync(role2);
+            }
+
+            var user = new IdentityUser
+            {
+                Email = "a@a.a",
+                UserName = "a@a.a",
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+
+            var result = await userManager.CreateAsync(user, "P@$$w0rd");
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user, "Admin");
+            }
+
+            var user1 = new IdentityUser
+            {
+                Email = "m@m.m",
+                UserName = "m@m.m",
+                SecurityStamp = Guid.NewGuid().ToString()
+            };
+
+            // var result = await userManager.CreateAsync(user);
+
+            var result1 = await userManager.CreateAsync(user1, "P@$$w0rd");
+
+            if (result.Succeeded)
+            {
+                await userManager.AddToRoleAsync(user1, "Member");
+            }
+
         }
 
         private static List<Organization> GetOrganizations()
