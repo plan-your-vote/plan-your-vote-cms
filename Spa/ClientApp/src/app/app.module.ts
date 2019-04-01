@@ -31,6 +31,7 @@ import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { IcsfileComponent } from './components/icsfile/icsfile.component';
 import { JSONParserService } from './services/jsonparser.service';
 import { HttpModule } from '@angular/http';
+import { SelectionComponent } from './selection/selection.component';
 
 
 export function setupTranslateFactory(service: TranslateService): Function {
@@ -50,7 +51,8 @@ export function setupTranslateFactory(service: TranslateService): Function {
     MapComponentComponent,
     EmailComponent,
     FooterMenuComponent,
-    IcsfileComponent
+    IcsfileComponent,
+    SelectionComponent
     
   ],
   imports: [

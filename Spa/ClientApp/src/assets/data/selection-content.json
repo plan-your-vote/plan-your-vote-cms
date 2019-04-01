@@ -1,0 +1,96 @@
+{
+  "default": {
+    "step1": "STEP 1: REVIEW AND SELECT CANDIDATES",
+    "step2": "STEP 2: REVIEW CAPITAL PLAN BORROWING QUESTIONS",
+    "step3": "STEP 3: CHOOSE YOUR VOTING DATE AND LOCATION",
+    "step4": "STEP 4: REVIEW YOUR PLAN",
+    "step1description": "Add up to 1 mayor, 10 councillors, 7 Park Board commissioners, and 9 school trustees to your plan. Open a candidate to read their profile and add them to your plan. Change your choices in the selected candidates area above. \nA candidate’s profile expresses their views alone and these views aren’t endorsed by the City of Vancouver. Profiles are included exactly as candidates wrote them.\nIf you live in the UBC Lands or University Endowment Lands, and you do not own property in Vancouver, you can only vote for school trustees in the election.",
+    "step2description": "Add your response to the Capital Plan borrowing questions to your plan.\n The ballot will have 3 \"yes\" or \"no\" questions on whether the City can borrow $300 million to help pay for projects in the Capital Plan.\nThe 2019-2022 Capital Plan invests $300,000,000 in City facilities and infrastructure to provide services to the people of Vancouver.\nIf a majority of voters vote yes, then City Council can borrow the funds for these projects.",
+    "step3description": "Not sure when you want to vote yet? Don't worry - you're not committing to a particular day or place. If you live in the UBC Lands or University Endowment Lands, you can vote at 2 voting places only on October 20 Opens in new window. These 2 places are not shown on the map below. Skip this step to review your choices and create your plan.",
+    "positions": {
+      "p0": {
+        "title": "MAYOR",
+        "numCandidates": 1,
+        "description": "The mayor leads City Council. City Council has the authority to pass bylaws that control many things in Vancouver."
+      },
+      "p1": {
+        "title": "COUNCILLOR",
+        "numCandidates": 10,
+        "description": "Together, the mayor and councillors are responsible for services such as bylaws, taxes, streets, sidewalks, and water."
+      },
+      "p2": {
+        "title": "PARK COMMISSIONER",
+        "numCandidates": 7,
+        "description": "The Park Board is responsible for managing City parks and community centres, and provides a wide range of recreation services."
+      },
+      "p3": {
+        "title": "SCHOOL TRUSTEE",
+        "numCandidates": 9,
+        "description": "The school board is independent of City Council. It provides elementary, secondary, community, and specialized education services in the city, UBC Lands, and University Endowment Lands."
+      }
+    },
+    "questions": {
+      "q0": {
+        "title": "1. TRANSPORTATION AND TECHNOLOGY",
+        "description": "This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to transportation and technology.\nAre you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,353,000 for the following purposes?",
+        "programs": {
+          "i0": {
+            "program": "A. Street and bridge infrastructure",
+            "description": "To provide for major maintenance, reconstruction and enhancement of the arterial and neighbourhood transportation networks, sidewalks, greenways, and cycle routes, and to undertake major maintenance of bridges and other structures, including repairs and structural work on Granville Bridge.",
+            "amount": "$47,429,000"
+          },
+          "i1": {
+            "program": "B. Traffic signals and street lighting",
+            "description": "To provide for major maintenance, replacement, and enhancement of traffic signals and street lighting that are beyond economical repair or no longer meet operational requirements.",
+            "amount": "$42,924,000"
+          },
+          "i2": {
+            "program": "C. Technology projects",
+            "description": "To provide for the renewal and enhancement of the City's information technology systems such as data centres, servers, and applications that support the delivery of and access to City services and programs.",
+            "amount": "$10,000,000"
+          }
+        },
+        "total": "$100,353,000"
+      },
+      "q1": {
+        "title": "2. CAPITAL MAINTENANCE AND RENOVATION PROGRAMS FOR EXISTING COMMUNITY FACILITIES, CIVIC FACILITIES, AND PARKS",
+        "description": "This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to capital maintenance and renovation programs for existing community facilities, civic facilities, and parks.\nAre you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $99,557,000 for the following purposes?",
+        "programs": {
+          "i0": {
+            "program": "A. Maintenance of community and civic facilities",
+            "description": "To provide for ongoing capital maintenance such as replacement of roofs, windows, elevators, heating / ventilation, electrical, and plumbing systems.",
+            "amount": "$59,175,000"
+          },
+          "i1": {
+            "program": "B. Renovations of community and civic facilities",
+            "description": "To provide for renovations or other upgrades such as renovations to community spaces, wheelchair access improvements, energy conservation upgrades, and removal of hazardous materials.",
+            "amount": "$23,975,000"
+          },
+          "i2": {
+            "program": "C. Maintenance and renovation of parks",
+            "description": "To provide for ongoing capital maintenance, renovations or other upgrades of existing parks, park buildings, and features within parks such as the seawall, pathways, playgrounds, playfields, and sport courts.",
+            "amount": "$16,407,000"
+          }
+        },
+        "total": "$99,557,000"
+      },
+      "q2": {
+        "title": "3. REPLACEMENT OF EXISTING COMMUNITY FACILITIES AND CIVIC FACILITIES",
+        "description": "This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to replacement of existing community facilities and civic facilities.\nAre you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,090,000 for the following purposes?",
+        "programs": {
+          "i0": {
+            "program": "A. Community facilities",
+            "description": "To provide for replacement, renewal or rehabilitation of existing community facilities, including Marpole-Oakridge Community Centre, Marpole Library, the City Archives, and other projects such as Britannia Community Centre, Ray-Cam Community Centre, or West End Community Centre that are at the planning or design stage.",
+            "amount": "$59,175,000"
+          },
+          "i1": {
+            "program": "B. Civic facilities",
+            "description": "To provide for replacement, renewal, or rehabilitation of existing civic facilities, including the first phase at Sunset Service Yard, seismic upgrade of the Kitsilano Fire Hall, and other projects such as Manitoba Service Yard or one of the downtown fire halls that are at the planning or design stage.",
+            "amount": "$23,975,000"
+          }
+        },
+        "total": "$100,090,000"
+      }
+    }
+  }
+}
