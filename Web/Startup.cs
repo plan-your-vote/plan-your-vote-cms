@@ -100,6 +100,12 @@ namespace Web
                 .AddDataAnnotationsLocalization()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddMvc()
+                .AddDataAnnotationsLocalization(options => {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    factory.Create(typeof(SharedResources));
+        });
+
             services.Configure<RequestLocalizationOptions>(opts =>
             {
                 var supportedCultures = new List<CultureInfo> {
