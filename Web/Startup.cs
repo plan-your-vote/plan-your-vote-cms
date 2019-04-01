@@ -142,6 +142,7 @@ namespace Web
 
             StateInit.Initialize(context);
             DummyData.Initialize(context);
+            ThemesInit.Initialize(context);
         }
     }
 }
