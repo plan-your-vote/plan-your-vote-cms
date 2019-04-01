@@ -39,8 +39,7 @@ export class PdfService {
    * Creates pdf.
    * 
    * TODO:
-   *  Make this work for multiple elections after dummy data is created.
-   *  Converting Image to Base64 is an async call. would need to implement a promise before saving.
+   *  Make this work for multiple races and ballots after aps is created.
    * 
    * @param pdfData PDF data passed through app.component.ts
    * @param fileName name of the file to be saved
@@ -400,12 +399,14 @@ export class PdfService {
 
     let pageX = 0;
     let pageY = 0;
+    let pageNumber = 1;
 
     let addDateTimeTitle = () => {
       const dateTimeTitleX = doubleSpace;
       const dateTimeTitleY = doubleSpace;
       this.doc.setFontSize(8);
       this.doc.text(pdfData["dateTime"], dateTimeTitleX, dateTimeTitleY);
+      this.doc.text("Page " + pageNumber, MAX_PAGE_X - largeSpace, dateTimeTitleY);
       this.doc.setFontSize(10);
       this.doc.text(pdfData["electionInfo"].VoteTitle, MAX_PAGE_X/2, dateTimeTitleY, {align:"center"});
       pageX += singleSpace;
@@ -422,18 +423,14 @@ export class PdfService {
       const imageRatio = imageData.width / imageData.height;
       const pdfImageHeight = logoSize;
       const pdfImageWidth = pdfImageHeight * imageRatio;
-      //TODO: Remove this line when complete
-      console.log(imageData);
+
       this.doc.addImage(base64image, 'JPEG', imageX, imageY, pdfImageWidth, pdfImageHeight);
-      //TODO: Remove this line when complete
-      //this.doc.save(fileName);
     }
 
-    let createFirstPage = () => {
+    let createFirstPage = (logo) => {
       addDateTimeTitle();
-      //Adds election logo to the page
-      //TODO: This is Async, so saving doesn't work at the moment.
-      this.getBase64Image(pdfData["electionInfo"].LogoURL, addElectionLogo);
+      
+      addElectionLogo(logo);
       pageY += largeSpace;
 
       this.doc.setFontSize(titleFontSize);
@@ -460,6 +457,7 @@ export class PdfService {
     let newPage = () => {
       pageX = 0;
       pageY = 0;
+      pageNumber++;
       this.doc.addPage();
       addDateTimeTitle();
       pageY += largeSpace;
@@ -473,14 +471,13 @@ export class PdfService {
     }
 
     let createCandidateCard = (candidate) => {
-      this.doc.setFontSize(defaultFontSize);
-
       //TODO: Add If selected, bold (and add a checkmark)?
       //Need to wait for selection feature
       //this.doc.setFontType("bold");
 
+      this.doc.setFontSize(defaultFontSize);
       if (candidate.lastName.length + candidate.firstName.length > 20) {
-        this.doc.text(candidate.lastName.toUpperCase() + ", ", pageX, pageY);
+        this.doc.text(candidate.lastName.toUpperCase() + ",", pageX, pageY);
         pageY += singleSpace;
         this.doc.text(candidate.firstName, pageX, pageY);
       } else {
@@ -495,8 +492,6 @@ export class PdfService {
       }
 
       this.doc.setFontType("normal");
-
-      //10 is a bit too small, 20 is a bit too large;
       pageY += doubleSpace + singleSpace;
     }
 
@@ -516,12 +511,12 @@ export class PdfService {
       this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
       pageY += doubleSpace;
 
-      //To reset PageY after new column or new page
+      //BaseHeight used to reset PageY after new column or new page
       const baseHeight = pageY;
       const baseHeightWithoutTitle = baseHeight - largeSpace;
 
       let columnNumber = 1;
-      let pageNumber = 1;
+      let candidatePageNumber = 1;
 
       const candidateList = dummyCandidates;
       //const candidateList = pdfData["candidates"]
@@ -540,12 +535,12 @@ export class PdfService {
         if (requiredHeight + pageY > pageLength) {
           if (columnNumber === 4) {
             newPage();
-            pageNumber++;
+            candidatePageNumber++;
             columnNumber = 1;
           } else {
             columnNumber++;
             pageX += MAX_PAGE_X / 4;
-            pageY = pageNumber === 1 ? baseHeight : baseHeightWithoutTitle;
+            pageY = candidatePageNumber === 1 ? baseHeight : baseHeightWithoutTitle;
             drawColumnDivider(columnNumber);
           }
         }
@@ -559,10 +554,16 @@ export class PdfService {
       //newPage();
     }
 
-    createFirstPage();
-    createRacePages();
-    createBallotPages();
-    
-    this.doc.save(fileName);
+    let p1 = new Promise((resolve, reject) => {
+      this.getBase64Image(pdfData["electionInfo"].LogoURL, resolve);
+    });
+
+    Promise.all([p1]).then((logo) => {
+      createFirstPage(logo[0]);
+      createRacePages();
+      createBallotPages();
+
+      this.doc.save(fileName);
+    });
   }
 }
