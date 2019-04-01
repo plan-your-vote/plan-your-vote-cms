@@ -48,13 +48,343 @@ export class PdfService {
   public pdf(pdfData: object, fileName: string): void {
     //TODO: Remove this line when complete
     console.log(pdfData);
+    
+    let dummyCandidates = [{
+      "firstName": "12345678901234567890",
+      "lastName": "lastNameaaaaaaaa",
+      "organization": "organization"
+    },{
+      "firstName": "2",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "3",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "4",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "5",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "6",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "7",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "8",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "firstName",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "9",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "10",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "11",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "12",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "13",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "14",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "15",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "16",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "17",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "18",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "19",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "20",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "21",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": ""
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": ""
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": ""
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": ""
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "22",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "23",
+      "lastName": "lastName",
+      "organization": "organization"
+    },{
+      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
+      "lastName": "lastName",
+      "organization": "organization"
+    }]
 
     //Setup
     this.doc = new jsPDF();
 
     //Default size is 210 x 297
     const MAX_PAGE_X = 210;
-    const MAX_PAGE_y = 297;
+    const MAX_PAGE_Y = 297;
 
     //Change this value to change logo size
     const logoSize = 20;
@@ -135,46 +465,90 @@ export class PdfService {
       pageY += largeSpace;
     };
 
-    let drawLineDividers = () => {
-      //Horizontal line before candidates
-      this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
-      pageY += doubleSpace;
-
+    let drawColumnDivider = (columnNumber) => {
       //Vertical lines between candidates
-      this.doc.line(MAX_PAGE_X / 4, pageY - singleSpace, MAX_PAGE_X / 4, MAX_PAGE_y - largeSpace);
-      this.doc.line(MAX_PAGE_X / 2, pageY - singleSpace, MAX_PAGE_X / 2, MAX_PAGE_y - largeSpace);
-      this.doc.line(MAX_PAGE_X * 3 / 4, pageY - singleSpace, MAX_PAGE_X * 3 / 4, MAX_PAGE_y - largeSpace);
+      //pageY should be set to baseHeight or baseHeightWithoutTitle
+      this.doc.line(MAX_PAGE_X * (columnNumber - 1) / 4, pageY,
+                    MAX_PAGE_X * (columnNumber - 1) / 4, MAX_PAGE_Y - doubleSpace);
     }
 
     let createCandidateCard = (candidate) => {
       this.doc.setFontSize(defaultFontSize);
-      let candidateName = candidate.lastName.toUpperCase() + ", " + candidate.firstName;
-      this.doc.text(candidateName, pageX, pageY);
-      pageY += doubleSpace;
-      this.doc.setFontSize(footerFontSize);
 
-      if(candidate.organization) {
-        this.doc.text(candidate.organization, pageX, pageY);
+      //TODO: Add If selected, bold (and add a checkmark)?
+      //Need to wait for selection feature
+      //this.doc.setFontType("bold");
+
+      if (candidate.lastName.length + candidate.firstName.length > 20) {
+        this.doc.text(candidate.lastName.toUpperCase() + ", ", pageX, pageY);
         pageY += singleSpace;
+        this.doc.text(candidate.firstName, pageX, pageY);
+      } else {
+        let candidateName = candidate.lastName.toUpperCase() + ", " + candidate.firstName;
+        this.doc.text(candidateName, pageX, pageY);
       }
-      //TODO: Add If selected, add a checkmark. Need to wait for selection feature
+
+      if (candidate.organization) {
+        pageY += singleSpace;
+        this.doc.setFontSize(footerFontSize);
+        this.doc.text(candidate.organization.toUpperCase(), pageX, pageY);
+      }
+
+      this.doc.setFontType("normal");
+
+      //10 is a bit too small, 20 is a bit too large;
+      pageY += doubleSpace + singleSpace;
     }
 
     let createRacePages = () => {
       //for loop this through each race once API is created.
       //I don't know what the object will look like so I don't want to mock it
-
       newPage();
 
       //TODO: add race title (ie mayer/councillor) when API is created
       //race title place holder ie (Mayer: 3 of 1)
       this.doc.setFontSize(headerFontSize);
-      let raceTitle = "RACE TITLE: + #CANDIDATESSELECTED of #CANDIDATESNEEDED"
+      const raceTitle = "RACE TITLE: + #CANDIDATESSELECTED of #CANDIDATESNEEDED"
       this.doc.text(raceTitle, pageX, pageY);
       pageY += doubleSpace;
+      
+      //Horizontal line before candidates
+      this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
+      pageY += doubleSpace;
 
-      drawLineDividers();
-      pdfData["candidates"].forEach(candidate => {
+      //To reset PageY after new column or new page
+      const baseHeight = pageY;
+      const baseHeightWithoutTitle = baseHeight - largeSpace;
+
+      let columnNumber = 1;
+      let pageNumber = 1;
+
+      const candidateList = dummyCandidates;
+      //const candidateList = pdfData["candidates"]
+
+      candidateList.forEach(candidate => {
+        let pageLength = MAX_PAGE_Y - doubleSpace;
+        let requiredHeight = singleSpace;
+        
+        if (candidate.lastName.length + candidate.firstName.length > 20) {
+          requiredHeight += singleSpace;
+        }
+        if (candidate.organization) {
+          requiredHeight += singleSpace;
+        }
+  
+        if (requiredHeight + pageY > pageLength) {
+          if (columnNumber === 4) {
+            newPage();
+            pageNumber++;
+            columnNumber = 1;
+          } else {
+            columnNumber++;
+            pageX += MAX_PAGE_X / 4;
+            pageY = pageNumber === 1 ? baseHeight : baseHeightWithoutTitle;
+            drawColumnDivider(columnNumber);
+          }
+        }
         createCandidateCard(candidate);
       });
     }
