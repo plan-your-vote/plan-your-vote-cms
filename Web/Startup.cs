@@ -155,6 +155,8 @@ namespace Web
             });
 
             DummyData.Initialize(app).Wait(); ;
+            StateInit.Initialize(context);
+            ThemesInit.Initialize(context);
         }
     }
 }

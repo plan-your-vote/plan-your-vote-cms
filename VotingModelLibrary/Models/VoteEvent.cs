@@ -16,5 +16,6 @@ namespace VotingModelLibrary.Models
 
         public int PageFontSize { get; set; }
         public string PageFontFamily { get; set; }
+
     }
 }
