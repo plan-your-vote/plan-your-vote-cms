@@ -17,18 +17,21 @@ namespace Web.Controllers
     {
 
         private readonly ApplicationDbContext _context;
+        private int _currentElection;
 
         public BallotIssuesApiController(ApplicationDbContext context)
         {
             _context = context;
+            _currentElection = _context.StateSingleton.Find(State.STATE_ID).currentElection;
         }
 
         // GET: api/BallotIssues
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BallotIssue>>> Get()
         {
-            return await _context.BallotIssues.ToListAsync();
+            return await _context.BallotIssues.Where(b => b.ElectionId == _currentElection).ToListAsync();
         }
+
 
         // GET: api/BallotIssues/5
         [HttpGet("{id}")]

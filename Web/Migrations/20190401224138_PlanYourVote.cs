@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web.Migrations
 {
-    public partial class first : Migration
+    public partial class PlanYourVote : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,17 +47,35 @@ namespace Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BallotIssues",
+                name: "Elections",
                 columns: table => new
                 {
-                    BallotIssueId = table.Column<int>(nullable: false)
+                    ElectionId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    BallotIssueTitle = table.Column<string>(nullable: true),
+                    DateStart = table.Column<string>(nullable: true),
+                    DateEnd = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BallotIssues", x => x.BallotIssueId);
+                    table.PrimaryKey("PK_Elections", x => x.ElectionId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    ThemeName = table.Column<string>(nullable: false),
+                    ID = table.Column<string>(nullable: false),
+                    Type = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true),
+                    Format = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => new { x.ThemeName, x.ID });
                 });
 
             migrationBuilder.CreateTable(
@@ -75,17 +93,15 @@ namespace Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Races",
+                name: "Themes",
                 columns: table => new
                 {
-                    RaceId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    PositionName = table.Column<string>(nullable: true),
-                    NumberNeeded = table.Column<int>(nullable: false)
+                    ThemeName = table.Column<string>(nullable: false),
+                    Selected = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Races", x => x.RaceId);
+                    table.PrimaryKey("PK_Themes", x => x.ThemeName);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,8 +150,8 @@ namespace Web.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -179,8 +195,8 @@ namespace Web.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -191,6 +207,126 @@ namespace Web.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BallotIssues",
+                columns: table => new
+                {
+                    BallotIssueId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ElectionId = table.Column<int>(nullable: false),
+                    BallotIssueTitle = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BallotIssues", x => x.BallotIssueId);
+                    table.ForeignKey(
+                        name: "FK_BallotIssues_Elections_ElectionId",
+                        column: x => x.ElectionId,
+                        principalTable: "Elections",
+                        principalColumn: "ElectionId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PollingStations",
+                columns: table => new
+                {
+                    PollingStationId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ElectionId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    AdditionalInfo = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    WheelchairInfo = table.Column<string>(nullable: true),
+                    ParkingInfo = table.Column<string>(nullable: true),
+                    WashroomInfo = table.Column<string>(nullable: true),
+                    GeneralAccessInfo = table.Column<string>(nullable: true),
+                    Latitude = table.Column<double>(nullable: false),
+                    Longitute = table.Column<double>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PollingStations", x => x.PollingStationId);
+                    table.ForeignKey(
+                        name: "FK_PollingStations_Elections_ElectionId",
+                        column: x => x.ElectionId,
+                        principalTable: "Elections",
+                        principalColumn: "ElectionId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Races",
+                columns: table => new
+                {
+                    RaceId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ElectionId = table.Column<int>(nullable: false),
+                    PositionName = table.Column<string>(nullable: true),
+                    NumberNeeded = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Races", x => x.RaceId);
+                    table.ForeignKey(
+                        name: "FK_Races_Elections_ElectionId",
+                        column: x => x.ElectionId,
+                        principalTable: "Elections",
+                        principalColumn: "ElectionId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StateSingleton",
+                columns: table => new
+                {
+                    StateId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    currentElection = table.Column<int>(nullable: false),
+                    ElectionId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StateSingleton", x => x.StateId);
+                    table.ForeignKey(
+                        name: "FK_StateSingleton_Elections_ElectionId",
+                        column: x => x.ElectionId,
+                        principalTable: "Elections",
+                        principalColumn: "ElectionId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Candidates",
+                columns: table => new
+                {
+                    CandidateId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    ElectionId = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Picture = table.Column<string>(nullable: true),
+                    Biography = table.Column<string>(nullable: true),
+                    OrganizationId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Candidates", x => x.CandidateId);
+                    table.ForeignKey(
+                        name: "FK_Candidates_Elections_ElectionId",
+                        column: x => x.ElectionId,
+                        principalTable: "Elections",
+                        principalColumn: "ElectionId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Candidates_Organizations_OrganizationId",
+                        column: x => x.OrganizationId,
+                        principalTable: "Organizations",
+                        principalColumn: "OrganizationId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -212,29 +348,6 @@ namespace Web.Migrations
                         column: x => x.BallotIssueId,
                         principalTable: "BallotIssues",
                         principalColumn: "BallotIssueId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Candidates",
-                columns: table => new
-                {
-                    CandidateId = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Picture = table.Column<string>(nullable: true),
-                    Biography = table.Column<string>(nullable: true),
-                    OrganizationId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Candidates", x => x.CandidateId);
-                    table.ForeignKey(
-                        name: "FK_Candidates_Organizations_OrganizationId",
-                        column: x => x.OrganizationId,
-                        principalTable: "Organizations",
-                        principalColumn: "OrganizationId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -326,6 +439,11 @@ namespace Web.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_BallotIssues_ElectionId",
+                table: "BallotIssues",
+                column: "ElectionId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CandidateRaces_CandidateId",
                 table: "CandidateRaces",
                 column: "CandidateId");
@@ -334,6 +452,11 @@ namespace Web.Migrations
                 name: "IX_CandidateRaces_RaceId",
                 table: "CandidateRaces",
                 column: "RaceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Candidates_ElectionId",
+                table: "Candidates",
+                column: "ElectionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Candidates_OrganizationId",
@@ -349,6 +472,21 @@ namespace Web.Migrations
                 name: "IX_IssueOptions_BallotIssueId",
                 table: "IssueOptions",
                 column: "BallotIssueId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PollingStations_ElectionId",
+                table: "PollingStations",
+                column: "ElectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Races_ElectionId",
+                table: "Races",
+                column: "ElectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StateSingleton_ElectionId",
+                table: "StateSingleton",
+                column: "ElectionId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -375,7 +513,19 @@ namespace Web.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
+                name: "Images");
+
+            migrationBuilder.DropTable(
                 name: "IssueOptions");
+
+            migrationBuilder.DropTable(
+                name: "PollingStations");
+
+            migrationBuilder.DropTable(
+                name: "StateSingleton");
+
+            migrationBuilder.DropTable(
+                name: "Themes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -394,6 +544,9 @@ namespace Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "Organizations");
+
+            migrationBuilder.DropTable(
+                name: "Elections");
         }
     }
 }

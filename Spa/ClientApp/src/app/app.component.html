@@ -1,16 +1,18 @@
-<body [style.background-color]="currentElection?.PageBackgroundColor" [style.color]="currentElection?.PageTextColor"
-  [style.font-size]="currentElection?.PageFontSize" [style.font-family]="currentElection?.PageFontFamily">
+<body>
   <app-nav-menu></app-nav-menu>
   <div class="container">
-    <h3>
+    <h1>
       {{ 'APP.TITLE' | translate }}
-    </h3>
-    <p class="lead">{{ 'APP.LANGUAGE' | translate }}</p>
-    <button (click)="generatePdf()">Try PDF</button>
-    <br />
-
-    <div class="style-demo-button">
-      <button mat-raised-button (click)="nextElection()" color="accent">Change Election/Style</button>
+    </h1>
+    <p class="lead">{{ 'APP.SUBTITLE' | translate }}</p>
+    <hr />
+    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+      <button class="btn btn-secondary" (click)="generatePdf()">
+        Try PDF
+      </button>
+      <button class="btn btn-secondary" (click)="nextElection()">
+        Change Election/Style
+      </button>
     </div>
     <br />
     <mat-accordion>
@@ -24,12 +26,10 @@
           <br />
           <mat-divider></mat-divider>
           <div class="election-details-demo">
-            <img [src]="( currentElection?.LogoURL )" width="300px" height="auto" />
+            <img [src]="currentElection?.LogoURL" width="300px" height="auto" />
           </div>
           <br />
-
-          <mat-card class="mat-elevation-z4" [style.color]="currentElection?.PageTextColor"
-            [style.font-size]="currentElection?.PageFontSize" [style.font-family]="currentElection?.PageFontFamily">
+          <mat-card class="mat-elevation-z4">
             <mat-card-header>
               <mat-card-title>
                 <h3>{{ currentElection?.VoteTitle }}</h3>
@@ -47,7 +47,6 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
-
 
     <br />
     <mat-divider></mat-divider>

@@ -1,14 +1,16 @@
 ﻿@model VotingModelLibrary.Models.Contact
+@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = @Localizer["Delete"];
 }
 
-<h1>Delete</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>@Localizer["Are you sure you want to delete this ?"]</h3>
 <div class="panel panel-default">
-    <h4>Contact</h4>
+    <h4>@Localizer["Contact"]</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -33,7 +35,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="ContactId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value=@Localizer["Delete"] class="btn btn-danger" /> |
+        <a asp-action="Index">@Localizer["Back to List"]</a>
     </form>
 </div>

@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Data;
 using Web.Models;
 using Web.ViewModels;
+using VotingModelLibrary.Models;
 
 namespace Web.Controllers
 {
@@ -21,11 +24,20 @@ namespace Web.Controllers
 
         public IActionResult Index()
         {
+            State s = _context.StateSingleton.Find(State.STATE_ID);
+            Election e = _context.Elections.Where(el => el.ElectionId == s.currentElection).First();
             DashboardViewModel dashboard = new DashboardViewModel
             {
-                CandidatesCount = _context.Candidates.Count(),
-                ContactsCount = _context.Contacts.Count(),
-                BallotIssuesCount = _context.BallotIssues.Count()
+                ElectionName = e.Name,
+                CandidatesCount = _context.Candidates
+                    .Where(c => c.ElectionId == s.currentElection)
+                    .Count(),
+                BallotIssuesCount = _context.BallotIssues
+                    .Where(c => c.ElectionId == s.currentElection)
+                    .Count(),
+                PollingStationsCount = _context.PollingStations
+                    .Where(c => c.ElectionId == s.currentElection)
+                    .Count()
             };
 
             return View(dashboard);
@@ -40,6 +52,16 @@ namespace Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+            CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+            new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) });
+            
+            return LocalRedirect(returnUrl);
         }
     }
 }
