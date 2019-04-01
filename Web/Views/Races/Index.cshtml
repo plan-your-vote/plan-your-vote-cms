@@ -1,0 +1,41 @@
+﻿@model IEnumerable<VotingModelLibrary.Models.Race>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PositionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberNeeded)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PositionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberNeeded)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.RaceId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.RaceId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.RaceId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

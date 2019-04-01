@@ -40,7 +40,10 @@ export class FooterMenuComponent implements OnInit {
   }
 
   onLangChange(event) {
-    this.translateService.use(event.target.value);
+    const arr = event.target.value.split(' ');
+    const languageCode = arr.pop();
+
+    this.translateService.use(languageCode);
   }
 
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Web.Migrations
 {
-    public partial class d : Migration
+    public partial class PlanYourVote : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,6 +63,22 @@ namespace Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    ThemeName = table.Column<string>(nullable: false),
+                    ID = table.Column<string>(nullable: false),
+                    Type = table.Column<string>(nullable: true),
+                    Value = table.Column<string>(nullable: true),
+                    Format = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => new { x.ThemeName, x.ID });
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Organizations",
                 columns: table => new
                 {
@@ -74,6 +90,18 @@ namespace Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Organizations", x => x.OrganizationId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Themes",
+                columns: table => new
+                {
+                    ThemeName = table.Column<string>(nullable: false),
+                    Selected = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Themes", x => x.ThemeName);
                 });
 
             migrationBuilder.CreateTable(
@@ -122,8 +150,8 @@ namespace Web.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -167,8 +195,8 @@ namespace Web.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -485,6 +513,9 @@ namespace Web.Migrations
                 name: "Contacts");
 
             migrationBuilder.DropTable(
+                name: "Images");
+
+            migrationBuilder.DropTable(
                 name: "IssueOptions");
 
             migrationBuilder.DropTable(
@@ -492,6 +523,9 @@ namespace Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "StateSingleton");
+
+            migrationBuilder.DropTable(
+                name: "Themes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

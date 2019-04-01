@@ -17,10 +17,11 @@ const THEME_SNOWDROP = '/snowdrop.css';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-  data: Election[] = [];
+  elections: Election[] = [];
   currentElection: Election;
   candidates: Candidate[];
   index: number;
+  data: Election[] = [];
   selectedCssFilepath: string;
 
   title = 'ClientApp';
@@ -32,21 +33,31 @@ export class AppComponent implements OnInit {
     private candidatesApi: CandidateService
   ) {
     this.index = 0;
+
     this.electionApi.getElections().subscribe(res => {
+      this.elections = res;
       this.data = res;
-      this.index = 0;
-      this.currentElection = this.data[this.index];
+      this.currentElection = this.elections[this.index];
+      
+      //sets the current selection to the first one
+      //TODO: do this async with a promise
+      if (!this.currentElection) {
+        this.currentElection = this.data[this.index];
+        console.log(this.data);
+      }
     });
+
     this.candidatesApi.getCandidates().subscribe(candidates => {
       this.candidates = candidates;
     });
   }
 
   ngOnInit(): void {
-    this.nextElection();
     this.themeService.getUserSelection().then(themeName => {
       this.chooseCss(themeName);
     });
+
+    const logoImage = this.themeService.getImage('BCIT Logo');
   }
 
   chooseCss(option: string): void {
@@ -67,27 +78,42 @@ export class AppComponent implements OnInit {
       .setAttribute('href', `${THEME_BASE_PATH}${this.selectedCssFilepath}`);
   }
 
+  /**
+   * TODO: I don't think this function will be relevant once the application goes forward
+   */
   public nextElection(): void {
-    this.currentElection = this.data[this.index];
-    if (this.index != this.data.length - 1) {
+    if (this.index != this.elections.length - 1) {
       this.index++;
     } else {
       this.index = 0;
     }
+    this.currentElection = this.elections[this.index];
   }
 
   /**
    * Attached to 'Try PDF' button.
    * Currently passing all candidates.
-   * Need to implement a way to implement just pass in candidate selected in the future.
-   * Should rename pdf title title of current election.
+   * Needs to be divided by races instead of candidates.
+   * Needs to implement candidate selection after Greg implements.
    */
   generatePdf() {
+    let selectedCandidateIds = new Set();
+    
+    if (localStorage.getItem('candidates')) {
+      let selectedCandidates = JSON.parse(localStorage.getItem('candidates'));
+
+      selectedCandidates.forEach(c => {
+        selectedCandidateIds.add(c.candidateId);
+      });
+    }
+
     var pdfData: object = {
       dateTime: new Date().toLocaleString(),
-      candidates: this.candidates
+      electionInfo: this.currentElection,
+      candidates: this.candidates,
+      selectedCandidateIds: selectedCandidateIds
     };
 
-    this.pdfService.pdf(pdfData, new Date().getHours().toString());
+    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle);
   }
 }
