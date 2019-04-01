@@ -36,6 +36,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
+
 export function setupTranslateFactory(service: TranslateService): Function {
   return () => service.use('en');
 }

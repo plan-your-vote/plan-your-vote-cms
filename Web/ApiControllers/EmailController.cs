@@ -38,8 +38,8 @@ namespace Web.Controllers
 
             return BadRequest("Failed to send email");
         }
-
-        private bool SendEmail(string emailAddress, string subject, string message)
+        
+        public bool SendEmail(string emailAddress, string subject, string message)
         {
             MailMessage mm = new MailMessage
             {

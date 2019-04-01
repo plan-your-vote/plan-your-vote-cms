@@ -22,4 +22,8 @@ export class CandidateService {
     const url = `${clientsUrl}/${id}`;
     return this.http.get<Candidate>(url);
   }
+
+  getSingle<T>(id: number) {
+    return this.http.get<T>(`https://localhost:5001/api/candidates/${id}`);
+  }
 }
