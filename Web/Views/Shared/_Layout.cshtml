@@ -1,4 +1,4 @@
-﻿@using  Microsoft.AspNetCore.Mvc.Localization
+@using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 <!DOCTYPE html>
@@ -52,6 +52,9 @@
                         <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "Contacts")">
                             <a class="nav-link text-white" asp-area="" asp-controller="Contacts" asp-action="Index">@Localizer["Contacts"]</a>
                         </li>
+                        <li class="nav-item @Html.IsSelected(actions: "Index", controllers: "Themes")">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Themes" asp-action="Index">@Localizer["Themes"]</a>
+                        </li>  
                         <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "PollingStations")">
                             <a class="nav-link text-white" asp-area="" asp-controller="PollingStations" asp-action="Index">@Localizer["Polling Stations"]</a>
                         </li>
