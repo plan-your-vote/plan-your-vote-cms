@@ -1,13 +1,15 @@
 ﻿@model VotingModelLibrary.Models.Contact
+@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = @Localizer["Edit"];
 }
 
-<h1>Edit</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>Contact</h4>
+    <h4>@Localizer["Contact"]</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
@@ -30,17 +32,17 @@
                     <span asp-validation-for="CandidateId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
+<div>
+    <a asp-action="Index">@Localizer["Back to List"]</a>
+</div>
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

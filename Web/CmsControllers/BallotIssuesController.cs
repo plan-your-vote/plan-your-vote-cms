@@ -64,7 +64,8 @@ namespace Web
                 BallotIssue issue = new BallotIssue
                 {
                     BallotIssueTitle = model.BallotIssueTitle,
-                    Description = model.Description
+                    Description = model.Description,
+                    ElectionId = _context.StateSingleton.Find(State.STATE_ID).currentElection
                 };
                 _context.Add(issue);
 

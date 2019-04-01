@@ -140,7 +140,9 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            StateInit.Initialize(context);
             DummyData.Initialize(context);
+            ThemesInit.Initialize(context);
         }
     }
 }
