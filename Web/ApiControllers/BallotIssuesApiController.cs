@@ -49,61 +49,6 @@ namespace Web.Controllers
             return issue;
         }
 
-        // POST: api/BallotIssues
-        [HttpPost]
-        public async Task<ActionResult<BallotIssue>> PostBallotIssue(BallotIssue issue)
-        {
-            _context.BallotIssues.Add(issue);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("GetBallotIssue", new { id = issue.BallotIssueId}, issue);
-        }
-
-        // PUT: api/BallotIssues/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutBallotIssue(int id, BallotIssue issue)
-        {
-            if (id != issue.BallotIssueId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(issue).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!IssueExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // DELETE: api/BallotIssues/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<BallotIssue>> DeleteBallotIssue(int id)
-        {
-            var issue = await _context.BallotIssues.FindAsync(id);
-            if (issue == null)
-            {
-                return NotFound();
-            }
-
-            _context.BallotIssues.Remove(issue);
-            await _context.SaveChangesAsync();
-
-            return issue;
-        }
-
         private bool IssueExists(int id)
         {
             return _context.BallotIssues.Any(e => e.BallotIssueId == id);

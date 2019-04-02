@@ -46,61 +46,6 @@ namespace Web.Controllers
             return candidate;
         }
 
-        // POST: api/Candidates
-        [HttpPost]
-        public async Task<ActionResult<Candidate>> PostCandidate(Candidate candidate)
-        {
-            _context.Candidates.Add(candidate);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction("GetCandidate", new { id = candidate.CandidateId}, candidate);
-        }
-
-        // PUT: api/Candidates/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCandidate(int id, Candidate candidate)
-        {
-            if (id != candidate.CandidateId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(candidate).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!IssueExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // DELETE: api/Candidates/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Candidate>> DeleteCandidate(int id)
-        {
-            var candidate = await _context.Candidates.FindAsync(id);
-            if (candidate == null)
-            {
-                return NotFound();
-            }
-
-            _context.Candidates.Remove(candidate);
-            await _context.SaveChangesAsync();
-
-            return candidate;
-        }
-
         private bool IssueExists(int id)
         {
             return _context.Candidates.Any(e => e.CandidateId == id);

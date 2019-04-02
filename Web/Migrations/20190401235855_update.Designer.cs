@@ -9,7 +9,7 @@ using Web.Data;
 namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190401234841_update")]
+    [Migration("20190401235855_update")]
     partial class update
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -481,7 +481,7 @@ namespace Web.Migrations
                         .HasForeignKey("CandidateId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("VotingModelLibrary.Models.Race", "Race")
+                    b.HasOne("VotingModelLibrary.Models.Race")
                         .WithMany("CandidateRaces")
                         .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade);

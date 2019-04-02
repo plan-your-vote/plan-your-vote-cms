@@ -479,7 +479,7 @@ namespace Web.Migrations
                         .HasForeignKey("CandidateId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("VotingModelLibrary.Models.Race", "Race")
+                    b.HasOne("VotingModelLibrary.Models.Race")
                         .WithMany("CandidateRaces")
                         .HasForeignKey("RaceId")
                         .OnDelete(DeleteBehavior.Cascade);
