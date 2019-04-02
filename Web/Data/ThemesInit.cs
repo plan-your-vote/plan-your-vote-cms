@@ -70,7 +70,7 @@ namespace Web
                     ThemeName = "Maple",
                     ID = "Footer Logo",
                     Type = "URL",
-                    Value = "https://flaglane.com/download/canadian-flag/canadian-flag.svg",
+                    Value = "https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg",
                     Format = "SVG",
                     Description = "Canadian Flag",
                 },
