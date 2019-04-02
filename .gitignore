@@ -3,6 +3,11 @@
 
 # SqliteDB
 
+
+*.db
+Web/Migrations/
+
+
 # User-specific files
 *.suo
 *.user
