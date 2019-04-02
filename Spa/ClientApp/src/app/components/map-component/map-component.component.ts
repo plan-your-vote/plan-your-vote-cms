@@ -12,6 +12,7 @@ import { transform } from 'ol/proj';
 import { fromLonLat } from 'ol/proj';
 import { PollingStation } from '../../models/pollingstation';
 import { PollingStationService } from '../../services/pollingstation.service';
+import { disableBindings } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-map-component',
@@ -47,20 +48,43 @@ export class MapComponentComponent implements OnInit {
       })
       .then(() => {
         this.stations.forEach(function (station) {
-          console.log(station.longitute);
+          navigator.geolocation.getCurrentPosition(function (pos) {
+            var lat1 = pos.coords.latitude;
+            var lat2 = station.latitude;
+            var lon1 = pos.coords.longitude;
+            var lon2 = station.longitute;
 
-          var marker = new Feature({
-            geometry: new Point(transform([station.longitute, station.latitude], 'EPSG:4326', 'EPSG:3857')),
-          });
+            var radlat1 = Math.PI * lat1 / 180;
+            var radlat2 = Math.PI * lat2 / 180;
+            var theta = lon1 - lon2;
+            var radtheta = Math.PI * theta / 180;
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+              dist = 1;
+            }
+            dist = Math.acos(dist);
+            dist = dist * 180 / Math.PI;
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1.609344;
+            if (dist < 5) {
+              console.log("Distance to polling station is: " + dist + "km. adding feature to map.")
+              var marker = new Feature({
+                geometry: new Point(transform([station.longitute, station.latitude], 'EPSG:4326', 'EPSG:3857')),
+              });
 
-          var markers = new sourceVector({
-            features: [marker]
-          });
+              var markers = new sourceVector({
+                features: [marker]
+              });
 
-          var markerVectorLayer = new layerVector({
-            source: markers,
+              var markerVectorLayer = new layerVector({
+                source: markers,
+              });
+              map.addLayer(markerVectorLayer);
+            } else {
+              console.log("Distance to polling station is: " + dist + "km. skipping station.")
+            }
+
           });
-          map.addLayer(markerVectorLayer);
         })
       });
   }
