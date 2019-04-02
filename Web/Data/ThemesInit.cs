@@ -41,7 +41,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Default",
-                    ID = "Vancouver Logo",
+                    ID = "Footer Logo",
                     Type = "URL",
                     Value = "https://vancouver.ca/plan-your-vote/img/cov_logo.png",
                     Format = "PNG",
@@ -59,7 +59,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Snowdrop",
-                    ID = "Video Thumb",
+                    ID = "Footer Logo",
                     Type = "URL",
                     Value = "https://www.bcit.ca/images/entryblocks/video_thumb_sd.png",
                     Format = "PNG",
@@ -68,7 +68,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Maple",
-                    ID = "Canadian Flag",
+                    ID = "Footer Logo",
                     Type = "URL",
                     Value = "https://flaglane.com/download/canadian-flag/canadian-flag.svg",
                     Format = "SVG",
