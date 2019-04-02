@@ -34,7 +34,6 @@ import { SelectionComponent } from './selection/selection.component';
 import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
 
 export function setupTranslateFactory(service: TranslateService): Function {
@@ -47,7 +46,6 @@ export function setupTranslateFactory(service: TranslateService): Function {
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent,
     TranslatePipe,
     CandidateItemComponent,
     CandidateListComponent,
@@ -92,7 +90,6 @@ export function setupTranslateFactory(service: TranslateService): Function {
       multi: true
     },
     JSONParserService
-    
   ],
   bootstrap: [AppComponent]
 })
