@@ -65,9 +65,10 @@ namespace Web
         public async Task<IActionResult> Create(string firstName, string lastName, IFormFile image, string biography, int organizationId)
         {
             var fileName = "";
-            var nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
+            var nameOfile = "";
             if (image != null)
             {
+                nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
                 fileName = "wwwroot\\" + nameOfile;
                 image.CopyTo(new FileStream(fileName, FileMode.Create));
                 ViewData["ImagePath"] = fileName;
@@ -88,7 +89,6 @@ namespace Web
             ViewData["OrganizationId"] = new SelectList(_context.Organizations, "Name", "Name", candidate.OrganizationId);
             return View(candidate);
         }
-
 
         public static string GenerateImageId()
         {

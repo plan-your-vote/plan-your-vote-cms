@@ -1,5 +1,4 @@
-<body [style.background-color]="currentElection?.PageBackgroundColor" [style.color]="currentElection?.PageTextColor"
-  [style.font-size]="currentElection?.PageFontSize" [style.font-family]="currentElection?.PageFontFamily">
+<body>
   <app-nav-menu></app-nav-menu>
   <div class="container">
     <h1>
@@ -30,8 +29,7 @@
             <img [src]="currentElection?.LogoURL" width="300px" height="auto" />
           </div>
           <br />
-          <mat-card class="mat-elevation-z4" [style.color]="currentElection?.PageTextColor"
-            [style.font-size]="currentElection?.PageFontSize" [style.font-family]="currentElection?.PageFontFamily">
+          <mat-card class="mat-elevation-z4">
             <mat-card-header>
               <mat-card-title>
                 <h3>{{ currentElection?.VoteTitle }}</h3>

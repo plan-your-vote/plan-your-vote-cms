@@ -1,14 +1,19 @@
 <div>
   <!-- <button (click)="downloadIcsFile()">Down ICS FIle</button> -->
 
+  <select [(ngModel)]="selectedDate" (change)="selected()">
+    <option *ngFor="let item of data" [ngValue]="item">{{item.date}}</option>
+  </select>
+
+
   <div title="Add to Calendar" class="addeventatc">
     Add to Calendar
-    <span class="start">03/31/2019 08:00 AM</span>
-    <span class="end">03/31/2019 03:00 PM</span>
+    <span class="start">{{selectedDate.date}} 08:00 AM</span>
+    <span class="end">{{selectedDate.date}} 03:00 PM</span>
     <span class="timezone">America/Vancouver</span>
-    <span class="title">BCIT President Election 2019</span>
-    <span class="description">Vote or we continue to email you</span>
-    <span class="location">Online</span>
+    <span class="title">Canadian Federal Election 2020</span>
+    <span class="description">Elect members of the Legislative Assembly in Canada</span>
+    <span class="location"></span>
   </div>
   
 </div>

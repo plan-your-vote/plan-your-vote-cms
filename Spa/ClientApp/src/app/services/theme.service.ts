@@ -8,18 +8,19 @@ const API_URL = 'https://localhost:5001/api/theme/';
   providedIn: 'root'
 })
 export class ThemeService {
+  private themeName: string;
+  
   constructor(
     @Inject(DOCUMENT) public document: Document,
     private http: HttpClient
   ) {}
 
-  private themeName: string;
-
   getUserSelection() {
     return new Promise<string>((resolve, reject) => {
       this.http.get<any>(API_URL).subscribe(
         res => {
-          this.themeName = res.themeName;
+          this.themeName = res.selectedTheme.themeName;
+          localStorage.setItem('images', JSON.stringify(res.images));
           resolve(this.themeName);
         },
         error => {
@@ -28,5 +29,21 @@ export class ThemeService {
         }
       );
     });
+  }
+
+  // parameter `key` is case sensitive
+  getImage(key: string) {
+    let images = [];
+    if (localStorage.getItem('images')) {
+      images = JSON.parse(localStorage.getItem('images'));
+    }
+
+    for (let i = 0; i < images.length; i++) {
+      if (images[i]['id'] === key) {
+        return images[i];
+      }
+    }
+
+    return { error: 'image not found: theme.service.ts' };
   }
 }
