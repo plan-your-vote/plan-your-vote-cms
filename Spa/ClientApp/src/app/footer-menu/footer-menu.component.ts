@@ -23,7 +23,7 @@ export class FooterMenuComponent implements OnInit {
   logo: Image = {
     description: '',
     format: '',
-    id: 'Logo',
+    id: 'Footer Logo',
     themeName: '',
     type: '',
     value: ''
