@@ -269,7 +269,7 @@ __pycache__/
 .vscode/
 
 # node
-Spa/package-lock.json
+Spa/ClientApp/package-lock.json
 
 # for mac users
 *.DS_Store
