@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JSONParserService } from 'src/app/services/jsonparser.service';
+import { Candidate } from 'src/app/models/candidate';
+import { Race } from 'src/app/models/Race';
+import { CandidateService } from '../services/candidate.service';
 
 @Component({
   selector: 'app-selection',
@@ -7,33 +10,18 @@ import { JSONParserService } from 'src/app/services/jsonparser.service';
   styleUrls: ['./selection.component.less']
 })
 export class SelectionComponent implements OnInit {
-
+  public candidates: Candidate[] = [];
+  public races: Race[] = [];
   //STEP1
   step1 = "";
   step1description = "";
-  //Positions
-  p0 = "";
-  p1 = "";
-  p2 = "";
-  p3 = "";
-  p0numCandidates = "";
-  p1numCandidates = "";
-  p2numCandidates = "";
-  p3numCandidates = "";
-  p0description = "";
-  p1description = "";
-  p2description = "";
-  p3description = "";
-  p0show: boolean = false;
-  p1show: boolean = false;
-  p2show: boolean = false;
-  p3show: boolean = false;
-
 
 
   //STEP2
   step2 = "";
   step2description = "";
+
+
   //Question 1
   q0 = "";
   q0desc = "";
@@ -89,10 +77,12 @@ export class SelectionComponent implements OnInit {
 
 
   jsonData: any;
-  constructor(private dataFinder: JSONParserService) { }
+  constructor(private dataFinder: JSONParserService, private _svc: CandidateService) { }
 
   ngOnInit() {
     this.parseDefaultEmail();
+    this.getRaces();
+    console.log(this.races);
   }
   parseDefaultEmail() {
     this.dataFinder.getJSONDataAsync("./assets/data/selection-content.json").then(data => {
@@ -100,36 +90,46 @@ export class SelectionComponent implements OnInit {
     })
   }
 
-  filterRaces(val: any) {
-    switch (val) {
-      case this.p0:
-        this.p0show = false;
-        this.p1show = true;
-        this.p2show = true;
-        this.p3show = true;
-        break;
-      case this.p1:
-        this.p0show = true;
-        this.p1show = false;
-        this.p2show = true;
-        this.p3show = true;
-        break;
-      case this.p2:
-        this.p0show = true;
-        this.p1show = true;
-        this.p2show = false;
-        this.p3show = true;
-        break;
-     default: {
-        this.p0show = false;
-        this.p1show = false;
-        this.p2show = false;
-        this.p3show = false;
-        break;
+  getRaces(): void {
+    this._svc.getRaces().subscribe(data => {
+      this.races = data;
+      console.log(this.races);
+      for (let r of this.races) {
+        r.show = "true";
+        r.selected = [];
       }
-    }
- 
+    });
+  }
 
+  onSelect(c: Candidate, r: Race) {
+    if (!c.selected) {
+      c.selected = true;
+      localStorage.setItem('candidates', JSON.stringify(this.candidates));
+      r.selected.push(c);
+    } else {
+      c.selected = false;
+      localStorage.setItem('candidates', JSON.stringify(this.candidates));
+      r.selected = r.selected.filter(function (e) { return e.candidateId !== c.candidateId });
+    }
+    console.log(this.races);
+  }
+
+  filterRaces(val: any) {
+    if (val == "All Races") {
+      for (let r of this.races) {
+        r.show = "true";
+        console.log(r.show);
+      }
+    } else {
+      for (let r of this.races) {
+        if (val != r.positionName) {
+          r.show = "false";
+        } else {
+          r.show = "true";
+        }
+        console.log(r.show);
+     }
+    }
   }
 
   SetQueryOptionsData(data: any) {
@@ -144,18 +144,6 @@ export class SelectionComponent implements OnInit {
   populateStepOne() {
     this.step1 = this.jsonData.default.step1;
     this.step1description = this.jsonData.default.step1description;
-    this.p0 = this.jsonData.default.positions.p0.title;
-    this.p1 = this.jsonData.default.positions.p1.title;
-    this.p2 = this.jsonData.default.positions.p2.title;
-    this.p3 = this.jsonData.default.positions.p3.title;
-    this.p0numCandidates = this.jsonData.default.positions.p0.numCandidates;
-    this.p1numCandidates = this.jsonData.default.positions.p1.numCandidates;
-    this.p2numCandidates = this.jsonData.default.positions.p2.numCandidates;
-    this.p3numCandidates = this.jsonData.default.positions.p3.numCandidates;
-    this.p0description = this.jsonData.default.positions.p0.description;
-    this.p1description = this.jsonData.default.positions.p1.description;
-    this.p2description = this.jsonData.default.positions.p2.description;
-    this.p3description = this.jsonData.default.positions.p3.description;
   }
   populateStepTwo() {
     this.step2 = this.jsonData.default.step2;

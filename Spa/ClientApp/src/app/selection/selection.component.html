@@ -13,10 +13,8 @@
           Filter by:
           <select id="filterRace" (change)="filterRaces($event.target.value)" name="race" style="padding-right: 10px; font-weight:normal;">
             <option>All Races</option>
-            <option value="{{p0}}">{{p0}}</option>
-            <option value="{{p1}}">{{p1}}</option>
-            <option value="{{p2}}">{{p2}}</option>
-            <option value="{{p3}}">{{p3}}</option>
+            <option *ngFor="let r of races" value="{{r.positionName}}">{{r.positionName}}</option>
+            
           </select>
         </p>
       </div>
@@ -26,35 +24,44 @@
       </div>
     </div>
     <br />
-    <div id="p0" class="col-md-11" *ngIf="!p0show">
-      <!--TODO: Add choose functionality and then duplicate for all positions-->
-      <h5 style="font-weight: bolder;">{{p0}}</h5>
-      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p0numCandidates}} CANDIDATE(S)</p>
-      <p>{{p0description}}</p>
-      <!--TODO: WHERE CANDIDATES GO-->
-    </div>
-    <div id="p1" class="col-md-11" *ngIf="!p1show">
-      <!--TODO: Add choose functionality and then duplicate for all positions-->
-      <h5 style="font-weight: bolder;">{{p1}}</h5>
-      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p1numCandidates}} CANDIDATE(S)</p>
-      <p>{{p1description}}</p>
-      <!--TODO: WHERE CANDIDATES GO-->
-    </div>
-    <div id="p2" class="col-md-11" *ngIf="!p2show">
-      <!--TODO: Add choose functionality and then duplicate for all positions-->
-      <h5 style="font-weight: bolder;">{{p2}}</h5>
-      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p2numCandidates}} CANDIDATE(S)</p>
-      <p>{{p2description}}</p>
-      <!--TODO: WHERE CANDIDATES GO-->
-    </div>
-    <div id="p3" class="col-md-11" *ngIf="!p3show">
-      <!--TODO: Add choose functionality and then duplicate for all positions-->
-      <h5 style="font-weight: bolder;">{{p3}}</h5>
-      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p3numCandidates}} CANDIDATE(S)</p>
-      <p>{{p3description}}</p>
-      <!--TODO: WHERE CANDIDATES GO-->
+    <!--
+  <div id="p0" class="col-md-11" *ngIf="!p0show">
+    <h5 style="font-weight: bolder;">{{p0}}</h5>
+    <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p0numCandidates}} CANDIDATE(S)</p>
+    <p>{{p0description}}</p>
+  </div>
+  -->
+
+  <div style="text-align:center"></div>
+  <div class="col-md-12" *ngFor="let r of races">
+    <div *ngIf="r.show=='true'">
+      <h2 class="page-title">{{r.positionName}}</h2>
+      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{r.numberNeeded}} CANDIDATE(S)</p>
+      <div class="table-responsive table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Picture</th>
+              <th>Biography</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cr of r.candidateRaces">
+              <td>{{ cr.candidate.firstName }}</td>
+              <td>{{ cr.candidate.lastName }}</td>
+              <td><img src="{{ cr.candidate.picture }}" /></td>
+              <td>{{ cr.candidate.biography }}</td>
+              <button type="button" (click)="onSelect(cr.candidate, r)" class="glyphicon glyphicon-check">{{ cr.candidate.selected ? 'Cancel' : 'Select' }}</button>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+  </div>
+
   <div id="steptwo" class="container">
     <div class="col-md-12">
       <h3>
@@ -158,15 +165,38 @@
       </h3>
     </div>
     <br />
-    <div class="col-md-12">
-      <h5>YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS</h5>
-      <p>{{q0}}</p>
-      <p><b>{{q0ans}}</b> to borrowing {{q0total}}</p>
-      <p>{{q1}}</p>
-      <p><b>{{q1ans}}</b> to borrowing {{q1total}}</p>
-      <p>{{q2}}</p>
-      <p><b>{{q2ans}}</b> to borrowing {{q2total}}</p>
+    <div class="col-md-12" *ngFor="let r of races">
+      <h5>YOUR CHOICES FOR {{r.positionName}}</h5>
+        <div class="table-responsive table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Picture</th>
+                <th>Biography</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of r.selected">
+                <td>{{ c.firstName }}</td>
+                <td>{{ c.lastName }}</td>
+                <td><img src="{{ c.picture }}" /></td>
+                <td>{{ c.biography }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
     </div>
-</div>
-  <br />
+      <div class="col-md-12">
+        <h5>YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS</h5>
+        <p>{{q0}}</p>
+        <p><b>{{q0ans}}</b> to borrowing {{q0total}}</p>
+        <p>{{q1}}</p>
+        <p><b>{{q1ans}}</b> to borrowing {{q1total}}</p>
+        <p>{{q2}}</p>
+        <p><b>{{q2ans}}</b> to borrowing {{q2total}}</p>
+      </div>
+    </div>
+    <br />
 </form>

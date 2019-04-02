@@ -23,7 +23,6 @@ import { TranslatePipe } from './pipes/translate.pipe';
 
 // components
 import { CandidateItemComponent } from './components/candidate-item/candidate-item.component';
-import { CandidateListComponent } from './components/candidate-list/candidate-list.component';
 import { MapComponentComponent } from './components/map-component/map-component.component';
 import { EmailComponent } from './components/email/email.component';
 import { IcsfileComponent } from './components/icsfile/icsfile.component';
@@ -49,7 +48,6 @@ export function setupTranslateFactory(service: TranslateService): Function {
     FetchDataComponent,
     TranslatePipe,
     CandidateItemComponent,
-    CandidateListComponent,
     MapComponentComponent,
     EmailComponent,
     FooterMenuComponent,

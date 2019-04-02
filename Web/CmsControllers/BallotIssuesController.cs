@@ -24,7 +24,7 @@ namespace Web
         // GET: BallotIssues
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BallotIssues.ToListAsync());
+            return View(await _context.BallotIssues.Include(s => s.BallotIssueOptions).ToListAsync());
         }
 
         // GET: BallotIssues/Details/5
