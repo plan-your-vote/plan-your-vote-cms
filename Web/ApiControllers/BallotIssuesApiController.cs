@@ -29,7 +29,7 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BallotIssue>>> Get()
         {
-            return await _context.BallotIssues.Where(b => b.ElectionId == _currentElection).ToListAsync();
+            return await _context.BallotIssues.Include(b => b.BallotIssueOptions).Where(b => b.ElectionId == _currentElection).ToListAsync();
         }
 
 
