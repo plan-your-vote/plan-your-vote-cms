@@ -15,16 +15,18 @@ namespace Web
     public class BallotIssuesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private State state;
 
         public BallotIssuesController(ApplicationDbContext context)
         {
             _context = context;
+            state = context.StateSingleton.Find(State.STATE_ID);
         }
 
         // GET: BallotIssues
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BallotIssues.Include(s => s.BallotIssueOptions).ToListAsync());
+            return View(await _context.BallotIssues.Where(b => b.ElectionId == state.currentElection).ToListAsync());
         }
 
         // GET: BallotIssues/Details/5
@@ -57,7 +59,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BallotIssueId,BallotIssueTitle,Description,OptionsTitles")] BallotIssueCreate model)
+        public async Task<IActionResult> Create(BallotIssueCreate model)
         {
             if (ModelState.IsValid)
             {
@@ -98,11 +100,29 @@ namespace Web
             }
 
             var ballotIssue = await _context.BallotIssues.FindAsync(id);
+
             if (ballotIssue == null)
             {
                 return NotFound();
             }
-            return View(ballotIssue);
+
+            var options = _context.IssueOptions.Where(op => op.BallotIssueId == id).ToList();
+
+            BallotIssueCreate model = new BallotIssueCreate
+            {
+                BallotIssueTitle = ballotIssue.BallotIssueTitle,
+                Description = ballotIssue.Description,
+                OptionsTitles = new List<string> { "", "", "", "" }
+            };
+
+            if (options != null)
+            {
+                int cnt = 0;
+                foreach (var op in options)
+                    model.OptionsTitles.Add(options[cnt++].IssueOptionTitle);
+            }
+
+            return View(model);
         }
 
         // POST: BallotIssues/Edit/5
@@ -110,23 +130,39 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BallotIssueId,BallotIssueTitle,Description")] BallotIssue ballotIssue)
+        public async Task<IActionResult> Edit(int id, [Bind("BallotIssueTitle,Description,OptionsTitles")] BallotIssueCreate model)
         {
-            if (id != ballotIssue.BallotIssueId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(ballotIssue);
+                    var bi = _context.BallotIssues.Find(id);
+                    bi.BallotIssueTitle = model.BallotIssueTitle;
+                    bi.Description = model.Description;
+                    _context.Update(bi);
+
+                    foreach (string title in model.OptionsTitles)
+                    {
+                        if (title != null && title.Length > 0)
+                        {
+                            var existing = _context.IssueOptions.Where(op => op.BallotIssueId == id).ToList();
+                            _context.RemoveRange(existing);
+
+                            IssueOption opt = new IssueOption
+                            {
+                                BallotIssueId = id,
+                                IssueOptionTitle = title,
+                                IssueOptionInfo = title,
+                            };
+                            _context.Add(opt);
+                        }
+                    }
                     await _context.SaveChangesAsync();
                 }
+
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BallotIssueExists(ballotIssue.BallotIssueId))
+                    if (!BallotIssueExists(id))
                     {
                         return NotFound();
                     }
@@ -137,7 +173,7 @@ namespace Web
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ballotIssue);
+            return View(model);
         }
 
         // GET: BallotIssues/Delete/5

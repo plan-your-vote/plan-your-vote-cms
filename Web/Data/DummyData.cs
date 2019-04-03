@@ -130,12 +130,12 @@ namespace Web.Data
             {
                 new Organization()
                 {
-                    Name = "_ORGANIZATION_JASON_LAMARCHE_",
+                    Name = "The United People for Change",
                     Description = "_DESCRIPTION_",
                 },
                 new Organization()
                 {
-                    Name = "_ORGANIZATION_MIKE_HANSEN_",
+                    Name = "The Second Organization",
                     Description = "_DESCRIPTION_",
                 },
                 new Organization()
@@ -210,7 +210,26 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor12.jpg",
                     Biography = @"Wai has lived in Vancouver for over 50 years and is a community advocate, business owner, and past Member of Parliament with over three decades of civic and policy leadership. She is a birth mother of twins and a foster parent to seven children. She holds a degree in Sociology with post graduate work in Urban Planning and Mass Communications.",
                     OrganizationId = 3,
-                    ElectionId = 1                   
+                    ElectionId = 1
+                },
+                new Candidate
+                {
+                    FirstName = "Tony",
+                    LastName = "Pacheco",
+                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor9.jpg",
+                    Biography = @"That's not actually a picture of Tony JSYK.",
+                    OrganizationId = 2,
+                    ElectionId = 1
+                }
+                ,
+                new Candidate
+                {
+                    FirstName = "Danny",
+                    LastName = "Di Iorio",
+                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor9.jpg",
+                    Biography = @"This may ACTUALLY be a picture of Danny; Who can really say.",
+                    OrganizationId = 1,
+                    ElectionId = 1
                 }
             };
         }
@@ -253,6 +272,18 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     CandidateId = 3,
                     ContactMethod = "Email",
                     ContactValue = "wai@young.ca"
+                },
+                new Contact()
+                {
+                    CandidateId = 4,
+                    ContactMethod = "Tel",
+                    ContactValue = "222-222-5252"
+                },
+                new Contact()
+                {
+                    CandidateId = 5,
+                    ContactMethod = "Email",
+                    ContactValue = "dd@dd.dd"
                 }
             };
         }
@@ -286,10 +317,17 @@ ILLEGAL MIGRANT CONTROL
                 },
                 new CandidateRace()
                 {
-                    RaceId = 2,
-                    CandidateId = 3,
+                    RaceId = 1,
+                    CandidateId = 4,
                     PositionName = "Mayor",
-                    PlatformInfo = @"Wai Young and Coalition Vancouver are 100% for the People. With over 35 years of policy experience working with community, governments & business she is ready to lead. She is proven, experienced, and inclusive. As a former MP who brought many important infrastructure projects to the city, she understands the comprehensive issues facing Vancouver. She will bring back mutual respect on the streets and clean up our city."
+                    PlatformInfo = @"If elected, Tony promises change for everyone. And not just small change, but like, Loonies and Toonies and stuff."
+                },
+                new CandidateRace()
+                {
+                    RaceId = 1,
+                    CandidateId = 5,
+                    PositionName = "Mayor",
+                    PlatformInfo = @"If elected, Danny will have made sure that Tony could not consolidate power for himself."
                 }
 
             };

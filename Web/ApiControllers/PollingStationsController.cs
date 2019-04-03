@@ -44,62 +44,6 @@ namespace Web.ApiControllers
             return pollingStation;
         }
 
-        // PUT: api/PollingStations/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPollingStation(int id, PollingStation pollingStation)
-        {
-            if (id != pollingStation.PollingStationId)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(pollingStation).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PollingStationExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/PollingStations
-        [HttpPost]
-        public async Task<ActionResult<PollingStation>> PostPollingStation(PollingStation pollingStation)
-        {
-            _context.PollingStations.Add(pollingStation);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPollingStation", new { id = pollingStation.PollingStationId }, pollingStation);
-        }
-
-        // DELETE: api/PollingStations/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<PollingStation>> DeletePollingStation(int id)
-        {
-            var pollingStation = await _context.PollingStations.FindAsync(id);
-            if (pollingStation == null)
-            {
-                return NotFound();
-            }
-
-            _context.PollingStations.Remove(pollingStation);
-            await _context.SaveChangesAsync();
-
-            return pollingStation;
-        }
-
         private bool PollingStationExists(int id)
         {
             return _context.PollingStations.Any(e => e.PollingStationId == id);

@@ -8,12 +8,12 @@ const API_URL = 'https://localhost:5001/api/theme/';
   providedIn: 'root'
 })
 export class ThemeService {
+  private themeName: string;
+  
   constructor(
     @Inject(DOCUMENT) public document: Document,
     private http: HttpClient
   ) {}
-
-  private themeName: string;
 
   getUserSelection() {
     return new Promise<string>((resolve, reject) => {
@@ -33,7 +33,10 @@ export class ThemeService {
 
   // parameter `key` is case sensitive
   getImage(key: string) {
-    const images = JSON.parse(localStorage.getItem('images'));
+    let images = [];
+    if (localStorage.getItem('images')) {
+      images = JSON.parse(localStorage.getItem('images'));
+    }
 
     for (let i = 0; i < images.length; i++) {
       if (images[i]['id'] === key) {

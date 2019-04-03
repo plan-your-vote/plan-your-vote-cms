@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { PdfService } from './services/pdf.service';
 import { Election } from './models/election';
 import { Candidate } from './models/candidate';
 import { ElectionService } from './services/election.service';
 import { CandidateService } from './services/candidate.service';
 import { ThemeService } from './services/theme.service';
+import { FormsModule } from '@angular/forms';
 
 const THEME_BASE_PATH = './assets/css';
 const THEME_DEFAULT = '/default.css';
 const THEME_MAPLE = '/maple.css';
 const THEME_SNOWDROP = '/snowdrop.css';
 
+@NgModule({
+  imports: [
+    FormsModule,
+  ]
+})
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -114,6 +120,6 @@ export class AppComponent implements OnInit {
       selectedCandidateIds: selectedCandidateIds
     };
 
-    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle);
+    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle.replace(/[\W_]+/g," "));
   }
 }

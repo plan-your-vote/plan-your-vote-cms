@@ -11,7 +11,7 @@ using Web.Data;
 
 namespace Web.Controllers
 {
-    [Route("api/Races")]
+    [Route("api/races")]
     [ApiController]
     public class RacesApiController : ControllerBase
     {
@@ -22,14 +22,17 @@ namespace Web.Controllers
         public RacesApiController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = _context.StateSingleton.Find(State.STATE_ID).currentElection;
+            _currentElection = context.StateSingleton.Find(State.STATE_ID).currentElection;
         }
 
         // GET: api/Races
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Race>>> Get()
         {
-            return await _context.Races.Include(c => c.CandidateRaces).ThenInclude(p => p.Candidate).Where(b => b.ElectionId == _currentElection).ToListAsync();
+            return await _context.Races
+                .Include(r => r.CandidateRaces)
+                .Where(r=>r.ElectionId == _currentElection)
+                .ToListAsync();
         }
 
 

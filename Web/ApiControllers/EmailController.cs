@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using VotingModelLibrary.Models;
 using Web.Models;
 
 namespace Web.Controllers
@@ -38,8 +39,8 @@ namespace Web.Controllers
 
             return BadRequest("Failed to send email");
         }
-
-        private bool SendEmail(string emailAddress, string subject, string message)
+        
+        public bool SendEmail(string emailAddress, string subject, string message)
         {
             MailMessage mm = new MailMessage
             {
