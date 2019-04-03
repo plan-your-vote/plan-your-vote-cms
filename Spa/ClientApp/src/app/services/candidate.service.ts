@@ -35,6 +35,7 @@ export class CandidateService {
     const url = "https://localhost:44307/api/ballotissues";
     return this.http.get<BallotIssue[]>(url);
 
+  }
   getSingle<T>(id: number) {
     return this.http.get<T>(`https://localhost:5001/api/candidates/${id}`);
   }

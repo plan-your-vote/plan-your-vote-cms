@@ -29,10 +29,8 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Race>>> Get()
         {
-            return await _context.Races
-                .Include(r => r.CandidateRaces)
-                .Where(r=>r.ElectionId == _currentElection)
-                .ToListAsync();
+            return await _context.Races.Include(c => c.CandidateRaces).ThenInclude(p => p.Candidate).Where(b => b.ElectionId == _currentElection).ToListAsync();
+
         }
 
 
