@@ -166,13 +166,13 @@ namespace Web.Data
                 {
                     PositionName = "Park Commisioner",
                     NumberNeeded = 7,
-                    ElectionId = 2
+                    ElectionId = 1
                 },
                 new Race
                 {
                     PositionName = "School Trustee",
                     NumberNeeded = 9,
-                    ElectionId = 3
+                    ElectionId = 1
                 }
             };
         }
@@ -201,7 +201,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor1.jpg",
                     Biography = @"Been in housing construction most of my life, truck driver, stock promoter and various other business. Founded the Canadian Hemp Growers Assoc. in 1996. 2005 on record at Senate Committee on national defence saying, ""terrorists"" are smuggling guns/drugs into Canada. 2005 Harm Reduction Pilot Project/monopolizing heroin to save lives, Men On Down Town East Society and Two Ravens Opioid Project.",
                     OrganizationId = 2,
-                    ElectionId = 2
+                    ElectionId = 1
                 },
                 new Candidate
                 {
@@ -211,8 +211,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                     Biography = @"Wai has lived in Vancouver for over 50 years and is a community advocate, business owner, and past Member of Parliament with over three decades of civic and policy leadership. She is a birth mother of twins and a foster parent to seven children. She holds a degree in Sociology with post graduate work in Urban Planning and Mass Communications.",
                     OrganizationId = 3,
                     ElectionId = 1
-                }
-                ,
+                },
                 new Candidate
                 {
                     FirstName = "Tony",
@@ -330,6 +329,7 @@ ILLEGAL MIGRANT CONTROL
                     PositionName = "Mayor",
                     PlatformInfo = @"If elected, Danny will have made sure that Tony could not consolidate power for himself."
                 }
+
             };
         }
 

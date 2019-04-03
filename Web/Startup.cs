@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace Web
 {
@@ -104,7 +105,9 @@ namespace Web
                 .AddDataAnnotationsLocalization(options => {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
                     factory.Create(typeof(SharedResources));
-        });
+        }).AddJsonOptions(options => {
+            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        }); ;
 
             services.Configure<RequestLocalizationOptions>(opts =>
             {

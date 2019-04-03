@@ -3,9 +3,7 @@
   <div id="stepone" class="container">
     <div class="col-md-12">
       <hr>
-      <h3>
-        {{step1}}
-      </h3>
+      <h3>{{step1}}</h3>
       {{step1description}}
       <br />
     </div>
@@ -13,12 +11,10 @@
       <div class="col-md-12">
         <p>
           Filter by:
-          <select id="filterRace" name="race" style="padding-right: 10px; font-weight:normal;">
+          <select id="filterRace" (change)="filterRaces($event.target.value)" name="race" style="padding-right: 10px; font-weight:normal;">
             <option>All Races</option>
-            <option>{{p0}}</option>
-            <option>{{p1}}</option>
-            <option>{{p2}}</option>
-            <option>{{p3}}</option>
+            <option *ngFor="let r of races" value="{{r.positionName}}">{{r.positionName}}</option>
+
           </select>
         </p>
       </div>
@@ -28,14 +24,44 @@
       </div>
     </div>
     <br />
-    <div id="p0" class="col-md-11">
-      <!--TODO: Add choose functionality and then duplicate for all positions-->
-      <h2 style="font-weight: bolder;">{{p0}}</h2>
-      <h4>FOR THE ELECTION, YOU CAN VOTE FOR {{p0numCandidates}} CANDIDATE(S)</h4>
+    <!--
+    <div id="p0" class="col-md-11" *ngIf="!p0show">
+      <h5 style="font-weight: bolder;">{{p0}}</h5>
+      <p>FOR THE ELECTION, YOU CAN VOTE FOR {{p0numCandidates}} CANDIDATE(S)</p>
       <p>{{p0description}}</p>
-      <!--TODO: WHERE CANDIDATES GO-->
+    </div>
+    -->
+
+    <div style="text-align:center"></div>
+    <div class="col-md-12" *ngFor="let r of races">
+      <div *ngIf="r.show=='true'">
+        <h2 class="page-title">{{r.positionName}}</h2>
+        <p>FOR THE ELECTION, YOU CAN VOTE FOR {{r.numberNeeded}} CANDIDATE(S)</p>
+        <div class="table-responsive table-container">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Picture</th>
+                <th>Biography</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cr of r.candidateRaces">
+                <td>{{ cr.candidate.firstName }}</td>
+                <td>{{ cr.candidate.lastName }}</td>
+                <td><img src="{{ cr.candidate.picture }}" /></td>
+                <td>{{ cr.candidate.biography }}</td>
+                <button type="button" (click)="onSelect(cr.candidate, r)" class="glyphicon glyphicon-check">{{ cr.candidate.selected ? 'Cancel' : 'Select' }}</button>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
+
   <div id="steptwo" class="container">
     <div class="col-md-12">
       <h3>
@@ -44,94 +70,16 @@
       {{step2description}}
     </div>
     <br />
-    <div class="col-md-12">
-      <div id="q0">
-        <h3>{{q0}}</h3>
-        {{q0desc}}
-        <table class="table">
-          <tr>
-            <th>Program</th>
-            <th>Description</th>
-            <th>Amount</th>
-          </tr>
-          <tr>
-            <td>{{q0i0program}}</td>
-            <td>{{q0i0desc}}</td>
-            <td>{{q0i0amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q0i1program}}</td>
-            <td>{{q0i1desc}}</td>
-            <td>{{q0i1amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q0i2program}}</td>
-            <td>{{q0i2desc}}</td>
-            <td>{{q0i2amount}}</td>
-          </tr>
-        </table>
-        <p>How do you plan to answer Question {{q0}}</p>
-        <input type="radio" name="q0ans" [(ngModel)]="q0ans" value="Yes">Yes
-        <input type="radio" name="q0ans" [(ngModel)]="q0ans" value="No">No
+    <div class="col-md-12" *ngFor="let i of issues">
+      <h5>{{i.ballotIssueTitle}}</h5>
+      {{i.description}}
+      <div *ngFor="let o of i.ballotIssueOptions">
+        <input type="radio" name="{{i.ballotIssueTitle}}" [(ngModel)]="i.answer" value="{{o.issueOptionInfo}}">{{o.issueOptionInfo}}
+
       </div>
-      <br />
-      <div id="q1">
-        <h3>{{q1}}</h3>
-        {{q1desc}}
-        <table class="table">
-          <tr>
-            <th>Program</th>
-            <th>Description</th>
-            <th>Amount</th>
-          </tr>
-          <tr>
-            <td>{{q1i0program}}</td>
-            <td>{{q1i0desc}}</td>
-            <td>{{q1i0amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q1i1program}}</td>
-            <td>{{q1i1desc}}</td>
-            <td>{{q1i1amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q1i2program}}</td>
-            <td>{{q1i2desc}}</td>
-            <td>{{q1i2amount}}</td>
-          </tr>
-        </table>
-        <p>How do you plan to answer Question {{q1}}</p>
-        <input type="radio" name="q1ans" [(ngModel)]="q1ans" value="Yes">Yes
-        <input type="radio" name="q1ans" [(ngModel)]="q1ans" value="No">No
-      </div>
-      <br />
-      <div id="q2">
-        <h3>{{q2}}</h3>
-        <p>{{q2desc}}</p>
-        <table class="table">
-          <tr>
-            <th>Program</th>
-            <th>Description</th>
-            <th>Amount</th>
-          </tr>
-          <tr>
-            <td>{{q2i0program}}</td>
-            <td>{{q2i0desc}}</td>
-            <td>{{q2i0amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q2i1program}}</td>
-            <td>{{q2i1desc}}</td>
-            <td>{{q2i1amount}}</td>
-          </tr>
-        </table>
-        <p>How do you plan to answer Question {{q2}}</p>
-        <input type="radio" name="q2ans" [(ngModel)]="q2ans" value="Yes">Yes
-        <input type="radio" name="q2ans" [(ngModel)]="q2ans" value="No">No
-      </div>
-      <br />
     </div>
   </div>
+  <br/>
   <div id="review" class="container">
     <div class="col-md-12">
       <h3>
@@ -139,15 +87,40 @@
       </h3>
     </div>
     <br />
-    <div class="col-md-12">
-      <h4>YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS</h4>
-      <p>{{q0}}</p>
-      <p><b>{{q0ans}}</b> to borrowing {{q0total}}</p>
-      <p>{{q1}}</p>
-      <p><b>{{q1ans}}</b> to borrowing {{q1total}}</p>
-      <p>{{q2}}</p>
-      <p><b>{{q2ans}}</b> to borrowing {{q2total}}</p>
+    <div class="col-md-12" *ngFor="let r of races">
+      <h5>YOUR CHOICES FOR {{r.positionName}}</h5>
+      <div class="table-responsive table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Picture</th>
+              <th>Biography</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of r.selected">
+              <td>{{ c.firstName }}</td>
+              <td>{{ c.lastName }}</td>
+              <td><img src="{{ c.picture }}" /></td>
+              <td>{{ c.biography }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
     </div>
-</div>
+    <div class="col-md-12">
+      <h5>YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS</h5>
+
+      <div *ngFor="let i of issues">
+        <p>{{i.ballotIssueTitle}}</p>
+        <p>Answer: <b>{{i.answer}}</b></p>
+
+
+      </div>
+    </div>
+  </div>
   <br />
 </form>

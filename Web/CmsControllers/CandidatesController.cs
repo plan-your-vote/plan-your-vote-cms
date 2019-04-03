@@ -27,7 +27,7 @@ namespace Web
             State s = _context.StateSingleton.Find(State.STATE_ID);
             var applicationDbContext = _context.Candidates
                 .Where(c => c.ElectionId == s.currentElection)
-                .Include(c => c.Organization).Include(c => c.Contacts);
+                .Include(c => c.Organization).Include(c => c.Contacts).Include(c => c.CandidateRaces);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -40,7 +40,7 @@ namespace Web
             }
 
             var candidate = await _context.Candidates
-                .Include(c => c.Organization)
+                .Include(c => c.Organization).Include(c => c.CandidateRaces)
                 .FirstOrDefaultAsync(m => m.CandidateId == id);
             if (candidate == null)
             {
