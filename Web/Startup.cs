@@ -58,6 +58,11 @@ namespace Web
             // string[] csSplit = cs.Split("=");
             // cs = csSplit[0] + "=" + path + csSplit[1];
 
+            //Choosing a db service
+            CheckDB check = new CheckDB();
+            check.checkType();
+            
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
