@@ -21,6 +21,7 @@ using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace Web
 {
@@ -55,13 +56,38 @@ namespace Web
 
             // string executableLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
             // string path = Path.GetDirectoryName(executableLocation).Split("bin")[0];
-            string cs = Configuration.GetConnectionString("DefaultConnection");
+            //string cs = Configuration.GetConnectionString("DefaultConnection");
             // string[] csSplit = cs.Split("=");
             // cs = csSplit[0] + "=" + path + csSplit[1];
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            //Choosing a db service
+            CheckDB check = new CheckDB();
+            
+            //check for environment variables (described in docs/dbconfig.md)
+            //if variable is not set, grab from appsettings.json
+            String ConnectionString = check.getConnectionStringEnvVar() ?? Configuration.GetConnectionString("DefaultConnection");
 
+            //if not set just use sqlite
+            String DatabaseType = check.checkType() ?? "sqlite";
+
+            switch (DatabaseType)
+            {
+                case "mssql":
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlServer(ConnectionString));
+                    break;
+                case "mysql":
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseMySql(ConnectionString, mySqlOptions => 
+                        {
+                            mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
+                        }));
+                    break;
+                default: //sqlite
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlite(ConnectionString));
+                    break;
+            }
             /*
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
