@@ -1,9 +1,9 @@
 {
   "default": {
-    "step1": "Step 1: Review and Select Candidates",
-    "step2": "Step 2: Review Capital Plan Borrowing Questions",
-    "step3": "Step 3: Choose Your Voting Date and Location",
-    "step4": "Step 4: Review Your Plan",
+    "step1title": "Step 1: Review and Select Candidates",
+    "step2title": "Step 2: Review Capital Plan Borrowing Questions",
+    "step3title": "Step 3: Choose Your Voting Date and Location",
+    "step4title": "Step 4: Review Your Plan",
     "step1description": "Add up to 1 mayor, 10 councillors, 7 Park Board commissioners, and 9 school trustees to your plan. Open a candidate to read their profile and add them to your plan. Change your choices in the selected candidates area above. \nA candidate’s profile expresses their views alone and these views aren’t endorsed by the City of Vancouver. Profiles are included exactly as candidates wrote them.\nIf you live in the UBC Lands or University Endowment Lands, and you do not own property in Vancouver, you can only vote for school trustees in the election.",
     "step2description": "Add your response to the Capital Plan borrowing questions to your plan.\n The ballot will have 3 \"yes\" or \"no\" questions on whether the City can borrow $300 million to help pay for projects in the Capital Plan.\nThe 2019-2022 Capital Plan invests $300,000,000 in City facilities and infrastructure to provide services to the people of Vancouver.\nIf a majority of voters vote yes, then City Council can borrow the funds for these projects.",
     "step3description": "Not sure when you want to vote yet? Don't worry - you're not committing to a particular day or place. If you live in the UBC Lands or University Endowment Lands, you can vote at 2 voting places only on October 20 Opens in new window. These 2 places are not shown on the map below. Skip this step to review your choices and create your plan.",

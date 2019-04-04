@@ -27,12 +27,12 @@ a:visited {
   color: #7834bc;
 }
 
-button {
-  width: 80px;
-}
-
 .race-number-needed {
   font-weight: bold;
+}
+
+.select-candidate-btn {
+  width: 80px;
 }
 
 /*
