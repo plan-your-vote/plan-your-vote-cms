@@ -7,9 +7,10 @@ import { Race } from "src/app/models/Race";
 
 import { CandidateService } from "../services/candidate.service";
 import { ElectionService } from "src/app/services/election.service";
-import { JSONParserService } from "src/app/services/jsonparser.service";
 import { PdfService } from "src/app/services/pdf.service";
 import { ActivatedRoute, ParamMap } from "@angular/router";
+
+import selectionContent from 'src/assets/data/selection-content.json';
 
 @Component({
   selector: "app-selection",
@@ -41,7 +42,6 @@ export class SelectionComponent implements OnInit {
 
   jsonData: any;
   constructor(
-    private dataFinder: JSONParserService,
     private electionApi: ElectionService,
     private _svc: CandidateService,
     private pdfService: PdfService,
@@ -73,13 +73,10 @@ export class SelectionComponent implements OnInit {
       this.currentStep = this.defaultStep;
     }
   }
-
+  
   parseDefaultEmail() {
-    this.dataFinder
-      .getJSONDataAsync("./assets/data/selection-content.json")
-      .then(data => {
-        this.SetQueryOptionsData(data);
-      });
+    const data = Object.assign({}, selectionContent || {});
+    this.SetQueryOptionsData(data);
   }
 
   SetQueryOptionsData(data: any) {
