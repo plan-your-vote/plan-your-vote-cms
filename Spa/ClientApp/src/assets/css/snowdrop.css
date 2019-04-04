@@ -33,6 +33,43 @@ a {
   color: #fff;
 }
 
+.btn {
+  background-color: #315317;
+  border: none;
+  border-radius: 0;
+  margin-top: 1em;
+  color: #ffffff;
+  outline: none;
+  position: relative;
+}
+.btn:before,
+.btn:after {
+  border: 0 solid transparent;
+  transition: all 0.25s;
+  content: '';
+  height: 24px;
+  position: absolute;
+  width: 24px;
+}
+.btn:before {
+  border-top: 2px solid #315317;
+  left: 0px;
+  top: -5px;
+}
+.btn:after {
+  border-bottom: 2px solid #315317;
+  bottom: -5px;
+  right: 0px;
+}
+.btn:hover {
+  background-color: #315317;
+}
+.btn:hover:before,
+.btn:hover:after {
+  height: 100%;
+  width: 100%;
+}
+
 /* NavBar */
 
 #navbar {
