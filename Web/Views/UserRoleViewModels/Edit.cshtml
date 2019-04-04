@@ -1,18 +1,20 @@
 ﻿@model Web.ViewModels.UserRoleViewModel
+@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = @Localizer["Edit"];
     string yes = "YES";
     string no = "NO";
 }
 
-<h1>Edit User Roles</h1>
+<h1>@Localizer["Edit User Roles"]</h1>
 <h1>
     @TempData["info"]
 </h1>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localizer["Back to List"]</a>
 </div>
 <dl class="row col-lg-6 well bs-component">
     <dt class="col-sm-4">
