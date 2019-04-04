@@ -103,7 +103,7 @@ namespace Web
             //     options.UseSqlServer(connString));
 
 
-            var host = Configuration["DBHOST"] ?? "127.0.0.1";
+            var host = Configuration["DBHOST"] ?? "172.18.0.1";
             var db = Configuration["DBNAME"] ?? "openvoting";
             var port = Configuration["DBPORT"] ?? "1433";
             var username = Configuration["DBUSERNAME"] ?? "sa";
@@ -112,7 +112,6 @@ namespace Web
             string connStr = $"Data Source={host},{port};Integrated Security=False;";
             connStr += $"User ID={username};Password={password};Database={db};";
             connStr += $"Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connStr));
 

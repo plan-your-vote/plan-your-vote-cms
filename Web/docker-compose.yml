@@ -2,23 +2,25 @@ version: '3'
 
 services:
   db:
-    image: microsoft/mssql-server-linux
+    image: mcr.microsoft.com/mssql/server
     restart: always
+    ports:
+      - "1401:1433"
     environment:
-      - sa_password=Sql!Expre55
+      - SA_PASSWORD=Sql!Expre55
       - ACCEPT_EULA=Y
 
   mvc:
     build:
       context: .
-      dockerfile: Dockerfile.windows
+      dockerfile: Dockerfile
     depends_on:
       - db
     ports:
       - "8888:80"
     restart: always
     environment:
-      - DBHOST=127.0.0.1
+      - DBHOST=172.18.0.1
       - DBNAME=openvoting
       - DBPORT=1433
       - DBUSERNAME=sa

@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore:2.0-nanoserver-sac2016
+FROM microsoft/aspnetcore-build:lts
 COPY dist /app
 WORKDIR /app
 EXPOSE 80/tcp
