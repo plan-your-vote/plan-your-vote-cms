@@ -35,6 +35,10 @@ a {
   color: #fff;
 }
 
+p {
+  text-align: justify;
+}
+
 .btn {
   background-color: #315317;
   border: none;
