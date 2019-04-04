@@ -11,4 +11,4 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@$$w0rd' --name mssql -p 1433:143
 - Create Database: CREATE DATABASE openvoting;
 
 
-docker run -p 3306:3306 --name mysqldb -e MYSQL_ROOT_PASSWORD=secret -d mysql:8.0.0
+docker run --name mysqldb -p 3306 -e MYSQL_ROOT_PASSWORD=secret  -d mysql:latest

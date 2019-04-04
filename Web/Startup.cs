@@ -78,7 +78,7 @@ namespace Web
                         options.UseSqlServer(ConnectionString));
                     break;
                 case "mysql":
-                    var host = Configuration["DBHOST"] ?? "localhost";
+                    var host = Configuration["DBHOST"] ?? "172.17.0.1";
                     var port = Configuration["DBPORT"] ?? "3306";
                     var password = Configuration["DBPASSWORD"] ?? "secret";
                     
