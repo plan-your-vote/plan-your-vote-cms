@@ -4,22 +4,23 @@ import { Candidate } from 'src/app/models/candidate';
 import { Race } from 'src/app/models/Race';
 import { CandidateService } from '../services/candidate.service';
 import { BallotIssue } from '../models/BallotIssue';
+import { CandidateRace } from '../models/CandidateRace';
 
 @Component({
-  selector: 'app-selection',
+  selector   : 'app-selection',
   templateUrl: './selection.component.html',
-  styleUrls: ['./selection.component.less']
+  styleUrls  : ['./selection.component.less']
 })
 export class SelectionComponent implements OnInit {
-  public candidates: Candidate[] = [];
-  public races: Race[] = [];
+  public selectedRaces: Race[] = [];
+  public races: Race[]         = [];
   public issues: BallotIssue[] = [];
   //STEP1
-  step1 = "";
+  step1            = "";
   step1description = "";
 
   //STEP2
-  step2 = "";
+  step2            = "";
   step2description = "";
 
   //STEP4
@@ -33,7 +34,6 @@ export class SelectionComponent implements OnInit {
     this.parseDefaultEmail();
     this.getRaces();
     this.getIssues();
-    console.log(this.races);
   }
   parseDefaultEmail() {
     this.dataFinder.getJSONDataAsync("./assets/data/selection-content.json").then(data => {
@@ -44,10 +44,24 @@ export class SelectionComponent implements OnInit {
   getRaces(): void {
     this._svc.getRaces().subscribe(data => {
       this.races = data;
-      console.log(this.races);
       for (let r of this.races) {
-        r.show = "true";
+        r.show     = "true";
         r.selected = [];
+      }
+      if (localStorage.getItem('selectedRaces')) {
+        this.selectedRaces = JSON.parse(localStorage.getItem('selectedRaces'));
+        this.selectedRaces.forEach(s => {
+          const r: Race = this.races.find(element => element.raceId === s.raceId);
+          if(r) {
+            r.selected = s.selected;
+            s.candidateRaces.forEach(scr => {
+              const cr: CandidateRace = r.candidateRaces.find(element => element.candidateId === scr.candidateId);
+              if(cr && scr.candidate.selected === true) {
+                cr.candidate.selected = true;
+              }
+            });
+          }
+        });
       }
     });
   }
@@ -55,7 +69,6 @@ export class SelectionComponent implements OnInit {
   getIssues(): void {
     this._svc.getBallotIssues().subscribe(data => {
       this.issues = data;
-      console.log(this.issues);
       for (let r of this.issues) {
         r.answer = "Unanswered";
       }
@@ -65,14 +78,23 @@ export class SelectionComponent implements OnInit {
   onSelect(c: Candidate, r: Race) {
     if (!c.selected) {
       c.selected = true;
-      localStorage.setItem('candidates', JSON.stringify(this.candidates));
       r.selected.push(c);
+      var unique: Boolean = true;
+      for(let s of this.selectedRaces) {
+        if (s.raceId == r.raceId)
+          unique = false;
+      }
+      if(unique)
+        this.selectedRaces.push(r);
     } else {
       c.selected = false;
-      localStorage.setItem('candidates', JSON.stringify(this.candidates));
       r.selected = r.selected.filter(function (e) { return e.candidateId !== c.candidateId });
+      // remove race data from localStorage if no candidates are selected
+      if(r.selected.length == 0) {
+        this.selectedRaces.splice(this.selectedRaces.indexOf(r), 1);
+      }
     }
-    console.log(this.races);
+    localStorage.setItem('selectedRaces', JSON.stringify(this.selectedRaces));
   }
 
   filterRaces(val: any) {
@@ -99,11 +121,11 @@ export class SelectionComponent implements OnInit {
   }
 
   populateStepOne() {
-    this.step1 = this.jsonData.default.step1;
+    this.step1            = this.jsonData.default.step1;
     this.step1description = this.jsonData.default.step1description;
   }
   populateStepTwo() {
-    this.step2 = this.jsonData.default.step2;
+    this.step2            = this.jsonData.default.step2;
     this.step2description = this.jsonData.default.step2description;
   }
     populateReview() {
