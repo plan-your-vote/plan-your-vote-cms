@@ -4,9 +4,8 @@ import { Candidate } from 'src/app/models/candidate';
 import { Race } from '../models/Race';
 import { BallotIssue } from '../models/BallotIssue';
 
-// const clientsUrl = "https://localhost:5001/api/races";              // DEV AND TESTING
-const clientsUrl = "http://pyv.azurewebsites.net/api"     // PRODUCTION
-
+const clientsUrl = "https://localhost:5001/api";              //DEV AND TESTING
+//const clientsUrl = "http://cityvote.azurewebsites.net/api"     //PRODUCTION
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +36,7 @@ export class CandidateService {
 
   }
   getSingle<T>(id: number) {
-    return this.http.get<T>(`${clientsUrl}/candidates/${id}`);
+    const url = `${clientsUrl}/candidates/${id}`;
+    return this.http.get<T>(url);
   }
 }

@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Theme";
+    ViewData["Title"] = @Localizer["Theme"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -13,7 +13,7 @@
 
 <div class="panel panel-default col-sm-5">
     <form asp-controller="Themes" asp-action="Index" method="post">
-        <label>Selected Theme: </label>
+        <label>@Localizer["Selected Theme:"]</label>
         <select asp-for="SelectedTheme" asp-items="Model.Themes"></select>
         <button type="submit">Save</button>
         <div>

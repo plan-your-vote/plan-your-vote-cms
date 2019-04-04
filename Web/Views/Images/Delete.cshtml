@@ -1,15 +1,25 @@
 ﻿@model VotingModelLibrary.Models.Theme.Image
+@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = @Localizer["Delete"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<<<<<<< HEAD
     <h1>@ViewData["Title"]</h1>
 
 <h3>Are you sure you want to delete this?</h3>
 <div class="panel panel-default">
     <h4>Image</h4>
+=======
+<h1>@ViewData["Title"]</h1>
+
+<h3>@Localizer["Are you sure you want to delete this ?"]</h3>
+<div>
+    <h4>@Localizer["Image"]</h4>
+>>>>>>> f8e005b21c68bcf9bdb6d6bbcd484e1bdab85f8b
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -41,7 +51,7 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ThemeName" />
         <input type="hidden" asp-for="ID" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value=@Localizer["Delete"] class="btn btn-danger" /> |
+        <a asp-action="Index">@Localizer["Back to List"]</a>
     </form>
 </div>

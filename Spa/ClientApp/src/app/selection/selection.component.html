@@ -1,112 +1,61 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
   <div class="row">
-    <h1>Start Voting</h1>
+    <div class="col-12">
+      <h1>Plan Your Vote</h1>
+    </div>
   </div>
 </div>
 
-<form>
-  <div id="stepone" class="container">
-    <div class="row">
-      <div class="col-12">
-        <h2>{{ step1 }}</h2>
-        <p>{{ step1description }}</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-3">
-        <label for="filterRace" class="col-form-label">
-          Filter by
-        </label>
-      </div>
-      <div class="col-sm-9">
-        <select
-          id="filterRace"
-          (change)="filterRaces($event.target.value)"
-          name="race"
-          class="form-control"
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="navbar navbar-expand subnavbar">
+        <a class="nav-link nav-item" [routerLink]="['/selection/step1']"
+          >Step 1</a
         >
-          <option>All Races</option>
-          <option *ngFor="let r of races" value="{{ r.positionName }}">{{
-            r.positionName
-          }}</option>
-        </select>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12" *ngFor="let race of races">
-        <div *ngIf="race.show == 'true'">
-          <app-candidate-table [race]="race"></app-candidate-table>
-        </div>
+        <a class="nav-link nav-item" [routerLink]="['/selection/step2']"
+          >Step 2</a
+        >
+        <a class="nav-link nav-item" [routerLink]="['/selection/step3']"
+          >Step 3</a
+        >
+        <a class="nav-link nav-item" [routerLink]="['/selection/step4']"
+          >Step 4</a
+        >
       </div>
     </div>
   </div>
+</div>
 
-  <div id="steptwo" class="container">
-    <div class="col-md-12">
-      <h3>
-        {{ step2 }}
-      </h3>
-      {{ step2description }}
-    </div>
+<router-outlet></router-outlet>
 
-    <div class="col-md-12" *ngFor="let i of issues">
-      <h5>{{ i.ballotIssueTitle }}</h5>
-      {{ i.description }}
-      <div *ngFor="let o of i.ballotIssueOptions">
-        <input
-          type="radio"
-          name="{{ i.ballotIssueTitle }}"
-          [(ngModel)]="i.answer"
-          value="{{ o.issueOptionInfo }}"
-        />{{ o.issueOptionInfo }}
-      </div>
-    </div>
-  </div>
+<form>
+  <div [ngSwitch]="currentStep">
+    <app-step1
+      *ngSwitchCase="'step1'"
+      [step1title]="step1title"
+      [step1description]="step1description"
+      [races]="races"
+    ></app-step1>
 
-  <div id="review" class="container">
-    <div class="col-md-12">
-      <h3>
-        {{ step4 }}
-      </h3>
-    </div>
+    <app-step2
+      *ngSwitchCase="'step2'"
+      [step2title]="step2title"
+      [step2description]="step2description"
+      [issues]="issues"
+    ></app-step2>
 
-    <div class="col-md-12" *ngFor="let r of races">
-      <h5>YOUR CHOICES FOR {{ r.positionName }}</h5>
-      <div class="table-responsive table-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Picture</th>
-              <th>Biography</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let c of r.selected">
-              <td>{{ c.firstName }}</td>
-              <td>{{ c.lastName }}</td>
-              <td><img src="{{ c.picture }}" /></td>
-              <td>{{ c.biography }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <h5>YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS</h5>
+    <app-step3
+      *ngSwitchCase="'step3'"
+      [step3title]="step3title"
+      [step3description]="step3description"
+    ></app-step3>
 
-      <div *ngFor="let i of issues">
-        <p>{{ i.ballotIssueTitle }}</p>
-        <p>
-          Answer: <b>{{ i.answer }}</b>
-        </p>
-      </div>
-    </div>
+    <app-step4
+      *ngSwitchCase="'step4'"
+      [step4title]="step4title"
+      [races]="races"
+      [issues]="issues"
+    ></app-step4>
   </div>
 </form>
-
-<button class="btn btn-secondary" (click)="generatePdf()">
-  Try PDF
-</button>

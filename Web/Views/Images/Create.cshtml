@@ -1,12 +1,15 @@
 ﻿@model VotingModelLibrary.Models.Theme.Image
+@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = @Localizer["Create"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>@ViewData["Title"]</h1>
 
+<<<<<<< HEAD
 <div class="panel panel-default">
     <h4>Image</h4>
     <hr />
@@ -49,8 +52,56 @@
                 </div>
             </form>
         </div>
+=======
+<h4>@Localizer["Image"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ThemeName" class="control-label"></label>
+                <input asp-for="ThemeName" class="form-control" />
+                <span asp-validation-for="ThemeName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ID" class="control-label"></label>
+                <input asp-for="ID" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <input asp-for="Type" class="form-control" />
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Format" class="control-label"></label>
+                <input asp-for="Format" class="form-control" />
+                <span asp-validation-for="Format" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
+            </div>
+        </form>
+>>>>>>> f8e005b21c68bcf9bdb6d6bbcd484e1bdab85f8b
     </div>
 </div>
 <div>
+<<<<<<< HEAD
     <a asp-action="Index">Back to List</a>
 </div>
+=======
+    <a asp-action="Index">>@Localizer["Back to List"]</a>
+</div>
+
+>>>>>>> f8e005b21c68bcf9bdb6d6bbcd484e1bdab85f8b
