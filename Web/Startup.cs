@@ -78,10 +78,12 @@ namespace Web
                         options.UseSqlServer(ConnectionString));
                     break;
                 case "mysql":
-
+                    var host = Configuration["DBHOST"] ?? "localhost";
+                    var port = Configuration["DBPORT"] ?? "3306";
+                    var password = Configuration["DBPASSWORD"] ?? "secret";
                     
                     services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseMySql(ConnectionString, mySqlOptions =>
+                        options.UseMySql($"server={host};userid=root;password={password};port={port};database=openvoting", mySqlOptions =>
                         {
                             mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
                         }));
@@ -175,6 +177,7 @@ namespace Web
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+            // context.Database.Migrate();
 
             app.UseSwagger();
 

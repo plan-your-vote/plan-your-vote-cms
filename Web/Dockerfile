@@ -1,8 +1,5 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:lts
-COPY . /app
+FROM microsoft/aspnetcore:lts
+COPY dist /app
 WORKDIR /app
-RUN ["dotnet", "restore"]
-RUN ["dotnet", "build"]
 EXPOSE 80/tcp
-RUN chmod +x ./entrypoint.sh
-CMD /bin/bash ./entrypoint.sh
+ENTRYPOINT ["dotnet", "Web.dll"]

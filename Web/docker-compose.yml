@@ -1,13 +1,31 @@
-version: "3"
+version: '3'
+
+volumes:
+  datafiles:
+
 services:
-    web:
-        build: .
-        ports:
-            - "8000:80"
-        depends_on:
-            - db
-    db:
-        image: "mcr.microsoft.com/mssql/server"
-        environment:
-            SA_PASSWORD: "P@$$w0rd"
-            ACCEPT_EULA: "Y"
+  db:
+    image: mysql:8.0.0
+    volumes:
+      - datafiles:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_TCP_PORT: 3306
+      MYSQL_USER: root
+      MYSQL_DATABASE: openvoting
+    restart: always
+
+  mvc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "8888:80"
+    restart: always
+    environment:
+      - DBHOST=localhost
+      - DBPORT=3306
+      - DBPASSWORD=secret
+      - ASPNETCORE_ENVIRONMENT=Development
