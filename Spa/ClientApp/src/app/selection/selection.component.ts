@@ -18,11 +18,7 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 })
 export class SelectionComponent implements OnInit {
   candidates: Candidate[];
-  currentElection: Election;
-  elections: Election[] = [];
-  data: Election[] = [];
-  index: number;
-
+  currentElection: Object;
   races: Race[] = [];
   issues: BallotIssue[] = [];
 
@@ -52,18 +48,8 @@ export class SelectionComponent implements OnInit {
     private candidatesApi: CandidateService,
     private route: ActivatedRoute
   ) {
-    this.index = 0;
-
-    this.electionApi.getElections().subscribe(res => {
-      this.elections = res;
-      this.data = res;
-      this.currentElection = this.elections[this.index];
-
-      //sets the current selection to the first one
-      //TODO: do this async with a promise
-      if (!this.currentElection) {
-        this.currentElection = this.data[this.index];
-      }
+    this.electionApi.getElection().subscribe(election => {
+      this.currentElection = election;
     });
 
     this.candidatesApi.getCandidates().subscribe(candidates => {
@@ -143,26 +129,21 @@ export class SelectionComponent implements OnInit {
    * Attached to 'Try PDF' button.
    */
   generatePdf() {
-    console.log(this);
-    //TODO: redo candidate selection id once dummy data added.
-    let selectedCandidateIds = new Set();
-    
-    if (localStorage.getItem('candidates')) {
-      let selectedCandidates = JSON.parse(localStorage.getItem('candidates'));
-
-      selectedCandidates.forEach(c => {
-        selectedCandidateIds.add(c.candidateId);
-      });
-    }
-
-    var pdfData: object = {
+    const pdfData: object = {
       dateTime: new Date().toLocaleString(),
       electionInfo: this.currentElection,
+      electionBanner: localStorage.images,
       races: this.races,
-      ballotIssues: this.issues,
-      selectedCandidateIds: selectedCandidateIds
+      ballotIssues: this.issues
     };
 
-    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle.replace(/[\W_]+/g," "));
+    console.log('this');
+    console.log(this);
+    console.log('localStorage');
+    console.log(localStorage);
+    console.log('pdfData');
+    console.log(pdfData);
+
+    this.pdfService.pdf(pdfData);
   }
 }

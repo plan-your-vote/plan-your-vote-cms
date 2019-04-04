@@ -41,18 +41,7 @@ export class PdfService {
    * @param pdfData PDF data passed through app.component.ts
    * @param fileName name of the file to be saved
    */
-  public pdf(pdfData: object, fileName: string): void {
-    //TODO: Remove this line when complete
-    console.log(pdfData);
-
-    //TODO: Remove this when selection works.
-    let selectedCandidateIds = new Set();
-    selectedCandidateIds.add(4);
-    selectedCandidateIds.add(16);
-    selectedCandidateIds.add(22);
-    selectedCandidateIds.add(23);
-    selectedCandidateIds.add(29);
-
+  public pdf(pdfData: object): void {
     //Setup
     this.doc = new jsPDF();
 
@@ -89,7 +78,7 @@ export class PdfService {
       this.doc.text(pdfData["dateTime"], dateTimeTitleX, dateTimeTitleY);
       this.doc.text("Page " + pageNumber, MAX_PAGE_X - largeSpace, dateTimeTitleY);
       this.doc.setFontSize(10);
-      this.doc.text(pdfData["electionInfo"].VoteTitle, MAX_PAGE_X/2, dateTimeTitleY, {align:"center"});
+      this.doc.text(pdfData["electionInfo"].name, MAX_PAGE_X/2, dateTimeTitleY, {align:"center"});
       pageX += singleSpace;
       pageY += doubleSpace;
     };
@@ -108,12 +97,16 @@ export class PdfService {
     let createFirstPage = () => {
       addDateTimeTitle();
       
-      addImageOnPDF(logo, logoSize, pageX, pageY + singleSpace);
+      if (logo) {
+        addImageOnPDF(logo, logoSize, pageX, pageY + singleSpace);
+      }
       pageY += largeSpace;
 
       this.doc.setFontSize(titleFontSize);
       this.doc.text("My Summary", MAX_PAGE_X/2, pageY, {align:"center"});
-      pageY += logoSize;
+      if (logo) {
+        pageY += logoSize;
+      }
 
       this.doc.setFontSize(headerFontSize);
       this.doc.text("My Voting Day", pageX, pageY);
@@ -148,9 +141,9 @@ export class PdfService {
                     MAX_PAGE_X * (columnNumber - 1) / 4, MAX_PAGE_Y - doubleSpace);
     }
 
-    let createCandidateCard = (candidate) => {
+    let createCandidateCard = (candidate, selected) => {
       //This adds the checkmark
-      if (selectedCandidateIds.has(candidate.candidateId)) {
+      if (selected) {
         this.doc.setFontType("bold");
         addImageOnPDF(checkmark, checkmarkSize, pageX - smallSpace, pageY - checkmarkSize);
       }
@@ -182,22 +175,22 @@ export class PdfService {
     let createRacePages = () => {
       const races = pdfData["races"];
       races.forEach(race => {
-        let candidatesSelected = 0;
         const candidateRaces = race["candidateRaces"];
+        const candidatesSelected = race["selected"] || [];
         
         newPage();
         
-        //TODO: change this to also look at raceId
-        candidateRaces.forEach(candidateRace => {
-          const candidate = candidateRace.candidate;
+        let selectedCandidateIds = new Set();
+
+        candidatesSelected.forEach(candidate => {
           if (candidate) {
-            candidatesSelected += selectedCandidateIds.has(candidate.candidateId) ? 1 : 0;
+            selectedCandidateIds.add(candidate.candidateId);
           }
         });
 
         //Race Title
         this.doc.setFontSize(headerFontSize);
-        const raceTitle = race.positionName + ": " + candidatesSelected + " of " + race.numberNeeded;
+        const raceTitle = race.positionName + ": " + candidatesSelected.length + " of " + race.numberNeeded;
         this.doc.text(raceTitle, pageX, pageY);
         pageY += doubleSpace;
         
@@ -216,6 +209,7 @@ export class PdfService {
         //On the 4th column, will create a new page instead.
         candidateRaces.forEach(candidateRace => {
           const candidate = candidateRace.candidate;
+          let selected = selectedCandidateIds.has(candidate.candidateId);
           if (candidate) {
             let pageLength = MAX_PAGE_Y - doubleSpace;
             let requiredHeight = singleSpace;
@@ -239,7 +233,7 @@ export class PdfService {
                 drawColumnDivider(columnNumber);
               }
             }
-            createCandidateCard(candidate);
+            createCandidateCard(candidate, selected);
           }
         });
       });
@@ -277,21 +271,43 @@ export class PdfService {
       }
     }
 
+    //TODO
     let p1 = new Promise((resolve, reject) => {
-      this.getBase64Image(pdfData["electionInfo"].LogoURL, resolve);
+      const electionImages = JSON.parse(pdfData["electionBanner"])
+      let imageFormat;
+      let electionLogo = electionImages.some(img => {
+        if (img.id === "Logo") {
+          imageFormat = img.format;
+          return img.value;
+        }
+      })
+      if (imageFormat === "PNG" || imageFormat === "JPG" || imageFormat === "JPEG" || imageFormat === "GIF") {
+        this.getBase64Image(electionLogo, resolve);
+      } else if (imageFormat === "SVG") {
+        //TODO
+        return false;
+      } else {
+        //reject
+      }
+    });
+    
+    //TODO remove
+    let p3 = new Promise((resolve, reject) => {
+      this.getBase64Image("https://www.worldatlas.com/webimage/flags/countrys/zzzflags/calarge.gif", resolve);
     });
 
     let p2 = new Promise((resolve, reject) => {
       this.getBase64Image("https://banner2.kisspng.com/20180315/djw/kisspng-check-mark-computer-icons-clip-art-green-tick-mark-5aab1c5116d0a0.2098334515211633450935.jpg", resolve);
     });
 
-    Promise.all([p1, p2]).then(image => {
+    Promise.all([p3, p2]).then(image => {
       logo = image[0];
       checkmark = image[1];
       createFirstPage();
       createRacePages();
       createBallotPages();
 
+      let fileName = pdfData["electionInfo"].name.replace(/[\W_]+/g," ")
       this.doc.save(fileName);
     });
   }
