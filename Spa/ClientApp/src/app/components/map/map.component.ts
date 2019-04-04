@@ -7,11 +7,11 @@ import OSM from 'ol/source/OSM';
 import { fromLonLat } from 'ol/proj';
 
 @Component({
-  selector: 'app-map-component',
-  templateUrl: './map-component.component.html',
-  styleUrls: ['./map-component.component.less']
+  selector: 'app-map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.less']
 })
-export class MapComponentComponent implements OnInit {
+export class MapComponent implements OnInit {
 
   constructor() { }
 

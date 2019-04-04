@@ -22,7 +22,7 @@ import { JSONParserService } from './services/jsonparser.service';
 import { TranslatePipe } from './pipes/translate.pipe';
 
 // components
-import { MapComponentComponent } from './components/map-component/map-component.component';
+import { MapComponent } from './components/map/map.component';
 import { EmailComponent } from './components/email/email.component';
 import { IcsfileComponent } from './components/icsfile/icsfile.component';
 import { ImageTopComponent } from './components/card/image-top/image-top.component';
@@ -47,7 +47,7 @@ export function setupTranslateFactory(service: TranslateService): Function {
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    MapComponentComponent,
+    MapComponent,
     EmailComponent,
     FooterMenuComponent,
     IcsfileComponent,
