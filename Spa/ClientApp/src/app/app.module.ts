@@ -32,7 +32,6 @@ import { SelectionComponent } from './selection/selection.component';
 
 import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 
 
 export function setupTranslateFactory(service: TranslateService): Function {
@@ -44,7 +43,6 @@ export function setupTranslateFactory(service: TranslateService): Function {
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
     TranslatePipe,
     CandidateItemComponent,
     MapComponentComponent,
