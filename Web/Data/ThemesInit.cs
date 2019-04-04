@@ -14,14 +14,14 @@ namespace Web
             {
                 var themes = GetThemes().ToArray();
                 context.Themes.AddRange(themes);
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
 
             if (context.Images?.Any() != true)
             {
                 var images = GetImages().ToArray();
                 context.Images.AddRange(images);
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 
