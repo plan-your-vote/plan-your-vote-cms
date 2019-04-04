@@ -62,7 +62,7 @@ namespace Web
 
             //Choosing a db service
             CheckDB check = new CheckDB();
-
+            
             //check for environment variables (described in docs/dbconfig.md)
             //if variable is not set, grab from appsettings.json
             String ConnectionString = check.getConnectionStringEnvVar() ?? Configuration.GetConnectionString("DefaultConnection");
@@ -77,22 +77,17 @@ namespace Web
                         options.UseSqlServer(ConnectionString));
                     break;
                 case "mysql":
-                    var host = Configuration["DBHOST"] ?? "tcp:172.17.0.2";
-                    var port = Configuration["DBPORT"] ?? "3306";
-                    var password = Configuration["DBPASSWORD"] ?? "secret";
-
                     services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseMySql($"server={host};userid=root;password={password};port={port};database=openvoting"
-                    ));
+                        options.UseMySql(ConnectionString, mySqlOptions => 
+                        {
+                            mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
+                        }));
                     break;
                 default: //sqlite
                     services.AddDbContext<ApplicationDbContext>(options =>
                         options.UseSqlite(ConnectionString));
                     break;
             }
-
-
-
             /*
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
@@ -133,14 +128,12 @@ namespace Web
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMvc()
-                .AddDataAnnotationsLocalization(options =>
-                {
+                .AddDataAnnotationsLocalization(options => {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
                     factory.Create(typeof(SharedResources));
-                }).AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                }); ;
+        }).AddJsonOptions(options => {
+            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        }); ;
 
             services.Configure<RequestLocalizationOptions>(opts =>
             {
@@ -177,7 +170,6 @@ namespace Web
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-            // context.Database.Migrate();
 
             app.UseSwagger();
 
@@ -197,7 +189,7 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(app).Wait(); 
+            DummyData.Initialize(app).Wait(); ;
             StateInit.Initialize(context);
             ThemesInit.Initialize(context);
         }
