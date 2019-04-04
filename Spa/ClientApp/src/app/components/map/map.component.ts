@@ -19,11 +19,9 @@ import { disableBindings } from '@angular/core/src/render3';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.less']
 })
-
 export class MapComponent implements OnInit {
-
   public stations: PollingStation[] = [];
-  
+
   constructor(private pollingStationApi: PollingStationService) {}
 
   ngOnInit() {
@@ -37,7 +35,7 @@ export class MapComponent implements OnInit {
     });
 
     // Centers map on current location
-    navigator.geolocation.getCurrentPosition(function (pos) {
+    navigator.geolocation.getCurrentPosition(pos => {
       const coords = fromLonLat([pos.coords.longitude, pos.coords.latitude]);
       map.getView().animate({ center: coords, zoom: 10 });
     });
@@ -49,29 +47,41 @@ export class MapComponent implements OnInit {
         console.table(this.stations);
       })
       .then(() => {
-        this.stations.forEach(function (station) {
-          navigator.geolocation.getCurrentPosition(function (pos) {
+        this.stations.forEach(station => {
+          navigator.geolocation.getCurrentPosition(function(pos) {
             const lat1 = pos.coords.latitude;
             const lat2 = station.latitude;
             const lon1 = pos.coords.longitude;
             const lon2 = station.longitute;
 
-            const radlat1 = Math.PI * lat1 / 180;
-            const radlat2 = Math.PI * lat2 / 180;
+            const radlat1 = (Math.PI * lat1) / 180;
+            const radlat2 = (Math.PI * lat2) / 180;
             const theta = lon1 - lon2;
-            const radtheta = Math.PI * theta / 180;
-            let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            const radtheta = (Math.PI * theta) / 180;
+            let dist =
+              Math.sin(radlat1) * Math.sin(radlat2) +
+              Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
             if (dist > 1) {
               dist = 1;
             }
             dist = Math.acos(dist);
-            dist = dist * 180 / Math.PI;
+            dist = (dist * 180) / Math.PI;
             dist = dist * 60 * 1.1515;
             dist = dist * 1.609344;
             if (dist < 5) {
-              console.log("Distance to polling station is: " + dist + "km. adding feature to map.")
+              console.log(
+                'Distance to polling station is: ' +
+                  dist +
+                  'km. adding feature to map.'
+              );
               const marker = new Feature({
-                geometry: new Point(transform([station.longitute, station.latitude], 'EPSG:4326', 'EPSG:3857')),
+                geometry: new Point(
+                  transform(
+                    [station.longitute, station.latitude],
+                    'EPSG:4326',
+                    'EPSG:3857'
+                  )
+                )
               });
 
               const markers = new sourceVector({
@@ -79,15 +89,18 @@ export class MapComponent implements OnInit {
               });
 
               const markerVectorLayer = new layerVector({
-                source: markers,
+                source: markers
               });
               map.addLayer(markerVectorLayer);
             } else {
-              console.log("Distance to polling station is: " + dist + "km. skipping station.")
+              console.log(
+                'Distance to polling station is: ' +
+                  dist +
+                  'km. skipping station.'
+              );
             }
-
           });
-        })
+        });
       });
   }
 }
