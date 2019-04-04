@@ -39,7 +39,6 @@ export class PdfService {
    * Creates pdf.
    * 
    * @param pdfData PDF data passed through app.component.ts
-   * @param fileName name of the file to be saved
    */
   public pdf(pdfData: object): void {
     //Setup
@@ -87,10 +86,12 @@ export class PdfService {
       // auto scales image
       const imageData = this.doc.getImageProperties(image);
       const imageRatio = imageData.width / imageData.height;
+      console.log(imageData);
       const pdfImageHeight = size;
       const pdfImageWidth = pdfImageHeight * imageRatio;
 
       this.doc.addImage(image, 'JPEG', imageX, imageY, pdfImageWidth, pdfImageHeight);
+      //this.doc.addSvgAsImage("data:image/svg+xml;charset=UTF-8,https://www.canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-en.svg", imageX, imageY, 59, 50);
     }
 
     //TODO: Make first page grab info dynamically
@@ -145,7 +146,8 @@ export class PdfService {
       //This adds the checkmark
       if (selected) {
         this.doc.setFontType("bold");
-        addImageOnPDF(checkmark, checkmarkSize, pageX - smallSpace, pageY - checkmarkSize);
+        //TODO remove comment
+        //addImageOnPDF(checkmark, checkmarkSize, pageX - smallSpace, pageY - checkmarkSize);
       }
 
       //This prints the candidate name. Separates first and last name if name too long.
@@ -241,13 +243,18 @@ export class PdfService {
     
     //TODO: Create new page when ballot issues get too long.
     let createBallotPages = () => {
-      const ballotIssues = pdfData["ballotIssues"];
+      //const ballotIssues = pdfData["ballotIssues"];
+      let ballotIssues = [];
+      //TODO REMOVE WHEN BALLOT IS DONE
+      for(let i = 0 ; i < 20; i ++){
+        ballotIssues[i] = pdfData["ballotIssues"][1];
+      }
       if (ballotIssues) {
         newPage();
-        addDateTimeTitle();
 
         let issueNumber = 0;
         ballotIssues.forEach(issue => {
+          let requiredHeight = 0;
           issueNumber++;
 
           //This adds issue header
@@ -255,14 +262,26 @@ export class PdfService {
           this.doc.setFontType("bold");
           const ballotTitle = issueNumber + ": " + issue.ballotIssueTitle;
           const splitTitle = this.doc.splitTextToSize(ballotTitle, MAX_PAGE_X - largeSpace);
+          let numberOfLines = splitTitle.length;
+          let pageLength = MAX_PAGE_Y - doubleSpace;
+
+          let titleLength = largeSpace + (5.6 * (numberOfLines - 1));
+          requiredHeight = doubleSpace + titleLength;
+          
+          if (requiredHeight + pageY > pageLength) {
+            newPage();
+            this.doc.setFontSize(headerFontSize);
+            this.doc.setFontType("bold");
+          }
           this.doc.text(splitTitle, pageX, pageY);
           this.doc.setFontType("normal");
-          let numberOfLines = splitTitle.length;
-          console.log(splitTitle);
-          console.log(numberOfLines);
 
           //Value of 5.6 works best from experimenting
-          pageY += doubleSpace + (5.6 * (numberOfLines - 1));
+          pageY += titleLength;
+
+          this.doc.setFontSize(defaultFontSize);
+          this.doc.text("Answer: " + issue.answer, pageX, pageY);
+          pageY += singleSpace;
           
           //Horizontal line
           this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
@@ -286,10 +305,10 @@ export class PdfService {
       if (imageFormat === "PNG" || imageFormat === "JPG" || imageFormat === "JPEG" || imageFormat === "GIF") {
         this.getBase64Image(electionLogo, resolve);
       } else if (imageFormat === "SVG") {
-        //TODO
-        return false;
+        //TODO SVG IMAGE
+        let svgText = "https://www.canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-en.svg";
       } else {
-        //reject
+        //TODO: reject
       }
     });
     
@@ -304,6 +323,7 @@ export class PdfService {
 
     //TODO: change p3 to p1 when p1 is done
     Promise.all([p3, p2]).then(image => {
+      console.log(image);
       logo = image[0];
       checkmark = image[1];
       createFirstPage();
@@ -315,3 +335,4 @@ export class PdfService {
     });
   }
 }
+
