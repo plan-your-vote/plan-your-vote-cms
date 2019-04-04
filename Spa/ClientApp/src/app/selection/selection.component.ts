@@ -9,8 +9,7 @@ import { CandidateService } from "../services/candidate.service";
 import { ElectionService } from "src/app/services/election.service";
 import { PdfService } from "src/app/services/pdf.service";
 import { ActivatedRoute, ParamMap } from "@angular/router";
-
-import selectionContent from 'src/assets/data/selection-content.json';
+import { JsonLinkerService } from '../services/json-linker.service';
 
 @Component({
   selector: "app-selection",
@@ -46,7 +45,8 @@ export class SelectionComponent implements OnInit {
     private _svc: CandidateService,
     private pdfService: PdfService,
     private candidatesApi: CandidateService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _json : JsonLinkerService
   ) {
     this.electionApi.getElection().subscribe(election => {
       this.currentElection = election;
@@ -75,8 +75,9 @@ export class SelectionComponent implements OnInit {
   }
   
   parseDefaultEmail() {
-    const data = Object.assign({}, selectionContent || {});
-    this.SetQueryOptionsData(data);
+    this._json.getSelectionContent().then(data => {
+      this.SetQueryOptionsData(data);
+    });
   }
 
   SetQueryOptionsData(data: any) {
@@ -133,14 +134,7 @@ export class SelectionComponent implements OnInit {
       races: this.races,
       ballotIssues: this.issues
     };
-
-    console.log('this');
-    console.log(this);
-    console.log('localStorage');
-    console.log(localStorage);
-    console.log('pdfData');
-    console.log(pdfData);
-
+    
     this.pdfService.pdf(pdfData);
   }
 }
