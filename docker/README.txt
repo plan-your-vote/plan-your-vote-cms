@@ -45,3 +45,6 @@ using this
    SELECT * FROM information_schema.tables
 ===
 
+
+NOTE: My attempt to dockerize SQL server and ASP.net. The database got to run but for some reasons, web_mvc_1 can't connect to the
+the database which gave an exit code of 101.
