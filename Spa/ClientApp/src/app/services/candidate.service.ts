@@ -4,8 +4,7 @@ import { Candidate } from 'src/app/models/candidate';
 import { Race } from '../models/Race';
 import { BallotIssue } from '../models/BallotIssue';
 
-const clientsUrl = "https://localhost:5001/api";              //DEV AND TESTING
-//const clientsUrl = "http://cityvote.azurewebsites.net/api"     //PRODUCTION
+const clientsUrl = "https://pyv.azurewebsites.net/api"     //PRODUCTION
 @Injectable({
   providedIn: 'root'
 })
