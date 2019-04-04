@@ -129,10 +129,28 @@
   <data name="Contacts" xml:space="preserve">
     <value>Contacts</value>
   </data>
+  <data name="Current Election" xml:space="preserve">
+    <value>Choix en cours</value>
+  </data>
+  <data name="Elections" xml:space="preserve">
+    <value>Élections</value>
+  </data>
+  <data name="Images" xml:space="preserve">
+    <value>Images</value>
+  </data>
   <data name="Plan Your Vote" xml:space="preserve">
     <value>Planifiez votre vote</value>
   </data>
+  <data name="Polling Stations" xml:space="preserve">
+    <value>Bureaux de vote</value>
+  </data>
   <data name="Privacy" xml:space="preserve">
     <value>Intimité</value>
+  </data>
+  <data name="Races" xml:space="preserve">
+    <value>Les courses</value>
+  </data>
+  <data name="Themes" xml:space="preserve">
+    <value>Des thèmes</value>
   </data>
 </root>

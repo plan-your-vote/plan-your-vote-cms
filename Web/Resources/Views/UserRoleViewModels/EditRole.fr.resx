@@ -117,10 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Selected Theme:" xml:space="preserve">
-    <value>Thème sélectionné:</value>
+  <data name="Back to List" xml:space="preserve">
+    <value>Retour à la liste</value>
   </data>
-  <data name="Theme" xml:space="preserve">
-    <value>Thème</value>
+  <data name="Contact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="Create A New Role" xml:space="preserve">
+    <value>Créer un nouveau rôle</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Effacer</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>modifier</value>
+  </data>
+  <data name="Edit Roles" xml:space="preserve">
+    <value>Modifier les rôles</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>sauvegarder</value>
   </data>
 </root>
