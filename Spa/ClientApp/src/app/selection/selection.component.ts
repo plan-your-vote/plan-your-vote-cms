@@ -141,31 +141,28 @@ export class SelectionComponent implements OnInit {
 
   /**
    * Attached to 'Try PDF' button.
-   * Currently passing all candidates.
-   * Needs to be divided by races instead of candidates.
-   * Needs to implement candidate selection after Greg implements.
    */
   generatePdf() {
+    console.log(this);
+    //TODO: redo candidate selection id once dummy data added.
     let selectedCandidateIds = new Set();
-
-    if (localStorage.getItem("candidates")) {
-      let selectedCandidates = JSON.parse(localStorage.getItem("candidates"));
+    
+    if (localStorage.getItem('candidates')) {
+      let selectedCandidates = JSON.parse(localStorage.getItem('candidates'));
 
       selectedCandidates.forEach(c => {
         selectedCandidateIds.add(c.candidateId);
       });
     }
 
-    let pdfData: object = {
+    var pdfData: object = {
       dateTime: new Date().toLocaleString(),
       electionInfo: this.currentElection,
-      candidates: this.candidates,
+      races: this.races,
+      ballotIssues: this.issues,
       selectedCandidateIds: selectedCandidateIds
     };
 
-    this.pdfService.pdf(
-      pdfData,
-      this.currentElection.VoteTitle.replace(/[\W_]+/g, " ")
-    );
+    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle.replace(/[\W_]+/g," "));
   }
 }
