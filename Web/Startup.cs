@@ -62,7 +62,7 @@ namespace Web
 
             //Choosing a db service
             CheckDB check = new CheckDB();
-            
+
             //check for environment variables (described in docs/dbconfig.md)
             //if variable is not set, grab from appsettings.json
             String ConnectionString = check.getConnectionStringEnvVar() ?? Configuration.GetConnectionString("DefaultConnection");
@@ -73,14 +73,15 @@ namespace Web
             switch (DatabaseType)
             {
                 case "mssql":
-                 var connection = @"Server=db;Database=openvoting;User=sa;Password=P@$$w0rd;";
-
+                  
                     services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlServer(connection));
+                        options.UseSqlServer(ConnectionString));
                     break;
                 case "mysql":
+
+                    
                     services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseMySql(ConnectionString, mySqlOptions => 
+                        options.UseMySql(ConnectionString, mySqlOptions =>
                         {
                             mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
                         }));
@@ -130,12 +131,14 @@ namespace Web
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddMvc()
-                .AddDataAnnotationsLocalization(options => {
+                .AddDataAnnotationsLocalization(options =>
+                {
                     options.DataAnnotationLocalizerProvider = (type, factory) =>
                     factory.Create(typeof(SharedResources));
-        }).AddJsonOptions(options => {
-            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-        }); ;
+                }).AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                }); ;
 
             services.Configure<RequestLocalizationOptions>(opts =>
             {
@@ -191,7 +194,7 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(app).Wait(); ;
+            // DummyData.Initialize(app).Wait(); 
             StateInit.Initialize(context);
             ThemesInit.Initialize(context);
         }

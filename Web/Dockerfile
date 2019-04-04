@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore-build:lts
+FROM mcr.microsoft.com/dotnet/core/aspnet:lts
 COPY . /app
 WORKDIR /app
 RUN ["dotnet", "restore"]

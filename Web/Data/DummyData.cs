@@ -83,7 +83,7 @@ namespace Web.Data
 
             if (await roleManager.FindByNameAsync(role1.Name) == null)
             {
-                
+
                 await roleManager.CreateAsync(role1);
             }
             if (await roleManager.FindByNameAsync(role2.Name) == null)
@@ -485,7 +485,7 @@ ILLEGAL MIGRANT CONTROL
                 new CandidateRace()
                 {
                     RaceId = 1,
-                    CandidateId = 3, 
+                    CandidateId = 3,
                     PositionName = "Mayor",
                     PlatformInfo = @"Wai Young and Coalition Vancouver are 100% for the People. With over 35 years of policy experience working with community, governments & business she is ready to lead. She is proven, experienced, and inclusive. As a former MP who brought many important infrastructure projects to the city, she understands the comprehensive issues facing Vancouver. She will bring back mutual respect on the streets and clean up our city."
                 },
