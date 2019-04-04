@@ -1,33 +1,35 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <form>
   <div id="stepone" class="container">
-    <div class="col-md-12">
-      <h3>{{ step1 }}</h3>
-      <p>{{ step1description }}</p>
-    </div>
-    <div>
-      <div class="col-md-12">
-        <p>
-          Filter by:
-          <select
-            id="filterRace"
-            (change)="filterRaces($event.target.value)"
-            name="race"
-            style="padding-right: 10px; font-weight:normal;"
-          >
-            <option>All Races</option>
-            <option *ngFor="let r of races" value="{{ r.positionName }}">{{
-              r.positionName
-            }}</option>
-          </select>
-        </p>
+    <div class="row">
+      <div class="col-12">
+        <h3>{{ step1 }}</h3>
+        <p>{{ step1description }}</p>
       </div>
     </div>
-
-    <div style="text-align:center"></div>
-    <div class="col-md-12" *ngFor="let race of races">
-      <div *ngIf="race.show == 'true'">
-        <app-candidate-table [race]="race"></app-candidate-table>
+    <div class="row">
+      <div class="col-12">
+        <label for="filterRace">
+          Filter by:
+        </label>
+        <select
+          id="filterRace"
+          (change)="filterRaces($event.target.value)"
+          name="race"
+          style="padding-right: 10px; font-weight:normal;"
+        >
+          <option>All Races</option>
+          <option *ngFor="let r of races" value="{{ r.positionName }}">{{
+            r.positionName
+          }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" *ngFor="let race of races">
+        <div *ngIf="race.show == 'true'">
+          <app-candidate-table [race]="race"></app-candidate-table>
+        </div>
       </div>
     </div>
   </div>
