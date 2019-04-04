@@ -73,20 +73,18 @@ namespace Web
             switch (DatabaseType)
             {
                 case "mssql":
-                  
+
                     services.AddDbContext<ApplicationDbContext>(options =>
                         options.UseSqlServer(ConnectionString));
                     break;
                 case "mysql":
-                    var host = Configuration["DBHOST"] ?? "172.17.0.1";
+                    var host = Configuration["DBHOST"] ?? "tcp:172.17.0.2";
                     var port = Configuration["DBPORT"] ?? "3306";
                     var password = Configuration["DBPASSWORD"] ?? "secret";
-                    
+
                     services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseMySql($"server={host};userid=root;password={password};port={port};database=openvoting", mySqlOptions =>
-                        {
-                            mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
-                        }));
+                        options.UseMySql($"server={host};userid=root;password={password};port={port};database=openvoting"
+                    ));
                     break;
                 default: //sqlite
                     services.AddDbContext<ApplicationDbContext>(options =>

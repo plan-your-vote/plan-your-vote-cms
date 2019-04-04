@@ -12,3 +12,5 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@$$w0rd' --name mssql -p 1433:143
 
 
 docker run --name mysqldb -p 3306 -e MYSQL_ROOT_PASSWORD=secret  -d mysql:latest
+
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=MyPassword001" -p 1433:1433 --name sqlserver-test -d mcr.microsoft.com/mssql/server:2017-latest
