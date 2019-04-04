@@ -4,8 +4,8 @@ import { Candidate } from 'src/app/models/candidate';
 import { Race } from '../models/Race';
 import { BallotIssue } from '../models/BallotIssue';
 
-const clientsUrl = "https://localhost:5001/api/races";              //DEV AND TESTING
-//const clientsUrl = "http://cityvote.azurewebsites.net/api/candidates"     //PRODUCTION
+// const clientsUrl = "https://localhost:5001/api/races";              // DEV AND TESTING
+const clientsUrl = "http://pyv.azurewebsites.net/api"     // PRODUCTION
 
 @Injectable({
   providedIn: 'root'
@@ -17,26 +17,26 @@ export class CandidateService {
   constructor(private http: HttpClient) {}
 
   getRaces() {
-    const url = `${clientsUrl}`
+    const url = `${clientsUrl}/races`;
     return this.http.get<Race[]>(url);
   }
 
   getCandidates() {
-    const url = `${clientsUrl}`
+    const url = `${clientsUrl}/candidates`;
 	  return this.http.get<Candidate[]>(url);
   }
 
   getCandidate(id: number) {
-    const url = `${clientsUrl}/${id}`;
+    const url = `${clientsUrl}/candidates/${id}`;
     return this.http.get<Candidate>(url);
   }
 
   getBallotIssues() {
-    const url = "https://localhost:5001/api/ballotissues";
+    const url = `${clientsUrl}/ballotissues`;
     return this.http.get<BallotIssue[]>(url);
 
   }
   getSingle<T>(id: number) {
-    return this.http.get<T>(`https://localhost:5001/api/candidates/${id}`);
+    return this.http.get<T>(`${clientsUrl}/candidates/${id}`);
   }
 }
