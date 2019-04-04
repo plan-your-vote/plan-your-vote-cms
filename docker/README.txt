@@ -38,6 +38,10 @@ using this
 
    docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Sql!Expre55' --name db -p 1433:1433 -d microsoft/mssql-server-linux
 
-   /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1,1401 -U sa -P 'Sql!Expre55'
+   /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1,1433 -U sa -P 'Sql!Expre55'
+
+   SELECT name FROM master.dbo.sysdatabases
+
+   SELECT * FROM information_schema.tables
 ===
 
