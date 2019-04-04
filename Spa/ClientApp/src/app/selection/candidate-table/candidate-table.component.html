@@ -1,5 +1,10 @@
 <h2 class="page-title">{{ race.positionName }}</h2>
-<p>FOR THE ELECTION, YOU CAN VOTE FOR {{ race.numberNeeded }} CANDIDATE(S)</p>
+<p>
+  For this election, please select
+  <span class="race-number-needed">{{ race.numberNeeded }}</span> candidate{{
+    race.numberNeeded != 1 ? "s" : ""
+  }}
+</p>
 <div class="table-responsive table-container">
   <table class="table">
     <thead>
@@ -17,13 +22,15 @@
         <td>{{ cr.candidate.lastName }}</td>
         <td><img src="{{ cr.candidate.picture }}" /></td>
         <td>{{ cr.candidate.biography }}</td>
-        <button
-          type="button"
-          (click)="onSelect(cr.candidate, race)"
-          class="btn glyphicon glyphicon-check"
-        >
-          {{ cr.candidate.selected ? 'Cancel' : 'Select' }}
-        </button>
+        <td>
+          <button
+            type="button"
+            (click)="onSelect(cr.candidate, race)"
+            class="btn glyphicon glyphicon-check"
+          >
+            {{ cr.candidate.selected ? "Cancel" : "Select" }}
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>
