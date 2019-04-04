@@ -15,6 +15,6 @@ namespace VotingModelLibrary.Models
         public Candidate Candidate { get; set; }
 
         public int RaceId { get; set; }
-        public Race Race { get; set; }
+        //public Race Race { get; set; }
     }
 }

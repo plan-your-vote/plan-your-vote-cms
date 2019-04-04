@@ -38,346 +38,20 @@ export class PdfService {
   /**
    * Creates pdf.
    * 
-   * TODO:
-   *  Make this work for multiple elections after dummy data is created.
-   *  Converting Image to Base64 is an async call. would need to implement a promise before saving.
-   * 
    * @param pdfData PDF data passed through app.component.ts
    * @param fileName name of the file to be saved
    */
   public pdf(pdfData: object, fileName: string): void {
     //TODO: Remove this line when complete
     console.log(pdfData);
-    
-    let dummyCandidates = [{
-      "firstName": "12345678901234567890",
-      "lastName": "lastNameaaaaaaaa",
-      "organization": "organization"
-    },{
-      "firstName": "2",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "3",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "4",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "5",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "6",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "7",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "8",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "firstName",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "9",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "10",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "11",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "12",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "13",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "14",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "15",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "16",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "17",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "18",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "19",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "20",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "21",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": ""
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": ""
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": ""
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": ""
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "22",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "23",
-      "lastName": "lastName",
-      "organization": "organization"
-    },{
-      "firstName": "24aaaaaaaaaaaaaaaaaaaaaa",
-      "lastName": "lastName",
-      "organization": "organization"
-    }]
+
+    //TODO: Remove this when selection works.
+    let selectedCandidateIds = new Set();
+    selectedCandidateIds.add(4);
+    selectedCandidateIds.add(16);
+    selectedCandidateIds.add(22);
+    selectedCandidateIds.add(23);
+    selectedCandidateIds.add(29);
 
     //Setup
     this.doc = new jsPDF();
@@ -386,10 +60,16 @@ export class PdfService {
     const MAX_PAGE_X = 210;
     const MAX_PAGE_Y = 297;
 
+    //Change this value to change checkmark size
+    const checkmarkSize = 3;
+    let checkmark;
+
     //Change this value to change logo size
     const logoSize = 20;
+    let logo;
 
     //Spacing
+    const smallSpace = 4;
     const singleSpace = 5;
     const doubleSpace = 10;
     const largeSpace = 20;
@@ -400,40 +80,35 @@ export class PdfService {
 
     let pageX = 0;
     let pageY = 0;
+    let pageNumber = 1;
 
     let addDateTimeTitle = () => {
       const dateTimeTitleX = doubleSpace;
       const dateTimeTitleY = doubleSpace;
       this.doc.setFontSize(8);
       this.doc.text(pdfData["dateTime"], dateTimeTitleX, dateTimeTitleY);
+      this.doc.text("Page " + pageNumber, MAX_PAGE_X - largeSpace, dateTimeTitleY);
       this.doc.setFontSize(10);
       this.doc.text(pdfData["electionInfo"].VoteTitle, MAX_PAGE_X/2, dateTimeTitleY, {align:"center"});
       pageX += singleSpace;
       pageY += doubleSpace;
     };
 
-    let addElectionLogo = (base64image) => {
-      // avoid race conditions for image placement
-      const imageX = singleSpace;
-      const imageY = singleSpace + doubleSpace;
-
+    let addImageOnPDF = (image, size, imageX, imageY) => {
       // auto scales image
-      const imageData = this.doc.getImageProperties(base64image);
+      const imageData = this.doc.getImageProperties(image);
       const imageRatio = imageData.width / imageData.height;
-      const pdfImageHeight = logoSize;
+      const pdfImageHeight = size;
       const pdfImageWidth = pdfImageHeight * imageRatio;
-      //TODO: Remove this line when complete
-      console.log(imageData);
-      this.doc.addImage(base64image, 'JPEG', imageX, imageY, pdfImageWidth, pdfImageHeight);
-      //TODO: Remove this line when complete
-      //this.doc.save(fileName);
+
+      this.doc.addImage(image, 'JPEG', imageX, imageY, pdfImageWidth, pdfImageHeight);
     }
 
+    //TODO: Make first page grab info dynamically
     let createFirstPage = () => {
       addDateTimeTitle();
-      //Adds election logo to the page
-      //TODO: This is Async, so saving doesn't work at the moment.
-      this.getBase64Image(pdfData["electionInfo"].LogoURL, addElectionLogo);
+      
+      addImageOnPDF(logo, logoSize, pageX, pageY + singleSpace);
       pageY += largeSpace;
 
       this.doc.setFontSize(titleFontSize);
@@ -460,6 +135,7 @@ export class PdfService {
     let newPage = () => {
       pageX = 0;
       pageY = 0;
+      pageNumber++;
       this.doc.addPage();
       addDateTimeTitle();
       pageY += largeSpace;
@@ -473,14 +149,16 @@ export class PdfService {
     }
 
     let createCandidateCard = (candidate) => {
+      //This adds the checkmark
+      if (selectedCandidateIds.has(candidate.candidateId)) {
+        this.doc.setFontType("bold");
+        addImageOnPDF(checkmark, checkmarkSize, pageX - smallSpace, pageY - checkmarkSize);
+      }
+
+      //This prints the candidate name. Separates first and last name if name too long.
       this.doc.setFontSize(defaultFontSize);
-
-      //TODO: Add If selected, bold (and add a checkmark)?
-      //Need to wait for selection feature
-      //this.doc.setFontType("bold");
-
       if (candidate.lastName.length + candidate.firstName.length > 20) {
-        this.doc.text(candidate.lastName.toUpperCase() + ", ", pageX, pageY);
+        this.doc.text(candidate.lastName.toUpperCase() + ",", pageX, pageY);
         pageY += singleSpace;
         this.doc.text(candidate.firstName, pageX, pageY);
       } else {
@@ -488,81 +166,133 @@ export class PdfService {
         this.doc.text(candidateName, pageX, pageY);
       }
 
+      //This prints the candidate organization
       if (candidate.organization) {
         pageY += singleSpace;
         this.doc.setFontSize(footerFontSize);
         this.doc.text(candidate.organization.toUpperCase(), pageX, pageY);
       }
 
+      //This returns the font size to normal after it is bolded from selection
       this.doc.setFontType("normal");
 
-      //10 is a bit too small, 20 is a bit too large;
       pageY += doubleSpace + singleSpace;
     }
 
     let createRacePages = () => {
-      //for loop this through each race once API is created.
-      //I don't know what the object will look like so I don't want to mock it
-      newPage();
-
-      //TODO: add race title (ie mayer/councillor) when API is created
-      //race title place holder ie (Mayer: 3 of 1)
-      this.doc.setFontSize(headerFontSize);
-      const raceTitle = "RACE TITLE: + #CANDIDATESSELECTED of #CANDIDATESNEEDED"
-      this.doc.text(raceTitle, pageX, pageY);
-      pageY += doubleSpace;
-      
-      //Horizontal line before candidates
-      this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
-      pageY += doubleSpace;
-
-      //To reset PageY after new column or new page
-      const baseHeight = pageY;
-      const baseHeightWithoutTitle = baseHeight - largeSpace;
-
-      let columnNumber = 1;
-      let pageNumber = 1;
-
-      const candidateList = dummyCandidates;
-      //const candidateList = pdfData["candidates"]
-
-      candidateList.forEach(candidate => {
-        let pageLength = MAX_PAGE_Y - doubleSpace;
-        let requiredHeight = singleSpace;
+      const races = pdfData["races"];
+      races.forEach(race => {
+        let candidatesSelected = 0;
+        const candidateRaces = race["candidateRaces"];
         
-        if (candidate.lastName.length + candidate.firstName.length > 20) {
-          requiredHeight += singleSpace;
-        }
-        if (candidate.organization) {
-          requiredHeight += singleSpace;
-        }
-  
-        if (requiredHeight + pageY > pageLength) {
-          if (columnNumber === 4) {
-            newPage();
-            pageNumber++;
-            columnNumber = 1;
-          } else {
-            columnNumber++;
-            pageX += MAX_PAGE_X / 4;
-            pageY = pageNumber === 1 ? baseHeight : baseHeightWithoutTitle;
-            drawColumnDivider(columnNumber);
+        newPage();
+        
+        //TODO: change this to also look at raceId
+        candidateRaces.forEach(candidateRace => {
+          const candidate = candidateRace.candidate;
+          if (candidate) {
+            candidatesSelected += selectedCandidateIds.has(candidate.candidateId) ? 1 : 0;
           }
-        }
-        createCandidateCard(candidate);
+        });
+
+        //Race Title
+        this.doc.setFontSize(headerFontSize);
+        const raceTitle = race.positionName + ": " + candidatesSelected + " of " + race.numberNeeded;
+        this.doc.text(raceTitle, pageX, pageY);
+        pageY += doubleSpace;
+        
+        //Horizontal line before candidates
+        this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
+        pageY += doubleSpace;
+  
+        //BaseHeight used to reset PageY after new column or new page
+        const baseHeight = pageY;
+        const baseHeightWithoutTitle = baseHeight - largeSpace;
+  
+        let columnNumber = 1;
+        let candidatePageNumber = 1;
+  
+        //Adds candidates. If candidate card is too long, will go to next column.
+        //On the 4th column, will create a new page instead.
+        candidateRaces.forEach(candidateRace => {
+          const candidate = candidateRace.candidate;
+          if (candidate) {
+            let pageLength = MAX_PAGE_Y - doubleSpace;
+            let requiredHeight = singleSpace;
+            
+            if (candidate.lastName.length + candidate.firstName.length > 20) {
+              requiredHeight += singleSpace;
+            }
+            if (candidate.organization) {
+              requiredHeight += singleSpace;
+            }
+      
+            if (requiredHeight + pageY > pageLength) {
+              if (columnNumber === 4) {
+                newPage();
+                candidatePageNumber++;
+                columnNumber = 1;
+              } else {
+                columnNumber++;
+                pageX += MAX_PAGE_X / 4;
+                pageY = candidatePageNumber === 1 ? baseHeight : baseHeightWithoutTitle;
+                drawColumnDivider(columnNumber);
+              }
+            }
+            createCandidateCard(candidate);
+          }
+        });
       });
     }
     
+    //TODO: Create new page when ballot issues get too long.
     let createBallotPages = () => {
-      //need APIs to create this.
+      const ballotIssues = pdfData["ballotIssues"];
+      if (ballotIssues) {
+        newPage();
+        addDateTimeTitle();
 
-      //newPage();
+        let issueNumber = 0;
+        ballotIssues.forEach(issue => {
+          issueNumber++;
+
+          //This adds issue header
+          this.doc.setFontSize(headerFontSize);
+          this.doc.setFontType("bold");
+          const ballotTitle = issueNumber + ": " + issue.ballotIssueTitle;
+          const splitTitle = this.doc.splitTextToSize(ballotTitle, MAX_PAGE_X - largeSpace);
+          this.doc.text(splitTitle, pageX, pageY);
+          this.doc.setFontType("normal");
+          let numberOfLines = splitTitle.length;
+          console.log(splitTitle);
+          console.log(numberOfLines);
+
+          //Value of 5.6 from trial and error
+          pageY += doubleSpace + (5.6 * (numberOfLines - 1));
+          
+          //Horizontal line
+          this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
+          pageY += doubleSpace;
+        });
+      }
     }
 
-    createFirstPage();
-    createRacePages();
-    createBallotPages();
-    
-    this.doc.save(fileName);
+    let p1 = new Promise((resolve, reject) => {
+      this.getBase64Image(pdfData["electionInfo"].LogoURL, resolve);
+    });
+
+    let p2 = new Promise((resolve, reject) => {
+      this.getBase64Image("https://banner2.kisspng.com/20180315/djw/kisspng-check-mark-computer-icons-clip-art-green-tick-mark-5aab1c5116d0a0.2098334515211633450935.jpg", resolve);
+    });
+
+    Promise.all([p1, p2]).then(image => {
+      logo = image[0];
+      checkmark = image[1];
+      createFirstPage();
+      createRacePages();
+      createBallotPages();
+
+      this.doc.save(fileName);
+    });
   }
 }

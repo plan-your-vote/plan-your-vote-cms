@@ -2,18 +2,29 @@
   <table>
     <tr>
       <td><label>E-mail Address: </label></td>
-      <td><input [(ngModel)]="emailaddress" name="email" ng-required="true" ng-minlength="5" /></td>
-      <td class="warningLabel" *ngIf="invalidEmail"><label>Invalid Email</label></td>
+      <td>
+        <input
+          [(ngModel)]="emailaddress"
+          name="email"
+          ng-required="true"
+          ng-minlength="5"
+        />
+      </td>
+      <td class="warningLabel" *ngIf="invalidEmail">
+        <label>Invalid Email</label>
+      </td>
       <td class="warningLabel" *ngIf="noEmail"><label>No Email</label></td>
     </tr>
     <tr>
       <td><label>Subject: </label></td>
-      <td><input [(ngModel)]="subject" name="subject"/></td>
+      <td><input [(ngModel)]="subject" name="subject" /></td>
     </tr>
     <tr>
       <td><label>Message: </label></td>
-      <td><input [(ngModel)]="message" name="message"/></td>
+      <td><input [(ngModel)]="message" name="message" /></td>
     </tr>
   </table>
-  <button (click)="sendReminderEmail()">Send Reminder Email</button> <!-- Requires email user to be logged into Gmail and allow sending E-mails from sources -->
+
+  <button class="btn" (click)="sendReminderEmail()">Send Reminder Email</button>
+  <!-- Requires email user to be logged into Gmail and allow sending E-mails from sources -->
 </div>

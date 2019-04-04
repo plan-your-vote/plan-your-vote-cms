@@ -1,153 +1,61 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<form>
-  <div id="stepone" class="container">
-    <div class="col-md-12">
-      <hr>
-      <h3>
-        {{step1}}
-      </h3>
-      {{step1description}}
-      <br />
-    </div>
-    <div>
-      <div class="col-md-12">
-        <p>
-          Filter by:
-          <select id="filterRace" name="race" style="padding-right: 10px; font-weight:normal;">
-            <option>All Races</option>
-            <option>{{p0}}</option>
-            <option>{{p1}}</option>
-            <option>{{p2}}</option>
-            <option>{{p3}}</option>
-          </select>
-        </p>
-      </div>
-      <div class="col-md-12" style="font-size: 16pt; align-items: flex-start;">
-        <input type="text" />
-        <input type="submit" value="Search" />
-      </div>
-    </div>
-    <br />
-    <div id="p0" class="col-md-11">
-      <!--TODO: Add choose functionality and then duplicate for all positions-->
-      <h2 style="font-weight: bolder;">{{p0}}</h2>
-      <h4>FOR THE ELECTION, YOU CAN VOTE FOR {{p0numCandidates}} CANDIDATE(S)</h4>
-      <p>{{p0description}}</p>
-      <!--TODO: WHERE CANDIDATES GO-->
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>Plan Your Vote</h1>
     </div>
   </div>
-  <div id="steptwo" class="container">
-    <div class="col-md-12">
-      <h3>
-        {{step2}}
-      </h3>
-      {{step2description}}
-    </div>
-    <br />
-    <div class="col-md-12">
-      <div id="q0">
-        <h3>{{q0}}</h3>
-        {{q0desc}}
-        <table class="table">
-          <tr>
-            <th>Program</th>
-            <th>Description</th>
-            <th>Amount</th>
-          </tr>
-          <tr>
-            <td>{{q0i0program}}</td>
-            <td>{{q0i0desc}}</td>
-            <td>{{q0i0amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q0i1program}}</td>
-            <td>{{q0i1desc}}</td>
-            <td>{{q0i1amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q0i2program}}</td>
-            <td>{{q0i2desc}}</td>
-            <td>{{q0i2amount}}</td>
-          </tr>
-        </table>
-        <p>How do you plan to answer Question {{q0}}</p>
-        <input type="radio" name="q0ans" [(ngModel)]="q0ans" value="Yes">Yes
-        <input type="radio" name="q0ans" [(ngModel)]="q0ans" value="No">No
-      </div>
-      <br />
-      <div id="q1">
-        <h3>{{q1}}</h3>
-        {{q1desc}}
-        <table class="table">
-          <tr>
-            <th>Program</th>
-            <th>Description</th>
-            <th>Amount</th>
-          </tr>
-          <tr>
-            <td>{{q1i0program}}</td>
-            <td>{{q1i0desc}}</td>
-            <td>{{q1i0amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q1i1program}}</td>
-            <td>{{q1i1desc}}</td>
-            <td>{{q1i1amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q1i2program}}</td>
-            <td>{{q1i2desc}}</td>
-            <td>{{q1i2amount}}</td>
-          </tr>
-        </table>
-        <p>How do you plan to answer Question {{q1}}</p>
-        <input type="radio" name="q1ans" [(ngModel)]="q1ans" value="Yes">Yes
-        <input type="radio" name="q1ans" [(ngModel)]="q1ans" value="No">No
-      </div>
-      <br />
-      <div id="q2">
-        <h3>{{q2}}</h3>
-        <p>{{q2desc}}</p>
-        <table class="table">
-          <tr>
-            <th>Program</th>
-            <th>Description</th>
-            <th>Amount</th>
-          </tr>
-          <tr>
-            <td>{{q2i0program}}</td>
-            <td>{{q2i0desc}}</td>
-            <td>{{q2i0amount}}</td>
-          </tr>
-          <tr>
-            <td>{{q2i1program}}</td>
-            <td>{{q2i1desc}}</td>
-            <td>{{q2i1amount}}</td>
-          </tr>
-        </table>
-        <p>How do you plan to answer Question {{q2}}</p>
-        <input type="radio" name="q2ans" [(ngModel)]="q2ans" value="Yes">Yes
-        <input type="radio" name="q2ans" [(ngModel)]="q2ans" value="No">No
-      </div>
-      <br />
-    </div>
-  </div>
-  <div id="review" class="container">
-    <div class="col-md-12">
-      <h3>
-        {{step4}}
-      </h3>
-    </div>
-    <br />
-    <div class="col-md-12">
-      <h4>YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS</h4>
-      <p>{{q0}}</p>
-      <p><b>{{q0ans}}</b> to borrowing {{q0total}}</p>
-      <p>{{q1}}</p>
-      <p><b>{{q1ans}}</b> to borrowing {{q1total}}</p>
-      <p>{{q2}}</p>
-      <p><b>{{q2ans}}</b> to borrowing {{q2total}}</p>
-    </div>
 </div>
-  <br />
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="navbar navbar-expand subnavbar">
+        <a class="nav-link nav-item" [routerLink]="['/selection/step1']"
+          >Step 1</a
+        >
+        <a class="nav-link nav-item" [routerLink]="['/selection/step2']"
+          >Step 2</a
+        >
+        <a class="nav-link nav-item" [routerLink]="['/selection/step3']"
+          >Step 3</a
+        >
+        <a class="nav-link nav-item" [routerLink]="['/selection/step4']"
+          >Step 4</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<form>
+  <div [ngSwitch]="currentStep">
+    <app-step1
+      *ngSwitchCase="'step1'"
+      [step1title]="step1title"
+      [step1description]="step1description"
+      [races]="races"
+    ></app-step1>
+
+    <app-step2
+      *ngSwitchCase="'step2'"
+      [step2title]="step2title"
+      [step2description]="step2description"
+      [issues]="issues"
+    ></app-step2>
+
+    <app-step3
+      *ngSwitchCase="'step3'"
+      [step3title]="step3title"
+      [step3description]="step3description"
+    ></app-step3>
+
+    <app-step4
+      *ngSwitchCase="'step4'"
+      [step4title]="step4title"
+      [races]="races"
+      [issues]="issues"
+    ></app-step4>
+  </div>
 </form>

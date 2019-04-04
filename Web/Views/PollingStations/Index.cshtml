@@ -15,9 +15,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Election)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -50,43 +47,40 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Election.ElectionId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Latitude)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Longitute)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.AdditionalInfo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WheelchairInfo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ParkingInfo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WashroomInfo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GeneralAccessInfo)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.PollingStationId">@Localizer["Edit"]</a> |
-                    <a asp-action="Details" asp-route-id="@item.PollingStationId">@Localizer["Details"]</a> |
-                    <a asp-action="Delete" asp-route-id="@item.PollingStationId">>@Localizer["Delete"]</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitute)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WheelchairInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkingInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WashroomInfo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GeneralAccessInfo)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PollingStationId">@Localizer["Edit"]</a> |
+                <a asp-action="Details" asp-route-id="@item.PollingStationId">@Localizer["Details"]</a> |
+                <a asp-action="Delete" asp-route-id="@item.PollingStationId">@Localizer["Delete"]</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

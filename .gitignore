@@ -3,6 +3,11 @@
 
 # SqliteDB
 
+
+*.db
+Web/Migrations/
+
+
 # User-specific files
 *.suo
 *.user
@@ -262,6 +267,9 @@ paket-files/
 __pycache__/
 *.pyc
 .vscode/
+
+# node
+Spa/ClientApp/package-lock.json
 
 # for mac users
 *.DS_Store
