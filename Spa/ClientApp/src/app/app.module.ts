@@ -32,6 +32,7 @@ import { SelectionComponent } from './selection/selection.component';
 
 import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { HomeComponent } from './home/home.component';
+import { CandidateTableComponent } from './selection/candidate-table/candidate-table.component';
 
 
 export function setupTranslateFactory(service: TranslateService): Function {
@@ -51,7 +52,8 @@ export function setupTranslateFactory(service: TranslateService): Function {
     IcsfileComponent,
     ImageTopComponent,
     ImageOverlayComponent,
-    SelectionComponent
+    SelectionComponent,
+    CandidateTableComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
