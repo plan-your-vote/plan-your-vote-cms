@@ -1,3 +1,24 @@
+/*  */
+
 .navbar-brand {
   color: #203f19 !important;
+}
+
+/* Footer */
+
+@media (max-width: 767.98px) {
+  #footer-share + select {
+    max-width: 30vw;
+  }
+}
+
+@media (min-width: 768px) {
+  #footer-copyright,
+  #footer-nav {
+    margin-bottom: 0;
+  }
+
+  #footer-share + select {
+    max-width: 10vw;
+  }
 }
