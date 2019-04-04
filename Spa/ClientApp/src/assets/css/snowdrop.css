@@ -10,6 +10,9 @@
   color: #8f9c94;
   color: #5f6c5c;
 } */
+* {
+  font-family: 'Lato', sans-serif;
+}
 
 h1,
 h2,
@@ -17,6 +20,7 @@ h3,
 h4,
 h5,
 h6 {
+  font-family: 'Merriweather', serif;
   color: #203f19;
 }
 
@@ -27,6 +31,12 @@ a {
 ::selection {
   background: #3f5c28;
   color: #fff;
+}
+
+/* NavBar */
+
+#navbar {
+  border-bottom: 0 !important;
 }
 
 /* Footer */
