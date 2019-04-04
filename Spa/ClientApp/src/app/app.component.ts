@@ -18,7 +18,8 @@ const THEME_SNOWDROP = '/snowdrop.css';
 export class AppComponent implements OnInit {
   selectedCssFilepath: string;
   title = 'ClientApp';
-  constructor(private themeService: ThemeService) {}
+  constructor(private themeService: ThemeService
+  ) {}
 
   ngOnInit(): void {
     this.themeService.getUserSelection().then(themeName => {
