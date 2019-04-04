@@ -1,56 +1,131 @@
-import { Component, OnInit } from '@angular/core';
-import { JSONParserService } from 'src/app/services/jsonparser.service';
-import { Candidate } from 'src/app/models/candidate';
-import { Race } from 'src/app/models/Race';
-import { CandidateService } from '../services/candidate.service';
-import { BallotIssue } from '../models/BallotIssue';
+import { Component, OnInit } from "@angular/core";
+
+import { BallotIssue } from "../models/BallotIssue";
+import { Candidate } from "src/app/models/candidate";
+import { Election } from "src/app/models/election";
+import { Race } from "src/app/models/Race";
+
+import { CandidateService } from "../services/candidate.service";
+import { ElectionService } from "src/app/services/election.service";
+import { JSONParserService } from "src/app/services/jsonparser.service";
+import { PdfService } from "src/app/services/pdf.service";
+import { ActivatedRoute, ParamMap } from "@angular/router";
 
 @Component({
-  selector: 'app-selection',
-  templateUrl: './selection.component.html',
-  styleUrls: ['./selection.component.less']
+  selector: "app-selection",
+  templateUrl: "./selection.component.html",
+  styleUrls: ["./selection.component.less"]
 })
 export class SelectionComponent implements OnInit {
-  public candidates: Candidate[] = [];
-  public races: Race[] = [];
-  public issues: BallotIssue[] = [];
+  candidates: Candidate[];
+  currentElection: Election;
+  elections: Election[] = [];
+  data: Election[] = [];
+  index: number;
+
+  races: Race[] = [];
+  issues: BallotIssue[] = [];
+
+  currentStep: string;
 
   //STEP1
-  step1 = "";
+  step1title = "";
   step1description = "";
 
   //STEP2
-  step2 = "";
+  step2title = "";
   step2description = "";
 
+  //STEP3
+  step3title = "";
+  step3description = "";
+
   //STEP4
-  step4 = "";
+  step4title = "";
 
   jsonData: any;
   constructor(
     private dataFinder: JSONParserService,
-    private _svc: CandidateService
-  ) { }
+    private electionApi: ElectionService,
+    private _svc: CandidateService,
+    private pdfService: PdfService,
+    private candidatesApi: CandidateService,
+    private route: ActivatedRoute
+  ) {
+    this.index = 0;
 
+    this.electionApi.getElections().subscribe(res => {
+      this.elections = res;
+      this.data = res;
+      this.currentElection = this.elections[this.index];
+
+      //sets the current selection to the first one
+      //TODO: do this async with a promise
+      if (!this.currentElection) {
+        this.currentElection = this.data[this.index];
+      }
+    });
+
+    this.candidatesApi.getCandidates().subscribe(candidates => {
+      this.candidates = candidates;
+    });
+  }
+
+  defaultStep: string = "step1";
   ngOnInit() {
     this.parseDefaultEmail();
+
     this.getRaces();
     this.getIssues();
-    console.log(this.races);
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.currentStep = this.route.snapshot.params.step;
+    });
+
+    // one time default fake routing
+    if (this.currentStep == null) {
+      this.currentStep = this.defaultStep;
+    }
   }
+
   parseDefaultEmail() {
-    this.dataFinder.getJSONDataAsync("./assets/data/selection-content.json").then(data => {
-      this.SetQueryOptionsData(data);
-    })
+    this.dataFinder
+      .getJSONDataAsync("./assets/data/selection-content.json")
+      .then(data => {
+        this.SetQueryOptionsData(data);
+      });
+  }
+
+  SetQueryOptionsData(data: any) {
+    this.jsonData = data;
+    this.populateStepOne();
+    this.populateStepTwo();
+    this.populateStepThree();
+    this.populateReview();
+  }
+
+  populateStepOne() {
+    this.step1title = this.jsonData.default.step1title;
+    this.step1description = this.jsonData.default.step1description;
+  }
+  populateStepTwo() {
+    this.step2title = this.jsonData.default.step2title;
+    this.step2description = this.jsonData.default.step2description;
+  }
+  populateStepThree() {
+    this.step3title = this.jsonData.default.step3title;
+    this.step3description = this.jsonData.default.step3description;
+  }
+  populateReview() {
+    this.step4title = this.jsonData.default.step4title;
   }
 
   getRaces(): void {
     this._svc.getRaces().subscribe(data => {
       this.races = data;
-      console.log(this.races);
-      for (let r of this.races) {
-        r.show = "true";
-        r.selected = [];
+      for (let race of this.races) {
+        race.show = "true";
+        race.selected = [];
       }
     });
   }
@@ -58,58 +133,36 @@ export class SelectionComponent implements OnInit {
   getIssues(): void {
     this._svc.getBallotIssues().subscribe(data => {
       this.issues = data;
-      console.log(this.issues);
-      for (let r of this.issues) {
-        r.answer = "Unanswered";
+      for (let issue of this.issues) {
+        issue.answer = "Unanswered";
       }
     });
   }
 
-  onSelect(c: Candidate, r: Race) {
-    if (!c.selected) {
-      c.selected = true;
-      localStorage.setItem('candidates', JSON.stringify(this.candidates));
-      r.selected.push(c);
-    } else {
-      c.selected = false;
-      localStorage.setItem('candidates', JSON.stringify(this.candidates));
-      r.selected = r.selected.filter(function (e) { return e.candidateId !== c.candidateId });
+  /**
+   * Attached to 'Try PDF' button.
+   */
+  generatePdf() {
+    console.log(this);
+    //TODO: redo candidate selection id once dummy data added.
+    let selectedCandidateIds = new Set();
+    
+    if (localStorage.getItem('candidates')) {
+      let selectedCandidates = JSON.parse(localStorage.getItem('candidates'));
+
+      selectedCandidates.forEach(c => {
+        selectedCandidateIds.add(c.candidateId);
+      });
     }
-    console.log(this.races);
-  }
 
-  filterRaces(val: any) {
-    if (val == "All Races") {
-      for (let r of this.races) {
-        r.show = "true";
-      }
-    } else {
-      for (let r of this.races) {
-        if (val != r.positionName) {
-          r.show = "false";
-        } else {
-          r.show = "true";
-        }
-     }
-    }
-  }
+    var pdfData: object = {
+      dateTime: new Date().toLocaleString(),
+      electionInfo: this.currentElection,
+      races: this.races,
+      ballotIssues: this.issues,
+      selectedCandidateIds: selectedCandidateIds
+    };
 
-  SetQueryOptionsData(data: any) {
-    this.jsonData = data;
-    this.populateStepOne();
-    this.populateStepTwo();
-    this.populateReview();
-  }
-
-  populateStepOne() {
-    this.step1 = this.jsonData.default.step1;
-    this.step1description = this.jsonData.default.step1description;
-  }
-  populateStepTwo() {
-    this.step2 = this.jsonData.default.step2;
-    this.step2description = this.jsonData.default.step2description;
-  }
-  populateReview() {
-    this.step4 = this.jsonData.default.step4;
+    this.pdfService.pdf(pdfData, this.currentElection.VoteTitle.replace(/[\W_]+/g," "));
   }
 }

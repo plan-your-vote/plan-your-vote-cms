@@ -22,8 +22,7 @@ import { JSONParserService } from './services/jsonparser.service';
 import { TranslatePipe } from './pipes/translate.pipe';
 
 // components
-import { CandidateItemComponent } from './components/candidate-item/candidate-item.component';
-import { MapComponentComponent } from './components/map-component/map-component.component';
+import { MapComponent } from './components/map/map.component';
 import { EmailComponent } from './components/email/email.component';
 import { IcsfileComponent } from './components/icsfile/icsfile.component';
 import { ImageTopComponent } from './components/card/image-top/image-top.component';
@@ -32,7 +31,11 @@ import { SelectionComponent } from './selection/selection.component';
 
 import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
+import { CandidateTableComponent } from './selection/candidate-table/candidate-table.component';
+import { Step1Component } from './selection/steps/step1/step1.component';
+import { Step2Component } from './selection/steps/step2/step2.component';
+import { Step4Component } from './selection/steps/step4/step4.component';
+import { Step3Component } from './selection/steps/step3/step3.component';
 
 
 export function setupTranslateFactory(service: TranslateService): Function {
@@ -44,16 +47,19 @@ export function setupTranslateFactory(service: TranslateService): Function {
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    TranslatePipe,
-    CandidateItemComponent,
-    MapComponentComponent,
+    MapComponent,
     EmailComponent,
     FooterMenuComponent,
     IcsfileComponent,
     ImageTopComponent,
     ImageOverlayComponent,
-    SelectionComponent
+    SelectionComponent,
+    CandidateTableComponent,
+    TranslatePipe,
+    Step1Component,
+    Step2Component,
+    Step4Component,
+    Step3Component
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

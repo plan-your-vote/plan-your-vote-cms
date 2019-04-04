@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using Web.Data;
 namespace Web.CmsControllers
 {
     // This controller needed to be manual modified as below since MVC cannot autogenerate Composite Key controller
+    [Authorize]
     public class ImagesController : Controller
     {
         private readonly ApplicationDbContext _context;

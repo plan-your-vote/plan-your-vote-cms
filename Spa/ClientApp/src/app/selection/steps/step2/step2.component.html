@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{ step2title }}</h2>
+      <p>{{ step2description }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mb40" *ngFor="let issue of issues">
+      <h5>{{ issue.ballotIssueTitle }}</h5>
+      <p>{{ issue.description }}</p>
+      <div *ngFor="let option of issue.ballotIssueOptions">
+        <input
+          type="radio"
+          name="{{ issue.ballotIssueTitle }}"
+          [(ngModel)]="issue.answer"
+          value="{{ option.issueOptionInfo }}"
+        />
+        <span>{{ option.issueOptionInfo }}</span>
+      </div>
+    </div>
+  </div>
+</div>

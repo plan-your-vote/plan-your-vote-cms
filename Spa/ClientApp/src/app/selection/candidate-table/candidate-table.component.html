@@ -1,0 +1,38 @@
+<h3 class="page-title mb40">{{ race.positionName }}</h3>
+<p>
+  <span>
+    For this election, please select
+    <b class="race-number-needed">{{ race.numberNeeded }}</b>
+    candidate{{ race.numberNeeded != 1 ? "s" : "" }}
+  </span>
+</p>
+<div class="table-responsive table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Picture</th>
+        <th>Biography</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cr of race.candidateRaces">
+        <td>{{ cr.candidate.firstName }}</td>
+        <td>{{ cr.candidate.lastName }}</td>
+        <td><img src="{{ cr.candidate.picture }}" /></td>
+        <td>{{ cr.candidate.biography }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn glyphicon glyphicon-check select-candidate-btn"
+            (click)="onSelect(cr.candidate, race)"
+          >
+            {{ cr.candidate.selected ? "Cancel" : "Select" }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

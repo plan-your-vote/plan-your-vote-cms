@@ -6,7 +6,6 @@ import { BallotIssue } from '../models/BallotIssue';
 
 const clientsUrl = "https://localhost:5001/api";              //DEV AND TESTING
 //const clientsUrl = "http://cityvote.azurewebsites.net/api"     //PRODUCTION
-
 @Injectable({
   providedIn: 'root'
 })
@@ -17,12 +16,12 @@ export class CandidateService {
   constructor(private http: HttpClient) {}
 
   getRaces() {
-    const url = `${clientsUrl}/races`
+    const url = `${clientsUrl}/races`;
     return this.http.get<Race[]>(url);
   }
 
   getCandidates() {
-    const url = `${clientsUrl}/candidates`
+    const url = `${clientsUrl}/candidates`;
 	  return this.http.get<Candidate[]>(url);
   }
 
