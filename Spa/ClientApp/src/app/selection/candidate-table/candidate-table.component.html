@@ -1,8 +1,8 @@
-<h2 class="page-title">{{ race.positionName }}</h2>
+<h3 class="page-title">{{ race.positionName }}</h3>
 <p>
   For this election, please select
   <span class="race-number-needed">{{ race.numberNeeded }}</span> candidate{{
-    race.numberNeeded != 1 ? "s" : ""
+    race.numberNeeded != 1 ? 's' : ''
   }}
 </p>
 <div class="table-responsive table-container">
@@ -28,7 +28,7 @@
             (click)="onSelect(cr.candidate, race)"
             class="btn glyphicon glyphicon-check"
           >
-            {{ cr.candidate.selected ? "Cancel" : "Select" }}
+            {{ cr.candidate.selected ? 'Cancel' : 'Select' }}
           </button>
         </td>
       </tr>
