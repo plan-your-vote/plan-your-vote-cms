@@ -44,11 +44,10 @@ export class MapComponent implements OnInit {
       .getPollingStations()
       .then(pollingStations => {
         this.stations = pollingStations;
-        console.table(this.stations);
       })
       .then(() => {
         this.stations.forEach(station => {
-          navigator.geolocation.getCurrentPosition(function(pos) {
+          navigator.geolocation.getCurrentPosition(pos => {
             const lat1 = pos.coords.latitude;
             const lat2 = station.latitude;
             const lon1 = pos.coords.longitude;
