@@ -73,8 +73,10 @@ namespace Web
             switch (DatabaseType)
             {
                 case "mssql":
+                 var connection = @"Server=db;Database=openvoting;User=sa;Password=P@$$w0rd;";
+
                     services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlServer(ConnectionString));
+                        options.UseSqlServer(connection));
                     break;
                 case "mysql":
                     services.AddDbContext<ApplicationDbContext>(options =>
