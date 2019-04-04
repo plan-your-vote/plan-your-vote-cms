@@ -9,7 +9,7 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@$$w0rd' --name mssql -p 1433:143
 
 
 - Create Database: CREATE DATABASE openvoting;
-
+dotnet ef migrations add "OpenVoting" -c ApplicationDbContext
 
 docker run --name mysqldb -p 3306 -e MYSQL_ROOT_PASSWORD=secret  -d mysql:latest
 
@@ -27,3 +27,12 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@$$w0rd' \
    -p 1401:1433 \
    --name sql1 \
    -d microsoft/mssql-server-linux
+
+
+
+   docker run -e 'ACCEPT_EULA=Y' --name mssql -e 'MSSQL_SA_PASSWORD=P@$$w0rd' -p 1401:1433 -d mcr.microsoft.com/mssql/server:2017-latest
+
+
+   docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@$$w0rd' --name mssql -p 1401:1433 -d mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
+
+   /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1,1401 -U sa -P P@$$w0rd

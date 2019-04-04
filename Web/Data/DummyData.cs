@@ -83,7 +83,7 @@ namespace Web.Data
 
             if (await roleManager.FindByNameAsync(role1.Name) == null)
             {
-
+                
                 await roleManager.CreateAsync(role1);
             }
             if (await roleManager.FindByNameAsync(role2.Name) == null)
@@ -485,7 +485,7 @@ ILLEGAL MIGRANT CONTROL
                 new CandidateRace()
                 {
                     RaceId = 1,
-                    CandidateId = 3,
+                    CandidateId = 3, 
                     PositionName = "Mayor",
                     PlatformInfo = @"Wai Young and Coalition Vancouver are 100% for the People. With over 35 years of policy experience working with community, governments & business she is ready to lead. She is proven, experienced, and inclusive. As a former MP who brought many important infrastructure projects to the city, she understands the comprehensive issues facing Vancouver. She will bring back mutual respect on the streets and clean up our city."
                 },
@@ -567,7 +567,7 @@ Are you in favour of Council having the authority, without further assent of the
             {
                 new Election()
                 {
-                    ElectionId = 1,
+                 
                     Name = "City of Vancouver 2018 Municiple Election",
                     DateEnd = "October 21 2018",
                     DateStart = "October 21 2018",
@@ -575,7 +575,7 @@ Are you in favour of Council having the authority, without further assent of the
                 },
                 new Election()
                 {
-                    ElectionId = 2,
+       
                     Name = "Canadian Federal Election, 2019",
                     DateEnd = "October 21 2019",
                     DateStart = "October 21 2019",
@@ -583,7 +583,7 @@ Are you in favour of Council having the authority, without further assent of the
                 },
                 new Election()
                 {
-                    ElectionId = 3,
+         
                     Name = "City of Vancouver 2020 Municiple Election",
                     DateEnd = "October 21 2020",
                     DateStart = "October 21 2020",
@@ -598,7 +598,7 @@ Are you in favour of Council having the authority, without further assent of the
             {
                 new PollingStation()
                 {
-                    PollingStationId = 1,
+                   
                     ElectionId = 1,
                     Name = "Holy Trinity Anglican Church",
                     AdditionalInfo = "",
@@ -612,7 +612,7 @@ Are you in favour of Council having the authority, without further assent of the
                 },
                 new PollingStation()
                 {
-                    PollingStationId = 2,
+                    
                     ElectionId = 1,
                     Name = "Grace Vancouver Church",
                     AdditionalInfo = "",
@@ -626,7 +626,7 @@ Are you in favour of Council having the authority, without further assent of the
                 },
                 new PollingStation()
                 {
-                    PollingStationId = 3,
+                   
                     ElectionId = 2,
                     Name = "Lord Tennyson Elementary School",
                     AdditionalInfo = "",
@@ -640,7 +640,7 @@ Are you in favour of Council having the authority, without further assent of the
                 },
                 new PollingStation()
                 {
-                    PollingStationId = 4,
+                  
                     ElectionId = 2,
                     Name = "Gathering Place Community Centre",
                     AdditionalInfo = "Handicap parking unavailable",
@@ -654,7 +654,7 @@ Are you in favour of Council having the authority, without further assent of the
                 },
                 new PollingStation()
                 {
-                    PollingStationId = 5,
+                 
                     ElectionId = 3,
                     Name = "False Creek Community Centre",
                     AdditionalInfo = "",
@@ -668,7 +668,7 @@ Are you in favour of Council having the authority, without further assent of the
                 },
                 new PollingStation()
                 {
-                    PollingStationId = 6,
+                   
                     ElectionId = 3,
                     Name = "Roundhouse Community Arts Centre",
                     AdditionalInfo = "",

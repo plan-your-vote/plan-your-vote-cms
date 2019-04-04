@@ -14,7 +14,7 @@ namespace Web.Data
             {
                 State state = new State
                 {
-                    StateId = State.STATE_ID,
+                   
                     currentElection = 1,
                 };
                 context.Add(state);
