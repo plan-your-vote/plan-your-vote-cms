@@ -31,5 +31,6 @@ namespace Web.Data
         public DbSet<PollingStation> PollingStations { get; set; }
         public DbSet<Theme> Themes { get; set; }
         public DbSet<Image> Images { get; set; }
+        public object Configuration { get; internal set; }
     }
 }

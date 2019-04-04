@@ -22,8 +22,6 @@ import { JSONParserService } from './services/jsonparser.service';
 import { TranslatePipe } from './pipes/translate.pipe';
 
 // components
-import { CandidateItemComponent } from './components/candidate-item/candidate-item.component';
-import { CandidateListComponent } from './components/candidate-list/candidate-list.component';
 import { MapComponentComponent } from './components/map-component/map-component.component';
 import { EmailComponent } from './components/email/email.component';
 import { IcsfileComponent } from './components/icsfile/icsfile.component';
@@ -33,7 +31,7 @@ import { SelectionComponent } from './selection/selection.component';
 
 import { FooterMenuComponent } from './footer-menu/footer-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
+import { CandidateTableComponent } from './selection/candidate-table/candidate-table.component';
 
 
 export function setupTranslateFactory(service: TranslateService): Function {
@@ -45,17 +43,15 @@ export function setupTranslateFactory(service: TranslateService): Function {
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    TranslatePipe,
-    CandidateItemComponent,
-    CandidateListComponent,
     MapComponentComponent,
     EmailComponent,
     FooterMenuComponent,
     IcsfileComponent,
     ImageTopComponent,
     ImageOverlayComponent,
-    SelectionComponent
+    SelectionComponent,
+    CandidateTableComponent,
+    TranslatePipe
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

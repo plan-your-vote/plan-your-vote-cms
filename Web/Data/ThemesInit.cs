@@ -61,7 +61,7 @@ namespace Web
                     ThemeName = "Snowdrop",
                     ID = "Footer Logo",
                     Type = "URL",
-                    Value = "https://www.bcit.ca/images/entryblocks/video_thumb_sd.png",
+                    Value = "https://www.bcit.ca/images/v4_entrybanners/bcit_home/home_industryexperts2_sml_hd.jpg",
                     Format = "PNG",
                     Description = "Education For a Complex World",
                 },
