@@ -51,16 +51,16 @@ export class MapComponent implements OnInit {
       .then(() => {
         this.stations.forEach(function (station) {
           navigator.geolocation.getCurrentPosition(function (pos) {
-            var lat1 = pos.coords.latitude;
-            var lat2 = station.latitude;
-            var lon1 = pos.coords.longitude;
-            var lon2 = station.longitute;
+            const lat1 = pos.coords.latitude;
+            const lat2 = station.latitude;
+            const lon1 = pos.coords.longitude;
+            const lon2 = station.longitute;
 
-            var radlat1 = Math.PI * lat1 / 180;
-            var radlat2 = Math.PI * lat2 / 180;
-            var theta = lon1 - lon2;
-            var radtheta = Math.PI * theta / 180;
-            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            const radlat1 = Math.PI * lat1 / 180;
+            const radlat2 = Math.PI * lat2 / 180;
+            const theta = lon1 - lon2;
+            const radtheta = Math.PI * theta / 180;
+            let dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
             if (dist > 1) {
               dist = 1;
             }
@@ -70,15 +70,15 @@ export class MapComponent implements OnInit {
             dist = dist * 1.609344;
             if (dist < 5) {
               console.log("Distance to polling station is: " + dist + "km. adding feature to map.")
-              var marker = new Feature({
+              const marker = new Feature({
                 geometry: new Point(transform([station.longitute, station.latitude], 'EPSG:4326', 'EPSG:3857')),
               });
 
-              var markers = new sourceVector({
+              const markers = new sourceVector({
                 features: [marker]
               });
 
-              var markerVectorLayer = new layerVector({
+              const markerVectorLayer = new layerVector({
                 source: markers,
               });
               map.addLayer(markerVectorLayer);
