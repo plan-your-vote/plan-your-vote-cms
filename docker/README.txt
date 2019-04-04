@@ -33,6 +33,11 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@$$w0rd' \
    docker run -e 'ACCEPT_EULA=Y' --name mssql -e 'MSSQL_SA_PASSWORD=P@$$w0rd' -p 1401:1433 -d mcr.microsoft.com/mssql/server:2017-latest
 
 
+using this
+===
+
    docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=P@$$w0rd' --name mssql -p 1401:1433 -d mcr.microsoft.com/mssql/server:2017-CU8-ubuntu
 
    /opt/mssql-tools/bin/sqlcmd -S 127.0.0.1,1401 -U sa -P P@$$w0rd
+===
+
