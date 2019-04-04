@@ -1,7 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { PdfService } from './services/pdf.service';
 import { Election } from './models/election';
-import { Candidate } from './models/candidate';
 import { ElectionService } from './services/election.service';
 import { CandidateService } from './services/candidate.service';
 import { ThemeService } from './services/theme.service';
@@ -28,7 +27,6 @@ export class AppComponent implements OnInit {
   elections: Election[] = [];
   currentElection: Election;
   races: Race[];
-  candidates: Candidate[];
   index: number;
   data: Election[] = [];
   issues: BallotIssue[] = [];
@@ -60,9 +58,9 @@ export class AppComponent implements OnInit {
     this.candidatesApi.getRaces().subscribe(races => {
       this.races = races;
     });
-
-    this.candidatesApi.getCandidates().subscribe(candidates => {
-      this.candidates = candidates;
+    
+    this.candidatesApi.getBallotIssues().subscribe(ballotIssue => {
+      this.issues = ballotIssue;
     });
   }
 
@@ -93,7 +91,7 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * TODO: I don't think this function will be relevant once the application goes forward
+   * TODO: Remove, I don't think this function will be relevant once the application goes forward
    */
   public nextElection(): void {
     if (this.index != this.elections.length - 1) {
@@ -106,12 +104,10 @@ export class AppComponent implements OnInit {
 
   /**
    * Attached to 'Try PDF' button.
-   * Currently passing all candidates.
-   * Needs to be divided by races instead of candidates.
-   * Needs to implement candidate selection after Greg implements.
    */
   generatePdf() {
     console.log(this);
+    //TODO: redo candidate selection id once dummy data added.
     let selectedCandidateIds = new Set();
     
     if (localStorage.getItem('candidates')) {
@@ -125,9 +121,8 @@ export class AppComponent implements OnInit {
     var pdfData: object = {
       dateTime: new Date().toLocaleString(),
       electionInfo: this.currentElection,
-      candidates: this.candidates,
       races: this.races,
-      //ballotIssues: this.issues,
+      ballotIssues: this.issues,
       selectedCandidateIds: selectedCandidateIds
     };
 

@@ -38,181 +38,14 @@ export class PdfService {
   /**
    * Creates pdf.
    * 
-   * TODO:
-   *  Make this work for multiple races and ballots after aps is created.
-   * 
    * @param pdfData PDF data passed through app.component.ts
    * @param fileName name of the file to be saved
    */
   public pdf(pdfData: object, fileName: string): void {
     //TODO: Remove this line when complete
     console.log(pdfData);
-    
-    let dummyRaces = [{
-      "PositionName": "Mayor",
-      "NumberNeeded": 1,
-      "candidates": [{
-        "firstName": "Mayor1",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 1
-      },{
-        "firstName": "Mayor2",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 2
-      },{
-        "firstName": "Mayor3",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 3
-      },{
-        "firstName": "Mayor4",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 4
-      },{
-        "firstName": "Mayor5",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 5
-      },{
-        "firstName": "Mayor6",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 6
-      },{
-        "firstName": "Mayor4",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 4
-      },{
-        "firstName": "Mayor7",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 7
-      },{
-        "firstName": "Mayor8",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 8
-      },{
-        "firstName": "Mayor9",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 9
-      },{
-        "firstName": "Mayor10",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 10
-      },{
-        "firstName": "Mayor11",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 11
-      },{
-        "firstName": "Mayor12",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 12
-      },{
-        "firstName": "Mayor13",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 13
-      },{
-        "firstName": "Mayor14",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 14
-      },{
-        "firstName": "Mayor15",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 15
-      },{
-        "firstName": "Mayor16",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 16
-      },{
-        "firstName": "Mayor17",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 17
-      },{
-        "firstName": "Mayor18",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 18
-      },{
-        "firstName": "Mayor19",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 19
-      },{
-        "firstName": "Mayor20",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 20
-      }]
-    },{
-      "PositionName": "Councillor",
-      "NumberNeeded": 10,
-      "candidates": [{
-        "firstName": "Councillor1",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 21
-      },{
-        "firstName": "Councillor2",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 22
-      },{
-        "firstName": "Councillor3",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 23
-      },{
-        "firstName": "Councillor4",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 24
-      },{
-        "firstName": "Councillor5",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 25
-      },{
-        "firstName": "Councillor6",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 26
-      },{
-        "firstName": "Councillor7",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 27
-      },{
-        "firstName": "Councillor8",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 28
-      },{
-        "firstName": "Councillor9",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 29
-      },{
-        "firstName": "Councillor10",
-        "lastName": "lastName",
-        "organization": "organization",
-        "candidateId": 30
-      }]
-    }];
 
+    //TODO: Remove this when selection works.
     let selectedCandidateIds = new Set();
     selectedCandidateIds.add(4);
     selectedCandidateIds.add(16);
@@ -227,10 +60,16 @@ export class PdfService {
     const MAX_PAGE_X = 210;
     const MAX_PAGE_Y = 297;
 
+    //Change this value to change checkmark size
+    const checkmarkSize = 3;
+    let checkmark;
+
     //Change this value to change logo size
     const logoSize = 20;
+    let logo;
 
     //Spacing
+    const smallSpace = 4;
     const singleSpace = 5;
     const doubleSpace = 10;
     const largeSpace = 20;
@@ -242,8 +81,6 @@ export class PdfService {
     let pageX = 0;
     let pageY = 0;
     let pageNumber = 1;
-    let logo;
-    let checkmark;
 
     let addDateTimeTitle = () => {
       const dateTimeTitleX = doubleSpace;
@@ -267,14 +104,11 @@ export class PdfService {
       this.doc.addImage(image, 'JPEG', imageX, imageY, pdfImageWidth, pdfImageHeight);
     }
 
+    //TODO: Make first page grab info dynamically
     let createFirstPage = () => {
       addDateTimeTitle();
       
-      // avoid race conditions for image placement
-      const imageX = singleSpace;
-      const imageY = singleSpace + doubleSpace;
-      
-      addImageOnPDF(logo, logoSize, imageX, imageY);
+      addImageOnPDF(logo, logoSize, pageX, pageY + singleSpace);
       pageY += largeSpace;
 
       this.doc.setFontSize(titleFontSize);
@@ -315,11 +149,13 @@ export class PdfService {
     }
 
     let createCandidateCard = (candidate) => {
+      //This adds the checkmark
       if (selectedCandidateIds.has(candidate.candidateId)) {
         this.doc.setFontType("bold");
-        addImageOnPDF(checkmark, 3, pageX - 4, pageY);
+        addImageOnPDF(checkmark, checkmarkSize, pageX - smallSpace, pageY - checkmarkSize);
       }
 
+      //This prints the candidate name. Separates first and last name if name too long.
       this.doc.setFontSize(defaultFontSize);
       if (candidate.lastName.length + candidate.firstName.length > 20) {
         this.doc.text(candidate.lastName.toUpperCase() + ",", pageX, pageY);
@@ -330,32 +166,38 @@ export class PdfService {
         this.doc.text(candidateName, pageX, pageY);
       }
 
+      //This prints the candidate organization
       if (candidate.organization) {
         pageY += singleSpace;
         this.doc.setFontSize(footerFontSize);
         this.doc.text(candidate.organization.toUpperCase(), pageX, pageY);
       }
 
+      //This returns the font size to normal after it is bolded from selection
       this.doc.setFontType("normal");
+
       pageY += doubleSpace + singleSpace;
     }
 
     let createRacePages = () => {
-      //currently using dummy race. not sure if object will actually look like this
-      //someone needs to create services.
-      dummyRaces.forEach(race => {
-        const candidateList = race["candidates"];
-        //const candidateList = pdfData["candidates"]
+      const races = pdfData["races"];
+      races.forEach(race => {
         let candidatesSelected = 0;
+        const candidateRaces = race["candidateRaces"];
         
         newPage();
         
-        candidateList.forEach(candidate => {
-          candidatesSelected += selectedCandidateIds.has(candidate.candidateId) ? 1 : 0;
+        //TODO: change this to also look at raceId
+        candidateRaces.forEach(candidateRace => {
+          const candidate = candidateRace.candidate;
+          if (candidate) {
+            candidatesSelected += selectedCandidateIds.has(candidate.candidateId) ? 1 : 0;
+          }
         });
 
+        //Race Title
         this.doc.setFontSize(headerFontSize);
-        const raceTitle = race.PositionName + ": " + candidatesSelected + " of " + race.NumberNeeded;
+        const raceTitle = race.positionName + ": " + candidatesSelected + " of " + race.numberNeeded;
         this.doc.text(raceTitle, pageX, pageY);
         pageY += doubleSpace;
         
@@ -370,39 +212,69 @@ export class PdfService {
         let columnNumber = 1;
         let candidatePageNumber = 1;
   
-        candidateList.forEach(candidate => {
-          let pageLength = MAX_PAGE_Y - doubleSpace;
-          let requiredHeight = singleSpace;
-          
-          if (candidate.lastName.length + candidate.firstName.length > 20) {
-            requiredHeight += singleSpace;
-          }
-          if (candidate.organization) {
-            requiredHeight += singleSpace;
-          }
-    
-          if (requiredHeight + pageY > pageLength) {
-            if (columnNumber === 4) {
-              newPage();
-              candidatePageNumber++;
-              columnNumber = 1;
-            } else {
-              columnNumber++;
-              pageX += MAX_PAGE_X / 4;
-              pageY = candidatePageNumber === 1 ? baseHeight : baseHeightWithoutTitle;
-              drawColumnDivider(columnNumber);
+        //Adds candidates. If candidate card is too long, will go to next column.
+        //On the 4th column, will create a new page instead.
+        candidateRaces.forEach(candidateRace => {
+          const candidate = candidateRace.candidate;
+          if (candidate) {
+            let pageLength = MAX_PAGE_Y - doubleSpace;
+            let requiredHeight = singleSpace;
+            
+            if (candidate.lastName.length + candidate.firstName.length > 20) {
+              requiredHeight += singleSpace;
             }
+            if (candidate.organization) {
+              requiredHeight += singleSpace;
+            }
+      
+            if (requiredHeight + pageY > pageLength) {
+              if (columnNumber === 4) {
+                newPage();
+                candidatePageNumber++;
+                columnNumber = 1;
+              } else {
+                columnNumber++;
+                pageX += MAX_PAGE_X / 4;
+                pageY = candidatePageNumber === 1 ? baseHeight : baseHeightWithoutTitle;
+                drawColumnDivider(columnNumber);
+              }
+            }
+            createCandidateCard(candidate);
           }
-          createCandidateCard(candidate);
         });
-
       });
     }
     
+    //TODO: Create new page when ballot issues get too long.
     let createBallotPages = () => {
-      //need APIs to create this.
+      const ballotIssues = pdfData["ballotIssues"];
+      if (ballotIssues) {
+        newPage();
+        addDateTimeTitle();
 
-      //newPage();
+        let issueNumber = 0;
+        ballotIssues.forEach(issue => {
+          issueNumber++;
+
+          //This adds issue header
+          this.doc.setFontSize(headerFontSize);
+          this.doc.setFontType("bold");
+          const ballotTitle = issueNumber + ": " + issue.ballotIssueTitle;
+          const splitTitle = this.doc.splitTextToSize(ballotTitle, MAX_PAGE_X - largeSpace);
+          this.doc.text(splitTitle, pageX, pageY);
+          this.doc.setFontType("normal");
+          let numberOfLines = splitTitle.length;
+          console.log(splitTitle);
+          console.log(numberOfLines);
+
+          //Value of 5.6 from trial and error
+          pageY += doubleSpace + (5.6 * (numberOfLines - 1));
+          
+          //Horizontal line
+          this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
+          pageY += doubleSpace;
+        });
+      }
     }
 
     let p1 = new Promise((resolve, reject) => {
@@ -413,7 +285,7 @@ export class PdfService {
       this.getBase64Image("https://banner2.kisspng.com/20180315/djw/kisspng-check-mark-computer-icons-clip-art-green-tick-mark-5aab1c5116d0a0.2098334515211633450935.jpg", resolve);
     });
 
-    Promise.all([p1, p2]).then((image) => {
+    Promise.all([p1, p2]).then(image => {
       logo = image[0];
       checkmark = image[1];
       createFirstPage();

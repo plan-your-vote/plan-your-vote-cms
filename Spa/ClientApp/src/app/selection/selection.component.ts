@@ -14,6 +14,7 @@ export class SelectionComponent implements OnInit {
   public candidates: Candidate[] = [];
   public races: Race[] = [];
   public issues: BallotIssue[] = [];
+
   //STEP1
   step1 = "";
   step1description = "";
@@ -25,9 +26,11 @@ export class SelectionComponent implements OnInit {
   //STEP4
   step4 = "";
 
-
   jsonData: any;
-  constructor(private dataFinder: JSONParserService, private _svc: CandidateService) { }
+  constructor(
+    private dataFinder: JSONParserService,
+    private _svc: CandidateService
+  ) { }
 
   ngOnInit() {
     this.parseDefaultEmail();
