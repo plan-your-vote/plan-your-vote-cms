@@ -9,17 +9,14 @@ import { Race } from 'src/app/models/Race';
   inputs: ['race']
 })
 export class CandidateTableComponent implements OnInit {
-  
   @Input() race;
 
   public candidates: Candidate[] = [];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  
   onSelect(c: Candidate, r: Race) {
     if (!c.selected) {
       c.selected = true;
@@ -28,10 +25,10 @@ export class CandidateTableComponent implements OnInit {
     } else {
       c.selected = false;
       localStorage.setItem('candidates', JSON.stringify(this.candidates));
-      r.selected = r.selected.filter(function (e) { return e.candidateId !== c.candidateId });
+      r.selected = r.selected.filter(function(e) {
+        return e.candidateId !== c.candidateId;
+      });
     }
     console.log(this.race);
   }
-
-
 }
