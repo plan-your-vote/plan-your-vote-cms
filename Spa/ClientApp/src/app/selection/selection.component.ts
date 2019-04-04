@@ -133,14 +133,7 @@ export class SelectionComponent implements OnInit {
       races: this.races,
       ballotIssues: this.issues
     };
-
-    console.log('this');
-    console.log(this);
-    console.log('localStorage');
-    console.log(localStorage);
-    console.log('pdfData');
-    console.log(pdfData);
-
+    
     this.pdfService.pdf(pdfData);
   }
 }
