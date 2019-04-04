@@ -6,24 +6,59 @@
   </div>
 </div>
 
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <ul class="navbar-nav navbar-expand-lg">
+        <li class="nav-item">
+          <a class="nav-link text-dark" [routerLink]="['/selection/step1']"
+            >Step 1</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" [routerLink]="['/selection/step2']"
+            >Step 2</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" [routerLink]="['/selection/step3']"
+            >Step 3</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" [routerLink]="['/selection/step4']"
+            >Step 4</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
+
 <form>
-  <app-step1
-    [step1title]="step1title"
-    [step1description]="step1description"
-    [races]="races"
-  ></app-step1>
+  <div [ngSwitch]="currentStep">
+    <app-step1
+      *ngSwitchCase="'step1'"
+      [step1title]="step1title"
+      [step1description]="step1description"
+      [races]="races"
+    ></app-step1>
 
-  <app-step2
-    [step2title]="step2title"
-    [step2description]="step2description"
-    [issues]="issues"
-  ></app-step2>
+    <app-step2
+      *ngSwitchCase="'step2'"
+      [step2title]="step2title"
+      [step2description]="step2description"
+      [issues]="issues"
+    ></app-step2>
 
-  <app-step3></app-step3>
+    <app-step3 *ngSwitchCase="'step3'"></app-step3>
 
-  <app-step4
-    [step4title]="step4title"
-    [races]="races"
-    [issues]="issues"
-  ></app-step4>
+    <app-step4
+      *ngSwitchCase="'step4'"
+      [step4title]="step4title"
+      [races]="races"
+      [issues]="issues"
+    ></app-step4>
+  </div>
 </form>

@@ -9,6 +9,7 @@ import { CandidateService } from "../services/candidate.service";
 import { ElectionService } from "src/app/services/election.service";
 import { JSONParserService } from "src/app/services/jsonparser.service";
 import { PdfService } from "src/app/services/pdf.service";
+import { ActivatedRoute, ParamMap } from "@angular/router";
 
 @Component({
   selector: "app-selection",
@@ -24,6 +25,8 @@ export class SelectionComponent implements OnInit {
 
   races: Race[] = [];
   issues: BallotIssue[] = [];
+
+  currentStep: string;
 
   //STEP1
   step1title = "";
@@ -42,7 +45,8 @@ export class SelectionComponent implements OnInit {
     private electionApi: ElectionService,
     private _svc: CandidateService,
     private pdfService: PdfService,
-    private candidatesApi: CandidateService
+    private candidatesApi: CandidateService,
+    private route: ActivatedRoute
   ) {
     this.index = 0;
 
@@ -63,11 +67,21 @@ export class SelectionComponent implements OnInit {
     });
   }
 
+  defaultStep: string = "step1";
   ngOnInit() {
     this.parseDefaultEmail();
 
     this.getRaces();
     this.getIssues();
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.currentStep = this.route.snapshot.params.step;
+    });
+
+    // one time default fake routing
+    if (this.currentStep == null) {
+      this.currentStep = this.defaultStep;
+    }
   }
 
   parseDefaultEmail() {
