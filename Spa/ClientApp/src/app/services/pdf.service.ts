@@ -91,7 +91,6 @@ export class PdfService {
       const pdfImageWidth = pdfImageHeight * imageRatio;
 
       this.doc.addImage(image, 'JPEG', imageX, imageY, pdfImageWidth, pdfImageHeight);
-      //this.doc.addSvgAsImage("data:image/svg+xml;charset=UTF-8,https://www.canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-en.svg", imageX, imageY, 59, 50);
     }
 
     //TODO: Make first page grab info dynamically
@@ -146,8 +145,7 @@ export class PdfService {
       //This adds the checkmark
       if (selected) {
         this.doc.setFontType("bold");
-        //TODO remove comment
-        //addImageOnPDF(checkmark, checkmarkSize, pageX - smallSpace, pageY - checkmarkSize);
+        addImageOnPDF(checkmark, checkmarkSize, pageX - smallSpace, pageY - checkmarkSize);
       }
 
       //This prints the candidate name. Separates first and last name if name too long.
@@ -241,14 +239,8 @@ export class PdfService {
       });
     }
     
-    //TODO: Create new page when ballot issues get too long.
     let createBallotPages = () => {
-      //const ballotIssues = pdfData["ballotIssues"];
-      let ballotIssues = [];
-      //TODO REMOVE WHEN BALLOT IS DONE
-      for(let i = 0 ; i < 20; i ++){
-        ballotIssues[i] = pdfData["ballotIssues"][1];
-      }
+      const ballotIssues = pdfData["ballotIssues"];
       if (ballotIssues) {
         newPage();
 
@@ -264,8 +256,7 @@ export class PdfService {
           const splitTitle = this.doc.splitTextToSize(ballotTitle, MAX_PAGE_X - largeSpace);
           let numberOfLines = splitTitle.length;
           let pageLength = MAX_PAGE_Y - doubleSpace;
-
-          let titleLength = largeSpace + (5.6 * (numberOfLines - 1));
+          let titleLength = doubleSpace + (5.6 * (numberOfLines - 1));
           requiredHeight = doubleSpace + titleLength;
           
           if (requiredHeight + pageY > pageLength) {
@@ -273,6 +264,7 @@ export class PdfService {
             this.doc.setFontSize(headerFontSize);
             this.doc.setFontType("bold");
           }
+
           this.doc.text(splitTitle, pageX, pageY);
           this.doc.setFontType("normal");
 
@@ -286,8 +278,6 @@ export class PdfService {
           //Horizontal line
           this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
           pageY += doubleSpace;
-
-          //TODO: Add selections
         });
       }
     }
