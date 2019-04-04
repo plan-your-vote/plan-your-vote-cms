@@ -70,50 +70,28 @@ namespace Web
             //if not set just use sqlite
             String DatabaseType = check.checkType() ?? "sqlite";
 
-            // switch (DatabaseType)
-            // {
-            //     case "mssql":
-            //         var hostname =Configuration["DBHOST"] ?? "localhost";
-            //         var pwd = Configuration["DBPASSWORD"] ?? "P@$$w0rd";
-            //         var connString = $"Data Source={hostname};Initial Catalog=OpenVoting;User ID=sa;Password={pwd};";
-            //         services.AddDbContext<ApplicationDbContext>(options =>
-            //             options.UseSqlServer(ConnectionString));
-            //         break;
-            //     case "mysql":
-            //         var host = Configuration["DBHOST"] ?? "tcp:172.17.0.2";
-            //         var port = Configuration["DBPORT"] ?? "3306";
-            //         var password = Configuration["DBPASSWORD"] ?? "secret";
+            switch (DatabaseType)
+            {
+                case "mssql":
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlServer(ConnectionString));
+                    break;
+                case "mysql":
+                    var host = Configuration["DBHOST"] ?? "tcp:172.17.0.2";
+                    var port = Configuration["DBPORT"] ?? "3306";
+                    var password = Configuration["DBPASSWORD"] ?? "secret";
 
-            //         services.AddDbContext<ApplicationDbContext>(options =>
-            //             options.UseMySql($"server={host};userid=root;password={password};port={port};database=openvoting"
-            //         ));
-            //         break;
-            //     default: //sqlite
-            //         services.AddDbContext<ApplicationDbContext>(options =>
-            //             options.UseSqlite(ConnectionString));
-            //         break;
-            // }
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseMySql($"server={host};userid=root;password={password};port={port};database=openvoting"
+                    ));
+                    break;
+                default: //sqlite
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlite(ConnectionString));
+                    break;
+            }
 
 
-            // var hostname = Configuration["DBHOST"] ?? "127.0.0.1, 1433";
-            // var pwd = Configuration["DBPASSWORD"] ?? "P@$$w0rd";
-            // var connString = $"Data Source={hostname};Initial Catalog=OpenVoting;User ID=SA;Password={pwd};";
-            // var connection = @"Server=db;Database=master;User=SA;Password=P@$$w0rd123;";
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlServer(connString));
-
-
-            var host = Configuration["DBHOST"] ?? "127.0.0.1";
-            var db = Configuration["DBNAME"] ?? "openvoting";
-            var port = Configuration["DBPORT"] ?? "1401";
-            var username = Configuration["DBUSERNAME"] ?? "sa";
-            var password = Configuration["DBPASSWORD"] ?? "Sql!Expre55";
-
-            string connStr = $"Data Source={host},{port};Integrated Security=False;";
-            connStr += $"User ID={username};Password={password};Database={db};";
-            connStr += $"Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connStr));
 
             /*
             services.AddDefaultIdentity<IdentityUser>()
