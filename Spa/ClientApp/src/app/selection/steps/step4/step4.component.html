@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>{{ step4title }}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mb40" *ngFor="let race of races">
+      <h5>Your Choices For {{ race.positionName }}</h5>
+      <div class="table-responsive table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Picture</th>
+              <th>Biography</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of race.selected">
+              <td>{{ c.firstName }}</td>
+              <td>{{ c.lastName }}</td>
+              <td><img src="{{ c.picture }}" /></td>
+              <td>{{ c.biography }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-12 mb80">
+      <h5>Your Planned Responses To Capital Plan Borrowing Questions</h5>
+      <div class="mb40" *ngFor="let issue of issues">
+        <p>{{ issue.ballotIssueTitle }}</p>
+        <p>
+          Answer: <b>{{ issue.answer }}</b>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6"></div>
+    <div class="col-md-6">
+      <app-email></app-email>
+      <app-icsfile></app-icsfile>
+      <button class="btn btn-secondary" (click)="generatePdf()">
+        Generate Voting Plan PDF
+      </button>
+    </div>
+  </div>
+</div>

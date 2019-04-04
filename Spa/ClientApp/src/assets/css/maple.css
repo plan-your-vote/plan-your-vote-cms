@@ -19,31 +19,31 @@ select {
   padding: 5px;
 }
 
-a {
-  color: #284162; /* Big links */
-}
-
-a:visited {
-  color: #7834bc;
-}
-
-button {
-  width: 80px;
-}
-
 .race-number-needed {
   font-weight: bold;
 }
 
-/*
-a {
-	color: #335075; // Small font-size Links
+.select-candidate-btn {
+  width: 80px;
 }
-*/
+
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ff3c43;
+}
+
+
+p {
+  text-align: justify;
+}
 
 /*
-
-background-color: #26374a; // dark background block
 color: #ffffff; // white text for dark background block
 border-bottom: 1px solid #af3c43; // red underline for dark background block
 
