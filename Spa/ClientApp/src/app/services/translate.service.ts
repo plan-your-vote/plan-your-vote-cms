@@ -19,17 +19,24 @@ export class TranslateService {
 
   use(lang: string): Promise<{}> {
     return new Promise<{}>((resolve, reject) => {
-      const langPath = '\/assets\/i18n\/' + (lang || 'en') + '.json';
-      this.http.get<{}>(langPath).subscribe(
-        translation => {
-          this.data = Object.assign({}, translation || {});
-          resolve(this.data);
-        },
-        error => {
-          this.data = {};
-          resolve(this.data);
-        }
-      );
+      switch (lang) {
+        case 'ko':
+          this.data = Object.assign({}, ko || {});
+          return resolve(this.data);
+        case 'zh-CN':
+          this.data = Object.assign({}, zhcn || {});
+          return resolve(this.data);
+        case 'zh-HK':
+          this.data = Object.assign({}, zhhk || {});
+          return resolve(this.data);
+        case 'zh-TW':
+          this.data = Object.assign({}, zhtw || {});
+          return resolve(this.data);
+        case 'en':
+        default:
+          this.data = Object.assign({}, en || {});
+          return resolve(this.data);
+      }
     });
   }
 }
