@@ -27,17 +27,17 @@ namespace Web.Data
 
                 await InsertUserAsync(userManager, roleManager);
 
-                var elections = GetElections().ToArray();
-                context.Elections.AddRange(elections);
-                context.SaveChanges();
+                // var elections = GetElections().ToArray();
+                // context.Elections.AddRange(elections);
+                // context.SaveChanges();
 
-                var pollingStations = GetPollingStations().ToArray();
-                context.PollingStations.AddRange(pollingStations);
-                context.SaveChanges();
+                // var pollingStations = GetPollingStations().ToArray();
+                // context.PollingStations.AddRange(pollingStations);
+                // context.SaveChanges();
 
-                var organizations = GetOrganizations().ToArray();
-                context.Organizations.AddRange(organizations);
-                context.SaveChanges();
+                // var organizations = GetOrganizations().ToArray();
+                // context.Organizations.AddRange(organizations);
+                // context.SaveChanges();
 
                 var races = GetRaces().ToArray();
                 context.Races.AddRange(races);
