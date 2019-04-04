@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VotingModelLibrary.Models
 {
@@ -14,7 +15,9 @@ namespace VotingModelLibrary.Models
         public int CandidateId { get; set; }
         public Candidate Candidate { get; set; }
 
-        public int RaceId { get; set; }
-        //public Race Race { get; set; }
+
+        public int? RaceId { get; set; }
+
+        public virtual Race Race { get; set; }
     }
 }

@@ -7,6 +7,8 @@ namespace VotingModelLibrary.Models
     {
         [Key]
         public int CandidateId { get; set; }
+
+        [Display(Name = "ElectionId")]
         public int ElectionId { get; set; }
         public Election Election { get; set; }
 
@@ -20,6 +22,8 @@ namespace VotingModelLibrary.Models
         public string Biography { get; set; }
         [Display(Name = "OrganizationId")]
         public int OrganizationId { get; set; }
+
+        
         [Display(Name = "Organization")]
         public Organization Organization { get; set; }
 
