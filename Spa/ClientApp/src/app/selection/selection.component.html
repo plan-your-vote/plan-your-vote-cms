@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <h1>Start Voting</h1>
+      <h1>Plan Your Vote</h1>
     </div>
   </div>
 </div>
@@ -9,31 +9,24 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <ul class="navbar-nav navbar-expand-lg">
-        <li class="nav-item">
-          <a class="nav-link text-dark" [routerLink]="['/selection/step1']"
-            >Step 1</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" [routerLink]="['/selection/step2']"
-            >Step 2</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" [routerLink]="['/selection/step3']"
-            >Step 3</a
-          >
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-dark" [routerLink]="['/selection/step4']"
-            >Step 4</a
-          >
-        </li>
-      </ul>
+      <div class="navbar navbar-expand">
+        <a class="nav-link nav-item" [routerLink]="['/selection/step1']"
+          >Step 1</a
+        >
+        <a class="nav-link nav-item" [routerLink]="['/selection/step2']"
+          >Step 2</a
+        >
+        <a class="nav-link nav-item" [routerLink]="['/selection/step3']"
+          >Step 3</a
+        >
+        <a class="nav-link nav-item" [routerLink]="['/selection/step4']"
+          >Step 4</a
+        >
+      </div>
     </div>
   </div>
 </div>
+
 <router-outlet></router-outlet>
 
 <form>

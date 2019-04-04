@@ -19,14 +19,6 @@ select {
   padding: 5px;
 }
 
-a {
-  color: #284162; /* Big links */
-}
-
-a:visited {
-  color: #7834bc;
-}
-
 .race-number-needed {
   font-weight: bold;
 }
