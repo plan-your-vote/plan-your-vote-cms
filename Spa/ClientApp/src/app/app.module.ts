@@ -16,7 +16,6 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 
 // services
 import { TranslateService } from './services/translate.service';
-import { JSONParserService } from './services/jsonparser.service';
 
 // pipes
 import { TranslatePipe } from './pipes/translate.pipe';
@@ -92,8 +91,7 @@ export function setupTranslateFactory(service: TranslateService): Function {
       useFactory: setupTranslateFactory,
       deps: [TranslateService],
       multi: true
-    },
-    JSONParserService
+    }
   ],
   bootstrap: [AppComponent]
 })
