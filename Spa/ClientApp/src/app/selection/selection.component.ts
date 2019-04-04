@@ -11,7 +11,6 @@ import { BallotIssue } from '../models/BallotIssue';
   styleUrls: ['./selection.component.less']
 })
 export class SelectionComponent implements OnInit {
-  public candidates: Candidate[] = [];
   public races: Race[] = [];
   public issues: BallotIssue[] = [];
   //STEP1
@@ -60,19 +59,6 @@ export class SelectionComponent implements OnInit {
         r.answer = "Unanswered";
       }
     });
-  }
-
-  onSelect(c: Candidate, r: Race) {
-    if (!c.selected) {
-      c.selected = true;
-      localStorage.setItem('candidates', JSON.stringify(this.candidates));
-      r.selected.push(c);
-    } else {
-      c.selected = false;
-      localStorage.setItem('candidates', JSON.stringify(this.candidates));
-      r.selected = r.selected.filter(function (e) { return e.candidateId !== c.candidateId });
-    }
-    console.log(this.races);
   }
 
   filterRaces(val: any) {
