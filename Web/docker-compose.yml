@@ -1,17 +1,12 @@
 version: '3'
 
-volumes:
-  datafiles:
-
 services:
   db:
-    image: mysql:latest
-    volumes:
-      - datafiles:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_TCP_PORT: 3306
+    image:  microsoft/mssql-server-linux
     restart: always
+    environment:
+      - sa_password=Sql!Expre55
+      - ACCEPT_EULA=Y
 
   mvc:
     build:
@@ -24,6 +19,8 @@ services:
     restart: always
     environment:
       - DBHOST=db
-      - DBPORT=3306
-      - DBPASSWORD=secret
+      - DBNAME=sql-docker
+      - DBPORT=1433
+      - DBUSERNAME=sa
+      - DBPASSWORD=Sql!Expre55
       - ASPNETCORE_ENVIRONMENT=Development

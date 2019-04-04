@@ -1,4 +1,4 @@
-FROM microsoft/aspnetcore:lts
+FROM microsoft/aspnetcore-build:lts
 COPY dist /app
 WORKDIR /app
 EXPOSE 80/tcp

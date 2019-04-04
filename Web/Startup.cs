@@ -93,11 +93,28 @@ namespace Web
             //             options.UseSqlite(ConnectionString));
             //         break;
             // }
-            var hostname = Configuration["DBHOST"] ?? "localhost";
-            var pwd = Configuration["DBPASSWORD"] ?? "P@$$w0rd";
-            var connString = $"Data Source={hostname};Initial Catalog=OpenVoting;User ID=sa;Password={pwd};";
+
+
+            // var hostname = Configuration["DBHOST"] ?? "127.0.0.1, 1433";
+            // var pwd = Configuration["DBPASSWORD"] ?? "P@$$w0rd123";
+            // var connString = $"Data Source={hostname};Initial Catalog=OpenVoting;User ID=sa;Password={pwd};";
+            // var connection = @"Server=db;Database=master;User=SA;Password=P@$$w0rd123;";
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            //     options.UseSqlServer(connString));
+
+
+            var host = Configuration["DBHOST"] ?? "localhost";
+            var db = Configuration["DBNAME"] ?? "AspCoreSqlExpress";
+            var port = Configuration["DBPORT"] ?? "1433";
+            var username = Configuration["DBUSERNAME"] ?? "sa";
+            var password = Configuration["DBPASSWORD"] ?? "Sql!Expre55";
+
+            string connStr = $"Data Source={host},{port};Integrated Security=False;";
+            connStr += $"User ID={username};Password={password};Database={db};";
+            connStr += $"Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(ConnectionString));
+                options.UseSqlServer(connStr));
 
             /*
             services.AddDefaultIdentity<IdentityUser>()
