@@ -21,20 +21,21 @@ export class TranslateService {
     return new Promise<{}>((resolve, reject) => {
       switch (lang) {
         case 'ko':
-          resolve(ko);
-          break;
-        case 'zhcn':
-          resolve(zhcn);
-          break;
-        case 'zhhk':
-          resolve(zhhk);
-          break;
-        case 'zhtw':
-          resolve(zhtw);
-          break;
+          this.data = Object.assign({}, ko || {});
+          return resolve(this.data);
+        case 'zh-CN':
+          this.data = Object.assign({}, zhcn || {});
+          return resolve(this.data);
+        case 'zh-HK':
+          this.data = Object.assign({}, zhhk || {});
+          return resolve(this.data);
+        case 'zh-TW':
+          this.data = Object.assign({}, zhtw || {});
+          return resolve(this.data);
         case 'en':
-          resolve(en);
-          break;
+        default:
+          this.data = Object.assign({}, en || {});
+          return resolve(this.data);
       }
     });
   }
