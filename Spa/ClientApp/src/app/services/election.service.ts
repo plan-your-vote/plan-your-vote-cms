@@ -4,9 +4,7 @@ import { Election } from 'src/app/models/election';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-const API_URL = "https://localhost:5001/api/election";
-//TODO:Change this API
-//const API_URL = "https://votingtoolmock.azurewebsites.net/api/bogus/election";
+const API_URL = "https://pyv.azurewebsites.net/api/election";
 
 const httpOptions = {
   headers: new HttpHeaders(
