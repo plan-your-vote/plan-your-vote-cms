@@ -7,6 +7,7 @@ import { CandidateService } from './services/candidate.service';
 import { ThemeService } from './services/theme.service';
 import { FormsModule } from '@angular/forms';
 import { Race } from './models/Race';
+import { BallotIssue } from './models/BallotIssue';
 
 const THEME_BASE_PATH = './assets/css';
 const THEME_DEFAULT = '/default.css';
@@ -30,6 +31,7 @@ export class AppComponent implements OnInit {
   candidates: Candidate[];
   index: number;
   data: Election[] = [];
+  issues: BallotIssue[] = [];
   selectedCssFilepath: string;
 
   title = 'ClientApp';
@@ -125,7 +127,7 @@ export class AppComponent implements OnInit {
       electionInfo: this.currentElection,
       candidates: this.candidates,
       races: this.races,
-      //ballotIssues: this.ballotIssues,
+      //ballotIssues: this.issues,
       selectedCandidateIds: selectedCandidateIds
     };
 

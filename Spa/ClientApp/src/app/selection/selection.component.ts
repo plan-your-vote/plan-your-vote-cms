@@ -106,7 +106,7 @@ export class SelectionComponent implements OnInit {
     this.step2 = this.jsonData.default.step2;
     this.step2description = this.jsonData.default.step2description;
   }
-    populateReview() {
-      this.step4 = this.jsonData.default.step4;
-    }
+  populateReview() {
+    this.step4 = this.jsonData.default.step4;
+  }
 }
