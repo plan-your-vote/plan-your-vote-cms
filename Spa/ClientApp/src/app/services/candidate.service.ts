@@ -4,7 +4,7 @@ import { Candidate } from 'src/app/models/candidate';
 import { Race } from '../models/Race';
 import { BallotIssue } from '../models/BallotIssue';
 
-const clientsUrl = "https://localhost:5001/api/races";              //DEV AND TESTING
+const clientsUrl = "https://localhost:5001/api/candidates";              //DEV AND TESTING
 //const clientsUrl = "http://cityvote.azurewebsites.net/api/candidates"     //PRODUCTION
 
 @Injectable({
@@ -18,7 +18,7 @@ export class CandidateService {
 
   getRaces() {
     const url = `${clientsUrl}`
-    return this.http.get<Race[]>(url);
+    return this.http.get<Race[]>("https://localhost:5001/api/races");
   }
 
   getCandidates() {

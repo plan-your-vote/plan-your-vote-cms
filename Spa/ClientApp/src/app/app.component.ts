@@ -6,6 +6,7 @@ import { ElectionService } from './services/election.service';
 import { CandidateService } from './services/candidate.service';
 import { ThemeService } from './services/theme.service';
 import { FormsModule } from '@angular/forms';
+import { Race } from './models/Race';
 
 const THEME_BASE_PATH = './assets/css';
 const THEME_DEFAULT = '/default.css';
@@ -25,6 +26,7 @@ const THEME_SNOWDROP = '/snowdrop.css';
 export class AppComponent implements OnInit {
   elections: Election[] = [];
   currentElection: Election;
+  races: Race[];
   candidates: Candidate[];
   index: number;
   data: Election[] = [];
@@ -51,6 +53,10 @@ export class AppComponent implements OnInit {
         this.currentElection = this.data[this.index];
         console.log(this.data);
       }
+    });
+    
+    this.candidatesApi.getRaces().subscribe(races => {
+      this.races = races;
     });
 
     this.candidatesApi.getCandidates().subscribe(candidates => {
@@ -103,6 +109,7 @@ export class AppComponent implements OnInit {
    * Needs to implement candidate selection after Greg implements.
    */
   generatePdf() {
+    console.log(this);
     let selectedCandidateIds = new Set();
     
     if (localStorage.getItem('candidates')) {
@@ -117,6 +124,8 @@ export class AppComponent implements OnInit {
       dateTime: new Date().toLocaleString(),
       electionInfo: this.currentElection,
       candidates: this.candidates,
+      races: this.races,
+      //ballotIssues: this.ballotIssues,
       selectedCandidateIds: selectedCandidateIds
     };
 
