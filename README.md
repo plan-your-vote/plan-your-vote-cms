@@ -14,3 +14,6 @@ Open Voting Tool
 
 ## Database Config
 [Database Config] (./doc/dbconfig.md) how to configure database for different sources
+
+## Deploy on docker container with SQLite
+docker-compose -f build.yml up --build
