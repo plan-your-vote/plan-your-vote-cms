@@ -22,7 +22,6 @@ import { JSONParserService } from './services/jsonparser.service';
 import { TranslatePipe } from './pipes/translate.pipe';
 
 // components
-import { CandidateItemComponent } from './components/candidate-item/candidate-item.component';
 import { MapComponentComponent } from './components/map-component/map-component.component';
 import { EmailComponent } from './components/email/email.component';
 import { IcsfileComponent } from './components/icsfile/icsfile.component';
@@ -46,7 +45,6 @@ export function setupTranslateFactory(service: TranslateService): Function {
     HomeComponent,
     CounterComponent,
     TranslatePipe,
-    CandidateItemComponent,
     MapComponentComponent,
     EmailComponent,
     FooterMenuComponent,
