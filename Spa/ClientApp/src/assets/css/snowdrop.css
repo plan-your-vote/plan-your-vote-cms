@@ -1,10 +1,39 @@
 /*  */
 
-.navbar-brand {
-  color: #203f19 !important;
+/* .colour-palette {
+  color: #203f19;
+  color: #315317;
+  color: #d2d7d2;
+  color: #778e6b;
+  color: #96a77c;
+  color: #9ead9b;
+  color: #8f9c94;
+  color: #5f6c5c;
+} */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #203f19;
+}
+
+a {
+  color: #315317;
+}
+
+::selection {
+  background: #3f5c28;
+  color: #fff;
 }
 
 /* Footer */
+
+#footer {
+  background-color: #c4cac6;
+}
 
 @media (max-width: 767.98px) {
   #footer-share + select {
