@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using VotingModelLibrary.Models;
 using Web.ViewModels;
 using Web.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.CmsControllers
 {
+    [Authorize]
     public class RaceViewModel
     {
         public int ElectionId { get; set; }
