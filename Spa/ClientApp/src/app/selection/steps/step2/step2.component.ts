@@ -5,8 +5,6 @@ import { BallotIssue } from "src/app/models/BallotIssue";
   selector: "app-step2",
   templateUrl: "./step2.component.html",
   styleUrls: ["./step2.component.less"],
-
-  inputs: ["step2title", "step2description", "issues"]
 })
 export class Step2Component implements OnInit {
   @Input() public step2title: string;

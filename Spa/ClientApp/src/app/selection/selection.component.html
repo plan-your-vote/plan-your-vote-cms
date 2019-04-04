@@ -9,7 +9,7 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      <div class="navbar navbar-expand">
+      <div class="navbar navbar-expand subnavbar">
         <a class="nav-link nav-item" [routerLink]="['/selection/step1']"
           >Step 1</a
         >
@@ -45,7 +45,11 @@
       [issues]="issues"
     ></app-step2>
 
-    <app-step3 *ngSwitchCase="'step3'"></app-step3>
+    <app-step3
+      *ngSwitchCase="'step3'"
+      [step3title]="step3title"
+      [step3description]="step3description"
+    ></app-step3>
 
     <app-step4
       *ngSwitchCase="'step4'"

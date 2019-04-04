@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h3>{{ step2title }}</h3>
+      <h2>{{ step2title }}</h2>
       <p>{{ step2description }}</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12" *ngFor="let issue of issues">
+    <div class="col-md-12 mb40" *ngFor="let issue of issues">
       <h5>{{ issue.ballotIssueTitle }}</h5>
       <p>{{ issue.description }}</p>
       <div *ngFor="let option of issue.ballotIssueOptions">

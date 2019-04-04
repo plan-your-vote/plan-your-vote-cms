@@ -36,6 +36,10 @@ export class SelectionComponent implements OnInit {
   step2title = "";
   step2description = "";
 
+  //STEP3
+  step3title = "";
+  step3description = "";
+
   //STEP4
   step4title = "";
 
@@ -96,6 +100,7 @@ export class SelectionComponent implements OnInit {
     this.jsonData = data;
     this.populateStepOne();
     this.populateStepTwo();
+    this.populateStepThree();
     this.populateReview();
   }
 
@@ -106,6 +111,10 @@ export class SelectionComponent implements OnInit {
   populateStepTwo() {
     this.step2title = this.jsonData.default.step2title;
     this.step2description = this.jsonData.default.step2description;
+  }
+  populateStepThree() {
+    this.step3title = this.jsonData.default.step3title;
+    this.step3description = this.jsonData.default.step3description;
   }
   populateReview() {
     this.step4title = this.jsonData.default.step4title;

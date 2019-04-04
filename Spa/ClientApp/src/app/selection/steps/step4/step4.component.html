@@ -1,12 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <h3>{{ step4title }}</h3>
+      <h2>{{ step4title }}</h2>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12" *ngFor="let race of races">
-      <h5>YOUR CHOICES FOR {{ race.positionName }}</h5>
+    <div class="col-md-12 mb40" *ngFor="let race of races">
+      <h5>Your Choices For {{ race.positionName }}</h5>
       <div class="table-responsive table-container">
         <table class="table">
           <thead>
@@ -28,9 +28,9 @@
         </table>
       </div>
     </div>
-    <div class="col-md-12">
-      <h5>YOUR PLANNED RESPONSES TO CAPITAL PLAN BORROWING QUESTIONS</h5>
-      <div *ngFor="let issue of issues">
+    <div class="col-md-12 mb80">
+      <h5>Your Planned Responses To Capital Plan Borrowing Questions</h5>
+      <div class="mb40" *ngFor="let issue of issues">
         <p>{{ issue.ballotIssueTitle }}</p>
         <p>
           Answer: <b>{{ issue.answer }}</b>
