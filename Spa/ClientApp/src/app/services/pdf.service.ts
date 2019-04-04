@@ -261,17 +261,19 @@ export class PdfService {
           console.log(splitTitle);
           console.log(numberOfLines);
 
-          //Value of 5.6 from trial and error
+          //Value of 5.6 works best from experimenting
           pageY += doubleSpace + (5.6 * (numberOfLines - 1));
           
           //Horizontal line
           this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
           pageY += doubleSpace;
+
+          //TODO: Add selections
         });
       }
     }
 
-    //TODO
+    //TODO make this work for SVG images.
     let p1 = new Promise((resolve, reject) => {
       const electionImages = JSON.parse(pdfData["electionBanner"])
       let imageFormat;
@@ -291,7 +293,7 @@ export class PdfService {
       }
     });
     
-    //TODO remove
+    //TODO: remove p3 when p1 is done
     let p3 = new Promise((resolve, reject) => {
       this.getBase64Image("https://www.worldatlas.com/webimage/flags/countrys/zzzflags/calarge.gif", resolve);
     });
@@ -300,6 +302,7 @@ export class PdfService {
       this.getBase64Image("https://banner2.kisspng.com/20180315/djw/kisspng-check-mark-computer-icons-clip-art-green-tick-mark-5aab1c5116d0a0.2098334515211633450935.jpg", resolve);
     });
 
+    //TODO: change p3 to p1 when p1 is done
     Promise.all([p3, p2]).then(image => {
       logo = image[0];
       checkmark = image[1];
