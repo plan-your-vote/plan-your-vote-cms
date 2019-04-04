@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PollingStation } from 'src/app/models/pollingstation';
 
-const API_URL = 'https://localhost:44307/api/PollingStations'; //DEV AND TESTING
-//const API_URL = "http://cityvote.azurewebsites.net/api/PollingStations"     //PRODUCTION
+// const API_URL = 'https://localhost:44307/api/PollingStations'; //DEV AND TESTING
+const API_URL = "http://pyv.azurewebsites.net/api/PollingStations"     //PRODUCTION
 
 @Injectable({
   providedIn: 'root'
