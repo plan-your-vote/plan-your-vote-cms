@@ -8,6 +8,7 @@
         <th>Last Name</th>
         <th>Picture</th>
         <th>Biography</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -19,9 +20,9 @@
         <button
           type="button"
           (click)="onSelect(cr.candidate, race)"
-          class="glyphicon glyphicon-check"
+          class="btn glyphicon glyphicon-check"
         >
-          {{ cr.candidate.selected ? "Cancel" : "Select" }}
+          {{ cr.candidate.selected ? 'Cancel' : 'Select' }}
         </button>
       </tr>
     </tbody>
