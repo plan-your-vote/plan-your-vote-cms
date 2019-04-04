@@ -20,6 +20,8 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace Web
 {
@@ -54,16 +56,55 @@ namespace Web
 
             // string executableLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
             // string path = Path.GetDirectoryName(executableLocation).Split("bin")[0];
-            string cs = Configuration.GetConnectionString("DefaultConnection");
+            //string cs = Configuration.GetConnectionString("DefaultConnection");
             // string[] csSplit = cs.Split("=");
             // cs = csSplit[0] + "=" + path + csSplit[1];
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            //Choosing a db service
+            CheckDB check = new CheckDB();
+            
+            //check for environment variables (described in docs/dbconfig.md)
+            //if variable is not set, grab from appsettings.json
+            String ConnectionString = check.getConnectionStringEnvVar() ?? Configuration.GetConnectionString("DefaultConnection");
 
+            //if not set just use sqlite
+            String DatabaseType = check.checkType() ?? "sqlite";
+
+            switch (DatabaseType)
+            {
+                case "mssql":
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlServer(ConnectionString));
+                    break;
+                case "mysql":
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseMySql(ConnectionString, mySqlOptions => 
+                        {
+                            mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
+                        }));
+                    break;
+                default: //sqlite
+                    services.AddDbContext<ApplicationDbContext>(options =>
+                        options.UseSqlite(ConnectionString));
+                    break;
+            }
+            /*
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>();*/
+            services.AddIdentity<IdentityUser, IdentityRole>(
+               option =>
+               {
+                   option.Password.RequireDigit = false;
+                   option.Password.RequiredLength = 6;
+                   option.Password.RequireNonAlphanumeric = false;
+                   option.Password.RequireUppercase = false;
+                   option.Password.RequireLowercase = false;
+               }
+           ).AddEntityFrameworkStores<ApplicationDbContext>()
+           .AddDefaultTokenProviders()
+           .AddDefaultUI(UIFramework.Bootstrap4);
+
 
             services.AddSwaggerGen(c =>
             {
@@ -85,6 +126,14 @@ namespace Web
                 .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 .AddDataAnnotationsLocalization()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddMvc()
+                .AddDataAnnotationsLocalization(options => {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    factory.Create(typeof(SharedResources));
+        }).AddJsonOptions(options => {
+            options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        }); ;
 
             services.Configure<RequestLocalizationOptions>(opts =>
             {
@@ -140,8 +189,9 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            DummyData.Initialize(app).Wait(); ;
             StateInit.Initialize(context);
-            DummyData.Initialize(context);
+            ThemesInit.Initialize(context);
         }
     }
 }

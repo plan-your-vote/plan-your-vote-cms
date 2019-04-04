@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Confirm Password" xml:space="preserve">
+    <value>Confirmez le mot de passe</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirmez le mot de passe</value>
   </data>
@@ -131,5 +134,11 @@
   </data>
   <data name="Register" xml:space="preserve">
     <value>registre</value>
+  </data>
+  <data name="The password and confirmation password do not match." xml:space="preserve">
+    <value>Le mot de passe et le mot de passe de confirmation ne correspondent pas.</value>
+  </data>
+  <data name="The {0} must be at least {2} and at max {1} characters long." xml:space="preserve">
+    <value>Le {0} doit comporter au moins {2} et au maximum {1} caractères.</value>
   </data>
 </root>

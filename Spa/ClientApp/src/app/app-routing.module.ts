@@ -1,16 +1,23 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
-import { CandidateListComponent } from './components/candidate-list/candidate-list.component';
+import { HomeComponent } from "./home/home.component";
+import { SelectionComponent } from "./selection/selection.component";
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'counter', component: CounterComponent },
-  { path: 'fetch-data', component: FetchDataComponent },
-  { path: 'candidates', component: CandidateListComponent }
+  { path: "", component: HomeComponent, pathMatch: "full" },
+  { path: "selection", component: SelectionComponent, },
+  {
+    path: "selection/:step",
+    component: SelectionComponent,
+    children: [
+      {
+        path: "",
+        redirectTo: "step1",
+        pathMatch: "full"
+      }
+    ]
+  }
 ];
 
 @NgModule({

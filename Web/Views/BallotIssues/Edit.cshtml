@@ -1,4 +1,4 @@
-﻿@model VotingModelLibrary.Models.BallotIssue
+﻿@model Web.Models.BallotIssueCreate
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
@@ -15,7 +15,6 @@
         <div class="col-md-4">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="BallotIssueId" />
                 <div class="form-group">
                     <label asp-for="BallotIssueTitle" class="control-label"></label>
                     <input asp-for="BallotIssueTitle" class="form-control" />
@@ -25,6 +24,19 @@
                     <label asp-for="Description" class="control-label"></label>
                     <input asp-for="Description" class="form-control" />
                     <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <label class="control-label">@Localizer["Options"]</label>
+                <div class="form-group">
+                    <input asp-for="OptionsTitles[0]" value="Yes" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input asp-for="OptionsTitles[1]" value="No" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input asp-for="OptionsTitles[2]" placeholder="Optional" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input asp-for="OptionsTitles[3]" placeholder="Optional" class="form-control" />
                 </div>
                 <div class="form-group">
                     <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
