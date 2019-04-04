@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  emailUrl: 'http://vote-web.azurewebsites.net/api/email'
+  emailUrl: 'https://pyv.azurewebsites.net/api/email'
 };
