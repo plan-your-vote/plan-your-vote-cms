@@ -7,10 +7,11 @@
   </div>
   <div class="row">
     <div class="col-sm-3">
-      <label for="filterRace" class="col-form-label">Filter by: </label>
+      <label for="filterRace" class="col-form-label" id="filterBy">Filter by: </label>
     </div>
     <div class="col-sm-9">
       <select
+        aria-describedby="filterBy"
         id="filterRace"
         class="form-control"
         name="race"
