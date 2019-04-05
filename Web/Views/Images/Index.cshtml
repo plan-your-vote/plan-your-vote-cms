@@ -3,16 +3,16 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = @Localizer["Index"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>@Localizer["Index"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@Localizer["Create New"]</a>
 </p>
-<table class="table">
+<table class="table panel panel-default">
     <thead>
         <tr>
             <th>
@@ -47,7 +47,7 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { ThemeName=item.ThemeName, ID=item.ID }) |
+                    @Html.ActionLink("Edit", "Edit", new { ThemeName = item.ThemeName, ID = item.ID }) |
                     @Html.ActionLink("Details", "Details", new { ThemeName = item.ThemeName, ID = item.ID }) |
                     @Html.ActionLink("Delete", "Delete", new { ThemeName = item.ThemeName, ID = item.ID })
                 </td>

@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 aria-label="The following Capital Plan Borrowing Questions are answered with yes or no radio buttons.">{{ step2title }}</h2>
+      <p>{{ step2description }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 mb40" *ngFor="let issue of issues">
+      <h5 id="issue">{{ issue.ballotIssueTitle }}</h5>
+      <p>{{ issue.description }}</p>
+      <div *ngFor="let option of issue.ballotIssueOptions" role="radiogroup" attr.aria-describedby="{{issue.ballotIssueTitle}}">
+        <input
+          type="radio"
+          attr.aria-label="{{ option.issueOptionInfo }} for {{ issue.ballotIssueTitle }}"
+          name="{{ issue.ballotIssueTitle }}"
+          [(ngModel)]="issue.answer"
+          value="{{ option.issueOptionInfo }}"
+        />
+        <span attr.aria-describedby="{{ issue.ballotIssueTitle }}">{{ option.issueOptionInfo }}</span>
+      </div>
+    </div>
+  </div>
+</div>

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
-const API_URL = 'https://localhost:5001/api/theme/';
+const API_URL = 'https://pyv.azurewebsites.net/api/theme'; // Deployment
 
 @Injectable({
   providedIn: 'root'

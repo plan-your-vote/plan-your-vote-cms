@@ -1,11 +1,11 @@
-<footer>
+<footer id="footer">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
         <img id="footer-logo" [src]="logo.value" alt="Logo" />
-        <p id="footer-copyright">
+        <div id="footer-copyright">
           &copy; 2019 {{ 'FOOTER.CITY' | translate }}
-        </p>
+        </div>
         <ul id="footer-nav">
           <li>
             <a href="#" target="_blank">
@@ -55,6 +55,7 @@
           </li>
         </ul>
         <select
+          aria-label="Change language to: "
           id="footer-select-lang"
           (change)="onLangChange($event)"
           [(ngModel)]="defaultLanguage"

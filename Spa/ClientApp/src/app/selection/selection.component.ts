@@ -1,67 +1,115 @@
-import { Component, OnInit } from '@angular/core';
-import { JSONParserService } from 'src/app/services/jsonparser.service';
-import { Candidate } from 'src/app/models/candidate';
-import { Race } from 'src/app/models/Race';
-import { CandidateService } from '../services/candidate.service';
-import { BallotIssue } from '../models/BallotIssue';
-import { CandidateRace } from '../models/CandidateRace';
+import { Component, OnInit } from "@angular/core";
+
+import { BallotIssue } from "../models/BallotIssue";
+import { Candidate } from "src/app/models/candidate";
+import { Election } from "src/app/models/election";
+import { Race } from "src/app/models/Race";
+
+import { CandidateService } from "../services/candidate.service";
+import { ElectionService } from "src/app/services/election.service";
+import { PdfService } from "src/app/services/pdf.service";
+import { ActivatedRoute, ParamMap } from "@angular/router";
+import { JsonLinkerService } from '../services/json-linker.service';
 
 @Component({
-  selector   : 'app-selection',
-  templateUrl: './selection.component.html',
-  styleUrls  : ['./selection.component.less']
+  selector   : "app-selection",
+  templateUrl: "./selection.component.html",
+  styleUrls  : ["./selection.component.less"]
 })
 export class SelectionComponent implements OnInit {
-  public selectedRaces: Race[] = [];
-  public races: Race[]         = [];
-  public issues: BallotIssue[] = [];
+  candidates     : Candidate[];
+  currentElection: Object;
+  races          : Race[] = [];
+  issues         : BallotIssue[] = [];
+
+  currentStep: string;
+
   //STEP1
-  step1            = "";
+  step1title       = "";
   step1description = "";
 
   //STEP2
-  step2            = "";
+  step2title       = "";
   step2description = "";
 
-  //STEP4
-  step4 = "";
+  //STEP3
+  step3title       = "";
+  step3description = "";
 
+  //STEP4
+  step4title = "";
 
   jsonData: any;
-  constructor(private dataFinder: JSONParserService, private _svc: CandidateService) { }
+  constructor(
+    private electionApi  : ElectionService,
+    private _svc         : CandidateService,
+    private pdfService   : PdfService,
+    private candidatesApi: CandidateService,
+    private route        : ActivatedRoute,
+    private _json        : JsonLinkerService
+  ) {
+    this.electionApi.getElection().subscribe(election => {
+      this.currentElection = election;
+    });
 
+    this.candidatesApi.getCandidates().subscribe(candidates => {
+      this.candidates = candidates;
+    });
+  }
+
+  defaultStep: string = "step1";
   ngOnInit() {
     this.parseDefaultEmail();
+
     this.getRaces();
     this.getIssues();
+
+    this.route.paramMap.subscribe((params: ParamMap) => {
+      this.currentStep = this.route.snapshot.params.step;
+    });
+
+    // one time default fake routing
+    if (this.currentStep == null) {
+      this.currentStep = this.defaultStep;
+    }
   }
+  
   parseDefaultEmail() {
-    this.dataFinder.getJSONDataAsync("./assets/data/selection-content.json").then(data => {
+    this._json.getSelectionContent().then(data => {
       this.SetQueryOptionsData(data);
-    })
+    });
+  }
+
+  SetQueryOptionsData(data: any) {
+    this.jsonData = data;
+    this.populateStepOne();
+    this.populateStepTwo();
+    this.populateStepThree();
+    this.populateReview();
+  }
+
+  populateStepOne() {
+    this.step1title       = this.jsonData.default.step1title;
+    this.step1description = this.jsonData.default.step1description;
+  }
+  populateStepTwo() {
+    this.step2title       = this.jsonData.default.step2title;
+    this.step2description = this.jsonData.default.step2description;
+  }
+  populateStepThree() {
+    this.step3title       = this.jsonData.default.step3title;
+    this.step3description = this.jsonData.default.step3description;
+  }
+  populateReview() {
+    this.step4title = this.jsonData.default.step4title;
   }
 
   getRaces(): void {
     this._svc.getRaces().subscribe(data => {
       this.races = data;
-      for (let r of this.races) {
-        r.show     = "true";
-        r.selected = [];
-      }
-      if (localStorage.getItem('selectedRaces')) {
-        this.selectedRaces = JSON.parse(localStorage.getItem('selectedRaces'));
-        this.selectedRaces.forEach(s => {
-          const r: Race = this.races.find(element => element.raceId === s.raceId);
-          if(r) {
-            r.selected = s.selected;
-            s.candidateRaces.forEach(scr => {
-              const cr: CandidateRace = r.candidateRaces.find(element => element.candidateId === scr.candidateId);
-              if(cr && scr.candidate.selected === true) {
-                cr.candidate.selected = true;
-              }
-            });
-          }
-        });
+      for (let race of this.races) {
+        race.show     = "true";
+        race.selected = [];
       }
     });
   }
@@ -69,66 +117,24 @@ export class SelectionComponent implements OnInit {
   getIssues(): void {
     this._svc.getBallotIssues().subscribe(data => {
       this.issues = data;
-      for (let r of this.issues) {
-        r.answer = "Unanswered";
+      for (let issue of this.issues) {
+        issue.answer = "Unanswered";
       }
     });
   }
 
-  onSelect(c: Candidate, r: Race) {
-    if (!c.selected) {
-      c.selected = true;
-      r.selected.push(c);
-      var unique: Boolean = true;
-      for(let s of this.selectedRaces) {
-        if (s.raceId == r.raceId)
-          unique = false;
-      }
-      if(unique)
-        this.selectedRaces.push(r);
-    } else {
-      c.selected = false;
-      r.selected = r.selected.filter(function (e) { return e.candidateId !== c.candidateId });
-      // remove race data from localStorage if no candidates are selected
-      if(r.selected.length == 0) {
-        this.selectedRaces.splice(this.selectedRaces.indexOf(r), 1);
-      }
-    }
-    localStorage.setItem('selectedRaces', JSON.stringify(this.selectedRaces));
+  /**
+   * Attached to 'Try PDF' button.
+   */
+  generatePdf() {
+    const pdfData: object = {
+      dateTime      : new Date().toLocaleString(),
+      electionInfo  : this.currentElection,
+      electionBanner: localStorage.images,
+      races         : this.races,
+      ballotIssues  : this.issues
+    };
+    
+    this.pdfService.pdf(pdfData);
   }
-
-  filterRaces(val: any) {
-    if (val == "All Races") {
-      for (let r of this.races) {
-        r.show = "true";
-      }
-    } else {
-      for (let r of this.races) {
-        if (val != r.positionName) {
-          r.show = "false";
-        } else {
-          r.show = "true";
-        }
-     }
-    }
-  }
-
-  SetQueryOptionsData(data: any) {
-    this.jsonData = data;
-    this.populateStepOne();
-    this.populateStepTwo();
-    this.populateReview();
-  }
-
-  populateStepOne() {
-    this.step1            = this.jsonData.default.step1;
-    this.step1description = this.jsonData.default.step1description;
-  }
-  populateStepTwo() {
-    this.step2            = this.jsonData.default.step2;
-    this.step2description = this.jsonData.default.step2description;
-  }
-    populateReview() {
-      this.step4 = this.jsonData.default.step4;
-    }
 }

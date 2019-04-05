@@ -12,6 +12,8 @@
 </div>
 
 <br />
+@if (User.Identity.IsAuthenticated)
+{
 
 <section class="content-header">
     <h1 class="display-3">@Localizer["Dashboard"]</h1>
@@ -43,7 +45,7 @@
                 <div class="icon">
                     <i class="material-icons">account_box</i>
                 </div>
-                <a class="small-box-footer" asp-area="" asp-controller="Polling Stations" asp-action="Index">
+                <a class="small-box-footer" asp-area="" asp-controller="PollingStations" asp-action="Index">
                     @Localizer["More info"] <i class="material-icons">chevron_right</i>
                 </a>
             </div>
@@ -64,3 +66,4 @@
         </div>
     </div>
 </section>
+}

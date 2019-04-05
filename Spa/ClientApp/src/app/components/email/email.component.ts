@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { EmailService } from "src/app/services/email.service";
-import { JSONParserService } from 'src/app/services/jsonparser.service';
+import { JsonLinkerService } from 'src/app/services/json-linker.service';
 
 const regexp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
@@ -18,14 +18,14 @@ export class EmailComponent implements OnInit {
   defaultMessage: string;
   defaultSubject: string;
 
-  constructor(private emailService: EmailService, private dataFinder: JSONParserService) { }
+  constructor(private emailService: EmailService, private _json : JsonLinkerService) { }
 
   ngOnInit() {
     this.parseDefaultEmail();
   }
 
   parseDefaultEmail() {
-    this.dataFinder.getJSONDataAsync("./assets/data/email.json").then(data => {
+    this._json.getEmailJSON().then(data => {
       this.setQueryOptionsData(data);
     })
   }
