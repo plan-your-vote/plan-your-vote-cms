@@ -1,6 +1,6 @@
 <div class="col-md-12">
   <section class="intro">
-    <h2 id="launch-anchor" tabindex="-1">Plan Your Vote</h2>
+    <h2 id="launch-anchor" tabindex="-1" aria-label="Plan Your Vote Home Page. Plan your Vote.">Plan Your Vote</h2>
 
     <p>
       Be prepared for the random order ballot. Choose candidates, answer Capital
@@ -10,8 +10,9 @@
     <a
       [routerLink]="['/selection/step1']"
       class="get-started get-started-new"
-      aria-label="Start planning your vote - Proceed to step 1"
-    >
+      aria-label="Start planning your vote - Proceed to step 1. The following page contains a list of
+      candidates separated into category: mayor, councellor, park board comissioners, and school trustees."
+     >
       <span class="text">Start Planning!</span>
       <span class="el-icon-chevron-right"></span>
     </a>
@@ -20,7 +21,7 @@
       role="region"
       aria-label="Voter tool - general info"
     >
-      <ul class="intro-tips">
+      <ul class="intro-tips" role="tooltip">
         <li>
           Browse candidates for mayor, councillor, Park Board commissioner, and
           school trustee, then add your favourites to your plan.
