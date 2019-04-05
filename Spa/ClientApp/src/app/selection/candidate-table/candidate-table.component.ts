@@ -20,11 +20,15 @@ export class CandidateTableComponent implements OnInit {
       this.selectedCandidateRaces.forEach(cr => {
 
         if(this.race.raceId === cr.raceId && cr.candidate.selected === true) {
+
+          // show candidate in step 4
+          // note: bugged if you refresh at step 4, will need to click step one and navigate back
+          // to step 4 for it to work. May be an async issue.
           this.race.selected.push(cr.candidate);
+
+          // change button display for step 1
           var scr                    = this.race.candidateRaces.find(element => element.candidateId === cr.candidateId);
               scr.candidate.selected = true;
-
-          console.log("Made it");
         }
 
       });
