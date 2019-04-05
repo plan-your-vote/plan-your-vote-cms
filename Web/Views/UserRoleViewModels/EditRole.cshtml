@@ -1,20 +1,22 @@
 ﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+@using  Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = @Localizer["Edit"];
 }
 
-<h1>Edit</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h4>Edit Roles</h4>
+<h4>@Localizer["Edit Roles"]</h4>
 <hr />
-<a asp-action="CreateRole">Create A New Role</a>
+<a asp-action="CreateRole">@Localizer["Create A New Role"]</a>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                Name
+                @Localizer["Name"]
             </th>
             <th></th>
         </tr>
@@ -28,7 +30,7 @@
                 </td>
                 <td>
                     <!--<a asp-action="Edit" asp-route-id="">e</a> -->
-                    <a asp-action="DeleteRole" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="DeleteRole" asp-route-id="@item.Id">@Localizer["Delete"]</a>
                 </td>
             </tr>
         }
@@ -37,6 +39,6 @@
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localizer["Back to List"]</a>
 </div>
 

@@ -7,7 +7,8 @@ namespace VotingModelLibrary.Models
     {
         [Key]
         public int RaceId { get; set; }
-        public int ElectionId { get; set; }
+
+        [Display(Name = "ElectionId")] public int ElectionId { get; set; }
         public Election Election { get; set; }
 
         public string PositionName { get; set; }

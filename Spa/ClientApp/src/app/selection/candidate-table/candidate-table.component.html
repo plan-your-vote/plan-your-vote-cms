@@ -1,0 +1,42 @@
+<h3 class="page-title mb40">{{ race.positionName }}</h3>
+<p>
+  <span>
+    For this election, please select
+    <b class="race-number-needed">{{ race.numberNeeded }}</b>
+    candidate{{ race.numberNeeded != 1 ? "s" : "" }}
+  </span>
+</p>
+<div class="table-responsive table-container">
+  <table class="table">
+    <thead role="rowheader">
+      <tr role="row">
+        <th id="fName" role="columnheader" aria-label="Column 1: First Name of the Candidate.">First Name</th>
+        <th id="lName" role="columnheader" aria-label="Column 2: Last Name of the Candidate.">Last Name</th>
+        <th id="picture" role="columheader" aria-label="Column 3: Image of the Candidate.">Picture</th>
+        <th id="bio" role="columnheader" aria-label="Column 4: Biographic description of the Candidate.">Biography</th>
+        <th id="select" role="columnheader" aria-label="Column 5: Selection button to add this Candidate to your plan."></th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup">
+      <tr *ngFor="let cr of race.candidateRaces">
+        <td role="cell" aria-describedby="fName">{{ cr.candidate.firstName }}</td>
+        <td role="cell" aria-describedby="lName">{{ cr.candidate.lastName }}</td>
+        <td role="cell" aria-describedby="picture"><img src="{{ cr.candidate.picture }}" /></td>
+        <td role="cell" aria-describedby="bio">{{ cr.candidate.biography }}</td>
+        <td role="cell" aria-describedby="select">
+
+
+          <button
+            attr.aria-checked="{{cr.candidate.selected}}"
+            aria-label="selected"
+            type="button"
+            class="btn glyphicon glyphicon-check select-candidate-btn"
+            (click)="onSelect(cr.candidate, race)"
+          >
+            {{ cr.candidate.selected ? "Cancel" : "Select" }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
