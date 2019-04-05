@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as jsPDF from 'jspdf';
-import { DOCUMENT } from '@angular/platform-browser';
-import { toBase64String } from '@angular/compiler/src/output/source_map';
-import { Candidate } from '../models/candidate';
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +12,16 @@ export class PdfService {
 
   /**
    * Converts image to base64 string.
-   * Need proxyURL to bypass CORS
+   * Need proxyURL to bypass CORS.
    * 
    * @param targetUrl URL of image
    * @param callback callback
    */
   public getBase64Image(targetUrl, callback) {
     var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
+    xhr.onload = () => {
         var reader = new FileReader();
-        reader.onloadend = function () {
+        reader.onloadend = () => {
             callback(reader.result);
         };
         reader.readAsDataURL(xhr.response);
@@ -37,6 +34,15 @@ export class PdfService {
   
   /**
    * Creates pdf.
+   * 
+   * TODOs:
+   * - Compatibility with SVG images
+   * - First page information should be grabbed dynamically.
+   * - I don't think theres any db data to test first page info.
+   * - Nice to have: for candidate name/org, refactor to use doc.splitTextToSize
+   * 
+   * jsPDF documentation:
+   * https://rawgit.com/MrRio/jsPDF/master/docs/jsPDF.html
    * 
    * @param pdfData PDF data passed through app.component.ts
    */
@@ -86,7 +92,6 @@ export class PdfService {
       // auto scales image
       const imageData = this.doc.getImageProperties(image);
       const imageRatio = imageData.width / imageData.height;
-      console.log(imageData);
       const pdfImageHeight = size;
       const pdfImageWidth = pdfImageHeight * imageRatio;
 
@@ -313,7 +318,6 @@ export class PdfService {
 
     //TODO: change p3 to p1 when p1 is done
     Promise.all([p3, p2]).then(image => {
-      console.log(image);
       logo = image[0];
       checkmark = image[1];
       createFirstPage();
@@ -325,4 +329,3 @@ export class PdfService {
     });
   }
 }
-
