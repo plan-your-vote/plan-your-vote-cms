@@ -8,23 +8,27 @@
 </p>
 <div class="table-responsive table-container">
   <table class="table">
-    <thead>
-      <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Picture</th>
-        <th>Biography</th>
-        <th></th>
+    <thead role="rowheader">
+      <tr role="row">
+        <th id="fName" role="columnheader" aria-label="Column 1: First Name of the Candidate.">First Name</th>
+        <th id="lName" role="columnheader" aria-label="Column 2: Last Name of the Candidate.">Last Name</th>
+        <th id="picture" role="columheader" aria-label="Column 3: Image of the Candidate.">Picture</th>
+        <th id="bio" role="columnheader" aria-label="Column 4: Biographic description of the Candidate.">Biography</th>
+        <th id="select" role="columnheader" aria-label="Column 5: Selection button to add this Candidate to your plan."></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody role="rowgroup">
       <tr *ngFor="let cr of race.candidateRaces">
-        <td>{{ cr.candidate.firstName }}</td>
-        <td>{{ cr.candidate.lastName }}</td>
-        <td><img src="{{ cr.candidate.picture }}" /></td>
-        <td>{{ cr.candidate.biography }}</td>
-        <td>
+        <td role="cell" aria-describedby="fName">{{ cr.candidate.firstName }}</td>
+        <td role="cell" aria-describedby="lName">{{ cr.candidate.lastName }}</td>
+        <td role="cell" aria-describedby="picture"><img src="{{ cr.candidate.picture }}" /></td>
+        <td role="cell" aria-describedby="bio">{{ cr.candidate.biography }}</td>
+        <td role="cell" aria-describedby="select">
+
+
           <button
+            attr.aria-checked="{{cr.candidate.selected}}"
+            aria-label="selected"
             type="button"
             class="btn glyphicon glyphicon-check select-candidate-btn"
             (click)="onSelect(cr.candidate, race)"
