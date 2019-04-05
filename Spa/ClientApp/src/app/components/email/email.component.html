@@ -19,7 +19,7 @@
             Invalid Email
         </label>
       </td>
-      <td class="warningLabel" role="alert" *ngIf="noEmail"><label id="No Email was provided.">No Email</label></td>
+      <td class="warningLabel" role="alert" *ngIf="noEmail"><label aria-label="Email is required." id="No Email was provided.">No Email</label></td>
     </tr>
     <tr>
       <td><label aria-label="Add the subject to this email in the text field provided to the right.">Subject: </label></td>
@@ -31,6 +31,6 @@
     </tr>
   </table>
 
-  <button aria-label="Email sent to the provided email address." class="btn" (click)="sendReminderEmail()">Send Reminder Email</button>
+  <button class="btn" (click)="sendReminderEmail()">Send Reminder Email</button>
   <!-- Requires email user to be logged into Gmail and allow sending E-mails from sources -->
 </div>

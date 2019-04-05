@@ -19,10 +19,10 @@
           </thead>
           <tbody>
             <tr *ngFor="let c of race.selected">
-              <td>{{ c.firstName }}</td>
-              <td>{{ c.lastName }}</td>
-              <td><img src="{{ c.picture }}" /></td>
-              <td>{{ c.biography }}</td>
+              <td aria-describedby="fName">{{ c.firstName }}</td>
+              <td aria-describedby="lName">{{ c.lastName }}</td>
+              <td aria-describedby="picture"><img src="{{ c.picture }}" /></td>
+              <td aria-describedby="bio">{{ c.biography }}</td>
             </tr>
           </tbody>
         </table>
