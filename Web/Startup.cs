@@ -103,8 +103,6 @@ namespace Web
 
 
 
-
-
             /*     
   services.AddDefaultIdentity<IdentityUser>()
       .AddDefaultUI(UIFramework.Bootstrap4)
@@ -198,9 +196,9 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            // DummyData.Initialize(app).Wait();
-            // StateInit.Initialize(context);
-            // ThemesInit.Initialize(context);
+            DummyData.Initialize(app).Wait();
+            StateInit.Initialize(context);
+            ThemesInit.Initialize(context);
         }
     }
 }
