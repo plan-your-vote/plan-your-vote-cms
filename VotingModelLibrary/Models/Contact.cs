@@ -5,6 +5,7 @@ namespace VotingModelLibrary.Models
     public class Contact
     {
         [Key]
+        [Display(Name = "ContactId")]
         public int ContactId { get; set; }
         [Display(Name = "ContactMethod")]
         public string ContactMethod { get; set; }   // eg. email, phone no etc

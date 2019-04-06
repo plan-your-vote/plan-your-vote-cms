@@ -117,19 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Candidate" xml:space="preserve">
-    <value>Candidat</value>
+  <data name="CandidateRaces" xml:space="preserve">
+    <value>Courses de candidats</value>
   </data>
-  <data name="CandidateId" xml:space="preserve">
-    <value>Numéro de candidat</value>
+  <data name="Election" xml:space="preserve">
+    <value>Élection</value>
   </data>
-  <data name="ContactId" xml:space="preserve">
-    <value>Identifiant du contact</value>
+  <data name="ElectionId" xml:space="preserve">
+    <value>Id d'élection</value>
   </data>
-  <data name="ContactMethod" xml:space="preserve">
-    <value>Méthode de contact</value>
+  <data name="NumberNeeded" xml:space="preserve">
+    <value>Nombre nécessaire</value>
   </data>
-  <data name="ContactValue" xml:space="preserve">
-    <value>Valeur de contact</value>
+  <data name="PositionName" xml:space="preserve">
+    <value>Nom du poste</value>
+  </data>
+  <data name="RaceId" xml:space="preserve">
+    <value>Identifiant de course</value>
   </data>
 </root>

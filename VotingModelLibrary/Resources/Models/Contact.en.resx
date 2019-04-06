@@ -123,6 +123,9 @@
   <data name="CandidateId" xml:space="preserve">
     <value>Candidate Id</value>
   </data>
+  <data name="ContactId" xml:space="preserve">
+    <value>Contact Id</value>
+  </data>
   <data name="ContactMethod" xml:space="preserve">
     <value>Contact Method</value>
   </data>
