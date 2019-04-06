@@ -123,6 +123,9 @@
   <data name="CandidateId" xml:space="preserve">
     <value>Numéro de candidat</value>
   </data>
+  <data name="ContactId" xml:space="preserve">
+    <value>Identifiant du contact</value>
+  </data>
   <data name="ContactMethod" xml:space="preserve">
     <value>Méthode de contact</value>
   </data>

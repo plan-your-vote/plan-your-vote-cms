@@ -118,21 +118,21 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CandidateRaces" xml:space="preserve">
-    <value />
+    <value>Candidate Races</value>
   </data>
   <data name="Election" xml:space="preserve">
-    <value />
+    <value>Election</value>
   </data>
   <data name="ElectionId" xml:space="preserve">
-    <value />
+    <value>Election Id</value>
   </data>
   <data name="NumberNeeded" xml:space="preserve">
-    <value />
+    <value>Number Needed</value>
   </data>
   <data name="PositionName" xml:space="preserve">
-    <value>yjgvbjk</value>
+    <value>Position Name</value>
   </data>
   <data name="RaceId" xml:space="preserve">
-    <value />
+    <value>Race Id</value>
   </data>
 </root>

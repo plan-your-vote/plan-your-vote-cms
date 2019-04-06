@@ -118,39 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdditionalInfo" xml:space="preserve">
-    <value />
+    <value>Additional Information</value>
   </data>
   <data name="Address" xml:space="preserve">
-    <value />
+    <value>Address</value>
   </data>
   <data name="Election" xml:space="preserve">
-    <value />
+    <value>Election</value>
   </data>
   <data name="ElectionId" xml:space="preserve">
-    <value />
+    <value>Election Id</value>
   </data>
   <data name="GeneralAccessInfo" xml:space="preserve">
-    <value />
+    <value>General Access Info</value>
   </data>
   <data name="Latitude" xml:space="preserve">
-    <value />
+    <value>Latitude</value>
   </data>
   <data name="Longitute" xml:space="preserve">
-    <value />
+    <value>Longitute</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value />
+    <value>Name</value>
   </data>
   <data name="ParkingInfo" xml:space="preserve">
-    <value />
+    <value>Parking Information</value>
   </data>
   <data name="PollingStationId" xml:space="preserve">
-    <value />
+    <value>Polling Station Id</value>
   </data>
   <data name="WashroomInfo" xml:space="preserve">
-    <value />
+    <value>Washroom Information</value>
   </data>
   <data name="WheelchairInfo" xml:space="preserve">
-    <value />
+    <value>Wheel chair Information</value>
   </data>
 </root>

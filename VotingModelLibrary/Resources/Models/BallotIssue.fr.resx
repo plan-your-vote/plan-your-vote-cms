@@ -121,18 +121,18 @@
     <value>Question de bulletin de vote</value>
   </data>
   <data name="BallotIssueId" xml:space="preserve">
-    <value>Ballot Issue Id</value>
+    <value>Numéro de bulletin de vote</value>
   </data>
   <data name="BallotIssueOptions" xml:space="preserve">
-    <value>Ballot Issue Options</value>
+    <value>Options de bulletin de vote</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>la description</value>
   </data>
   <data name="Election" xml:space="preserve">
-    <value>Election</value>
+    <value>Élection</value>
   </data>
   <data name="ElectionId" xml:space="preserve">
-    <value>Election Id</value>
+    <value>Id d'élection</value>
   </data>
 </root>
