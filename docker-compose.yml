@@ -20,9 +20,10 @@ services:
       - "8888:80"
     restart: always
     environment:
-      - DBHOST=127.0.0.1
+      - DBHOST=172.18.0.1
       - DBNAME=openvoting
       - DBPORT=1433
       - DBUSERNAME=sa
       - DBPASSWORD=Sql!Expre55
       - ASPNETCORE_ENVIRONMENT=Development
+      - APPSETTING_DB_TYPE=mssql
