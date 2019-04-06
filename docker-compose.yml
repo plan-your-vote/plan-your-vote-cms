@@ -27,5 +27,5 @@ services:
       - DBPORT=1433
       - DBUSERNAME=sa
       - DBPASSWORD=Sql!Expre55
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - APPSETTING_DB_TYPE=mssql

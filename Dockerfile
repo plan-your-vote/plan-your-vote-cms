@@ -20,4 +20,5 @@ FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
 COPY --from=build-env /app/Web/out ./
 EXPOSE 80/tcp
-ENTRYPOINT ["dotnet", "Web.dll"]
+ENV ASPNETCORE_URLS https://*:8888
+ENTRYPOINT ["dotnet", "Web.dll", "--server.urls", "http://*:8888"]

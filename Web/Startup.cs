@@ -73,7 +73,7 @@ namespace Web
             switch (DatabaseType)
             {
                 case "mssql":
-                    var host = Configuration["DBHOST"] ?? "localhost";
+                    var host = Configuration["DBHOST"] ?? "172.19.0.1";
                     var db = Configuration["DBNAME"] ?? "openvoting";
                     var port = Configuration["DBPORT"] ?? "1433";
                     var username = Configuration["DBUSERNAME"] ?? "sa";
@@ -86,9 +86,9 @@ namespace Web
                         options.UseSqlServer(connStr));
                     break;
                 case "mysql":
-                     host = Configuration["DBHOST"] ?? "localhost";
-                     port = Configuration["DBPORT"] ?? "3306";
-                     password = Configuration["DBPASSWORD"] ?? "secret";
+                    host = Configuration["DBHOST"] ?? "localhost";
+                    port = Configuration["DBPORT"] ?? "3306";
+                    password = Configuration["DBPASSWORD"] ?? "secret";
                     services.AddDbContext<ApplicationDbContext>(options =>
                     {
                         options.UseMySql($"server={host}; userid=root; pwd={password};"
@@ -103,32 +103,6 @@ namespace Web
 
 
 
-
-            // var host = Configuration["DBHOST"] ?? "172.17.0.1";
-            // var db = Configuration["DBNAME"] ?? "openvoting";
-            // var port = Configuration["DBPORT"] ?? "1401";
-            // var username = Configuration["DBUSERNAME"] ?? "sa";
-            // var password = Configuration["DBPASSWORD"] ?? "Sql!Expre55";
-
-            // string connStr = $"Data Source={host},{port};Integrated Security=False;";
-            // connStr += $"User ID={username};Password={password};Database={db};";
-
-            // Console.WriteLine(connStr);
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseSqlServer(connStr));
-
-            // var host = Configuration["DBHOST"] ?? "localhost";
-            // var port = Configuration["DBPORT"] ?? "3306";
-            // var password = Configuration["DBPASSWORD"] ?? "cunbong0812";
-
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //     options.UseMySql($"server={host};userid=root;password={password};port={port};database=openvoting", mySqlOptions =>
-            //     {
-            //         mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
-            //     }));
-
-            // services.AddDbContext<ApplicationDbContext>(options =>
-            //         options.UseSqlite(ConnectionString));
 
 
             /*     
@@ -224,9 +198,9 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(app).Wait();
-            StateInit.Initialize(context);
-            ThemesInit.Initialize(context);
+            // DummyData.Initialize(app).Wait();
+            // StateInit.Initialize(context);
+            // ThemesInit.Initialize(context);
         }
     }
 }
