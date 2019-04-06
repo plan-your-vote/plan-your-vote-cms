@@ -1,9 +1,12 @@
 <div>
   <table>
     <tr>
-      <td><label>E-mail Address: </label></td>
+      <td><label aria-label="Add your email in the text field provided to the right.
+        Make sure the email is more than 5 characters long.">E-mail Address: </label></td>
       <td>
         <input
+          role="textbox"
+          type="text"
           [(ngModel)]="emailaddress"
           name="email"
           ng-required="true"
@@ -11,17 +14,20 @@
         />
       </td>
       <td class="warningLabel" *ngIf="invalidEmail">
-        <label>Invalid Email</label>
+        <label role="alert" aria-label="Invalid Email.
+          Make sure the email is at least 5 characters long and contains a valid email hosting provider.">
+            Invalid Email
+        </label>
       </td>
-      <td class="warningLabel" *ngIf="noEmail"><label>No Email</label></td>
+      <td class="warningLabel" role="alert" *ngIf="noEmail"><label aria-label="Email is required." id="No Email was provided.">No Email</label></td>
     </tr>
     <tr>
-      <td><label>Subject: </label></td>
-      <td><input [(ngModel)]="subject" name="subject" /></td>
+      <td><label aria-label="Add the subject to this email in the text field provided to the right.">Subject: </label></td>
+      <td><input role="textbox" type="text"[(ngModel)]="subject" name="subject" /></td>
     </tr>
     <tr>
-      <td><label>Message: </label></td>
-      <td><input [(ngModel)]="message" name="message" /></td>
+      <td><label aria-label="Add the body message to this email in the text field provided to the right.">Message: </label></td>
+      <td><input role="textbox" type="text"[(ngModel)]="message" name="message" /></td>
     </tr>
   </table>
 

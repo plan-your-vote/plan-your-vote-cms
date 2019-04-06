@@ -1,12 +1,13 @@
 <div>
   <!-- <button (click)="downloadIcsFile()">Down ICS FIle</button> -->
 
-  <select [(ngModel)]="selectedDate" (change)="selected()">
-    <option *ngFor="let item of data" [ngValue]="item">{{item.date}}</option>
+  <select role="listbox" aria-haspopup="true" aria-expanded="false" [(ngModel)]="selectedDate" (change)="selected()">
+    <option *ngFor="let item of data" [ngValue]="item" aria-describedby="formatDescription">{{item.date}}</option>
   </select>
 
-
-  <div title="Add to Calendar" class="addeventatc">
+  <div title="Add to Calendar" class="addeventatc" aria-label="Select a date from the drop-down list. 
+    The format of the date is day / month / year. Click the add button and select from providers:
+    apple, google, outlook, and yahoo.">
     Add to Calendar
     <span class="start">{{selectedDate.date}} 08:00 AM</span>
     <span class="end">{{selectedDate.date}} 03:00 PM</span>

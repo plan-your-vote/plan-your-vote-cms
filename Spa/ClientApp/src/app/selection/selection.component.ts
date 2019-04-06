@@ -12,28 +12,28 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { JsonLinkerService } from '../services/json-linker.service';
 
 @Component({
-  selector: "app-selection",
+  selector   : "app-selection",
   templateUrl: "./selection.component.html",
-  styleUrls: ["./selection.component.less"]
+  styleUrls  : ["./selection.component.less"]
 })
 export class SelectionComponent implements OnInit {
-  candidates: Candidate[];
+  candidates     : Candidate[];
   currentElection: Object;
-  races: Race[] = [];
-  issues: BallotIssue[] = [];
+  races          : Race[] = [];
+  issues         : BallotIssue[] = [];
 
   currentStep: string;
 
   //STEP1
-  step1title = "";
+  step1title       = "";
   step1description = "";
 
   //STEP2
-  step2title = "";
+  step2title       = "";
   step2description = "";
 
   //STEP3
-  step3title = "";
+  step3title       = "";
   step3description = "";
 
   //STEP4
@@ -41,12 +41,12 @@ export class SelectionComponent implements OnInit {
 
   jsonData: any;
   constructor(
-    private electionApi: ElectionService,
-    private _svc: CandidateService,
-    private pdfService: PdfService,
+    private electionApi  : ElectionService,
+    private _svc         : CandidateService,
+    private pdfService   : PdfService,
     private candidatesApi: CandidateService,
-    private route: ActivatedRoute,
-    private _json : JsonLinkerService
+    private route        : ActivatedRoute,
+    private _json        : JsonLinkerService
   ) {
     this.electionApi.getElection().subscribe(election => {
       this.currentElection = election;
@@ -89,15 +89,15 @@ export class SelectionComponent implements OnInit {
   }
 
   populateStepOne() {
-    this.step1title = this.jsonData.default.step1title;
+    this.step1title       = this.jsonData.default.step1title;
     this.step1description = this.jsonData.default.step1description;
   }
   populateStepTwo() {
-    this.step2title = this.jsonData.default.step2title;
+    this.step2title       = this.jsonData.default.step2title;
     this.step2description = this.jsonData.default.step2description;
   }
   populateStepThree() {
-    this.step3title = this.jsonData.default.step3title;
+    this.step3title       = this.jsonData.default.step3title;
     this.step3description = this.jsonData.default.step3description;
   }
   populateReview() {
@@ -108,7 +108,7 @@ export class SelectionComponent implements OnInit {
     this._svc.getRaces().subscribe(data => {
       this.races = data;
       for (let race of this.races) {
-        race.show = "true";
+        race.show     = "true";
         race.selected = [];
       }
     });
@@ -128,11 +128,11 @@ export class SelectionComponent implements OnInit {
    */
   generatePdf() {
     const pdfData: object = {
-      dateTime: new Date().toLocaleString(),
-      electionInfo: this.currentElection,
+      dateTime      : new Date().toLocaleString(),
+      electionInfo  : this.currentElection,
       electionBanner: localStorage.images,
-      races: this.races,
-      ballotIssues: this.issues
+      races         : this.races,
+      ballotIssues  : this.issues
     };
     
     this.pdfService.pdf(pdfData);

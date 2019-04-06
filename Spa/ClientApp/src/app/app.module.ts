@@ -87,10 +87,10 @@ export function setupTranslateFactory(service: TranslateService): Function {
   providers: [
     TranslateService,
     {
-      provide: APP_INITIALIZER,
+      provide   : APP_INITIALIZER,
       useFactory: setupTranslateFactory,
-      deps: [TranslateService],
-      multi: true
+      deps      : [TranslateService],
+      multi     : true
     }
   ],
   bootstrap: [AppComponent]
