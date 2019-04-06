@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20190330031443_Themes3Migration.cs" />
-    <Compile Remove="Migrations\20190330031443_Themes3Migration.Designer.cs" />
     <Compile Remove="Models\ViewHelper.cs" />
   </ItemGroup>
 
@@ -21,15 +19,20 @@
     <PackageReference Include="Microsoft.AspNet.Identity.Core.fr" Version="2.2.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+
   </ItemGroup>
 
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <ProjectReference Include="..\VotingModelLibrary\VotingModelLibrary.csproj" />
   </ItemGroup>
 

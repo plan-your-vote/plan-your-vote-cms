@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Theme";
+    ViewData["Title"] = @Localizer["Theme"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,19 +11,21 @@
 
 <link rel="stylesheet" href="~/css/Themes.css" />
 
-<form asp-controller="Themes" asp-action="Index" method="post">
-    <label>Selected Theme: </label>
-    <select asp-for="SelectedTheme" asp-items="Model.Themes"></select>
-    <button type="submit">Save</button>
-    <div>
-        @if (ViewData["Error"] != null)
-        {
-            <p><strong>Error: </strong> @ViewData["Error"].ToString()</p>
-        }
-        @if (TempData["Success"] != null)
-        {
+<div class="panel panel-default col-sm-5">
+    <form asp-controller="Themes" asp-action="Index" method="post">
+        <label>@Localizer["Selected Theme:"]</label>
+        <select asp-for="SelectedTheme" asp-items="Model.Themes"></select>
+        <button type="submit">Save</button>
+        <div>
+            @if (ViewData["Error"] != null)
+            {
+                <p><strong>Error: </strong> @ViewData["Error"].ToString()</p>
+            }
+            @if (TempData["Success"] != null)
+            {
 
-            <p><strong>Success!</strong> @TempData["Success"].ToString()</p>
-        }
-    </div>
-</form>
+                <p><strong>Success!</strong> @TempData["Success"].ToString()</p>
+            }
+        </div>
+    </form>
+</div>

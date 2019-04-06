@@ -11,6 +11,5 @@ namespace VotingModelLibrary.Models
         public string IssueOptionInfo { get; set; }
 
         public int BallotIssueId { get; set; }
-        public BallotIssue BallotIssue { get; set; }
     }
 }

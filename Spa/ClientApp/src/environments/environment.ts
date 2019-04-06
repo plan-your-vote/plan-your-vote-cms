@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  emailUrl: 'https://localhost:44307/api/email'
+  emailUrl: 'https://pyv.azurewebsites.net/api/email'
 };
 
 /*

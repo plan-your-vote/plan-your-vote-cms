@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h2>{{ step1title }}</h2>
+      <p>{{ step1description }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-3">
+      <label for="filterRace" class="col-form-label" id="filterBy">Filter by: </label>
+    </div>
+    <div class="col-sm-9">
+      <select
+        aria-describedby="filterBy"
+        id="filterRace"
+        class="form-control"
+        name="race"
+        (change)="showSelectedRace($event.target.value)"
+      >
+        <option>All Races</option>
+        <option *ngFor="let race of races" value="{{ race.positionName }}">{{
+          race.positionName
+        }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12" *ngFor="let race of races">
+      <div *ngIf="race.show == 'true'">
+        <app-candidate-table [race]="race"></app-candidate-table>
+      </div>
+    </div>
+  </div>
+</div>

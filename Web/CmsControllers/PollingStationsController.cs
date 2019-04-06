@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,19 +11,24 @@ using Web.Data;
 
 namespace Web
 {
+    [Authorize]
     public class PollingStationsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly int _electionId;
 
         public PollingStationsController(ApplicationDbContext context)
         {
             _context = context;
+            _electionId = _context.StateSingleton.Find(State.STATE_ID).currentElection;
         }
 
         // GET: PollingStations
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.PollingStations.Include(p => p.Election);
+            var applicationDbContext = _context.PollingStations
+                .Include(p => p.Election)
+                .Where(ps => ps.ElectionId == _electionId);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -48,7 +54,7 @@ namespace Web
         // GET: PollingStations/Create
         public IActionResult Create()
         {
-            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "ElectionId");
+            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "Name");
             return View();
         }
 
@@ -65,7 +71,7 @@ namespace Web
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "ElectionId", pollingStation.ElectionId);
+            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "Name", pollingStation.ElectionId);
             return View(pollingStation);
         }
 
@@ -82,7 +88,7 @@ namespace Web
             {
                 return NotFound();
             }
-            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "ElectionId", pollingStation.ElectionId);
+            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "Name", pollingStation.ElectionId);
             return View(pollingStation);
         }
 
@@ -118,7 +124,7 @@ namespace Web
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "ElectionId", pollingStation.ElectionId);
+            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "Name", pollingStation.ElectionId);
             return View(pollingStation);
         }
 

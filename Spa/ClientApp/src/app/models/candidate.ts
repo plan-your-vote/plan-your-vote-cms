@@ -4,7 +4,7 @@ export class Candidate {
   lastName    : string;
   picture     : string;
   organization: string;
-  selected    : boolean;
+  selected: boolean;
 
   constructor(
     candidateId : number,
