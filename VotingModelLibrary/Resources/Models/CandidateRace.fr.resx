@@ -123,13 +123,22 @@
   <data name="CandidateId" xml:space="preserve">
     <value>Numéro de candidat</value>
   </data>
-  <data name="ContactId" xml:space="preserve">
-    <value>Identifiant du contact</value>
+  <data name="CandidateRaceId" xml:space="preserve">
+    <value>Identifiant de course du candidat</value>
   </data>
-  <data name="ContactMethod" xml:space="preserve">
-    <value>Méthode de contact</value>
+  <data name="PlatformInfo" xml:space="preserve">
+    <value>Informations sur la plateforme</value>
   </data>
-  <data name="ContactValue" xml:space="preserve">
-    <value>Valeur de contact</value>
+  <data name="PositionName" xml:space="preserve">
+    <value>Nom du poste</value>
+  </data>
+  <data name="Race" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="RaceId" xml:space="preserve">
+    <value>Identifiant de course</value>
+  </data>
+  <data name="TopIssues" xml:space="preserve">
+    <value>Principaux problèmes</value>
   </data>
 </root>

@@ -117,19 +117,41 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Candidate" xml:space="preserve">
-    <value>Candidat</value>
+  <data name="AdditionalInfo" xml:space="preserve">
+    <value>Information additionnelle</value>
   </data>
-  <data name="CandidateId" xml:space="preserve">
-    <value>Numéro de candidat</value>
+  <data name="Address" xml:space="preserve">
+    <value>Adresse</value>
   </data>
-  <data name="ContactId" xml:space="preserve">
-    <value>Identifiant du contact</value>
+  <data name="Election" xml:space="preserve">
+    <value>Élection
+Élection</value>
   </data>
-  <data name="ContactMethod" xml:space="preserve">
-    <value>Méthode de contact</value>
+  <data name="ElectionId" xml:space="preserve">
+    <value>Id d'élection</value>
   </data>
-  <data name="ContactValue" xml:space="preserve">
-    <value>Valeur de contact</value>
+  <data name="GeneralAccessInfo" xml:space="preserve">
+    <value>Informations générales d'accès</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Latitude</value>
+  </data>
+  <data name="Longitute" xml:space="preserve">
+    <value>Longitute</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>prénom</value>
+  </data>
+  <data name="ParkingInfo" xml:space="preserve">
+    <value>Informations de stationnement</value>
+  </data>
+  <data name="PollingStationId" xml:space="preserve">
+    <value>ID du bureau de vote</value>
+  </data>
+  <data name="WashroomInfo" xml:space="preserve">
+    <value>Informations sur les toilettes</value>
+  </data>
+  <data name="WheelchairInfo" xml:space="preserve">
+    <value>Information sur le fauteuil roulant</value>
   </data>
 </root>

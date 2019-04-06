@@ -120,6 +120,18 @@
   <data name="Biography" xml:space="preserve">
     <value>la biographie</value>
   </data>
+  <data name="CandidateId" xml:space="preserve">
+    <value>Numéro de candidat</value>
+  </data>
+  <data name="CandidateRaces" xml:space="preserve">
+    <value>Courses de candidats</value>
+  </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="ElectionId" xml:space="preserve">
+    <value>Id d'élection</value>
+  </data>
   <data name="FirstName" xml:space="preserve">
     <value>Prénom</value>
   </data>

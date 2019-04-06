@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Candidate" xml:space="preserve">
-    <value>Candidat</value>
+  <data name="BallotIssueId" xml:space="preserve">
+    <value>Numéro de bulletin de vote</value>
   </data>
-  <data name="CandidateId" xml:space="preserve">
-    <value>Numéro de candidat</value>
+  <data name="IssueOptionId" xml:space="preserve">
+    <value>Numéro d'option d'émission</value>
   </data>
-  <data name="ContactId" xml:space="preserve">
-    <value>Identifiant du contact</value>
+  <data name="IssueOptionInfo" xml:space="preserve">
+    <value>Information sur l'option d'émission</value>
   </data>
-  <data name="ContactMethod" xml:space="preserve">
-    <value>Méthode de contact</value>
-  </data>
-  <data name="ContactValue" xml:space="preserve">
-    <value>Valeur de contact</value>
+  <data name="IssueOptionTitle" xml:space="preserve">
+    <value>Titre de l'option d'émission</value>
   </data>
 </root>

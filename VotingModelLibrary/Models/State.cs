@@ -11,9 +11,11 @@ namespace VotingModelLibrary.Models
         public static readonly int STATE_ID = 1;
 
         [Key]
+        [DisplayName("StateId")]
         public int StateId { get; set; }
-        [DisplayName("Current Election")]
+        [DisplayName("CurrentElection")]
         public int currentElection { get; set; }
+        [DisplayName("Election")]
         public Election Election { get; set; }
     }
 }
