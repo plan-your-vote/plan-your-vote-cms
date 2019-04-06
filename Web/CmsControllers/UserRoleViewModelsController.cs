@@ -13,7 +13,7 @@ using Web.ViewModels;
 
 namespace Web.CmsControllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "Admin")]
     public class UserRoleViewModelsController : Controller
     {
         private readonly ApplicationDbContext _context;
