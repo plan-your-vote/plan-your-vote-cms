@@ -8,28 +8,34 @@ namespace VotingModelLibrary.Models
     public class PollingStation
     {
         [Key]
+        [Display(Name = "PollingStationId")]
         public int PollingStationId { get; set; }
+        [Display(Name = "ElectionId")]
         public int ElectionId { get; set; }
+        [Display(Name = "Election")]
         public Election Election { get; set; }
-
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Display(Name = "Additional Info")]
+        [Display(Name = "AdditionalInfo")]
         public string AdditionalInfo { get; set; }
+        [Display(Name = "Address")]
         public string Address { get; set; }
 
-        [Display(Name = "Wheelchair Info")]
+        [Display(Name = "WheelchairInfo")]
         public string WheelchairInfo { get; set; }
 
-        [Display(Name = "Parking Info")]
+        [Display(Name = "ParkingInfo")]
         public string ParkingInfo { get; set; }
 
-        [Display(Name = "Washroom Info")]
+        [Display(Name = "WashroomInfo")]
         public string WashroomInfo { get; set; }
 
-        [Display(Name = "General Access Info")]
+        [Display(Name = "GeneralAccessInfo")]
         public string GeneralAccessInfo { get; set; }
+        [Display(Name = "Latitude")]
         public double Latitude { get; set; }
+        [Display(Name = "Longitute")]
         public double Longitute { get; set; }
     }
 }
