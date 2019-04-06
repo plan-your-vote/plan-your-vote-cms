@@ -567,7 +567,7 @@ Are you in favour of Council having the authority, without further assent of the
             {
                 new Election()
                 {
-                 
+                    ElectionId = 1,
                     Name = "City of Vancouver 2018 Municiple Election",
                     DateEnd = "October 21 2018",
                     DateStart = "October 21 2018",
@@ -575,7 +575,7 @@ Are you in favour of Council having the authority, without further assent of the
                 },
                 new Election()
                 {
-       
+                    ElectionId = 2,
                     Name = "Canadian Federal Election, 2019",
                     DateEnd = "October 21 2019",
                     DateStart = "October 21 2019",
@@ -583,7 +583,7 @@ Are you in favour of Council having the authority, without further assent of the
                 },
                 new Election()
                 {
-         
+                    ElectionId = 3,
                     Name = "City of Vancouver 2020 Municiple Election",
                     DateEnd = "October 21 2020",
                     DateStart = "October 21 2020",
