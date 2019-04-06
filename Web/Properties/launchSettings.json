@@ -13,7 +13,7 @@
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "APPSETTING_DB_TYPE": "mssql"
+        "APPSETTING_DB_TYPE": "sqlite"
       }
     },
     "Web": {
