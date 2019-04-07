@@ -1,11 +1,11 @@
-<div class="container">
-  <div class="row">
+<div class="container" role="main">
+  <div class="row" role="region" aria-label="Step 1 Instructions">
     <div class="col-12">
       <h2>{{ step1title }}</h2>
       <p>{{ step1description }}</p>
     </div>
   </div>
-  <div class="row">
+  <div class="row" role="region" aria-label="Filter settings">
     <div class="col-sm-3">
       <label for="filterRace" class="col-form-label" id="filterBy">Filter by: </label>
     </div>
@@ -24,7 +24,7 @@
       </select>
     </div>
   </div>
-  <div class="row">
+  <div class="row" role="region" aria-label="Candidate listing in table format.">
     <div class="col-12" *ngFor="let race of races">
       <div *ngIf="race.show == 'true'">
         <app-candidate-table [race]="race"></app-candidate-table>

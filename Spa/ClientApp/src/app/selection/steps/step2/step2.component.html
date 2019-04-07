@@ -1,11 +1,11 @@
-<div class="container">
-  <div class="row">
+<div class="container" role="main">
+  <div class="row" role="region" aria-label="Step 2 Instructions">
     <div class="col-md-12">
       <h2 aria-label="The following Capital Plan Borrowing Questions are answered with yes or no radio buttons.">{{ step2title }}</h2>
       <p>{{ step2description }}</p>
     </div>
   </div>
-  <div class="row">
+  <div class="row" role="region" aria-label="Yes or No Question">
     <div class="col-md-12 mb40" *ngFor="let issue of issues">
       <h5 id="issue">{{ issue.ballotIssueTitle }}</h5>
       <p>{{ issue.description }}</p>
