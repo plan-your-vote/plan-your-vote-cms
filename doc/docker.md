@@ -5,7 +5,7 @@ This document helps you to set up Docker and run it on your local machine with o
 - [Install Docker](#install-docker)
 - [How to Use](#how-to-use)
 - [Containers](#containers)
-- [Customization] (#customization)
+- [Customization](#customization)
 
 
 ## Install Docker
