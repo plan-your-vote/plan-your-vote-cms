@@ -1,11 +1,11 @@
-<div class="container">
-  <div class="row">
+<div class="container" role="main">
+  <div class="row" role="region" aria-label="Step 4 Instructions">
     <div class="col-md-12">
       <h2>{{ step4title }}</h2>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12 mb40" *ngFor="let race of races">
+  <div class="row" role="region" aria-label="Complete Summary">
+    <div class="col-md-12 mb40" *ngFor="let race of races" role="region" aria-label="Candidate Choices.">
       <h5>Your Choices For {{ race.positionName }}</h5>
       <div class="table-responsive table-container">
         <table class="table">
@@ -28,7 +28,7 @@
         </table>
       </div>
     </div>
-    <div class="col-md-12 mb80">
+    <div class="col-md-12 mb80" role="region" aria-label="Questionaire answers">
       <h5>Your Planned Responses To Capital Plan Borrowing Questions</h5>
       <div class="mb40" *ngFor="let issue of issues">
         <p>{{ issue.ballotIssueTitle }}</p>
@@ -38,7 +38,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" role="region" aria-label="Email reminder and PDF generation features">
     <div class="col-md-6"></div>
     <div class="col-md-6" 
       aria-label="To send a reminder email, add your email with a subject and message in the text fields provided.
