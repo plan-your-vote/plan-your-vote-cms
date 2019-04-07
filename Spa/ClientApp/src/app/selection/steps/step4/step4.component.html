@@ -11,10 +11,10 @@
         <table class="table">
           <thead>
             <tr>
-              <th id="fName" aria-label="Column 1: First Name of the Candidate.">First Name</th>
-              <th id="lName" aria-label="Column 2: Last Name of the Candidate.">Last Name</th>
-              <th id="picture" aria-label="Column 3: Image of the Candidate.">Picture</th>
-              <th id="bio" aria-label="Column 4: Biographic description of the Candidate.">Biography</th>
+              <th id="fName" attr.aria-label="Column 1: First Name of the candidate {{ race.positionName }}">First Name</th>
+              <th id="lName" attr.aria-label="Column 2: Last Name of the candidate {{ race.positionName }}.">Last Name</th>
+              <th id="picture" attr.aria-label="Column 3: Image of the candidate {{ race.positionName }}.">Picture</th>
+              <th id="bio" attr.aria-label="Column 4: Biographic description of the candidate {{ race.positionName }}.">Biography</th>
             </tr>
           </thead>
           <tbody>
@@ -45,7 +45,7 @@
         You can also choose a date to add to calendar and generate a pdf with a summary of your voting plan.">
       <app-email></app-email>
       <app-icsfile></app-icsfile>
-      <button aria-label="Generating pdf summary of your plan." class="btn btn-secondary" (click)="generatePdf()">
+      <button aria-label="Generating and downloading pdf summary of your plan. Remember to officially vote in person on election day." class="btn btn-secondary" (click)="generatePdf()">
         Generate Voting Plan PDF
       </button>
     </div>
