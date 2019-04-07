@@ -1,6 +1,4 @@
 <div>
-  <!-- <button (click)="downloadIcsFile()">Down ICS FIle</button> -->
-
   <label for="dateChooser" class="col-form-label" id="info" aria-label="format: day month year">Date:</label>
   <select id="dateChooser" role="listbox" [(ngModel)]="selectedDate" (change)="selected()">
     <option aria-describedby="info" *ngFor="let item of data" [ngValue]="item">{{item.date}}</option>
@@ -15,5 +13,4 @@
     <span class="description">Elect members of the Legislative Assembly in Canada</span>
     <span class="location"></span>
   </div>
-  
 </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+declare const addeventatc:any;
+
 @Component({
   selector: 'app-icsfile',
   templateUrl: './icsfile.component.html',
@@ -16,7 +18,7 @@ export class IcsfileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    
+	addeventatc.refresh();
   }
 
 
