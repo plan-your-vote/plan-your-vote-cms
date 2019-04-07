@@ -1,26 +1,27 @@
 <header>
   <nav
     id="navbar"
-    role="navigation"
-    aria-label="top navigation bar containing links to the home page and the voting page on the right."
     class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
-    aria-expanded="true"
   >
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']" aria-label="This logo link will bring you back to the home page.">
-        <img id="nav-logo" [src]="logo.value" alt="Logo" />
+      <a class="navbar-brand" [routerLink]="['/']" tabindex="-1">
+        <img id="nav-logo" [src]="logo.value" alt="Logo" aria-hidden="true" tabindex="-1"/>
       </a>
+
       <button
+        aria-expanded="true"
+        aria-label="menu toggle"
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target=".navbar-collapse"
-        aria-label="Toggle navigation"
-        [attr.aria-expanded]="isExpanded"
-        (click)="toggle()"
+        
+        (click)="toggle()"      
       >
-        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon">
+        </span>
       </button>
+
       <div
         class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse"
         [ngClass]="{ show: isExpanded }"
@@ -31,11 +32,12 @@
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a class="nav-link text-dark" aria-label="" [routerLink]="['/']">Home</a>
+            <a class="nav-link text-dark" aria-label="Home: Link to main page." [routerLink]="['/']">Home</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/selection']"
-              aria-label="planning your vote - Proceed to step 1">Start Voting</a
+              aria-label="Start Voting: link to step 1 of planning your vote.
+                Reminder: This is a planning application, actual voting must be done in person on election day.">Start Voting</a
             >
           </li>
         </ul>
