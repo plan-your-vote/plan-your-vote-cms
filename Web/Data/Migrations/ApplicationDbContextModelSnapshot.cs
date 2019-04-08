@@ -14,7 +14,7 @@ namespace Web.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034");
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -129,11 +129,9 @@ namespace Web.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128);
+                    b.Property<string>("ProviderKey");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -164,11 +162,9 @@ namespace Web.Data.Migrations
                 {
                     b.Property<string>("UserId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128);
+                    b.Property<string>("LoginProvider");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128);
+                    b.Property<string>("Name");
 
                     b.Property<string>("Value");
 
@@ -232,7 +228,7 @@ namespace Web.Data.Migrations
 
                     b.Property<string>("PositionName");
 
-                    b.Property<int>("RaceId");
+                    b.Property<int?>("RaceId");
 
                     b.Property<string>("TopIssues");
 
@@ -379,6 +375,37 @@ namespace Web.Data.Migrations
                     b.ToTable("StateSingleton");
                 });
 
+            modelBuilder.Entity("VotingModelLibrary.Models.Theme.Image", b =>
+                {
+                    b.Property<string>("ThemeName");
+
+                    b.Property<string>("ID");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Format");
+
+                    b.Property<string>("Type");
+
+                    b.Property<string>("Value");
+
+                    b.HasKey("ThemeName", "ID");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("VotingModelLibrary.Models.Theme.Theme", b =>
+                {
+                    b.Property<string>("ThemeName")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Selected");
+
+                    b.HasKey("ThemeName");
+
+                    b.ToTable("Themes");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -454,8 +481,7 @@ namespace Web.Data.Migrations
 
                     b.HasOne("VotingModelLibrary.Models.Race", "Race")
                         .WithMany("CandidateRaces")
-                        .HasForeignKey("RaceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("RaceId");
                 });
 
             modelBuilder.Entity("VotingModelLibrary.Models.Contact", b =>
@@ -468,7 +494,7 @@ namespace Web.Data.Migrations
 
             modelBuilder.Entity("VotingModelLibrary.Models.IssueOption", b =>
                 {
-                    b.HasOne("VotingModelLibrary.Models.BallotIssue", "BallotIssue")
+                    b.HasOne("VotingModelLibrary.Models.BallotIssue")
                         .WithMany("BallotIssueOptions")
                         .HasForeignKey("BallotIssueId")
                         .OnDelete(DeleteBehavior.Cascade);

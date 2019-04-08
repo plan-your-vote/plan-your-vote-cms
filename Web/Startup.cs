@@ -62,7 +62,7 @@ namespace Web
 
             //Choosing a db service
             CheckDB check = new CheckDB();
-            
+
             //check for environment variables (described in docs/dbconfig.md)
             //if variable is not set, grab from appsettings.json
             String ConnectionString = check.getConnectionStringEnvVar() ?? Configuration.GetConnectionString("DefaultConnection");
@@ -73,25 +73,41 @@ namespace Web
             switch (DatabaseType)
             {
                 case "mssql":
+                    var host = Configuration["DBHOST"] ?? "172.19.0.1";
+                    var db = Configuration["DBNAME"] ?? "openvoting";
+                    var port = Configuration["DBPORT"] ?? "1433";
+                    var username = Configuration["DBUSERNAME"] ?? "sa";
+                    var password = Configuration["DBPASSWORD"] ?? "Sql!Expre55";
+
+                    string connStr = $"Data Source={host},{port};Integrated Security=False;";
+                    connStr += $"User ID={username};Password={password};Database={db};";
+                    connStr += $"Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                     services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseSqlServer(ConnectionString));
+                        options.UseSqlServer(connStr));
                     break;
                 case "mysql":
+                    host = Configuration["DBHOST"] ?? "localhost";
+                    port = Configuration["DBPORT"] ?? "3306";
+                    password = Configuration["DBPASSWORD"] ?? "secret";
+                    db = Configuration["DBNAME"] ?? "openvoting";
                     services.AddDbContext<ApplicationDbContext>(options =>
-                        options.UseMySql(ConnectionString, mySqlOptions => 
-                        {
-                            mySqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MySql);
-                        }));
+                    {
+                        options.UseMySql($"server={host}; userid=root; pwd={password};"
+                            + $"port={port}; database={db}");
+                    });
                     break;
                 default: //sqlite
                     services.AddDbContext<ApplicationDbContext>(options =>
                         options.UseSqlite(ConnectionString));
                     break;
             }
-            /*
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();*/
+
+
+
+            /*     
+  services.AddDefaultIdentity<IdentityUser>()
+      .AddDefaultUI(UIFramework.Bootstrap4)
+      .AddEntityFrameworkStores<ApplicationDbContext>();*/
             services.AddIdentity<IdentityUser, IdentityRole>(
                option =>
                {
@@ -181,7 +197,7 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(app).Wait(); ;
+            DummyData.Initialize(app).Wait();
             StateInit.Initialize(context);
             ThemesInit.Initialize(context);
         }

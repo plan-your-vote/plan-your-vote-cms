@@ -1,9 +1,0 @@
-version: "3.5"
-services:
-  project:
-    ports:
-      - 5080:80
-    build:
-      context: .
-      dockerfile: Dockerfile.mvc
-    container_name: OpenVotingTool

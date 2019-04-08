@@ -181,66 +181,70 @@ export class PdfService {
       const races = pdfData["races"];
       races.forEach(race => {
         const candidateRaces = race["candidateRaces"];
-        const candidatesSelected = race["selected"] || [];
-        
-        newPage();
-        
-        let selectedCandidateIds = new Set();
+        const candidatesSelected = race["selected"];
 
-        candidatesSelected.forEach(candidate => {
-          if (candidate) {
-            selectedCandidateIds.add(candidate.candidateId);
-          }
-        });
-
-        //Race Title
-        this.doc.setFontSize(headerFontSize);
-        const raceTitle = race.positionName + ": " + candidatesSelected.length + " of " + race.numberNeeded;
-        this.doc.text(raceTitle, pageX, pageY);
-        pageY += doubleSpace;
-        
-        //Horizontal line before candidates
-        this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
-        pageY += doubleSpace;
+        // Do not create a page for empty races
+        if (candidateRaces) {
+          newPage();
+          
+          let selectedCandidateIds = new Set();
   
-        //BaseHeight used to reset PageY after new column or new page
-        const baseHeight = pageY;
-        const baseHeightWithoutTitle = baseHeight - largeSpace;
-  
-        let columnNumber = 1;
-        let candidatePageNumber = 1;
-  
-        //Adds candidates. If candidate card is too long, will go to next column.
-        //On the 4th column, will create a new page instead.
-        candidateRaces.forEach(candidateRace => {
-          const candidate = candidateRace.candidate;
-          let selected = selectedCandidateIds.has(candidate.candidateId);
-          if (candidate) {
-            let pageLength = MAX_PAGE_Y - doubleSpace;
-            let requiredHeight = singleSpace;
-            
-            if (candidate.lastName.length + candidate.firstName.length > 20) {
-              requiredHeight += singleSpace;
+          candidatesSelected.forEach(candidate => {
+            if (candidate) {
+              selectedCandidateIds.add(candidate.candidateId);
             }
-            if (candidate.organization) {
-              requiredHeight += singleSpace;
-            }
-      
-            if (requiredHeight + pageY > pageLength) {
-              if (columnNumber === 4) {
-                newPage();
-                candidatePageNumber++;
-                columnNumber = 1;
-              } else {
-                columnNumber++;
-                pageX += MAX_PAGE_X / 4;
-                pageY = candidatePageNumber === 1 ? baseHeight : baseHeightWithoutTitle;
-                drawColumnDivider(columnNumber);
+          });
+  
+          //Race Title
+          this.doc.setFontSize(headerFontSize);
+          const raceTitle = race.positionName + ": " + candidatesSelected.length + " of " + race.numberNeeded;
+          this.doc.text(raceTitle, pageX, pageY);
+          pageY += doubleSpace;
+          
+          //Horizontal line before candidates
+          this.doc.line(pageX, pageY, MAX_PAGE_X - pageX, pageY);
+          pageY += doubleSpace;
+    
+          //BaseHeight used to reset PageY after new column or new page
+          const baseHeight = pageY;
+          const baseHeightWithoutTitle = baseHeight - largeSpace;
+    
+          let columnNumber = 1;
+          let candidatePageNumber = 1;
+    
+          //Adds candidates. If candidate card is too long, will go to next column.
+          //On the 4th column, will create a new page instead.
+          //TODO Change candidate races to use doc.splitTextToSize similar to ballots
+          candidateRaces.forEach(candidateRace => {
+            const candidate = candidateRace.candidate;
+            let selected = selectedCandidateIds.has(candidate.candidateId);
+            if (candidate) {
+              let pageLength = MAX_PAGE_Y - doubleSpace;
+              let requiredHeight = singleSpace;
+              
+              if (candidate.lastName.length + candidate.firstName.length > 20) {
+                requiredHeight += singleSpace;
               }
+              if (candidate.organization) {
+                requiredHeight += singleSpace;
+              }
+        
+              if (requiredHeight + pageY > pageLength) {
+                if (columnNumber === 4) {
+                  newPage();
+                  candidatePageNumber++;
+                  columnNumber = 1;
+                } else {
+                  columnNumber++;
+                  pageX += MAX_PAGE_X / 4;
+                  pageY = candidatePageNumber === 1 ? baseHeight : baseHeightWithoutTitle;
+                  drawColumnDivider(columnNumber);
+                }
+              }
+              createCandidateCard(candidate, selected);
             }
-            createCandidateCard(candidate, selected);
-          }
-        });
+          });
+        }
       });
     }
     
