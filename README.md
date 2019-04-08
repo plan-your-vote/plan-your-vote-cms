@@ -1,4 +1,3 @@
-
 # OpenVoting
 Open Voting Tool
 
@@ -32,5 +31,5 @@ Developers must not push their changes directly to `master`. They can push curre
 `user branches` - branch off of develop, keep to small contained features
 
 ## Links for Live Sites
-[Front end single page app](http://pyvspa.azurewebsites.net/)
-[Backend CMS](https://pyv.azurewebsites.net/)
+- [Front end single page app](http://pyvspa.azurewebsites.net/)
+- [Backend CMS](https://pyv.azurewebsites.net/)
