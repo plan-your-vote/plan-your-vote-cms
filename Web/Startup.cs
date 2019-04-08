@@ -89,10 +89,11 @@ namespace Web
                     host = Configuration["DBHOST"] ?? "localhost";
                     port = Configuration["DBPORT"] ?? "3306";
                     password = Configuration["DBPASSWORD"] ?? "secret";
+                    db = Configuration["DBNAME"] ?? "openvoting";
                     services.AddDbContext<ApplicationDbContext>(options =>
                     {
                         options.UseMySql($"server={host}; userid=root; pwd={password};"
-                            + $"port={port}; database=openvoting");
+                            + $"port={port}; database={db}");
                     });
                     break;
                 default: //sqlite
