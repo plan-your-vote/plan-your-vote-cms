@@ -13,7 +13,9 @@ WORKDIR /app
 COPY ./Web/. ./Web/
 COPY ./VotingModelLibrary/. ./VotingModelLibrary/
 WORKDIR /app/Web
+RUN dotnet ef database update
 RUN dotnet publish -c Release -o out
+
 
 # Build runtime image
 FROM microsoft/dotnet:aspnetcore-runtime
