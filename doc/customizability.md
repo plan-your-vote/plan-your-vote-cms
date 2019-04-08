@@ -3,34 +3,28 @@
 ## Table of Contents
 
 - [List of Files](#list-of-files)
-- [How It Works](#how-it-works)
-- [How to Use](#how-to-use)
-  - [Consumers](#consumers)
-  - [Developers](#developers)
-- [Helpful Articles](#helpful-articles)
 - [Future Steps](#future-steps)
 
 ## List of Files
 
-### Static Resource Files
+### Front-End
 
-### Function Files
+All files for this function are under `Spa/ClientApp/src/`.
 
-## How It Works
+#### Static Resource Files
 
-- On Initialization:
-- After Initialiazation:
+- `assets/css/`
+  - Contains CSS files to use for the entire SPA
 
-### On Initialization
+#### Function Files
 
-### After Initialization
+- `app/services/`
+  - `theme.service.ts`
 
-## How to Use
-
-### Consumers
-
-### Developers
-
-## Helpful Articles
+### Back-End
 
 ## Future Steps
+
+- Known issue: Need to refresh after initialization to render logo images
+  - Need to make components initialized after receiving logo image URLs
+- Suggestion: Making this function work with SVG images might be a good idea for front-end performance
