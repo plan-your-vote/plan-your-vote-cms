@@ -13,13 +13,14 @@ All files for this function are under `Spa/ClientApp/src/`.
 
 #### Static Resource Files
 
-- `assets/css/`
-  - Contains CSS files to use for the entire SPA
+- `assets/css/`: Contains CSS files to use for the entire SPA
 
 #### Function Files
 
-- `app/services/`
-  - `theme.service.ts`
+- `index.html`
+  - `<link id="theme" href="" rel="stylesheet">`
+- `app/app.component.ts`
+- `app/services/theme.service.ts`
 
 ### Back-End
 
