@@ -29,9 +29,9 @@ All files for this function are under `Spa/ClientApp/src/`.
   - `app.module.ts`: Imports modules and set `TranslateService` under `providers`
 - `app/services/`
   - `translate.service.ts`
-- `app/pipes`
+- `app/pipes/`
   - `translate.pipe.ts`: Connects `translate.service.ts` and this SPA
-- `app/footer-menu`
+- `app/footer-menu/`
   - `footer-menu.component.ts`
   - `footer-menu.component.html`
 
@@ -107,7 +107,7 @@ Example: `{{ 'FOOTER.CITY' | translate }}`
 }
 ```
 
-- expected rendered result: `Vancouver`
+- Expected rendered result: `Vancouver`
 
 6. Done
 
