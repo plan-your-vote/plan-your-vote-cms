@@ -3,7 +3,7 @@ This document gives instructions on how to use ARIA attributes to ensure pages a
 
 ## ARIA
 
-ARIA is a standard in providing enhancing accessibility to those that are visually impaired. Instead of using vision, a visually impaired user relies on the screen reader that describes and helps navigate the user through a page.
+ARIA is a standard in providing enhanced accessibility to those that are visually impaired. Instead of using vision, a visually impaired user relies on the screen reader that describes and helps navigate the user through a page.
 
 The screen reader relies on the "reader tree" analogous to the "render tree" for those with sight. ARIA attributes manipulate the render tree to ensure the screen reader speaks accurately the page the user is currently on.
 
