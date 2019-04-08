@@ -1,5 +1,5 @@
 <div>
-  <label for="dateChooser" class="col-form-label" id="info" aria-label="format: day month year">Date:</label>
+  <label for="dateChooser" class="col-form-label" id="info" aria-label="format: month day year">Date:</label>
   <select id="dateChooser" role="listbox" [(ngModel)]="selectedDate" (change)="selected()">
     <option aria-describedby="info" *ngFor="let item of data" [ngValue]="item">{{item.date}}</option>
   </select>
