@@ -181,9 +181,9 @@ export class PdfService {
       const races = pdfData["races"];
       races.forEach(race => {
         const candidateRaces = race["candidateRaces"];
-        const candidatesSelected = race["selected"] || [];
+        const candidatesSelected = race["selected"];
 
-        // Do not create a pages for empty races
+        // Do not create a page for empty races
         if (candidateRaces) {
           newPage();
           
