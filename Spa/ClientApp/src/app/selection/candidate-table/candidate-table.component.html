@@ -10,11 +10,11 @@
   <table class="table">
     <thead role="rowheader">
       <tr role="row">
-        <th id="fName" role="columnheader" aria-label="Column 1: First Name of the Candidate.">First Name</th>
-        <th id="lName" role="columnheader" aria-label="Column 2: Last Name of the Candidate.">Last Name</th>
-        <th id="picture" role="columheader" aria-label="Column 3: Image of the Candidate.">Picture</th>
-        <th id="bio" role="columnheader" aria-label="Column 4: Biographic description of the Candidate.">Biography</th>
-        <th id="select" role="columnheader" aria-label="Column 5: Selection button to add this Candidate to your plan."></th>
+        <th id="fName" role="columnheader" attr.aria-label="Column 1: First Name of the candidate {{ race.positionName }}">First Name</th>
+        <th id="lName" role="columnheader" attr.aria-label="Column 2: Last Name of the candidate {{ race.positionName }}.">Last Name</th>
+        <th id="picture" role="columheader" attr.aria-label="Column 3: Image of the candidate {{ race.positionName }}.">Picture</th>
+        <th id="bio" role="columnheader" attr.aria-label="Column 4: Biographic description of the candidate {{ race.positionName }}.">Biography</th>
+        <th id="select" role="columnheader" attr.aria-label="Column 5: Selection button to add this candidate {{ race.positionName }} to your plan."></th>
       </tr>
     </thead>
     <tbody role="rowgroup">

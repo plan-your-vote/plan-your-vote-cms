@@ -2,18 +2,34 @@
 Open Voting Tool
 
 ## Table of Contents
-- [PDF Generator](#pdf-generator)
-- [Localization](#localization)
-- [Database Config](#dbconfig)
+- [What is Open Voting Tool?](#what-is-open-voting-tool)
+- [Feature Documents](#feature-documents)
+- [Branch Structure](#branch-structure)
+- [Links for Live Sites](#links-for-live-sites)
 
-## PDF Generator
-[PDF Generator](./doc/pdf-generator.md) document explains how to implement PDF when the front-end is setup with Angular.
+## What is Open Voting Tool
+Open Voting Tool is a open source project created by Medhat & BCIT CST Information Systems students. Originally City of Vancouver has an app https://vancouver.ca/plan-your-vote/index.aspx, but the app was built on jQuery with HTML & CSS, without any modern web frameworks.
 
-## Localization
-[Localization](./doc/localization.md) document explains how to use resource files as a developer.
+The purpose of this project is to develop a web app look like the one that City of Vancouver currently has, but can be used by anyone using CMS. The application must be used and implemented by anyone and any organization
 
-## Database Config
-[Database Config] (./doc/dbconfig.md) how to configure database for different sources
+## Feature Documents
+- [PDF Generator](./doc/pdf-generator.md)
+- [Localization](./doc/localization.md)
+- [Database Config](./doc/dbconfig.md)
+- [Accessibility](./doc/accessibility.md)
+- [Docker](./doc/docker.md)
+- [Local Storage](./doc/localstorage.md)
+- [Unit Tests](./doc/unit-tests.md)
 
-## Deploy on docker container with SQLite
-docker-compose -f build.yml up --build
+## Branch Structure
+Developers must not push their changes directly to `master`. They can push currently to `develop`, but we recommend protect `develop` so that they cannot push directly. We do not have naming conventions for branches as well, but recommend setup conventions.
+
+`master` - the current live sites are automatically deployed from master whenever a change is made. This should be carefully maintained and only have tested code pushed to it
+
+`develop` - currently develop branch is not protected from the direct pushing, but we recommend protect this branch as well. We would recommend setup testing live sites as well on develop, so that feature owners can merge their changes develop and do the testing right away.
+
+`user branches` - branch off of develop, keep to small contained features
+
+## Links for Live Sites
+- [Front end single page app](http://pyvspa.azurewebsites.net/)
+- [Backend CMS](https://pyv.azurewebsites.net/)

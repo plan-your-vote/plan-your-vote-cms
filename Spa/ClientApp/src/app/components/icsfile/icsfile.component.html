@@ -1,13 +1,10 @@
 <div>
-  <!-- <button (click)="downloadIcsFile()">Down ICS FIle</button> -->
-
-  <select role="listbox" aria-haspopup="true" aria-expanded="false" [(ngModel)]="selectedDate" (change)="selected()">
-    <option *ngFor="let item of data" [ngValue]="item" aria-describedby="formatDescription">{{item.date}}</option>
+  <label for="dateChooser" class="col-form-label" id="info" aria-label="format: month day year">Date:</label>
+  <select id="dateChooser" role="listbox" [(ngModel)]="selectedDate" (change)="selected()">
+    <option aria-describedby="info" *ngFor="let item of data" [ngValue]="item">{{item.date}}</option>
   </select>
 
-  <div title="Add to Calendar" class="addeventatc" aria-label="Select a date from the drop-down list. 
-    The format of the date is day / month / year. Click the add button and select from providers:
-    apple, google, outlook, and yahoo.">
+  <div title="Add to Calendar" class="addeventatc">
     Add to Calendar
     <span class="start">{{selectedDate.date}} 08:00 AM</span>
     <span class="end">{{selectedDate.date}} 03:00 PM</span>
@@ -16,5 +13,4 @@
     <span class="description">Elect members of the Legislative Assembly in Canada</span>
     <span class="location"></span>
   </div>
-  
 </div>
