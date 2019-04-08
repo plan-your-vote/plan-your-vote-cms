@@ -19,7 +19,7 @@ Please refer to [Docker Official Website](https://www.docker.com/) to download t
 
 At this point, you should be able to run this app without worrying about how to install .NET Core or config your database. Simply just copy and run this command on your terminal window. Open [localhost:8888](http:localhost:8888) to see the result !
 
-```docker-compose -f build.yml up```
+```docker-compose -f build.yml up --build```
 
 ## Containers
 To Dockerize this application, we have used .Net Core 2.2 for the website and Linux SQL Server for the database. The database by default will be named: ``openvoting`` and password is: ```Sql!Expre55``` which runs on port ```1433```
