@@ -21,9 +21,9 @@ Please refer to [Docker Official Website](https://www.docker.com/) to download t
 
 At this point, you should be able to run this app without worrying about how to install .NET Core or config your database. Simply just copy and run this command on your terminal window. Open [localhost:8888](http:localhost:8888) to see the result !
 
-- MySQL: ```docker-compose -f mysql.yml up --build```
-- SQL Server: ```docker-compose -f sqlserver.yml up --build```
-- SQLite: ``docker-compose -f sqlite.yml up --build```
+- MySQL: ```docker-compose -f docker/mysql.yml up --build```
+- SQL Server: ```docker-compose -f docker/sqlserver.yml up --build```
+- SQLite: ```docker-compose -f docker/sqlite.yml up --build```
 
 ## Containers
 To Dockerize this application, we have used .Net Core 2.2 for the website. For the database you can choose between using SQLite (by default), MySql or Linux SQL Server.
