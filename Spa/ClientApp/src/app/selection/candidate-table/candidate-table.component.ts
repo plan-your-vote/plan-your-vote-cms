@@ -58,11 +58,9 @@ export class CandidateTableComponent implements OnInit {
       c.selected = false;
       r.selected = r.selected.filter(function (e) { return e.candidateId !== c.candidateId });
       // the following has a bug: selecting candidate with id 3 for mayor, then councillor, then deselecting him for mayor will
-      // remove both from selectedCandidateRaces. For some reason, deselecting him for counsillor then mayor works fine.
+      // remove both from selectedCandidateRaces. For some reason, deselecting him for councillor then mayor works fine.
       this.selectedCandidateRaces = this.selectedCandidateRaces.filter(function (e) { return e.candidateId !== c.candidateId || e.raceId !== r.raceId });
     }
-
-    
     
     localStorage.setItem('selectedCandidateRaces', JSON.stringify(this.selectedCandidateRaces));
   }

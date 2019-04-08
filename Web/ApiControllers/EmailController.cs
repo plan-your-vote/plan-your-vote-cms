@@ -39,7 +39,8 @@ namespace Web.Controllers
 
             return BadRequest("Failed to send email");
         }
-        
+
+        [ApiExplorerSettings(IgnoreApi = true)]
         public bool SendEmail(string emailAddress, string subject, string message)
         {
             MailMessage mm = new MailMessage
