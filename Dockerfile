@@ -13,7 +13,6 @@ WORKDIR /app
 COPY ./Web/. ./Web/
 COPY ./VotingModelLibrary/. ./VotingModelLibrary/
 WORKDIR /app/Web
-RUN dotnet ef database update
 RUN dotnet publish -c Release -o out
 
 
@@ -21,6 +20,6 @@ RUN dotnet publish -c Release -o out
 FROM microsoft/dotnet:aspnetcore-runtime
 WORKDIR /app
 COPY --from=build-env /app/Web/out ./
-EXPOSE 80/tcp
-ENV ASPNETCORE_URLS https://*:8888
-ENTRYPOINT ["dotnet", "Web.dll", "--server.urls", "http://*:8888"]
+
+EXPOSE 80
+ENTRYPOINT ["dotnet", "Web.dll"]
