@@ -6,16 +6,17 @@ import { TranslateService } from 'src/app/services/translate.service';
   pure: false
 })
 export class TranslatePipe implements PipeTransform {
-  constructor(private translate: TranslateService) { }
+  constructor(private translate: TranslateService) {}
 
   transform(param: string): any {
-    var params = param.split(".");
-    var component = params[0];
-    var key = params[1];
+    const params = param.split('.');
+    const component = params[0];
+    const key = params[1];
+
     if (this.translate.data[component]) {
       return this.translate.data[component][key] || key;
     } else {
-      console.error("Please check language resource files");
+      console.error('Please check language resource files');
       return key;
     }
   }
