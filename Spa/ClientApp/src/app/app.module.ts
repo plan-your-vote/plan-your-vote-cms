@@ -5,9 +5,21 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { MatListModule } from '@angular/material/list';
-import { MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-  MatSnackBarModule, MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule,
-  MatSortModule, MatRippleModule, MatExpansionModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatProgressSpinnerModule,
+  MatRippleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatToolbarModule
+} from '@angular/material';
 import { ShareButtonsModule } from '@ngx-share/buttons';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -33,9 +45,8 @@ import { HomeComponent } from './home/home.component';
 import { CandidateTableComponent } from './selection/candidate-table/candidate-table.component';
 import { Step1Component } from './selection/steps/step1/step1.component';
 import { Step2Component } from './selection/steps/step2/step2.component';
-import { Step4Component } from './selection/steps/step4/step4.component';
 import { Step3Component } from './selection/steps/step3/step3.component';
-
+import { Step4Component } from './selection/steps/step4/step4.component';
 
 export function setupTranslateFactory(service: TranslateService): Function {
   return () => service.use('en');
@@ -70,7 +81,7 @@ export function setupTranslateFactory(service: TranslateService): Function {
     MatListModule,
     MatIconModule,
     MatToolbarModule,
-    MatButtonModule, 
+    MatButtonModule,
     MatCardModule,
     MatExpansionModule,
     MatInputModule,
@@ -87,10 +98,10 @@ export function setupTranslateFactory(service: TranslateService): Function {
   providers: [
     TranslateService,
     {
-      provide   : APP_INITIALIZER,
+      provide: APP_INITIALIZER,
       useFactory: setupTranslateFactory,
-      deps      : [TranslateService],
-      multi     : true
+      deps: [TranslateService],
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

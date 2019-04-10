@@ -9,7 +9,7 @@ const API_URL = 'https://pyv.azurewebsites.net/api/theme'; // Deployment
 })
 export class ThemeService {
   private themeName: string;
-  
+
   constructor(
     @Inject(DOCUMENT) public document: Document,
     private http: HttpClient
