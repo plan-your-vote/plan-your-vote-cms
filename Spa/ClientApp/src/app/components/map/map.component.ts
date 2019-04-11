@@ -37,7 +37,7 @@ export class MapComponent implements OnInit {
     // Centers map on current location
     navigator.geolocation.getCurrentPosition(pos => {
       const coords = fromLonLat([pos.coords.longitude, pos.coords.latitude]);
-      map.getView().animate({ center: coords, zoom: 10 });
+      map.getView().animate({ center: coords, zoom: 12 });
     });
 
     this.pollingStationApi
