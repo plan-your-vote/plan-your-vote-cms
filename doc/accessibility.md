@@ -56,6 +56,7 @@ When a form submission fails validation, red text indicating the error will not 
 
 When elements are dynamic, using plain aria attributes can cause the reader to speak the opposite of what is happening. Read up on dynamic aria implementation (uses attr.) via the ARIA online documentation. It is essential that all dynamic elements are given proper dynamic aria attributes.
 
-Here is a link to a few youtube videos demonstrating ARIA scenarios in action: https://www.youtube.com/channel/UCYTh3fYU3grIoU7ATYMgnHA
+Here is a link to a few youtube videos demonstrating ARIA scenarios in action: 
+[Video](https://www.youtube.com/channel/UCYTh3fYU3grIoU7ATYMgnHA)
 
 Good Luck! - Aska 
