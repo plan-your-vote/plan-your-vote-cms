@@ -1,4 +1,4 @@
-# Localization
+# Localization on the front end
 This document helps you to set resource variables on `json` files by different components.
 
 ## Table of Contents
