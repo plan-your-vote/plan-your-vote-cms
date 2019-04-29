@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using VotingModelLibrary.Models;
+using Web.Models;
 using Web.Data;
 
 namespace Web.ApiControllers
@@ -20,7 +20,7 @@ namespace Web.ApiControllers
         public PollingStationsController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = _context.StateSingleton.Find(State.STATE_ID).currentElection;
+            _currentElection = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
         }
 
         // GET: api/PollingStations

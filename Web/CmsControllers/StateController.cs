@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using VotingModelLibrary.Models;
+using Web.Models;
 using Web.Data;
 
 namespace Web.CmsControllers
@@ -25,7 +25,7 @@ namespace Web.CmsControllers
         public async Task<IActionResult> Index()
         {
             State s = _context.StateSingleton.Find(State.STATE_ID);
-            Election current = _context.Elections.Where(e => e.ElectionId == s.currentElection).First();
+            Election current = _context.Elections.Where(e => e.ElectionId == s.CurrentElection).First();
             ViewBag.ElectionName = current.Name;
             return View(await _context.StateSingleton.ToListAsync());
         }
@@ -52,7 +52,7 @@ namespace Web.CmsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StateId,currentElection")] State state)
+        public async Task<IActionResult> Edit(int id, [Bind("StateId,CurrentElection")] State state)
         {
             if (id != state.StateId)
             {

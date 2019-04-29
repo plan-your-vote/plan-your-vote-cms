@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using VotingModelLibrary.Models;
 using Web.Data;
 using Web.Models;
 
@@ -28,7 +27,7 @@ namespace Web
         // GET: BallotIssues
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BallotIssues.Where(b => b.ElectionId == state.currentElection).ToListAsync());
+            return View(await _context.BallotIssues.Where(b => b.ElectionId == state.CurrentElection).ToListAsync());
         }
 
         // GET: BallotIssues/Details/5
@@ -69,7 +68,7 @@ namespace Web
                 {
                     BallotIssueTitle = model.BallotIssueTitle,
                     Description = model.Description,
-                    ElectionId = _context.StateSingleton.Find(State.STATE_ID).currentElection
+                    ElectionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection
                 };
                 _context.Add(issue);
 

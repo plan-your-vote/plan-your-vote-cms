@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VotingModelLibrary.Models;
+using Web.Models;
 
 namespace Web.Data
 {
@@ -15,7 +15,7 @@ namespace Web.Data
                 State state = new State
                 {
                    
-                    currentElection = 1,
+                    CurrentElection = 1,
                 };
                 context.Add(state);
                 context.SaveChanges();

@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using VotingModelLibrary.Models.Theme;
 using Web.Data;
 using Web.Models;
 using Web.ViewModels;
@@ -42,7 +41,7 @@ namespace Web.CmsControllers
                     newThemeName = ChangeCurrentTheme(viewModel);
                     TempData["Success"] = $"{newThemeName} voting theme has been selected";
                 }
-                catch(Exception ex)
+                catch (Exception)
                 {
                     //TODO Log error
                     ViewData["Error"] = $"Error occurred while changing voting theme";
