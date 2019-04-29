@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 using Web.Data;
 using Web.Models;
 using Web.ViewModels;
-using VotingModelLibrary.Models;
 
 namespace Web.Controllers
 {
@@ -25,18 +24,18 @@ namespace Web.Controllers
         public IActionResult Index()
         {
             State s = _context.StateSingleton.Find(State.STATE_ID);
-            Election e = _context.Elections.Where(el => el.ElectionId == s.currentElection).First();
+            Election e = _context.Elections.Where(el => el.ElectionId == s.CurrentElection).First();
             DashboardViewModel dashboard = new DashboardViewModel
             {
                 ElectionName = e.Name,
                 CandidatesCount = _context.Candidates
-                    .Where(c => c.ElectionId == s.currentElection)
+                    .Where(c => c.ElectionId == s.CurrentElection)
                     .Count(),
                 BallotIssuesCount = _context.BallotIssues
-                    .Where(c => c.ElectionId == s.currentElection)
+                    .Where(c => c.ElectionId == s.CurrentElection)
                     .Count(),
                 PollingStationsCount = _context.PollingStations
-                    .Where(c => c.ElectionId == s.currentElection)
+                    .Where(c => c.ElectionId == s.CurrentElection)
                     .Count()
             };
 

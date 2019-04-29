@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using VotingModelLibrary.Models;
-using VotingModelLibrary.Models.Theme;
-using Web.ViewModels;
 using Web.Models;
 
 namespace Web.Data

@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VotingModelLibrary\VotingModelLibrary.csproj" />
     <ProjectReference Include="..\Web\Web.csproj" />
   </ItemGroup>
 

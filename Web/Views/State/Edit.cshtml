@@ -1,4 +1,4 @@
-﻿@model VotingModelLibrary.Models.State
+﻿@model Web.Models.State
 
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
@@ -18,9 +18,9 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="StateId" />
                 <div class="form-group">
-                    <label asp-for="currentElection" class="control-label"></label>
-                    <select asp-for="currentElection" class="form-control" asp-items="ViewBag.Elections"></select>
-                    <span asp-validation-for="currentElection" class="text-danger"></span>
+                    <label asp-for="CurrentElection" class="control-label"></label>
+                    <select asp-for="CurrentElection" class="form-control" asp-items="ViewBag.Elections"></select>
+                    <span asp-validation-for="CurrentElection" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />

@@ -62,10 +62,12 @@ namespace Web.CmsControllers
             var roles = _context.Roles.ToList();
             var userrole = _context.UserRoles.ToList();
 
-            UserRoleViewModel model = new UserRoleViewModel();
-            model.userId = id;
-            model.user = users.FirstOrDefault(u => u.Id == id);
-            model.roles = new List<IdentityRole>();
+            UserRoleViewModel model = new UserRoleViewModel
+            {
+                userId = id,
+                user = users.FirstOrDefault(u => u.Id == id),
+                roles = new List<IdentityRole>()
+            };
             foreach (IdentityUserRole<string> ur in userrole)
             {
                 if (ur.UserId == id)
