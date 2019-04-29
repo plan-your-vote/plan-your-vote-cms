@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using VotingModelLibrary.Models;
-using Web.ViewModels;
+using Web.Models;
 using Web.Data;
 using Microsoft.AspNetCore.Authorization;
 
@@ -36,7 +35,7 @@ namespace Web.CmsControllers
         // GET: Races
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Races.Where(r => r.ElectionId == State.currentElection).ToListAsync());
+            return View(await _context.Races.Where(r => r.ElectionId == State.CurrentElection).ToListAsync());
         }
 
         // GET: Races/Details/5
@@ -117,7 +116,7 @@ namespace Web.CmsControllers
                 return NotFound();
             }
             ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "Name");
-            ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c=>c.ElectionId==State.currentElection), "CandidateId", "LastName");
+            ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c=>c.ElectionId==State.CurrentElection), "CandidateId", "LastName");
             return View(model);
         }
 

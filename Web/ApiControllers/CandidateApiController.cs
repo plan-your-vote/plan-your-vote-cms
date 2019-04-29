@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using VotingModelLibrary.Models;
+using Web.Models;
 using Web.Data;
 
 namespace Web.Controllers
@@ -22,7 +22,7 @@ namespace Web.Controllers
         public CandidatesApiController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = _context.StateSingleton.Find(State.STATE_ID).currentElection;
+            _currentElection = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
         }
 
         // GET: api/Candidates

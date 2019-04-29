@@ -7,9 +7,6 @@
 @inject IViewLocalizer Localizer
 @inject IOptions<RequestLocalizationOptions> LocOptions
 
-@using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer _localizer
-
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
     var cultureItems = LocOptions.Value.SupportedUICultures

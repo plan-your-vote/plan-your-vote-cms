@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using VotingModelLibrary.Models.Theme;
+using Web.Models;
 using Web.Data;
 
 namespace Web.ApiControllers

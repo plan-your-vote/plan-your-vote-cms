@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using VotingModelLibrary.Models;
+using Web.Models;
 using Web.Data;
 
 namespace Web
@@ -28,7 +28,7 @@ namespace Web
         {
             State s = _context.StateSingleton.Find(State.STATE_ID);
             var applicationDbContext = _context.Candidates
-                .Where(c => c.ElectionId == s.currentElection)
+                .Where(c => c.ElectionId == s.CurrentElection)
                 .Include(c => c.Organization).Include(c => c.Contacts).Include(c => c.CandidateRaces);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -81,7 +81,7 @@ namespace Web
             candidate.Picture = nameOfile;
             candidate.Biography = biography;
             candidate.OrganizationId = organizationId;
-            candidate.ElectionId = _context.StateSingleton.Find(State.STATE_ID).currentElection;
+            candidate.ElectionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
             if (ModelState.IsValid)
             {
                 _context.Add(candidate);
