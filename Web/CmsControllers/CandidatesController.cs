@@ -122,7 +122,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,FirstName,LastName,Picture,Biography,OrganizationId")] Candidate candidate)
+        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,FirstName,LastName,Biography,OrganizationId")] Candidate candidate, IFormFile image)
         {
             if (id != candidate.CandidateId)
             {
@@ -131,8 +131,17 @@ namespace Web
 
             if (ModelState.IsValid)
             {
+                if (image != null 
+                    && (image.ContentType == "image/jpeg" || image.ContentType == "image/png"))
+                {
+                    string nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
+                    string fileName = "wwwroot\\" + nameOfile;
+                    image.CopyTo(new FileStream(fileName, FileMode.Create));
+                    candidate.Picture = nameOfile;
+                }
                 try
                 {
+                    candidate.ElectionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
                     _context.Update(candidate);
                     await _context.SaveChangesAsync();
                 }
