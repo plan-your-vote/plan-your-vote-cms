@@ -27,7 +27,7 @@ namespace Web.Controllers
             Election e = _context.Elections.Where(el => el.ElectionId == s.CurrentElection).First();
             DashboardViewModel dashboard = new DashboardViewModel
             {
-                ElectionName = e.Name,
+                ElectionName = e.ElectionName,
                 CandidatesCount = _context.Candidates
                     .Where(c => c.ElectionId == s.CurrentElection)
                     .Count(),
