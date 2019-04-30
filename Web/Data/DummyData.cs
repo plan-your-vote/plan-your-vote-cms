@@ -567,23 +567,23 @@ Are you in favour of Council having the authority, without further assent of the
             {
                 new Election()
                 {
-                    Name = "City of Vancouver 2018 Municiple Election",
-                    DateEnd = "October 21 2018",
-                    DateStart = "October 21 2018",
+                    ElectionName = "City of Vancouver 2018 Municiple Election",
+                    EndDate = "October 21 2018",
+                    StartDate = "October 21 2018",
                     Description = "Voting in an election is one of the most important things a citizen can do in their community and country."
                 },
                 new Election()
                 {
-                    Name = "Canadian Federal Election, 2019",
-                    DateEnd = "October 21 2019",
-                    DateStart = "October 21 2019",
+                    ElectionName = "Canadian Federal Election, 2019",
+                    EndDate = "October 21 2019",
+                    StartDate = "October 21 2019",
                     Description = "The 2019 Canadian federal election is scheduled to take place on or before October 21, 2019. The October 21 date of the vote is determined by the fixed-date procedures in the Canada Elections Act"
                 },
                 new Election()
                 {
-                    Name = "City of Vancouver 2020 Municiple Election",
-                    DateEnd = "October 21 2020",
-                    DateStart = "October 21 2020",
+                    ElectionName = "City of Vancouver 2020 Municiple Election",
+                    EndDate = "October 21 2020",
+                    StartDate = "October 21 2020",
                     Description = "Voting in an election is one of the most important things a citizen can do in their community and country."
                 }
             };
