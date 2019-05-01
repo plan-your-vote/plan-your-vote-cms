@@ -56,7 +56,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ElectionId,DateStart,DateEnd,Name,Description")] Election election)
+        public async Task<IActionResult> Create([Bind("ElectionId,StartDate,EndDate,ElectionName,Description")] Election election)
         {
             if (ModelState.IsValid)
             {

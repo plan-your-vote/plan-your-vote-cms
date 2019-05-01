@@ -43,7 +43,7 @@ namespace Web.CmsControllers
             {
                 return NotFound();
             }
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "Name");
+            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName");
             return View(state);
         }
 
