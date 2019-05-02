@@ -70,10 +70,25 @@ namespace Web
             var nameOfile = "";
             if (image != null)
             {
+                if (image.ContentType != "image/jpeg"
+                        && image.ContentType != "image/png"
+                        && image.ContentType != "image/gif")
+                {
+                    ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
+                    ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId");
+                    return View();
+                }
+
+                if (image.Length < 4500)
+                {
+                    ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
+                    ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId");
+                    return View();
+                }
+
                 nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
                 fileName = "wwwroot\\" + nameOfile;
                 image.CopyTo(new FileStream(fileName, FileMode.Create));
-                ViewData["ImagePath"] = fileName;
             }
             var candidate = new Candidate();
             candidate.FirstName = firstName;
@@ -122,7 +137,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,FirstName,LastName,Picture,Biography,OrganizationId")] Candidate candidate)
+        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,FirstName,LastName,Biography,OrganizationId")] Candidate candidate, IFormFile image)
         {
             if (id != candidate.CandidateId)
             {
@@ -131,8 +146,43 @@ namespace Web
 
             if (ModelState.IsValid)
             {
+                if (image != null)
+                {
+                    if (image.ContentType != "image/jpeg" 
+                        && image.ContentType != "image/png" 
+                        && image.ContentType != "image/gif")
+                    {
+                        ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
+                        ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
+                        return View(candidate);
+                    }
+
+                    if (image.Length < 4500)
+                    {
+                        ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
+                        ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
+                        return View(candidate);
+                    }
+
+                    string nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
+                    string fileName = "wwwroot\\" + nameOfile;
+                    image.CopyTo(new FileStream(fileName, FileMode.Create));
+                    candidate.Picture = nameOfile;
+                }
+                else
+                {
+                    var existing = _context.Candidates
+                        .Where(c => c.CandidateId == id)
+                        .Select(c => new { Pic = c.Picture });
+                    foreach (var result in existing)
+                    {
+                        candidate.Picture = result.Pic;
+                    }
+                }
+
                 try
                 {
+                    candidate.ElectionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
                     _context.Update(candidate);
                     await _context.SaveChangesAsync();
                 }
