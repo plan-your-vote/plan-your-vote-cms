@@ -70,6 +70,15 @@ namespace Web
             var nameOfile = "";
             if (image != null)
             {
+                if (image.ContentType != "image/jpeg"
+                        && image.ContentType != "image/png"
+                        && image.ContentType != "image/gif")
+                {
+                    ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
+                    ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId");
+                    return View();
+                }
+
                 nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
                 fileName = "wwwroot\\" + nameOfile;
                 image.CopyTo(new FileStream(fileName, FileMode.Create));
@@ -131,9 +140,17 @@ namespace Web
 
             if (ModelState.IsValid)
             {
-                if (image != null 
-                    && (image.ContentType == "image/jpeg" || image.ContentType == "image/png"))
+                if (image != null)
                 {
+                    if (image.ContentType != "image/jpeg" 
+                        && image.ContentType != "image/png" 
+                        && image.ContentType != "image/gif")
+                    {
+                        ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
+                        ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
+                        return View(candidate);
+                    }
+
                     string nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
                     string fileName = "wwwroot\\" + nameOfile;
                     image.CopyTo(new FileStream(fileName, FileMode.Create));

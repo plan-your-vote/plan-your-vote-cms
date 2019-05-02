@@ -26,7 +26,9 @@
                     <span asp-validation-for="LastName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="file" name="image">
+                    <label asp-for="Picture" class="control-label"></label>
+                    <input asp-for="Picture" type="file" name="image">
+                    <span asp-validation-for="Picture" class="text-danger">@ViewData["ImageMessage"]</span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Biography" class="control-label"></label>
