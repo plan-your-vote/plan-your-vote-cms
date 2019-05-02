@@ -139,6 +139,17 @@ namespace Web
                     image.CopyTo(new FileStream(fileName, FileMode.Create));
                     candidate.Picture = nameOfile;
                 }
+                else
+                {
+                    var existing = _context.Candidates
+                        .Where(c => c.CandidateId == id)
+                        .Select(c => new { Pic = c.Picture });
+                    foreach (var result in existing)
+                    {
+                        candidate.Picture = result.Pic;
+                    }
+                }
+
                 try
                 {
                     candidate.ElectionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
