@@ -274,5 +274,3 @@ Spa/ClientApp/package-lock.json
 # for mac users
 *.DS_Store
 commit counter.txt
-
-wwwroot/images/
