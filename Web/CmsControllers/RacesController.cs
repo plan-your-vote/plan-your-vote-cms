@@ -61,7 +61,7 @@ namespace Web.CmsControllers
         // GET: Races/Create
         public IActionResult Create()
         {
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "Name");
+            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName");
             return View();
         }
 
@@ -78,7 +78,7 @@ namespace Web.CmsControllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "Name", race.ElectionId);
+            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName", race.ElectionId);
             return View(race);
         }
 
@@ -115,7 +115,7 @@ namespace Web.CmsControllers
             {
                 return NotFound();
             }
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "Name");
+            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName");
             ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c=>c.ElectionId==State.CurrentElection), "CandidateId", "LastName");
             return View(model);
         }
@@ -168,7 +168,7 @@ namespace Web.CmsControllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "Name", model.ElectionId);
+            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName", model.ElectionId);
             return View(model);
         }
 

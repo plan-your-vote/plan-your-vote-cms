@@ -26,7 +26,7 @@ namespace Web.CmsControllers
         {
             State s = _context.StateSingleton.Find(State.STATE_ID);
             Election current = _context.Elections.Where(e => e.ElectionId == s.CurrentElection).First();
-            ViewBag.ElectionName = current.Name;
+            ViewBag.ElectionName = current.ElectionName;
             return View(await _context.StateSingleton.ToListAsync());
         }
 
@@ -43,7 +43,7 @@ namespace Web.CmsControllers
             {
                 return NotFound();
             }
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "Name");
+            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName");
             return View(state);
         }
 

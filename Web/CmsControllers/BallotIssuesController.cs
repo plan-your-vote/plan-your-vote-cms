@@ -51,8 +51,14 @@ namespace Web
 
         // GET: BallotIssues/Create
         public IActionResult Create()
-        { 
-            return View();
+        {
+            return View(new BallotIssueCreate()
+            {
+                OptionsTitles = new List<string>
+                {
+                    "", "",
+                }
+            });
         }
 
         // POST: BallotIssues/Create
@@ -108,20 +114,14 @@ namespace Web
             }
 
             var options = _context.IssueOptions.Where(op => op.BallotIssueId == id).ToList();
+            List<string> optionTitles = options.Select(optionTitle => optionTitle.IssueOptionTitle).ToList();
 
             BallotIssueCreate model = new BallotIssueCreate
             {
                 BallotIssueTitle = ballotIssue.BallotIssueTitle,
                 Description = ballotIssue.Description,
-                OptionsTitles = new List<string> { "", "", "", "" }
+                OptionsTitles = optionTitles,
             };
-
-            if (options != null)
-            {
-                int cnt = 0;
-                foreach (var op in options)
-                    model.OptionsTitles.Add(options[cnt++].IssueOptionTitle);
-            }
 
             return View(model);
         }

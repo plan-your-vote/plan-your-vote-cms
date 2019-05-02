@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Index"];
+    ViewData["Title"] = @Localizer["All Elections"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -12,16 +12,16 @@
     <a asp-action="Create">@Localizer["Create New"]</a>
 </p>
 <table class="table panel panel-default">
-    <thead>
+    <thead
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DateStart)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateEnd)
-            </th>
             <th class="col-sm-3">
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.ElectionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -32,25 +32,25 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateStart)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateEnd)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ElectionId">@Localizer["Edit"]</a> |
-                    <a asp-action="Details" asp-route-id="@item.ElectionId">@Localizer["Details"]</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ElectionId">@Localizer["Delete"]</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ElectionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ElectionId">@Localizer["Edit"]</a> |
+                <a asp-action="Details" asp-route-id="@item.ElectionId">@Localizer["Details"]</a> |
+                <a asp-action="Delete" asp-route-id="@item.ElectionId">@Localizer["Delete"]</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
