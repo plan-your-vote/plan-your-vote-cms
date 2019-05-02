@@ -79,10 +79,16 @@ namespace Web
                     return View();
                 }
 
+                if (image.Length < 4500)
+                {
+                    ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
+                    ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId");
+                    return View();
+                }
+
                 nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
                 fileName = "wwwroot\\" + nameOfile;
                 image.CopyTo(new FileStream(fileName, FileMode.Create));
-                ViewData["ImagePath"] = fileName;
             }
             var candidate = new Candidate();
             candidate.FirstName = firstName;
@@ -147,6 +153,13 @@ namespace Web
                         && image.ContentType != "image/gif")
                     {
                         ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
+                        ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
+                        return View(candidate);
+                    }
+
+                    if (image.Length < 4500)
+                    {
+                        ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
                         ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
                         return View(candidate);
                     }
