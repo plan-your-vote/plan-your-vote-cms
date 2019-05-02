@@ -28,7 +28,10 @@
             @Html.DisplayNameFor(model => model.Picture)
         </dt>
         <dd class="col-sm-10">
-            <img width="150" height="150" src="@Html.DisplayFor(model => model.Picture)">
+            @{
+                var url = "../../" + Model.Picture;
+                <img width="150" height="150" src="@url">
+            }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Biography)
