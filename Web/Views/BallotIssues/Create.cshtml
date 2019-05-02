@@ -27,18 +27,34 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <label class="control-label">@Localizer["Options"]</label>
-                <div class="form-group">
-                    <input asp-for="OptionsTitles[0]" value="Yes" class="form-control" />
+                <script>
+                    function appendInputChild(e) {
+                        var myDiv = document.createElement('div');
+                        myDiv.setAttribute('class', 'form-group');
+
+                        var myInput = document.createElement('input');
+
+                        var optionsElement = document.getElementById("options");
+                        myInput.setAttribute('id', `OptionsTitles_${optionsElement.childElementCount}_`);
+                        myInput.setAttribute('name', `OptionsTitles[${optionsElement.childElementCount}]`);
+                        myInput.setAttribute('type', "text");
+                        myInput.setAttribute('class', 'form-control');
+                        
+                        myDiv.append(myInput);
+
+                        optionsElement.append(myDiv);
+                    }
+                </script>
+                <div id="options">
+                    @for (int i = 0; i < Model.OptionsTitles.Count; i++)
+                    {
+                        <div class="form-group">
+                            @Html.TextBoxFor(m => m.OptionsTitles[i], new { @class = "form-control" })
+                        </div>
+                    }
                 </div>
-                <div class="form-group">
-                    <input asp-for="OptionsTitles[1]" value="No" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input asp-for="OptionsTitles[2]" placeholder="Optional" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input asp-for="OptionsTitles[3]" placeholder="Optional" class="form-control" />
-                </div>
+                <button id="AddIssueOption" type="button" role="button" class="btn btn-primary" onClick="appendInputChild(event)">Add</button>
+                
                 <div class="form-group">
                     <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
                 </div>
