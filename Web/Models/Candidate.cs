@@ -14,12 +14,8 @@ namespace Web.Models
 
         public Election Election { get; set; }
 
-        [Display (Name="FirstName")]
-        public string FirstName { get; set; }
-
-        [Display(Name = "LastName")]
-
-        public string LastName { get; set; }
+        [Display (Name="Name")]
+        public string Name { get; set; }
 
         [Display(Name = "Picture")]
         public string Picture { get; set; }

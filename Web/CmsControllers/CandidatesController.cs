@@ -64,7 +64,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string firstName, string lastName, IFormFile image, string biography, int organizationId)
+        public async Task<IActionResult> Create(string name, IFormFile image, string biography, int organizationId)
         {
             var fileName = "";
             var nameOfile = "";
@@ -91,8 +91,7 @@ namespace Web
                 image.CopyTo(new FileStream(fileName, FileMode.Create));
             }
             var candidate = new Candidate();
-            candidate.FirstName = firstName;
-            candidate.LastName = lastName;
+            candidate.Name = name;
             candidate.Picture = nameOfile;
             candidate.Biography = biography;
             candidate.OrganizationId = organizationId;
@@ -137,7 +136,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,FirstName,LastName,Biography,OrganizationId")] Candidate candidate, IFormFile image)
+        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,Name,Biography,OrganizationId")] Candidate candidate, IFormFile image)
         {
             if (id != candidate.CandidateId)
             {

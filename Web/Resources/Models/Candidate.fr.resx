@@ -132,11 +132,8 @@
   <data name="ElectionId" xml:space="preserve">
     <value>Id d'élection</value>
   </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>Prénom</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Nom de famille</value>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
   </data>
   <data name="Organization" xml:space="preserve">
     <value>Organisation</value>

@@ -183,8 +183,7 @@ namespace Web.Data
             {
                 new Candidate
                 {
-                    FirstName = "Jason",
-                    LastName= "Lamarche",
+                    Name = "LAMARCHE Jason",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor0.jpg",
                     Biography = @"Jason Lamarche loves Vancouver and has lived here for 21 years. Jason was born in Ottawa, Ontario.
 
@@ -196,8 +195,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "Mike",
-                    LastName = "Hansen",
+                    Name = "HANSEN Mike",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor1.jpg",
                     Biography = @"Been in housing construction most of my life, truck driver, stock promoter and various other business. Founded the Canadian Hemp Growers Assoc. in 1996. 2005 on record at Senate Committee on national defence saying, ""terrorists"" are smuggling guns/drugs into Canada. 2005 Harm Reduction Pilot Project/monopolizing heroin to save lives, Men On Down Town East Society and Two Ravens Opioid Project.",
                     OrganizationId = 2,
@@ -205,8 +203,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "Wai",
-                    LastName = "Young",
+                    Name = "YOUNG Wai",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor12.jpg",
                     Biography = @"Wai has lived in Vancouver for over 50 years and is a community advocate, business owner, and past Member of Parliament with over three decades of civic and policy leadership. She is a birth mother of twins and a foster parent to seven children. She holds a degree in Sociology with post graduate work in Urban Planning and Mass Communications.",
                     OrganizationId = 3,
@@ -214,8 +211,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "Tony",
-                    LastName = "Pacheco",
+                    Name = "PACHECO Tony",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor9.jpg",
                     Biography = @"That's not actually a picture of Tony JSYK.",
                     OrganizationId = 2,
@@ -224,8 +220,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 ,
                 new Candidate
                 {
-                    FirstName = "Danny",
-                    LastName = "Di Iorio",
+                    Name = "DI IORIO Danny",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor9.jpg",
                     Biography = @"This may ACTUALLY be a picture of Danny; Who can really say.",
                     OrganizationId = 1,
@@ -233,8 +228,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "STEWART ",
-                    LastName = "Kennedy",
+                    Name = "STEWART Kennedy",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor7.jpg",
                     Biography = @"I've lived in Vancouver since 1989. I moved from Nova Scotia with only $100 and went on to serve as an MP (2011-2018), elected with Jack Layton's NDP.
                                 I am an SFU policy professor, specializing in cities and housing and have a Ph.D. from the London School of Economics.
@@ -244,8 +238,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "YANO ",
-                    LastName = "John",
+                    Name = "YANO John",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor2.jpg",
                     Biography = @"Born in Niagara Falls, to parents who were born in Vancouver, whose parents were born in Japan. Studied organic chemistry, is a journeyman chef. Environmental and Social Justice Advocate, former HEU shop steward, member of local executive and 2 provincial union committees. Member of federal and provincial NDP riding executives and former BCNDP Provincial Executive Member. Out, Proud, Gay man.",
                     OrganizationId = 1,
@@ -253,8 +246,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "David",
-                    LastName = "CHEN",
+                    Name = "CHEN David",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor3.jpg",
                     Biography = @"I offer a tremendous amount of relevant and technical experience as a father of 3 (two with permanent disabilities), a certified financial planner® with 13 years experience, small business owner, and 25 years experience working with my community as a strata president, a Strathcona PAC chair, a Vancouver Foundation granting DSEF committee member, VP/Treasurer of Beauty Night Society and more.",
                     OrganizationId = 2,
@@ -262,8 +254,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "SYLVESTER",
-                    LastName = "Shauna",
+                    Name = "SYLVESTER Shauna",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor4.jpg",
                     Biography = @"With 30 years of leadership experience and numerous awards, Shauna stands as an independent, principled and pragmatic Mayoral candidate. She has served on the boards of Vancity, MEC and BC Assessment and has worked with cities on housing, transportation, finance, climate change and innovation. Shauna understands Vancouver needs a bridge builder who can deliver affordable housing and financial accountability.",
                     OrganizationId = 2,
@@ -271,8 +262,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "CASSIDY ",
-                    LastName = "Sean",
+                    Name = "CASSIDY Sean",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor8.jpg",
                     Biography = @"Born/raised in Vancouver, high school Vancouver College, UBC (Political science/Econ), MBA, Fordham University NYC, visiting MBA University of Washington. I am an FMP GE's renowned finance program. Worked on Bay St. doing government and municipal finance across Canada with RBC DS. Represented Canada on Wall St with CMHC, Acting Trade Commissioner S America in Vancouver, Venture Capital advisor.",
                     OrganizationId = 1,
@@ -280,8 +270,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "BREMNER",
-                    LastName = "Hector",
+                    Name = "BREMNER Hector",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor10.jpg",
                     Biography = @"Hector Bremner is the only candidate with Vancouver City council experience running for Mayor. Councillor Bremner's life and career have been marked by recognizing good ideas, getting things done, and bringing people together. He feels honoured to be able to serve all communities across our great city and promises to citizens that he will get the job done.",
                     OrganizationId = 1,
@@ -289,8 +278,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "FOGAL",
-                    LastName = "Connie",
+                    Name = "FOGAL Connie",
                     Picture = "https://vancouver.ca/plan-your-vote/img/mayor11.jpg",
                     Biography = @"Connie Fogal, a retired lawyer and widow to Harry Rankin, Vancouver's outspoken alderman, has served as Vancouver Park Board Commissioner, leader of the Canadian Action Party, spokesperson for Citizens Against Gambling Expansion, elected representative to Kitsilano's and Vancouver's Resources Boards, and plaintiff in lawsuits against globalization and the militarization of Nanoose Bay.",
                     OrganizationId = 1,
@@ -298,8 +286,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "BASRA",
-                    LastName = "Nycki",
+                    Name = "BASRA Nycki",
                     Picture = "https://vancouver.ca/plan-your-vote/img/councillor2.jpg",
                     Biography = @"Nycki has policed in the Downtown Eastside but is presently an articling student completing her requirements to become a lawyer. She has degrees in Communication and Law and has extensive experience working on large projects at the local, national and international level. She volunteers for various organizations and is a community activist therefore is well versed in Vancouver's issues.",
                     OrganizationId = 2,
@@ -307,8 +294,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "RAUNET",
-                    LastName = "Françoise",
+                    Name = "RAUNET Françoise",
                     Picture = "https://vancouver.ca/plan-your-vote/img/councillor9.jpg",
                     Biography = @"I am a public school teacher and life-long advocate for social change. Growing up in Vancouver in the eighties, I was raised in the peace, labour, and environmental activist movements. Now a mom trying to raise two kids in an increasingly unaffordable city, my frustration with decades of government inaction has driven me into politics.",
                     OrganizationId = 2,
@@ -316,8 +302,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "ROBERTS",
-                    LastName = "Anne",
+                    Name = "ROBERTS Anne",
                     Picture = "https://vancouver.ca/plan-your-vote/img/councillor15.jpg",
                     Biography = @"Anne Roberts is a former COPE city councillor and school board trustee. She taught journalism at Langara College after a career as a reporter and radio producer. A long-time community activist and feminist, Anne worked to improve schools, parks, pedestrian safety and neighbourhood shopping in Kensington-Cedar Cottage, where she and her family have lived for the past 40 years.",
                     OrganizationId = 2,
@@ -325,8 +310,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "BLIGH",
-                    LastName = "Rebecca",
+                    Name = "BLIGH Rebecca",
                     Picture = "https://vancouver.ca/plan-your-vote/img/councillor22.jpg",
                     Biography = @"Rebecca has spent 20 years working with Vancouver startups & NGOs. Rebecca is a passionate supporter of education and the environment and has championed global leadership development programs. Rebecca, skilled in building trust, is a community activator and volunteers with the Dr. Peter Centre. Rebecca rents in East Vancouver with her wife, Laura, and her two teenagers Holly and Jackson.",
                     OrganizationId = 2,
@@ -334,8 +318,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "GREWAL",
-                    LastName = "David",
+                    Name = "GREWAL David",
                     Picture = "https://vancouver.ca/plan-your-vote/img/councillor40.jpg",
                     Biography = @"An engineer and lifelong Vancouverite, David co-founded Absolute Energy Inc., BC's largest natural gas brokerage firm and served as Chair of a community association where he advocated for greater transparency and engagement with citizens. He is committed to making Vancouver a fiscal, social, and innovation leader where working families and seniors can live and small businesses can thrive.",
                     OrganizationId = 2,
@@ -343,8 +326,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "LI",
-                    LastName = "Morning",
+                    Name = "LI Morning",
                     Picture = "https://vancouver.ca/plan-your-vote/img/councillor59.jpg",
                     Biography = @"In 2004, I immigrated to Vancouver, graduated with computer major, worked as IT engineer, salesperson, later opened my computer company.
 
@@ -358,8 +340,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "ZARUDINA",
-                    LastName = "Olga",
+                    Name = "ZARUDINA Olga",
                     Picture = "https://vancouver.ca/plan-your-vote/img/park0.jpg",
                     Biography = @"Olga Zarudina is a licensed REALTOR® and a certified translator.
                                     Olga holds Bachelor's and Master's Degrees in Linguistics and Translation/Interpretation. 
@@ -369,8 +350,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "NEMETZ",
-                    LastName = "Steven L",
+                    Name = "NEMETZ Steven L",
                     Picture = "https://vancouver.ca/plan-your-vote/img/park5.jpg",
                     Biography = @"Steven's roots in the city of Vancouver are deep. Steven is the fourth generation of his family to live in Vancouver. (See nemetzfamily.ca) All his schooling, up through UBC, took place in Vancouver. Steven has a J. D. and an LL.M from Osgoode Hall Law School, and an MBA from Schulich School of Business. Steven is a father and grandfather.",
                     OrganizationId = 3,
@@ -378,8 +358,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "COUPAR ",
-                    LastName = "John",
+                    Name = "COUPAR John",
                     Picture = "https://vancouver.ca/plan-your-vote/img/park10.jpg",
                     Biography = @"Coupar is seeking his 3rd Term as a Park Commissioner and is well known for his successful effort to keep the Bloedel Conservatory open in QE Park. He was a founding director of the Friends of the Bloedel, and since his election in 2011 has been responsible for continuing efforts to restore and promote the iconic Bloedel Conservatory.",
                     OrganizationId = 3,
@@ -387,8 +366,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "MCGARRIGLE ",
-                    LastName = "Kathy",
+                    Name = "MCGARRIGLE Kathy",
                     Picture = "https://vancouver.ca/plan-your-vote/img/park11.jpg",
                     Biography = @"Kathy McGarrigle is a proud resident of Vancouver, respected for her longtime commitment to serving others. She brings her deep knowledge of the city and extensive business experience and is a voice for positive change. She has a passion for making a difference in the community and lends her time to issues related to poverty, women, children, and seniors.",
                     OrganizationId = 3,
@@ -396,8 +374,7 @@ Jason has ten years experience in Municipal, Provincial, Federal politics; earni
                 },
                 new Candidate
                 {
-                    FirstName = "MACKINNON",
-                    LastName = "Stuart",
+                    Name = "MACKINNON Stuart",
                     Picture = "https://vancouver.ca/plan-your-vote/img/park31.jpg",
                     Biography = @"Stuart Mackinnon is currently the Chair of the Park Board. Stuart was first elected a Park Board Commissioner with the Green Party from 2008-2011. He teaches and is currently the Special Education Department Head and School Based Resource Teacher at Killarney Secondary in Vancouver. Stuart lives, works, and shops in the Champlain/Fraserlands neighbourhood of Vancouver.",
                     OrganizationId = 3,
