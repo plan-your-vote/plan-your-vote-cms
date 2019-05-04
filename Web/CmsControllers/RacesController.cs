@@ -17,6 +17,7 @@ namespace Web.CmsControllers
         public int ElectionId { get; set; }
         public int RaceId { get; set; }
         public string PositionName { get; set; }
+        public string Description { get; set; }
         public int NumberNeeded { get; set; }
         public IList<int> RaceCandidatesIds { get; set; }
     }
@@ -107,6 +108,7 @@ namespace Web.CmsControllers
                 ElectionId = race.ElectionId,
                 RaceId = race.RaceId,
                 PositionName = race.PositionName,
+                Description = race.Description,
                 NumberNeeded = race.NumberNeeded,
                 RaceCandidatesIds = raceCandidateIds
             };
@@ -139,6 +141,7 @@ namespace Web.CmsControllers
                     var race = _context.Races.Find(id);
                     race.ElectionId = model.ElectionId;
                     race.PositionName = model.PositionName;
+                    race.Description = model.Description;
                     race.NumberNeeded = model.NumberNeeded;
                     _context.Update(race);
 
