@@ -23,6 +23,13 @@ namespace Web
                 context.Images.AddRange(images);
                 context.SaveChanges();
             }
+
+            if (context.SocialMedias?.Any() != true)
+            {
+                var socialMedias = GetSocialMedias().ToArray();
+                context.SocialMedias.AddRange(socialMedias);
+                context.SaveChanges();
+            }
         }
 
         private static List<Image> GetImages()
@@ -105,6 +112,31 @@ namespace Web
                     ThemeName = "Maple",
                     Selected = false,
                 },
+            };
+        }
+
+        private static List<SocialMedia> GetSocialMedias()
+        {
+            return new List<SocialMedia>()
+            {
+                new SocialMedia()
+                {
+                    MediaName = "Facebook",
+                    Message = "I'm using Plan Your Vote!",
+                    Link = "https://www.facebook.com/"
+                },
+                new SocialMedia()
+                {
+                    MediaName = "Twitter",
+                    Message = "I'm using Plan Your Vote!",
+                    Link = "https://twitter.com/"
+                },
+                new SocialMedia()
+                {
+                    MediaName = "LinkedIn",
+                    Message = "I'm using Plan Your Vote!",
+                    Link = "https://ca.linkedin.com/"
+                }
             };
         }
     }
