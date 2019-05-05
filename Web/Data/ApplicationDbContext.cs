@@ -29,5 +29,7 @@ namespace Web.Data
         public DbSet<Theme> Themes { get; set; }
         public DbSet<Image> Images { get; set; }
         public object Configuration { get;  set; }
+        public DbSet<Web.Models.SocialMedia> SocialMedias { get; set; }
+        public DbSet<Web.Models.CandidateDetail> CandidateDetails { get; set; }
     }
 }

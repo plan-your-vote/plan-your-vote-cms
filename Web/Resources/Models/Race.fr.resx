@@ -120,6 +120,9 @@
   <data name="CandidateRaces" xml:space="preserve">
     <value>Courses de candidats</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>La description</value>
+  </data>
   <data name="Election" xml:space="preserve">
     <value>Élection</value>
   </data>

@@ -18,6 +18,9 @@ namespace Web.Models
         [Display(Name = "PositionName")]
         public string PositionName { get; set; }
 
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
         [Display(Name = "NumberNeeded")]
         public int NumberNeeded { get; set; }
 

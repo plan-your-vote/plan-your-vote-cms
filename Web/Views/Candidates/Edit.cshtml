@@ -17,24 +17,14 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="CandidateId" />
                 <div class="form-group">
-                    <label asp-for="FirstName" class="control-label"></label>
-                    <input asp-for="FirstName" class="form-control" />
-                    <span asp-validation-for="FirstName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LastName" class="control-label"></label>
-                    <input asp-for="LastName" class="form-control" />
-                    <span asp-validation-for="LastName" class="text-danger"></span>
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Picture" class="control-label"></label><br />
                     <input asp-for="Picture" type="file" name="image" />
                     <span asp-validation-for="Picture" class="text-danger">@ViewData["ImageMessage"]</span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Biography" class="control-label"></label>
-                    <input asp-for="Biography" class="form-control" />
-                    <span asp-validation-for="Biography" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="OrganizationId" class="control-label"></label>
