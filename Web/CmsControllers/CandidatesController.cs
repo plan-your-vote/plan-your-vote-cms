@@ -64,7 +64,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(string name, IFormFile image, string biography, int organizationId)
+        public async Task<IActionResult> Create(string name, IFormFile image, int organizationId)
         {
             var fileName = "";
             var nameOfile = "";
@@ -93,7 +93,6 @@ namespace Web
             var candidate = new Candidate();
             candidate.Name = name;
             candidate.Picture = nameOfile;
-            candidate.Biography = biography;
             candidate.OrganizationId = organizationId;
             candidate.ElectionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
             if (ModelState.IsValid)
@@ -136,7 +135,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,Name,Biography,OrganizationId")] Candidate candidate, IFormFile image)
+        public async Task<IActionResult> Edit(int id, [Bind("CandidateId,Name,OrganizationId")] Candidate candidate, IFormFile image)
         {
             if (id != candidate.CandidateId)
             {

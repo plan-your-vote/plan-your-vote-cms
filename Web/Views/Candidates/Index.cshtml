@@ -21,9 +21,6 @@
                 @Html.DisplayNameFor(model => model.Picture)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Biography)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Organization)
             </th>
             <th class="col-sm-2"></th>
@@ -38,9 +35,6 @@
                 </td>
                 <td>
                     <img width="80" height="80" src="@Html.DisplayFor(modelItem => item.Picture)">
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Biography)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Organization.Name)

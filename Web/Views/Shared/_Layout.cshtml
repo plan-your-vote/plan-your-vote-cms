@@ -66,12 +66,16 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "Candidates,Contacts")">
+                            <li class="dropdown @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "Candidates,CandidateDetails,Contacts")">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Candidate Details <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li class="nav-item">
                                         <a class="nav-link text-white"
                                            asp-area="" asp-controller="Candidates" asp-action="Index">@Localizer["Candidates"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white"
+                                           asp-area="" asp-controller="CandidateDetails" asp-action="Index">@Localizer["CandidateDetails"]</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link text-white" asp-area="" asp-controller="Contacts" asp-action="Index">@Localizer["Contacts"]</a>
