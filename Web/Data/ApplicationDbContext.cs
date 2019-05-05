@@ -31,5 +31,6 @@ namespace Web.Data
         public object Configuration { get;  set; }
         public DbSet<Web.Models.SocialMedia> SocialMedias { get; set; }
         public DbSet<Web.Models.CandidateDetail> CandidateDetails { get; set; }
+        public DbSet<Web.Models.Step> Steps { get; set; }
     }
 }
