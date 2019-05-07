@@ -197,7 +197,7 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(app).Wait();
+            DummyData.Initialize(context, app).Wait();
             StateInit.Initialize(context);
             ThemesInit.Initialize(context);
         }
