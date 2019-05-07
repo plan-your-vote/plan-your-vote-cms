@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Models;
@@ -11,439 +13,307 @@ namespace Web.Data
 {
     public static class DummyData
     {
-        public static async Task Initialize(IApplicationBuilder app)
+        public static ApplicationDbContext _context;
+
+        public const int DummyElectionId = 1; // Hardcoded
+        public static async Task Initialize(ApplicationDbContext context, IApplicationBuilder app)
         {
-            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            _context = context;
+
+            context.Database.EnsureCreated();
+
+            InitializeDatabase(context);
+
+            if (!context.Candidates.Any())
             {
-                ApplicationDbContext context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-
-                UserManager<IdentityUser> userManager = serviceScope.ServiceProvider.GetService<UserManager<IdentityUser>>();
-                RoleManager<IdentityRole> roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
-
-
-                context.Database.EnsureCreated();
-
-                if (context.Candidates.Any()) { return; }
-
-                await InsertUserAsync(userManager, roleManager);
-
-                var elections = GetElections().ToArray();
-                context.Elections.AddRange(elections);
-                context.SaveChanges();
-
-                var pollingStations = GetPollingStations().ToArray();
-                context.PollingStations.AddRange(pollingStations);
-                context.SaveChanges();
-
-                var organizations = GetOrganizations().ToArray();
-                context.Organizations.AddRange(organizations);
-                context.SaveChanges();
-
-                var races = GetRaces().ToArray();
-                context.Races.AddRange(races);
-                context.SaveChanges();
-
-                var candidates = GetCandidates().ToArray();
-                context.Candidates.AddRange(candidates);
-                context.SaveChanges();
-
-                var contacts = GetContacts().ToArray();
-                context.Contacts.AddRange(contacts);
-                context.SaveChanges();
-
-                var candidateRaces = GetCandidateRaces().ToArray();
-                context.CandidateRaces.AddRange(candidateRaces);
-                context.SaveChanges();
-
-                var ballotIssues = GetBallotIssues().ToArray();
-                context.BallotIssues.AddRange(ballotIssues);
-                context.SaveChanges();
-
-                var issueOptions = GetIssueOptions().ToArray();
-                context.IssueOptions.AddRange(issueOptions);
-                context.SaveChanges();
+                // InitializeDatabase();
             }
-        }
-
-        public static async Task InsertUserAsync(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
-
-        {
-
-            var role1 = new IdentityRole
+            else
             {
-                Name = "Admin",
-                NormalizedName = "Admin"
-            };
-
-            var role2 = new IdentityRole
-            {
-                Name = "Member",
-                NormalizedName = "Member"
-            };
-
-            if (await roleManager.FindByNameAsync(role1.Name) == null)
-            {
-                
-                await roleManager.CreateAsync(role1);
-            }
-            if (await roleManager.FindByNameAsync(role2.Name) == null)
-            {
-                await roleManager.CreateAsync(role2);
+                return;
             }
 
-            var user = new IdentityUser
+            await InsertUserAsync(app);
+        }
+
+        public static void InitializeDatabase(ApplicationDbContext context)
+        {
+            const string candidatesFile = "wwwroot/Data/candidates.json";
+            List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
+
+
+
+            var elections = GetElections().ToArray();
+            context.Elections.AddRange(elections);
+            context.SaveChanges();
+
+            const string pollingStationsFile = "wwwroot/Data/pollingStations.json";
+            List<JSONPollingStation> pollingStationsData = GetJsonData<JSONPollingStation>(pollingStationsFile);
+
+            List<PollingStation> pollingStations = pollingStationsData
+                .Select(psd => new PollingStation()
+                {
+                    ElectionId = DummyElectionId,
+                    PollingStationId = psd.VotingPlaceID,
+                    Name = psd.FacilityName,
+                    Address = psd.FacilityAddress,
+                    AdditionalInfo = psd.Location,
+                    Latitude = psd.Latitude,
+                    Longitute = psd.Longitude,
+                    // = psd.AdvancedOnly,
+                    // = psd.LocalArea,
+
+                })
+                .ToList();
+            context.PollingStations.AddRange(pollingStations);
+            context.SaveChanges();
+
+            var organizations = GetOrganizations(candidateData).ToArray();
+            context.Organizations.AddRange(organizations);
+            context.SaveChanges();
+
+            var races = GetRaces(candidateData).ToArray();
+            context.Races.AddRange(races);
+            context.SaveChanges();
+
+            GetCandidatesAndContacts(candidateData);
+
+            var candidateRaces = GetCandidateRaces(candidateData).ToArray();
+            context.CandidateRaces.AddRange(candidateRaces);
+            context.SaveChanges();
+
+            var ballotIssues = GetBallotIssues().ToArray();
+            context.BallotIssues.AddRange(ballotIssues);
+            context.SaveChanges();
+
+            var issueOptions = GetIssueOptions().ToArray();
+            context.IssueOptions.AddRange(issueOptions);
+            context.SaveChanges();
+        }
+
+        private static List<CandidateRace> GetCandidateRaces(List<JSONCandidate> candidateData)
+        {
+            List<CandidateRace> candidateRaces = new List<CandidateRace>();
+
+            foreach (var existingCandidate in candidateData)
             {
-                Email = "a@a.a",
-                UserName = "a@a.a",
-                SecurityStamp = Guid.NewGuid().ToString()
-            };
+                CandidateRace candidateRace = new CandidateRace()
+                {
+                    PlatformInfo = existingCandidate.Platform,
+                    PositionName = existingCandidate.Position,
+                };
 
+                candidateRace.CandidateId = _context.Candidates
+                    .Where(candidate => candidate.Name == existingCandidate.Name)
+                    .First() // BUG in the future?
+                    .CandidateId;
 
-            var result = await userManager.CreateAsync(user, "P@$$w0rd");
+                candidateRace.RaceId = _context.Races
+                    .Where(races => races.PositionName == existingCandidate.Position)
+                    .First() //Potential bug
+                    .RaceId;
 
-            if (result.Succeeded)
-            {
-                await userManager.AddToRoleAsync(user, "Admin");
+                candidateRaces.Add(candidateRace);
             }
 
-            var user1 = new IdentityUser
+            return candidateRaces;
+        }
+
+        private static List<Candidate> GetCandidatesAndContacts(List<JSONCandidate> candidateData)
+        {
+            List<Candidate> candidates = new List<Candidate>();
+
+            foreach (var existingCandidate in candidateData)
             {
-                Email = "m@m.m",
-                UserName = "m@m.m",
-                SecurityStamp = Guid.NewGuid().ToString()
-            };
+                candidates = new List<Candidate>();
+                List<Contact> contacts = new List<Contact>();
 
-            // var result = await userManager.CreateAsync(user);
 
-            var result1 = await userManager.CreateAsync(user1, "P@$$w0rd");
+                Candidate candidate = new Candidate()
+                {
+                    ElectionId = DummyElectionId,
+                    Name = existingCandidate.Name,
+                    Picture = existingCandidate.Picture,
+                };
 
-            if (result.Succeeded)
-            {
-                await userManager.AddToRoleAsync(user1, "Member");
+                candidate.OrganizationId = _context.Organizations
+                    .Where(organization => organization.Name == existingCandidate.Party)
+                    .Single()
+                    .OrganizationId;
+
+                candidates.Add(candidate);
+
+                _context.Candidates.AddRange(candidates);
+                _context.SaveChanges();
+
+
+
+                if (!string.IsNullOrEmpty(existingCandidate.Twitter))
+                {
+                    contacts.Add(new Contact()
+                    {
+                        ContactMethod = "Twitter",
+                        ContactValue = existingCandidate.Twitter,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+                if (!string.IsNullOrEmpty(existingCandidate.Facebook))
+                {
+                    contacts.Add(new Contact()
+                    {
+                        ContactMethod = "Facebook",
+                        ContactValue = existingCandidate.Facebook,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+                if (!string.IsNullOrEmpty(existingCandidate.Instagram))
+                {
+                    contacts.Add(new Contact()
+                    {
+                        ContactMethod = "Instagram",
+                        ContactValue = existingCandidate.Instagram,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+                if (!string.IsNullOrEmpty(existingCandidate.YouTube))
+                {
+                    contacts.Add(new Contact()
+                    {
+                        ContactMethod = "YouTube",
+                        ContactValue = existingCandidate.YouTube,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+                if (!string.IsNullOrEmpty(existingCandidate.Other))
+                {
+                    contacts.Add(new Contact()
+                    {
+                        ContactMethod = "Other",
+                        ContactValue = existingCandidate.Other,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+                if (!string.IsNullOrEmpty(existingCandidate.Phone))
+                {
+                    contacts.Add(new Contact()
+                    {
+                        ContactMethod = "Phone",
+                        ContactValue = existingCandidate.Phone,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+                if (!string.IsNullOrEmpty(existingCandidate.Email))
+                {
+                    contacts.Add(new Contact()
+                    {
+                        ContactMethod = "Email",
+                        ContactValue = existingCandidate.Email,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+                if (!string.IsNullOrEmpty(existingCandidate.Website))
+                {
+                    contacts.Add(new Contact()
+                    {
+                        ContactMethod = "Website",
+                        ContactValue = existingCandidate.Website,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+
+                // var contacts = GetContacts(candidateData).ToArray();
+                _context.Contacts.AddRange(contacts);
+                _context.SaveChanges();
             }
 
+            
+
+            return candidates;
         }
 
-        private static List<Organization> GetOrganizations()
+        private static List<Organization> GetOrganizations(List<JSONCandidate> candidateData)
         {
-            return new List<Organization>()
+            List<Organization> organizations = new List<Organization>();
+
+            foreach (var candidate in candidateData)
             {
-                new Organization()
+                if (organizations.FindIndex(existingOrg => candidate.Party == existingOrg.Name) == -1)
                 {
-                    Name = "The United People for Change",
-                    Description = "_DESCRIPTION_",
-                },
-                new Organization()
-                {
-                    Name = "The Second Organization",
-                    Description = "_DESCRIPTION_",
-                },
-                new Organization()
-                {
-                    Name = "Coalition Vancouver",
-                    Description = "Coalition is 100% for the people!",
+                    organizations.Add(new Organization()
+                    {
+                        Name = candidate.Party,
+                    });
                 }
-            };
+            }
+
+            return organizations;
         }
 
-        private static List<Race> GetRaces()
+        private static List<Race> GetRaces(List<JSONCandidate> candidateData)
         {
-            return new List<Race>
+            const int NumOfMayorsNeeded = 1;
+            const int NumOfCouncillorsNeeded = 1;
+            const int NumOfParkCommissionersNeeded = 1;
+            const int NumOfSchoolTrusteesNeeded = 1;
+
+            List<Race> races = new List<Race>();
+
+            foreach (var candidate in candidateData)
             {
-                new Race
+                if (races.FindIndex(existingRace => candidate.Position == existingRace.PositionName) == -1)
                 {
-                    PositionName = "Mayor",
-                    NumberNeeded = 1,
-                    ElectionId = 1
-                },
-                new Race
-                {
-                    PositionName = "Councillor",
-                    NumberNeeded = 10,
-                    ElectionId = 1
-                },
-                new Race
-                {
-                    PositionName = "Park Commisioner",
-                    NumberNeeded = 7,
-                    ElectionId = 1
-                },
-                new Race
-                {
-                    PositionName = "School Trustee",
-                    NumberNeeded = 9,
-                    ElectionId = 1
+                    Race race = new Race()
+                    {
+                        ElectionId = DummyElectionId,
+                        PositionName = candidate.Position,
+                    };
+
+                    switch (candidate.Position)
+                    {
+                        case "Councillor":
+                            race.NumberNeeded = NumOfCouncillorsNeeded;
+                            break;
+                        case "Mayor":
+                            race.NumberNeeded = NumOfMayorsNeeded;
+                            break;
+                        case "Park Board commissioner":
+                            race.NumberNeeded = NumOfParkCommissionersNeeded;
+                            break;
+                        case "School trustee":
+                            race.NumberNeeded = NumOfSchoolTrusteesNeeded;
+                            break;
+                    }
+
+                    races.Add(race);
                 }
-            };
+            }
+
+            return races;
         }
 
-        private static List<Candidate> GetCandidates()
+        public static List<DataType> GetJsonData<DataType>(string filePath)
         {
-            return new List<Candidate>
-            {
-                new Candidate
-                {
-                    Name = "LAMARCHE Jason",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor0.jpg",
-                    OrganizationId = 1,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "HANSEN Mike",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor1.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "YOUNG Wai",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor12.jpg",
-                    OrganizationId = 3,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "PACHECO Tony",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor9.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                }
-                ,
-                new Candidate
-                {
-                    Name = "DI IORIO Danny",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor9.jpg",
-                    OrganizationId = 1,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "STEWART Kennedy",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor7.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "YANO John",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor2.jpg",
-                    OrganizationId = 1,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "CHEN David",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor3.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "SYLVESTER Shauna",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor4.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "CASSIDY Sean",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor8.jpg",
-                    OrganizationId = 1,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "BREMNER Hector",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor10.jpg",
-                    OrganizationId = 1,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "FOGAL Connie",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/mayor11.jpg",
-                    OrganizationId = 1,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "BASRA Nycki",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/councillor2.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "RAUNET Françoise",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/councillor9.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "ROBERTS Anne",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/councillor15.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "BLIGH Rebecca",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/councillor22.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "GREWAL David",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/councillor40.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "LI Morning",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/councillor59.jpg",
-                    OrganizationId = 2,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "ZARUDINA Olga",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/park0.jpg",
-                    OrganizationId = 3,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "NEMETZ Steven L",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/park5.jpg",
-                    OrganizationId = 3,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "COUPAR John",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/park10.jpg",
-                    OrganizationId = 3,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "MCGARRIGLE Kathy",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/park11.jpg",
-                    OrganizationId = 3,
-                    ElectionId = 1
-                },
-                new Candidate
-                {
-                    Name = "MACKINNON Stuart",
-                    Picture = "https://vancouver.ca/plan-your-vote/img/park31.jpg",
-                    OrganizationId = 3,
-                    ElectionId = 1
-                },
-
-
-            };
+            return JsonConvert.DeserializeObject<List<DataType>>(File.ReadAllText(filePath));
         }
 
-        private static List<Contact> GetContacts()
+        private static List<Election> GetElections()
         {
-            return new List<Contact>
+            return new List<Election>()
             {
-                new Contact()
+                new Election()
                 {
-                    CandidateId = 1,
-                    ContactMethod = "Tel",
+                    ElectionName = "City of Vancouver 2018 Municipal Election",
+                    EndDate = "October 21 2018",
+                    StartDate = "September 14 2018",
+                    Description = "City of Vancouver 2018 Municipal Election"
                 },
-                new Contact()
+                new Election()
                 {
-                    CandidateId = 1,
-                    ContactMethod = "Email",
-                    ContactValue = "MAYORLAMARCHE@protonmail.com",
+                    ElectionName = "Canadian Federal Election 2019",
+                    EndDate = "October 21 2019",
+                    StartDate = "October 21 2019",
+                    Description = "The 2019 Canadian federal election is scheduled to take place on or before October 21, 2019. The October 21 date of the vote is determined by the fixed-date procedures in the Canada Elections Act"
                 },
-                new Contact()
-                {
-                    CandidateId = 2,
-                    ContactMethod = "Tel",
-                    ContactValue = "604 700 1652",
-                },
-                new Contact()
-                {
-                    CandidateId = 2,
-                    ContactMethod = "Email",
-                    ContactValue = "mikec.hansen@gmail.com",
-                },
-                new Contact()
-                {
-                    CandidateId = 3,
-                    ContactMethod = "Tel",
-                    ContactValue = "555-555-5555"
-                },
-                new Contact()
-                {
-                    CandidateId = 3,
-                    ContactMethod = "Email",
-                    ContactValue = "wai@young.ca"
-                },
-                new Contact()
-                {
-                    CandidateId = 4,
-                    ContactMethod = "Tel",
-                    ContactValue = "222-222-5252"
-                },
-                new Contact()
-                {
-                    CandidateId = 5,
-                    ContactMethod = "Email",
-                    ContactValue = "dd@dd.dd"
-                }
-            };
-        }
-
-        private static List<CandidateRace> GetCandidateRaces()
-        {
-            return new List<CandidateRace>()
-            {
-                new CandidateRace()
-                {
-                    RaceId = 1,
-                    CandidateId = 1,
-                    PositionName = "Mayor",
-                    PlatformInfo = @"If Jason Lamarche is elected Mayor of Vancouver he will use his Democratic support and Executive Powers to impose strict Rent Control with select 1 bedroom rents capped at $500 per month.
-
-Jason will launch new Illegal Immigration Control Enforcement teams managed by Vancouver Police Department.
-
-Jason will help Canadian citizens start, run, and expand small businesses and other development projects.
-
-Jason is a true independent and will not accept donations from voters or businesses.",
-                    TopIssues = @"RENT CONTROL 1 BR $500
-ILLEGAL MIGRANT CONTROL
-//PRO SMALL CANADA BUSINESS",
-                },
-                new CandidateRace()
-                {
-                    RaceId = 1,
-                    CandidateId = 3, 
-                    PositionName = "Mayor",
-                    PlatformInfo = @"Wai Young and Coalition Vancouver are 100% for the People. With over 35 years of policy experience working with community, governments & business she is ready to lead. She is proven, experienced, and inclusive. As a former MP who brought many important infrastructure projects to the city, she understands the comprehensive issues facing Vancouver. She will bring back mutual respect on the streets and clean up our city."
-                },
-                new CandidateRace()
-                {
-                    RaceId = 1,
-                    CandidateId = 4,
-                    PositionName = "Mayor",
-                    PlatformInfo = @"If elected, Tony promises change for everyone. And not just small change, but like, Loonies and Toonies and stuff."
-                },
-                new CandidateRace()
-                {
-                    RaceId = 1,
-                    CandidateId = 5,
-                    PositionName = "Mayor",
-                    PlatformInfo = @"If elected, Danny will have made sure that Tony could not consolidate power for himself."
-                }
-
             };
         }
 
@@ -501,123 +371,66 @@ Are you in favour of Council having the authority, without further assent of the
             };
         }
 
-        private static List<Election> GetElections()
+        public static async Task InsertUserAsync(IApplicationBuilder app)
         {
-            return new List<Election>()
+            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
-                new Election()
-                {
-                    ElectionName = "City of Vancouver 2018 Municiple Election",
-                    EndDate = "October 21 2018",
-                    StartDate = "October 21 2018",
-                    Description = "Voting in an election is one of the most important things a citizen can do in their community and country."
-                },
-                new Election()
-                {
-                    ElectionName = "Canadian Federal Election, 2019",
-                    EndDate = "October 21 2019",
-                    StartDate = "October 21 2019",
-                    Description = "The 2019 Canadian federal election is scheduled to take place on or before October 21, 2019. The October 21 date of the vote is determined by the fixed-date procedures in the Canada Elections Act"
-                },
-                new Election()
-                {
-                    ElectionName = "City of Vancouver 2020 Municiple Election",
-                    EndDate = "October 21 2020",
-                    StartDate = "October 21 2020",
-                    Description = "Voting in an election is one of the most important things a citizen can do in their community and country."
-                }
-            };
-        }
+                UserManager<IdentityUser> userManager = serviceScope.ServiceProvider.GetService<UserManager<IdentityUser>>();
+                RoleManager<IdentityRole> roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
 
-        private static List<PollingStation> GetPollingStations()
-        {
-            return new List<PollingStation>()
-            {
-                new PollingStation()
+                var role1 = new IdentityRole
                 {
-                   
-                    ElectionId = 1,
-                    Name = "Holy Trinity Anglican Church",
-                    AdditionalInfo = "",
-                    Latitude = 49.27376,
-                    Longitute = -123.127989,
-                    Address = "1440 W 12th Avenue",
-                    WheelchairInfo = "main entrance on West 12th Ave",
-                    ParkingInfo = "street and church parking lot",
-                    WashroomInfo = "",
-                    GeneralAccessInfo = ""
-                },
-                new PollingStation()
+                    Name = "Admin",
+                    NormalizedName = "Admin"
+                };
+
+                var role2 = new IdentityRole
                 {
-                    
-                    ElectionId = 1,
-                    Name = "Grace Vancouver Church",
-                    AdditionalInfo = "",
-                    Latitude = 48.888,
-                    Longitute = -121.00,
-                    Address = "1696 W 7th Avenue",
-                    WheelchairInfo = "via ramp at the side entrance to the sanctuary, on West 7th Ave",
-                    ParkingInfo = "street",
-                    WashroomInfo = "",
-                    GeneralAccessInfo = ""
-                },
-                new PollingStation()
+                    Name = "Member",
+                    NormalizedName = "Member"
+                };
+
+                if (await roleManager.FindByNameAsync(role1.Name) == null)
                 {
-                   
-                    ElectionId = 2,
-                    Name = "Lord Tennyson Elementary School",
-                    AdditionalInfo = "",
-                    Latitude = 49.4444,
-                    Longitute = -122.555,
-                    Address = "1936 W 10th Avenue",
-                    WheelchairInfo = "south side entrance on West 11th Ave",
-                    ParkingInfo = "street",
-                    WashroomInfo = "wheelchair accessible washrooms are on the 3rd floor via chair lift",
-                    GeneralAccessInfo = ""
-                },
-                new PollingStation()
-                {
-                  
-                    ElectionId = 2,
-                    Name = "Gathering Place Community Centre",
-                    AdditionalInfo = "Handicap parking unavailable",
-                    Latitude = 50.110,
-                    Longitute = -123.444,
-                    Address = "609 Helmcken St",
-                    WheelchairInfo = "main entrance at the corner of Helmcken St and Seymour St",
-                    ParkingInfo = "street",
-                    WashroomInfo = "",
-                    GeneralAccessInfo = ""
-                },
-                new PollingStation()
-                {
-                 
-                    ElectionId = 3,
-                    Name = "False Creek Community Centre",
-                    AdditionalInfo = "",
-                    Latitude = 49.5677,
-                    Longitute = -121.127989,
-                    Address = "1318 Cartwright St",
-                    WheelchairInfo = "main entrance on Cartwright St",
-                    ParkingInfo = "street and community centre parking",
-                    WashroomInfo = "",
-                    GeneralAccessInfo = ""
-                },
-                new PollingStation()
-                {
-                   
-                    ElectionId = 3,
-                    Name = "Roundhouse Community Arts Centre",
-                    AdditionalInfo = "",
-                    Latitude = 49.6999,
-                    Longitute = -124.127989,
-                    Address = "181 Roundhouse Mews",
-                    WheelchairInfo = "main entrance on Roundhouse Mews",
-                    ParkingInfo = "street parking, underground parking off Drake St",
-                    WashroomInfo = "",
-                    GeneralAccessInfo = ""
+
+                    await roleManager.CreateAsync(role1);
                 }
-            };
+                if (await roleManager.FindByNameAsync(role2.Name) == null)
+                {
+                    await roleManager.CreateAsync(role2);
+                }
+
+                var user = new IdentityUser
+                {
+                    Email = "a@a.a",
+                    UserName = "a@a.a",
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+
+
+                var result = await userManager.CreateAsync(user, "P@$$w0rd");
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+
+                var user1 = new IdentityUser
+                {
+                    Email = "m@m.m",
+                    UserName = "m@m.m",
+                    SecurityStamp = Guid.NewGuid().ToString()
+                };
+
+                // var result = await userManager.CreateAsync(user);
+
+                var result1 = await userManager.CreateAsync(user1, "P@$$w0rd");
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(user1, "Member");
+                }
+            }
         }
     }
 }
