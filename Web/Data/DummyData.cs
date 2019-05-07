@@ -16,17 +16,16 @@ namespace Web.Data
         public static ApplicationDbContext _context;
 
         public const int DummyElectionId = 1; // Hardcoded
+
         public static async Task Initialize(ApplicationDbContext context, IApplicationBuilder app)
         {
             _context = context;
 
             context.Database.EnsureCreated();
 
-            InitializeDatabase(context);
-
             if (!context.Candidates.Any())
             {
-                // InitializeDatabase();
+                InitializeDatabase(context);
             }
             else
             {
@@ -133,7 +132,7 @@ namespace Web.Data
                 {
                     ElectionId = DummyElectionId,
                     Name = existingCandidate.Name,
-                    Picture = existingCandidate.Picture,
+                    Picture = "images/" + existingCandidate.Picture,
                 };
 
                 candidate.OrganizationId = _context.Organizations
