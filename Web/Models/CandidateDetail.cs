@@ -27,10 +27,14 @@ namespace Web.Models
 
     public class CandidateDetail
     {
+        [Key]
         public int ID { get; set; }
 
-        [ForeignKey("CandidateId")]
+        [Display(Name = "CandidateId")]
         public int CandidateId { get; set; }
+
+        [Display(Name = "Candidate")]
+        public Candidate Candidate { get; set; }
 
         [Display(Name = "Title")]
         public string Title { get; set; }
@@ -43,6 +47,5 @@ namespace Web.Models
 
         [Display(Name = "Language")]
         public Language Lang { get; set; }
-        
     }
 }

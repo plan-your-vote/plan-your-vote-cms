@@ -118,34 +118,87 @@ namespace Web.Data
             return candidateRaces;
         }
 
-        private static List<Candidate> GetCandidatesAndContacts(List<JSONCandidate> candidateData)
+        private static void GetCandidatesAndContacts(List<JSONCandidate> candidateData)
         {
-            List<Candidate> candidates = new List<Candidate>();
+            List<Contact> contacts = new List<Contact>();
+            List<CandidateDetail> details = new List<CandidateDetail>();
 
             foreach (var existingCandidate in candidateData)
             {
-                candidates = new List<Candidate>();
-                List<Contact> contacts = new List<Contact>();
-
-
                 Candidate candidate = new Candidate()
                 {
                     ElectionId = DummyElectionId,
                     Name = existingCandidate.Name,
                     Picture = "images/" + existingCandidate.Picture,
+                    OrganizationId = _context.Organizations
+                        .Where(organization => organization.Name == existingCandidate.Party)
+                        .Single()
+                        .OrganizationId,
                 };
 
-                candidate.OrganizationId = _context.Organizations
-                    .Where(organization => organization.Name == existingCandidate.Party)
-                    .Single()
-                    .OrganizationId;
-
-                candidates.Add(candidate);
-
-                _context.Candidates.AddRange(candidates);
+                _context.Candidates.Add(candidate);
                 _context.SaveChanges();
 
+                if (!string.IsNullOrEmpty(existingCandidate.Priority1))
+                {
+                    details.Add(new CandidateDetail()
+                    {
+                        Title = "Priority 1",
+                        Format = CandidateDetailFormat.OrderedList,
+                        Text = existingCandidate.Priority1,
+                        Lang = Language.en,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
 
+                if (!string.IsNullOrEmpty(existingCandidate.Priority2))
+                {
+
+                    details.Add(new CandidateDetail()
+                    {
+                        Title = "Priority 2",
+                        Format = CandidateDetailFormat.OrderedList,
+                        Text = existingCandidate.Priority2,
+                        Lang = Language.en,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Priority3))
+                {
+                    details.Add(new CandidateDetail()
+                    {
+                        Title = "Priority 3",
+                        Format = CandidateDetailFormat.OrderedList,
+                        Text = existingCandidate.Priority3,
+                        Lang = Language.en,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Platform))
+                {
+                    details.Add(new CandidateDetail()
+                    {
+                        Title = "Platform",
+                        Format = CandidateDetailFormat.Text,
+                        Text = existingCandidate.Platform,
+                        Lang = Language.en,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Biography))
+                {
+                    details.Add(new CandidateDetail()
+                    {
+                        Title = "Biography",
+                        Format = CandidateDetailFormat.Text,
+                        Text = existingCandidate.Biography,
+                        Lang = Language.en,
+                        CandidateId = candidate.CandidateId,
+                    });
+                }
 
                 if (!string.IsNullOrEmpty(existingCandidate.Twitter))
                 {
@@ -156,6 +209,7 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
+
                 if (!string.IsNullOrEmpty(existingCandidate.Facebook))
                 {
                     contacts.Add(new Contact()
@@ -165,6 +219,7 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
+
                 if (!string.IsNullOrEmpty(existingCandidate.Instagram))
                 {
                     contacts.Add(new Contact()
@@ -174,6 +229,7 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
+
                 if (!string.IsNullOrEmpty(existingCandidate.YouTube))
                 {
                     contacts.Add(new Contact()
@@ -183,6 +239,7 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
+
                 if (!string.IsNullOrEmpty(existingCandidate.Other))
                 {
                     contacts.Add(new Contact()
@@ -192,6 +249,7 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
+
                 if (!string.IsNullOrEmpty(existingCandidate.Phone))
                 {
                     contacts.Add(new Contact()
@@ -201,6 +259,7 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
+
                 if (!string.IsNullOrEmpty(existingCandidate.Email))
                 {
                     contacts.Add(new Contact()
@@ -210,6 +269,7 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
+
                 if (!string.IsNullOrEmpty(existingCandidate.Website))
                 {
                     contacts.Add(new Contact()
@@ -219,15 +279,13 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
-
-                // var contacts = GetContacts(candidateData).ToArray();
-                _context.Contacts.AddRange(contacts);
-                _context.SaveChanges();
             }
 
-            
+            _context.CandidateDetails.AddRange(details);
+            _context.SaveChanges();
 
-            return candidates;
+            _context.Contacts.AddRange(contacts);
+            _context.SaveChanges();
         }
 
         private static List<Organization> GetOrganizations(List<JSONCandidate> candidateData)
@@ -251,9 +309,9 @@ namespace Web.Data
         private static List<Race> GetRaces(List<JSONCandidate> candidateData)
         {
             const int NumOfMayorsNeeded = 1;
-            const int NumOfCouncillorsNeeded = 1;
-            const int NumOfParkCommissionersNeeded = 1;
-            const int NumOfSchoolTrusteesNeeded = 1;
+            const int NumOfCouncillorsNeeded = 10;
+            const int NumOfParkCommissionersNeeded = 7;
+            const int NumOfSchoolTrusteesNeeded = 9;
 
             List<Race> races = new List<Race>();
 
