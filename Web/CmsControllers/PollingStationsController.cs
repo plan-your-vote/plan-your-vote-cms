@@ -42,6 +42,7 @@ namespace Web
 
             var pollingStation = await _context.PollingStations
                 .Include(p => p.Election)
+                .Include(p => p.PollingStationDates)
                 .FirstOrDefaultAsync(m => m.PollingStationId == id);
             if (pollingStation == null)
             {
@@ -54,8 +55,12 @@ namespace Web
         // GET: PollingStations/Create
         public IActionResult Create()
         {
-            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "Name");
-            return View();
+            return View(new PollingStationGroup()
+            {
+                PollingStationDates = new List<DateTime>(),
+                PollingStartTimes = new List<DateTime>(),
+                PollingEndTimes = new List<DateTime>()
+            });
         }
 
         // POST: PollingStations/Create
@@ -63,16 +68,43 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PollingStationId,ElectionId,Name,AdditionalInfo,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitute")] PollingStation pollingStation)
+        public async Task<IActionResult> Create(PollingStationGroup pollingStationGroup)
         {
             if (ModelState.IsValid)
             {
+                PollingStation pollingStation = new PollingStation
+                {
+                    ElectionId = _electionId,
+                    Name = pollingStationGroup.PollingStationName,
+                    AdditionalInfo = pollingStationGroup.AdditionalInfo,
+                    Address = pollingStationGroup.Address,
+                    WheelchairInfo = pollingStationGroup.WheelchairInfo,
+                    ParkingInfo = pollingStationGroup.ParkingInfo,
+                    WashroomInfo = pollingStationGroup.WashroomInfo,
+                    GeneralAccessInfo = pollingStationGroup.GeneralAccessInfo,
+                    Latitude = pollingStationGroup.Latitude,
+                    Longitute = pollingStationGroup.Longitute
+                };
                 _context.Add(pollingStation);
+
+                if (pollingStationGroup.PollingStationDates != null)
+                {
+                    for (var i = 0; i < pollingStationGroup.PollingStationDates.Count; ++i)
+                    {
+                        PollingStationDate pollingDate = new PollingStationDate
+                        {
+                            PollingStationId = pollingStation.PollingStationId,
+                            PollingDate = pollingStationGroup.PollingStationDates[i].Date,
+                            StartTime = pollingStationGroup.PollingStationDates[i].Date.Add(pollingStationGroup.PollingStartTimes[i].TimeOfDay),
+                            EndTime = pollingStationGroup.PollingStationDates[i].Date.Add(pollingStationGroup.PollingEndTimes[i].TimeOfDay)
+                        };
+                        _context.Add(pollingDate);
+                    }
+                }
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "Name", pollingStation.ElectionId);
-            return View(pollingStation);
+            return View(pollingStationGroup);
         }
 
         // GET: PollingStations/Edit/5
@@ -84,12 +116,33 @@ namespace Web
             }
 
             var pollingStation = await _context.PollingStations.FindAsync(id);
+
             if (pollingStation == null)
             {
                 return NotFound();
             }
-            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "Name", pollingStation.ElectionId);
-            return View(pollingStation);
+
+            var DateGroup = _context.PollingStationDates.Where(op => op.PollingStationId == id).ToList();
+            List<DateTime> PollDates = DateGroup.Select(d => d.PollingDate).ToList();
+            List<DateTime> StartTimes = DateGroup.Select(d => d.StartTime).ToList();
+            List<DateTime> EndTimes = DateGroup.Select(d => d.EndTime).ToList();
+
+            PollingStationGroup group = new PollingStationGroup
+            {
+                PollingStationName = pollingStation.Name,
+                AdditionalInfo = pollingStation.AdditionalInfo,
+                Address = pollingStation.Address,
+                WheelchairInfo = pollingStation.WheelchairInfo,
+                ParkingInfo = pollingStation.ParkingInfo,
+                WashroomInfo = pollingStation.WashroomInfo,
+                GeneralAccessInfo = pollingStation.GeneralAccessInfo,
+                Latitude = pollingStation.Latitude,
+                Longitute = pollingStation.Longitute,
+                PollingStationDates = PollDates,
+                PollingStartTimes = StartTimes,
+                PollingEndTimes = EndTimes
+            };
+            return View(group);
         }
 
         // POST: PollingStations/Edit/5
@@ -97,23 +150,49 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PollingStationId,ElectionId,Name,AdditionalInfo,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitute")] PollingStation pollingStation)
+        public async Task<IActionResult> Edit(int id, 
+            [Bind("PollingStationName,AdditionalInfo,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitute,PollingStationDates,PollingStartTimes,PollingEndTimes")] PollingStationGroup group)
         {
-            if (id != pollingStation.PollingStationId)
-            {
-                return NotFound();
-            }
-
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var pollingStation = _context.PollingStations.Find(id);
+                    pollingStation.Name = group.PollingStationName;
+                    pollingStation.AdditionalInfo = group.AdditionalInfo;
+                    pollingStation.Address = group.Address;
+                    pollingStation.WheelchairInfo = group.WheelchairInfo;
+                    pollingStation.ParkingInfo = group.ParkingInfo;
+                    pollingStation.WashroomInfo = group.WashroomInfo;
+                    pollingStation.GeneralAccessInfo = group.GeneralAccessInfo;
+                    pollingStation.Latitude = group.Latitude;
+                    pollingStation.Longitute = group.Longitute;
                     _context.Update(pollingStation);
+
+                    if (group.PollingStationDates != null)
+                    {
+                        for (var i = 0; i < group.PollingStationDates.Count; i++)
+                        {
+                            var existing = _context.PollingStationDates
+                                .Where(psd => psd.PollingStationId == id)
+                                .ToList();
+                            _context.RemoveRange(existing);
+
+                            PollingStationDate psDate = new PollingStationDate
+                            {
+                                PollingStationId = pollingStation.PollingStationId,
+                                PollingDate = group.PollingStationDates[i].Date,
+                                StartTime = group.PollingStationDates[i].Date.Add(group.PollingStartTimes[i].TimeOfDay),
+                                EndTime = group.PollingStationDates[i].Date.Add(group.PollingEndTimes[i].TimeOfDay)
+                            };
+                            _context.Add(psDate);
+                        }
+                    }
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PollingStationExists(pollingStation.PollingStationId))
+                    if (!PollingStationExists(id))
                     {
                         return NotFound();
                     }
@@ -124,8 +203,7 @@ namespace Web
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ElectionId"] = new SelectList(_context.Elections, "ElectionId", "Name", pollingStation.ElectionId);
-            return View(pollingStation);
+            return View(group);
         }
 
         // GET: PollingStations/Delete/5
@@ -156,6 +234,28 @@ namespace Web
             _context.PollingStations.Remove(pollingStation);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult VerifyStartTime(List<DateTime> PollingStationDates, List<DateTime> PollingStartTimes)
+        {
+            if (PollingStationDates.Count != PollingStartTimes.Count)
+            {
+                return Json(data: "Please enter a start time for each poll date.");
+            }
+
+            return Json(data: true);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult VerifyEndTime(List<DateTime> PollingStationDates, List<DateTime> PollingEndTimes)
+        {
+            if (PollingStationDates.Count != PollingEndTimes.Count)
+            {
+                return Json(data: "Please enter an end time for each poll date.");
+            }
+
+            return Json(data: true);
         }
 
         private bool PollingStationExists(int id)

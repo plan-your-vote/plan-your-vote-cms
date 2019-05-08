@@ -67,6 +67,32 @@
             @Html.DisplayFor(model => model.AdditionalInfo)
         </dd>
     </dl>
+    <div id="polling-dates">
+        @Html.DisplayNameFor(model => model.PollingStationDates)
+        @for(int i = 0; i < Model.PollingStationDates.Count; i++)
+        {
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(m => m.PollingStationDates[i].PollingDate)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(m => m.PollingStationDates[i].PollingDate)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(m => m.PollingStationDates[i].StartTime)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(m => m.PollingStationDates[i].StartTime)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(m => m.PollingStationDates[i].EndTime)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(m => m.PollingStationDates[i].EndTime)
+                </dd>
+            </dl>
+        }
+    </div>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.PollingStationId">@Localizer["Edit"]</a> |
