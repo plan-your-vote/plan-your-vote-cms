@@ -123,13 +123,6 @@
   <data name="Address" xml:space="preserve">
     <value>Adresse</value>
   </data>
-  <data name="Election" xml:space="preserve">
-    <value>Élection
-Élection</value>
-  </data>
-  <data name="ElectionId" xml:space="preserve">
-    <value>Id d'élection</value>
-  </data>
   <data name="GeneralAccessInfo" xml:space="preserve">
     <value>Informations générales d'accès</value>
   </data>
@@ -139,17 +132,20 @@
   <data name="Longitute" xml:space="preserve">
     <value>Longitude</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Nom</value>
-  </data>
   <data name="ParkingInfo" xml:space="preserve">
     <value>Informations de stationnement</value>
   </data>
-  <data name="PollingStationDates" xml:space="preserve">
-    <value>Dates des bureaux de vote</value>
+  <data name="PollingEndTimes" xml:space="preserve">
+    <value>Heure de fin</value>
   </data>
-  <data name="PollingStationId" xml:space="preserve">
-    <value>ID du bureau de vote</value>
+  <data name="PollingStartTimes" xml:space="preserve">
+    <value>Heure de début</value>
+  </data>
+  <data name="PollingStationDates" xml:space="preserve">
+    <value>Date de vote</value>
+  </data>
+  <data name="PollingStationName" xml:space="preserve">
+    <value>Nom</value>
   </data>
   <data name="WashroomInfo" xml:space="preserve">
     <value>Informations sur les toilettes</value>

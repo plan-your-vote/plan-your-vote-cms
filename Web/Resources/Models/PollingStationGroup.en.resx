@@ -118,20 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AdditionalInfo" xml:space="preserve">
-    <value>Information additionnelle</value>
+    <value>Additional Information</value>
   </data>
   <data name="Address" xml:space="preserve">
-    <value>Adresse</value>
-  </data>
-  <data name="Election" xml:space="preserve">
-    <value>Élection
-Élection</value>
-  </data>
-  <data name="ElectionId" xml:space="preserve">
-    <value>Id d'élection</value>
+    <value>Address</value>
   </data>
   <data name="GeneralAccessInfo" xml:space="preserve">
-    <value>Informations générales d'accès</value>
+    <value>General Access Information</value>
   </data>
   <data name="Latitude" xml:space="preserve">
     <value>Latitude</value>
@@ -139,22 +132,25 @@
   <data name="Longitute" xml:space="preserve">
     <value>Longitude</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Nom</value>
-  </data>
   <data name="ParkingInfo" xml:space="preserve">
-    <value>Informations de stationnement</value>
+    <value>Parking Information</value>
+  </data>
+  <data name="PollingEndTimes" xml:space="preserve">
+    <value>End Time</value>
+  </data>
+  <data name="PollingStartTimes" xml:space="preserve">
+    <value>Start Time</value>
   </data>
   <data name="PollingStationDates" xml:space="preserve">
-    <value>Dates des bureaux de vote</value>
+    <value>Poll Date</value>
   </data>
-  <data name="PollingStationId" xml:space="preserve">
-    <value>ID du bureau de vote</value>
+  <data name="PollingStationName" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="WashroomInfo" xml:space="preserve">
-    <value>Informations sur les toilettes</value>
+    <value>Washroom Information</value>
   </data>
   <data name="WheelchairInfo" xml:space="preserve">
-    <value>Information sur le fauteuil roulant</value>
+    <value>Wheelchair Information</value>
   </data>
 </root>

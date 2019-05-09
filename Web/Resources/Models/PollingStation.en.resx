@@ -136,13 +136,16 @@
     <value>Latitude</value>
   </data>
   <data name="Longitute" xml:space="preserve">
-    <value>Longitute</value>
+    <value>Longitude</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="ParkingInfo" xml:space="preserve">
     <value>Parking Information</value>
+  </data>
+  <data name="PollingStationDates" xml:space="preserve">
+    <value>Polling Station Dates</value>
   </data>
   <data name="PollingStationId" xml:space="preserve">
     <value>Polling Station Id</value>
@@ -151,6 +154,6 @@
     <value>Washroom Information</value>
   </data>
   <data name="WheelchairInfo" xml:space="preserve">
-    <value>Wheel chair Information</value>
+    <value>Wheelchair Information</value>
   </data>
 </root>

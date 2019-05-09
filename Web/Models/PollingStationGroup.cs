@@ -1,24 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Web.Models
 {
-    public class PollingStation
+    public class PollingStationGroup
     {
-        [Key]
-        [Display(Name = "PollingStationId")]
-        public int PollingStationId { get; set; }
-
-        [Display(Name = "ElectionId")]
-        public int ElectionId { get; set; }
-
-        [Display(Name = "Election")]
-        public Election Election { get; set; }
-
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        [Display(Name = "PollingStationName")]
+        public string PollingStationName { get; set; }
 
         [Display(Name = "AdditionalInfo")]
         public string AdditionalInfo { get; set; }
@@ -45,6 +36,14 @@ namespace Web.Models
         public double Longitude { get; set; }
 
         [Display(Name = "PollingStationDates")]
-        public List<PollingStationDate> PollingStationDates { get; set; }
+        public List<DateTime> PollingStationDates { get; set; }
+
+        [Microsoft.AspNetCore.Mvc.Remote(action: "VerifyStartTime", controller: "PollingStations", AdditionalFields = nameof(PollingStationDates))]
+        [Display(Name = "PollingStartTimes")]
+        public List<DateTime> PollingStartTimes { get; set; }
+
+        [Microsoft.AspNetCore.Mvc.Remote(action: "VerifyEndTime", controller: "PollingStations", AdditionalFields = nameof(PollingStationDates))]
+        [Display(Name = "PollingEndTimes")]
+        public List<DateTime> PollingEndTimes { get; set; }
     }
 }
