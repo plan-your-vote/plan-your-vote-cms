@@ -21,7 +21,7 @@ namespace Web.Models
         [Display(Name = "Picture")]
         public string Picture { get; set; }
 
-        [Display(Name = "Details")]
+        [Display(Name = "CandidateDetails")]
         public List<CandidateDetail> Details { get; set; }
 
         [Display(Name = "OrganizationId")]
