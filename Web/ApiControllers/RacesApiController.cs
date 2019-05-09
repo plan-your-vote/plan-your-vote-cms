@@ -46,7 +46,8 @@ namespace Web.Controllers
                     .Select(cr => new
                     {
                         cr.Candidate,
-                        cr.Candidate.Contacts
+                        cr.Candidate.Contacts,
+                        cr.Candidate.Details,
                     })
 
                 })
