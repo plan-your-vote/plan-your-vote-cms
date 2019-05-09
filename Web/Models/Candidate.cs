@@ -12,14 +12,16 @@ namespace Web.Models
         [Display(Name = "ElectionId")]
         public int ElectionId { get; set; }
 
+        [Display(Name = "Election")]
         public Election Election { get; set; }
 
-        [Display (Name="Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Display(Name = "Picture")]
         public string Picture { get; set; }
 
+        [Display(Name = "Details")]
         public List<CandidateDetail> Details { get; set; }
 
         [Display(Name = "OrganizationId")]

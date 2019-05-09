@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Web.Data;
+using Web.ApiDTO;
 
 namespace Web.ApiControllers
 {
@@ -27,7 +28,20 @@ namespace Web.ApiControllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PollingStation>>> GetPollingStations()
         {
-            return await _context.PollingStations.Where(b => b.ElectionId == _currentElection).ToListAsync();
+            VotingPage votingPage = new VotingPage()
+            {
+                PageTitle = "CHOOSE YOUR VOTING DATE AND LOCATION",
+                PageDescription = "Not sure when you want to vote yet? Don't worry - you're not committing to a particular day or place. If you live in the UBC Lands or University Endowment Lands, you can vote at 2 voting places only on October 20 Opens in new window. These 2 places are not shown on the map below. Skip this step to review your choices and create your plan.",
+                PageNumber = 3,
+            };
+
+            var pollingStations = await _context.PollingStations.Where(b => b.ElectionId == _currentElection).ToListAsync();
+
+            return Ok(new
+            {
+                votingPage,
+                pollingStations
+            });
         }
 
         // GET: api/PollingStations/5

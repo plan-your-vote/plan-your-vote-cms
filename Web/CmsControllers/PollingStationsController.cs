@@ -83,7 +83,7 @@ namespace Web
                     WashroomInfo = pollingStationGroup.WashroomInfo,
                     GeneralAccessInfo = pollingStationGroup.GeneralAccessInfo,
                     Latitude = pollingStationGroup.Latitude,
-                    Longitute = pollingStationGroup.Longitute
+                    Longitude = pollingStationGroup.Longitude
                 };
                 _context.Add(pollingStation);
 
@@ -137,7 +137,7 @@ namespace Web
                 WashroomInfo = pollingStation.WashroomInfo,
                 GeneralAccessInfo = pollingStation.GeneralAccessInfo,
                 Latitude = pollingStation.Latitude,
-                Longitute = pollingStation.Longitute,
+                Longitude = pollingStation.Longitude,
                 PollingStationDates = PollDates,
                 PollingStartTimes = StartTimes,
                 PollingEndTimes = EndTimes
@@ -151,7 +151,7 @@ namespace Web
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, 
-            [Bind("PollingStationName,AdditionalInfo,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitute,PollingStationDates,PollingStartTimes,PollingEndTimes")] PollingStationGroup group)
+            [Bind("PollingStationName,AdditionalInfo,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitude,PollingStationDates,PollingStartTimes,PollingEndTimes")] PollingStationGroup group)
         {
             if (ModelState.IsValid)
             {
@@ -166,7 +166,7 @@ namespace Web
                     pollingStation.WashroomInfo = group.WashroomInfo;
                     pollingStation.GeneralAccessInfo = group.GeneralAccessInfo;
                     pollingStation.Latitude = group.Latitude;
-                    pollingStation.Longitute = group.Longitute;
+                    pollingStation.Longitude = group.Longitude;
                     _context.Update(pollingStation);
 
                     if (group.PollingStationDates != null)

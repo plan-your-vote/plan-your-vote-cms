@@ -32,8 +32,8 @@ namespace Web.Models
         [Display(Name = "Latitude")]
         public double Latitude { get; set; }
 
-        [Display(Name = "Longitute")]
-        public double Longitute { get; set; }
+        [Display(Name = "Longitude")]
+        public double Longitude { get; set; }
 
         [Display(Name = "PollingStationDates")]
         public List<DateTime> PollingStationDates { get; set; }

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Web.Data;
+using Web.ApiDTO;
 
 namespace Web.Controllers
 {
@@ -29,10 +30,35 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Race>>> Get()
         {
-            return await _context.Races.Include(c => c.CandidateRaces).ThenInclude(p => p.Candidate).Where(b => b.ElectionId == _currentElection).ToListAsync();
+            VotingPage votingPage = new VotingPage()
+            {
+                PageTitle = "REVIEW AND SELECT CANDIDATES",
+                PageDescription = "Add up to 1 mayor, 10 councillors, 7 Park Board commissioners, and 9 school trustees to your plan. Open a candidate to read their profile and add them to your plan. Change your choices in the selected candidates area above.\nA candidate’s profile expresses their views alone and these views aren’t endorsed by the City of Vancouver. Profiles are included exactly as candidates wrote them.\nIf you live in the UBC Lands or University Endowment Lands, and you do not own property in Vancouver, you can only vote for school trustees in the election.",
+                PageNumber = 1,
+            };
 
+            var races = await _context.Races
+                .Where(race => race.ElectionId == _currentElection)
+                .Select(race => new
+                {
+                    race,
+                    candidates = race.CandidateRaces
+                    .Select(cr => new
+                    {
+                        cr.Candidate,
+                        cr.Candidate.Contacts,
+                        cr.Candidate.Details,
+                    })
+
+                })
+                .ToListAsync();
+
+            return Ok(new
+            {
+                votingPage,
+                races,
+            });
         }
-
 
         // GET: api/Races/5
         [HttpGet("{id}")]

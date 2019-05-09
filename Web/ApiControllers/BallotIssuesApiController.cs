@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Web.Data;
+using Web.ApiDTO;
 
 namespace Web.Controllers
 {
@@ -29,10 +30,23 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BallotIssue>>> Get()
         {
-            return await _context.BallotIssues
+            VotingPage votingPage = new VotingPage()
+            {
+                PageTitle = "REVIEW CAPITAL PLAN BORROWING QUESTIONS",
+                PageDescription = @"Add your response to the Capital Plan borrowing questions to your plan. \n The ballot will have 3 ""yes"" or ""no"" questions on whether the City can borrow $300 million to help pay for projects in the Capital Plan. \n The 2019-2022 Capital Plan invests $300,000,000 in City facilities and infrastructure to provide services to the people of Vancouver. \n If a majority of voters vote yes, then City Council can borrow the funds for these projects.",
+                PageNumber = 2,
+            };
+
+            var ballotIssues = await _context.BallotIssues
                 .Include(b => b.BallotIssueOptions)
                 .Where(b => b.ElectionId == _currentElection)
                 .ToListAsync();
+
+            return Ok(new
+            {
+                votingPage,
+                ballotIssues
+            });
         }
 
         // GET: api/BallotIssues/5

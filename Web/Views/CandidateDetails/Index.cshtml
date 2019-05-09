@@ -13,16 +13,16 @@
 <table class="table panel panel-default">
     <thead>
         <tr>
-            <th>
+            <th class="col-sm-1">
                 @Html.DisplayNameFor(model => model.Title)
             </th>
-            <th>
+            <th class="col-sm-9">
                 @Html.DisplayNameFor(model => model.Text)
             </th>
-            <th>
+            <th class="col-sm-1">
                 @Html.DisplayNameFor(model => model.Format)
             </th>
-            <th>
+            <th class="col-sm-1">
                 @Html.DisplayNameFor(model => model.Lang)
             </th>
             <th></th>
@@ -32,16 +32,16 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="col-sm-1">
                     @Html.DisplayFor(modelItem => item.Title)
                 </td>
-                <td>
+                <td class="col-sm-9">
                     @Html.DisplayFor(modelItem => item.Text)
                 </td>
-                <td>
+                <td class="col-sm-1">
                     @Html.DisplayFor(modelItem => item.Format)
                 </td>
-                <td>
+                <td class="col-sm-1">
                     @Html.DisplayFor(modelItem => item.Lang)
                 </td>
                 <td>
