@@ -58,7 +58,7 @@ namespace Web.Data
                     Address = psd.FacilityAddress,
                     AdditionalInfo = psd.Location,
                     Latitude = psd.Latitude,
-                    Longitute = psd.Longitude,
+                    Longitude = psd.Longitude,
                     // = psd.AdvancedOnly,
                     // = psd.LocalArea,
 

@@ -63,7 +63,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PollingStationId,ElectionId,Name,AdditionalInfo,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitute")] PollingStation pollingStation)
+        public async Task<IActionResult> Create([Bind("PollingStationId,ElectionId,Name,AdditionalInfo,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitude")] PollingStation pollingStation)
         {
             if (ModelState.IsValid)
             {
@@ -97,7 +97,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PollingStationId,ElectionId,Name,AdditionalInfo,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitute")] PollingStation pollingStation)
+        public async Task<IActionResult> Edit(int id, [Bind("PollingStationId,ElectionId,Name,AdditionalInfo,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitude")] PollingStation pollingStation)
         {
             if (id != pollingStation.PollingStationId)
             {
