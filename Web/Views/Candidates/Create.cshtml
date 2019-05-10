@@ -6,6 +6,13 @@
     ViewData["Title"] = @Localizer["Create"];
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+</script>
+
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
@@ -29,6 +36,77 @@
                     <label asp-for="OrganizationId" class="control-label"></label>
                     <select asp-for="OrganizationId" class="form-control" asp-items="ViewBag.OrganizationId"></select>
                     <span asp-validation-for="OrganizationId" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <h4><label asp-for="Details" class="control-label"></label></h4>
+                    <hr />
+                    <input type="hidden" id="removedDetails" name="removedDetails" value="" />
+                </div>
+                <div id="allDetails">
+                    <div id="detail_0">
+                        <div>
+                            <p class="lead">Detail 1</p>
+                            <button type="button" id="removeDetail_0" class="btn btn-primary">Remove Detail</button>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.Details[0].Title, new { @class = "control-label" })
+                            @Html.TextBoxFor(c => c.Details[0].Title, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Details[0].Title, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.Details[0].Text, new { @class = "control-label" })
+                            @Html.TextAreaFor(c => c.Details[0].Text, new { @class = "form-control", @rows = 10 })
+                            @Html.ValidationMessageFor(c => c.Details[0].Text, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.Details[0].Format, new { @class = "control-label" })
+                            @Html.DropDownListFor(c => c.Details[0].Format, Html.GetEnumSelectList(typeof(CandidateDetailFormat)), "", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Details[0].Text, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.Details[0].Lang, new { @class = "control-label" })
+                            @Html.DropDownListFor(c => c.Details[0].Lang, Html.GetEnumSelectList(typeof(Language)), "", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Details[0].Lang, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        function getCount(div) {
+                            if ($(div).children().length === 0) {
+                                return -1;
+                            }
+
+                            let id = $(div).children().last().attr("id");
+                            return parseInt(id.charAt(id.length - 1));
+                        }
+
+                        $("#addDetail").click(function () {
+                            let count = getCount("#allDetails") + 1;
+                            $("#allDetails").append($(document.createElement("div")).attr("id", "detail_" + count));
+                            $("#detail_" + count)
+                                .load('@Url.Action("GetFields", "Candidates")',
+                                    { "count": count },
+                                    function (response, status, xhr) {
+                                        if (status == "error") {
+                                            alert("An error occurred while loading the detail fields.");
+                                        }
+                                    });
+                        });
+
+                        $("#removeDetail_0").click(function () {
+                            $(this.parentNode.parentNode).attr("style", "display:none");
+                            let id = $(this.parentNode.parentNode).attr("id");
+                            if (id != null) {
+                                let index = id.charAt(id.length - 1);
+                                $("#removedDetails").attr("value", $("#removedDetails").attr("value") + index + ",");
+                            }
+                        });
+                    });
+                </script>
+                <div>
+                    <button type="button" id="addDetail" class="btn btn-primary">Add a Candidate Detail</button>
                 </div>
                 <div class="form-group">
                     <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
