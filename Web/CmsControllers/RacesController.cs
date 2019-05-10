@@ -172,6 +172,7 @@ namespace Web.CmsControllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName", model.ElectionId);
+            ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c => c.ElectionId == State.CurrentElection), "CandidateId", "Name");
             return View(model);
         }
 
