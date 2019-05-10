@@ -28,23 +28,41 @@
             }
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Organization)
+            @Html.DisplayNameFor(model => model.Organization.Name)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Organization.Name)
         </dd>
-        @*
+    </dl>
+    <h6>@Html.DisplayNameFor(model => model.Details)</h6>
+    <dl class="row">
+        @foreach (var detail in Model.Details)
+        {
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Contacts)
+                @Html.DisplayNameFor(model => detail.Title)
             </dt>
             <dd class="col-sm-10">
-                @foreach (var i in Model.Contacts)
-                {
-                    @i.ContactMethod
-                    @i.ContactValue
-                }
+                @Html.DisplayFor(model => detail.Title)
             </dd>
-        *@
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => detail.Text)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => detail.Text)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => detail.Format)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => detail.Format)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => detail.Lang)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => detail.Lang)
+            </dd>
+        }
     </dl>
 </div>
 <div>

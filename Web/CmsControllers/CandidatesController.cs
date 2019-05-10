@@ -43,7 +43,9 @@ namespace Web
             }
 
             var candidate = await _context.Candidates
-                .Include(c => c.Organization).Include(c => c.CandidateRaces)
+                .Include(c => c.Details)
+                .Include(c => c.Organization)
+                .Include(c => c.CandidateRaces)
                 .FirstOrDefaultAsync(m => m.CandidateId == id);
             if (candidate == null)
             {
