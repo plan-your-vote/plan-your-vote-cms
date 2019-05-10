@@ -1,0 +1,38 @@
+﻿@model Web.Models.Candidate
+
+@{ 
+    var count = Model.Details.Count - 1;
+}
+
+<script>
+    $("#removeDetail_@count").click(function () {
+        //$(this.parentNode.parentNode).remove();
+        $(this.parentNode.parentNode).attr("style", "display:none");
+        console.log($(this.parentNode.parentNode).attr("id"));
+    });
+</script>
+
+<div>
+    <h6>Detail @(count+1)</h6>
+    <button type="button" id="removeDetail_@count" class="btn btn-primary">Remove Detail</button>
+</div>
+<div class="form-group">
+        @Html.LabelFor(c => c.Details[count].Title, new { @class = "control-label" })
+        @Html.TextBoxFor(c => c.Details[count].Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Details[count].Title, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Details[count].Text, new { @class = "control-label" })
+        @Html.TextAreaFor(c => c.Details[count].Text, new { @class = "form-control", @rows = 10 })
+        @Html.ValidationMessageFor(c => c.Details[count].Text, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Details[count].Format, new { @class = "control-label" })
+        @Html.DropDownListFor(c => c.Details[count].Format, Html.GetEnumSelectList(typeof(CandidateDetailFormat)), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Details[count].Text, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(c => c.Details[count].Lang, new { @class = "control-label" })
+        @Html.DropDownListFor(c => c.Details[count].Lang, Html.GetEnumSelectList(typeof(Language)), "", new { @class = "form-control" })
+        @Html.ValidationMessageFor(c => c.Details[count].Lang, "", new { @class = "text-danger" })
+    </div>

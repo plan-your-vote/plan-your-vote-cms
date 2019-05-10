@@ -116,6 +116,23 @@ namespace Web
             return strDateTimeNumber + strRandomResult;
         }
 
+        public virtual IActionResult GetFields(int count)
+        {
+            List<CandidateDetail> list = new List<CandidateDetail>();
+
+            for (int i = 0; i <= count; i++)
+            {
+                list.Add(new CandidateDetail());
+            }
+
+            Candidate candidate = new Candidate
+            {
+                Details = list
+            };
+
+            return PartialView("CandidateDetail", candidate);
+        }
+
         // GET: Candidates/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
