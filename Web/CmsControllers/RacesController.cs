@@ -118,7 +118,7 @@ namespace Web.CmsControllers
                 return NotFound();
             }
             ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName");
-            ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c=>c.ElectionId==State.CurrentElection), "CandidateId", "LastName");
+            ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c=>c.ElectionId==State.CurrentElection), "CandidateId", "Name");
             return View(model);
         }
 
