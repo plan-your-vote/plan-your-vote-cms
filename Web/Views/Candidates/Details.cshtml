@@ -36,9 +36,10 @@
     </dl>
     <h4>@Html.DisplayNameFor(model => model.Details)</h4>
     <hr />
-    <dl class="row">
-        @foreach (var detail in Model.Details)
-        {
+    @foreach (var detail in Model.Details)
+    {
+        <dl class="row">
+
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => detail.Title)
             </dt>
@@ -78,8 +79,9 @@
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => detail.Lang)
             </dd>
-        }
-    </dl>
+        </dl>
+        <hr />
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.CandidateId">@Localizer["Edit"]</a> |
