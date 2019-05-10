@@ -40,8 +40,6 @@ namespace Web.Data
             const string candidatesFile = "wwwroot/Data/candidates.json";
             List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
 
-
-
             var elections = GetElections().ToArray();
             context.Elections.AddRange(elections);
             context.SaveChanges();
@@ -153,7 +151,6 @@ namespace Web.Data
 
                 if (!string.IsNullOrEmpty(existingCandidate.Priority2))
                 {
-
                     details.Add(new CandidateDetail()
                     {
                         Title = "Priority 2",
@@ -360,15 +357,15 @@ namespace Web.Data
                 new Election()
                 {
                     ElectionName = "City of Vancouver 2018 Municipal Election",
-                    EndDate = "October 21 2018",
-                    StartDate = "September 14 2018",
+                    EndDate = new DateTime(2019, 10, 21),
+                    StartDate = new DateTime(2018, 9, 14),
                     Description = "City of Vancouver 2018 Municipal Election"
                 },
                 new Election()
                 {
                     ElectionName = "Canadian Federal Election 2019",
-                    EndDate = "October 21 2019",
-                    StartDate = "October 21 2019",
+                    EndDate = new DateTime(2019, 10, 21),
+                    StartDate = new DateTime(2019, 10, 21),
                     Description = "The 2019 Canadian federal election is scheduled to take place on or before October 21, 2019. The October 21 date of the vote is determined by the fixed-date procedures in the Canada Elections Act"
                 },
             };

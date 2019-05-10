@@ -12,10 +12,10 @@ namespace Web.Models
         public int ElectionId { get; set; }
 
         [Display(Name = "StartDate")]
-        public string StartDate { get; set; }
+        public DateTime StartDate { get; set; }
 
         [Display(Name = "EndDate")]
-        public string EndDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         [Display(Name = "ElectionName")]
         public string ElectionName { get; set; }

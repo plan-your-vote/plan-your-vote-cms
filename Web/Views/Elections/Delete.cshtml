@@ -3,16 +3,20 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Delete"];
+    ViewData["Title"] = @Localizer["Delete Election"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <h3>@Localizer["Are you sure you want to delete this ?"]</h3>
 <div class="panel panel-default">
-    <h4>@Localizer["Election"]</h4>
-    <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ElectionName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ElectionName)
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.StartDate)
         </dt>
@@ -26,12 +30,6 @@
             @Html.DisplayFor(model => model.EndDate)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ElectionName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ElectionName)
-        </dd>
-        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd class="col-sm-10">
@@ -41,7 +39,9 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="ElectionId" />
-        <input type="submit" value=@Localizer["Delete"] class="btn btn-danger" /> |
-        <a asp-action="Index">@Localizer["Back to List"]</a>
+        <input type="submit" value=@Localizer["Delete"] class="btn btn-danger" />
     </form>
+</div>
+<div>
+    <a asp-action="Index">@Localizer["Back to List"]</a>
 </div>
