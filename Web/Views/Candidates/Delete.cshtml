@@ -33,9 +33,44 @@
         </dd>
     </dl>
 
+    <h4>@Html.DisplayNameFor(model => model.Details)</h4>
+    <hr />
+    <dl class="row">
+        @foreach (var detail in Model.Details)
+        {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => detail.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => detail.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => detail.Text)
+            </dt>
+            <dd class="col-sm-10">
+                @if (detail.Format == CandidateDetailFormat.List)
+                {
+                    <ul>
+                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                    </ul>
+                }
+                else if (detail.Format == CandidateDetailFormat.OrderedList)
+                {
+                    <ol>
+                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                    </ol>
+                }
+                else
+                {
+                    @Html.DisplayFor(model => detail.Text)
+                }
+            </dd>
+        }
+    </dl>
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="CandidateId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">@Localizer["Back to List"]</a>
-</form>
+    </form>
 </div>

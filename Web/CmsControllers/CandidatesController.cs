@@ -67,7 +67,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Candidate model, IFormFile image, int organizationId)
+        public async Task<IActionResult> Create(Candidate model, IFormFile image, int organizationId, string removedDetails)
         {
             var fileName = "";
             var nameOfile = "";
@@ -93,6 +93,25 @@ namespace Web
                 fileName = "wwwroot\\" + nameOfile;
                 image.CopyTo(new FileStream(fileName, FileMode.Create));
                 model.Picture = nameOfile;
+            }
+
+            // Remove the "deleted" items from the list
+            if (removedDetails != null && removedDetails != "")
+            {
+                string[] itemsToRemove = removedDetails.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                int[] indexes = new int[itemsToRemove.Length];
+                for (int i = 0; i < itemsToRemove.Length; ++i)
+                {
+                    indexes[i] = int.Parse(itemsToRemove[i]);
+                }
+
+                // sort in ascending order
+                indexes = indexes.OrderBy(i => i).ToArray();
+
+                for (int i = indexes.Length - 1; i >= 0; --i)
+                {
+                    model.Details.RemoveAt(indexes[i]);
+                }
             }
 
             Candidate candidate = new Candidate
@@ -279,6 +298,7 @@ namespace Web
 
             var candidate = await _context.Candidates
                 .Include(c => c.Organization)
+                .Include(c => c.Details)
                 .FirstOrDefaultAsync(m => m.CandidateId == id);
             if (candidate == null)
             {
