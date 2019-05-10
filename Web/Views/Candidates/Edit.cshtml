@@ -39,7 +39,8 @@
                     <span asp-validation-for="OrganizationId" class="text-danger"></span>
                 </div>
                 <div>
-                    <label asp-for="Details" class="control-label"></label>
+                    <h4><label asp-for="Details" class="control-label"></label></h4>
+                    <hr />
                     <input type="hidden" id="removedDetails" name="removedDetails" value="" />
                 </div>
                 <div id="allDetails">
@@ -47,7 +48,7 @@
                     {
                     <div id="detail_@i">
                         <div>
-                            <h6>Detail @(i + 1)</h6>
+                            <p class="lead">Detail @(i + 1)</p>
                             <button type="button" id="removeDetail_@i" class="btn btn-primary">Remove Detail</button>
                         </div>
                         <div class="form-group">
@@ -87,13 +88,16 @@
                 
                 <script type="text/javascript">
                     $(document).ready(function () {
-                        function getCount() {
-                            let id = $("#allDetails").children().last().attr("id");
+                        function getLast(div) {
+                            if ($(div).children().length === 0) {
+                                return -1;
+                            }
+                            let id = $(div).children().last().attr("id");
                             return parseInt(id.charAt(id.length - 1));
                         }
 
                         $("#addDetail").click(function () {
-                            let count = getCount() + 1;
+                            let count = getLast("#allDetails") + 1;
                             $("#allDetails").append($(document.createElement("div")).attr("id", "detail_" + count));
                             $("#detail_" + count)
                                 .load('@Url.Action("GetFields", "Candidates")',

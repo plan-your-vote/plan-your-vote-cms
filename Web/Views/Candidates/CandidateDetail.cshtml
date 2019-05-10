@@ -6,14 +6,17 @@
 
 <script>
     $("#removeDetail_@count").click(function () {
-        //$(this.parentNode.parentNode).remove();
         $(this.parentNode.parentNode).attr("style", "display:none");
-        console.log($(this.parentNode.parentNode).attr("id"));
+        let id = $(this.parentNode.parentNode).attr("id");
+        if (id != null) {
+            let index = id.charAt(id.length - 1);
+            $("#removedDetails").attr("value", $("#removedDetails").attr("value") + index + ",");
+        }
     });
 </script>
 
 <div>
-    <h6>Detail @(count+1)</h6>
+    <p class="lead">Detail @(count+1)</p>
     <button type="button" id="removeDetail_@count" class="btn btn-primary">Remove Detail</button>
 </div>
 <div class="form-group">

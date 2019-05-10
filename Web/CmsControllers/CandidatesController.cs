@@ -178,9 +178,18 @@ namespace Web
             if (removedDetails != null && removedDetails != "")
             {
                 string[] itemsToRemove = removedDetails.Split(',', StringSplitOptions.RemoveEmptyEntries);
-                foreach (string index in itemsToRemove)
+                int[] indexes = new int[itemsToRemove.Length];
+                for (int i = 0; i < itemsToRemove.Length; ++i)
                 {
-                    model.Details.RemoveAt(int.Parse(index));
+                    indexes[i] = int.Parse(itemsToRemove[i]);
+                }
+
+                // sort in ascending order
+                indexes = indexes.OrderBy(i => i).ToArray();
+
+                for (int i = indexes.Length-1; i >= 0; --i)
+                {
+                    model.Details.RemoveAt(indexes[i]);
                 }
             }
 

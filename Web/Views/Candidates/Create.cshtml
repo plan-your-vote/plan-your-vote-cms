@@ -6,6 +6,13 @@
     ViewData["Title"] = @Localizer["Create"];
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+</script>
+
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
@@ -31,11 +38,15 @@
                     <span asp-validation-for="OrganizationId" class="text-danger"></span>
                 </div>
 
-                <label asp-for="Details" class="control-label"></label>
+                <div>
+                    <h4><label asp-for="Details" class="control-label"></label></h4>
+                    <hr />
+                    <input type="hidden" id="removedDetails" name="removedDetails" value="" />
+                </div>
                 <div id="allDetails">
                     <div id="detail_0">
                         <div>
-                            <h6>Detail 1</h6>
+                            <p class="lead">Detail 1</p>
                             <button type="button" id="removeDetail_0" class="btn btn-primary">Remove Detail</button>
                         </div>
                         <div class="form-group">
@@ -60,22 +71,19 @@
                         </div>
                     </div>
                 </div>
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                        asp-fallback-test="window.jQuery"
-                        crossorigin="anonymous"
-                        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-                </script>
-
                 <script type="text/javascript">
                     $(document).ready(function () {
-                        function getCount() {
-                            let id = $("#allDetails").children().last().attr("id");
+                        function getCount(div) {
+                            if ($(div).children().length === 0) {
+                                return -1;
+                            }
+
+                            let id = $(div).children().last().attr("id");
                             return parseInt(id.charAt(id.length - 1));
                         }
 
                         $("#addDetail").click(function () {
-                            let count = getCount() + 1;
+                            let count = getCount("#allDetails") + 1;
                             $("#allDetails").append($(document.createElement("div")).attr("id", "detail_" + count));
                             $("#detail_" + count)
                                 .load('@Url.Action("GetFields", "Candidates")',
@@ -88,7 +96,12 @@
                         });
 
                         $("#removeDetail_0").click(function () {
-                            $(this.parentNode.parentNode).remove();
+                            $(this.parentNode.parentNode).attr("style", "display:none");
+                            let id = $(this.parentNode.parentNode).attr("id");
+                            if (id != null) {
+                                let index = id.charAt(id.length - 1);
+                                $("#removedDetails").attr("value", $("#removedDetails").attr("value") + index + ",");
+                            }
                         });
                     });
                 </script>
