@@ -16,18 +16,18 @@ namespace Web
     public class BallotIssuesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private State state;
+        private int _managedElectionID;
 
         public BallotIssuesController(ApplicationDbContext context)
         {
             _context = context;
-            state = context.StateSingleton.Find(State.STATE_ID);
+            _managedElectionID = _context.StateSingleton.Find(State.STATE_ID).ManagedElectionID;
         }
 
         // GET: BallotIssues
         public async Task<IActionResult> Index()
         {
-            return View(await _context.BallotIssues.Where(b => b.ElectionId == state.CurrentElection).ToListAsync());
+            return View(await _context.BallotIssues.Where(b => b.ElectionId == _managedElectionID).ToListAsync());
         }
 
         // GET: BallotIssues/Details/5
@@ -74,7 +74,7 @@ namespace Web
                 {
                     BallotIssueTitle = model.BallotIssueTitle,
                     Description = model.Description,
-                    ElectionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection
+                    ElectionId = _managedElectionID,
                 };
                 _context.Add(issue);
 

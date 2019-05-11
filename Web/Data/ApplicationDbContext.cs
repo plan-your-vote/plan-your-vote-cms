@@ -8,6 +8,12 @@ namespace Web.Data
     {
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
+
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -33,9 +39,8 @@ namespace Web.Data
         public DbSet<PollingStationDate> PollingStationDates { get; set; }
         public DbSet<Theme> Themes { get; set; }
         public DbSet<Image> Images { get; set; }
-        public object Configuration { get;  set; }
-        public DbSet<Web.Models.SocialMedia> SocialMedias { get; set; }
-        public DbSet<Web.Models.CandidateDetail> CandidateDetails { get; set; }
-        public DbSet<Web.Models.Step> Steps { get; set; }
+        public DbSet<SocialMedia> SocialMedias { get; set; }
+        public DbSet<CandidateDetail> CandidateDetails { get; set; }
+        public DbSet<Step> Steps { get; set; }
     }
 }

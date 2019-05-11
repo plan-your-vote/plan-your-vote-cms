@@ -15,12 +15,12 @@ namespace Web
     public class PollingStationsController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly int _electionId;
+        private readonly int _managedElectionID;
 
         public PollingStationsController(ApplicationDbContext context)
         {
             _context = context;
-            _electionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            _managedElectionID = _context.StateSingleton.Find(State.STATE_ID).ManagedElectionID;
         }
 
         // GET: PollingStations
@@ -28,7 +28,7 @@ namespace Web
         {
             var applicationDbContext = _context.PollingStations
                 .Include(p => p.Election)
-                .Where(ps => ps.ElectionId == _electionId);
+                .Where(ps => ps.ElectionId == _managedElectionID);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -74,7 +74,7 @@ namespace Web
             {
                 PollingStation pollingStation = new PollingStation
                 {
-                    ElectionId = _electionId,
+                    ElectionId = _managedElectionID,
                     Name = pollingStationGroup.PollingStationName,
                     AdditionalInfo = pollingStationGroup.AdditionalInfo,
                     Address = pollingStationGroup.Address,
