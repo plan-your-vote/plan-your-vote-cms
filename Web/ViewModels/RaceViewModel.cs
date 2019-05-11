@@ -14,6 +14,6 @@ namespace Web.ViewModels
         public string PositionName { get; set; }
         public string Description { get; set; }
         public int NumberNeeded { get; set; }
-        public IList<int> RaceCandidatesIds { get; set; }
+        public List<int> RaceCandidatesIds { get; set; }
     }
 }
