@@ -15,26 +15,26 @@
         <div class="col-md-4">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="RaceId" />
+                @Html.TextBoxFor(r => r.Race.RaceId, new { @type = "hidden" })
                 <div class="form-group">
-                    <label asp-for="ElectionId" class="control-label"></label>
-                    <select asp-for="ElectionId" class="form-control" asp-items="ViewBag.Elections"></select>
-                    <span asp-validation-for="ElectionId" class="text-danger"></span>
+                    @Html.LabelFor(r => r.Race.ElectionId, Html.DisplayNameFor(r => r.Race.Election), new { @class = "control-label" })
+                    <select asp-for="Race.ElectionId" class="form-control" asp-items="ViewBag.Elections"></select>
+                    <span asp-validation-for="Race.ElectionId" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="PositionName" class="control-label"></label>
-                    <input asp-for="PositionName" class="form-control" />
-                    <span asp-validation-for="PositionName" class="text-danger"></span>
+                    <label asp-for="Race.PositionName" class="control-label"></label>
+                    <input asp-for="Race.PositionName" class="form-control" />
+                    <span asp-validation-for="Race.PositionName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    <label asp-for="Race.Description" class="control-label"></label>
+                    <input asp-for="Race.Description" class="form-control" />
+                    <span asp-validation-for="Race.Description" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="NumberNeeded" class="control-label"></label>
-                    <input asp-for="NumberNeeded" class="form-control" />
-                    <span asp-validation-for="NumberNeeded" class="text-danger"></span>
+                    <label asp-for="Race.NumberNeeded" class="control-label"></label>
+                    <input asp-for="Race.NumberNeeded" class="form-control" />
+                    <span asp-validation-for="Race.NumberNeeded" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="RaceCandidatesIds" class="control-label"></label>
