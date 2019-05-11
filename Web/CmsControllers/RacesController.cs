@@ -61,7 +61,7 @@ namespace Web.CmsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RaceId,ElectionId,PositionName,NumberNeeded")] Race race)
+        public async Task<IActionResult> Create([Bind("RaceId,ElectionId,PositionName,Description,NumberNeeded")] Race race)
         {
             if (ModelState.IsValid)
             {
@@ -95,11 +95,7 @@ namespace Web.CmsControllers
 
             RaceViewModel model = new RaceViewModel
             {
-                ElectionId = race.ElectionId,
-                RaceId = race.RaceId,
-                PositionName = race.PositionName,
-                Description = race.Description,
-                NumberNeeded = race.NumberNeeded,
+                Race = race,
                 RaceCandidatesIds = raceCandidateIds
             };
 
@@ -121,7 +117,7 @@ namespace Web.CmsControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, RaceViewModel model)
         {
-            if (id != model.RaceId)
+            if (id != model.Race.RaceId)
             {
                 return NotFound();
             }
@@ -131,28 +127,31 @@ namespace Web.CmsControllers
                 try
                 {
                     var race = _context.Races.Find(id);
-                    race.ElectionId = model.ElectionId;
-                    race.PositionName = model.PositionName;
-                    race.Description = model.Description;
-                    race.NumberNeeded = model.NumberNeeded;
+                    race.ElectionId = model.Race.ElectionId;
+                    race.PositionName = model.Race.PositionName;
+                    race.Description = model.Race.Description;
+                    race.NumberNeeded = model.Race.NumberNeeded;
                     _context.Update(race);
 
                     var crs = _context.CandidateRaces.Where(cr => cr.RaceId == id).ToList();
                     _context.RemoveRange(crs);
 
-                    foreach (var cr in model.RaceCandidatesIds)
-                        _context.Add(new CandidateRace
-                        {
-                            CandidateId = cr,
-                            RaceId = id,
-                            PositionName = race.PositionName
-                        });
+                    if (model.RaceCandidatesIds != null)
+                    {
+                        foreach (var cr in model.RaceCandidatesIds)
+                            _context.Add(new CandidateRace
+                            {
+                                CandidateId = cr,
+                                RaceId = id,
+                                PositionName = race.PositionName
+                            });
+                    }
 
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RaceExists(model.RaceId))
+                    if (!RaceExists(model.Race.RaceId))
                     {
                         return NotFound();
                     }
@@ -163,7 +162,8 @@ namespace Web.CmsControllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName", model.ElectionId);
+
+            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName", model.Race.ElectionId);
             ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c => c.ElectionId == _managedElectionID), "CandidateId", "Name");
             return View(model);
         }

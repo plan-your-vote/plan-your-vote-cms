@@ -117,16 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Candidates" xml:space="preserve">
-    <value>Candidats</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>La description</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Nom d'organisation</value>
-  </data>
-  <data name="OrganizationId" xml:space="preserve">
-    <value>Identifiant d'organisation</value>
+  <data name="RaceCandidatesIds" xml:space="preserve">
+    <value>Candidates</value>
   </data>
 </root>
