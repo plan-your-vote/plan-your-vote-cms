@@ -14,20 +14,26 @@ namespace Web.CmsControllers
     [Authorize]
     public class StateController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private static ApplicationDbContext _context;
+        private int _managedElectionID;
 
         public StateController(ApplicationDbContext context)
         {
             _context = context;
+
+            _managedElectionID = _context.StateSingleton.AsNoTracking().First().ManagedElectionID;
         }
 
         // GET: State
         public async Task<IActionResult> Index()
         {
-            State s = _context.StateSingleton.Find(State.STATE_ID);
-            Election current = _context.Elections.Where(e => e.ElectionId == s.CurrentElection).First();
-            ViewBag.ElectionName = current.ElectionName;
-            return View(await _context.StateSingleton.ToListAsync());
+            State state = await _context.StateSingleton
+                .Include(s => s.RunningElection)
+                .Include(s => s.ManagedElection)
+                .SingleAsync()
+                .ConfigureAwait(false);
+
+            return View(state);
         }
 
         // GET: State/Edit/5
@@ -52,7 +58,7 @@ namespace Web.CmsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("StateId,CurrentElection")] State state)
+        public async Task<IActionResult> Edit(int id, [Bind("StateId,RunningElectionID,ManagedElectionID")] State state)
         {
             if (id != state.StateId)
             {

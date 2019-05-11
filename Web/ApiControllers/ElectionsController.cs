@@ -15,19 +15,19 @@ namespace Web.ApiControllers
     public class ElectionsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly int _election;   
+        private readonly int _runningElectionID;
 
         public ElectionsController(ApplicationDbContext context)
         {
             _context = context;
-            _election = context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            _runningElectionID = context.StateSingleton.Find(State.STATE_ID).RunningElectionID;
         }
 
         // GET: api/Election
         [HttpGet]
         public async Task<ActionResult<Election>> GetElections()
         {
-            return await _context.Elections.FindAsync(_election);
+            return await _context.Elections.FindAsync(_runningElectionID);
         }
 
         // GET: api/Election/5

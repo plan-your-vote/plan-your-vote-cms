@@ -13,18 +13,19 @@ namespace Web.CmsControllers
     public class StepsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly int _managedElectionID;
 
         public StepsController(ApplicationDbContext context)
         {
             _context = context;
+            _managedElectionID = _context.StateSingleton.Find(State.STATE_ID).ManagedElectionID;
         }
 
         // GET: Steps
         public async Task<IActionResult> Index()
         {
-            State s = _context.StateSingleton.Find(State.STATE_ID);
             var currentElectionSteps = _context.Steps
-                .Where(step => step.ElectionId == s.CurrentElection);
+                .Where(step => step.ElectionId == _managedElectionID);
             return View(await currentElectionSteps.ToListAsync());
         }
 
@@ -59,7 +60,7 @@ namespace Web.CmsControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,StepNumber,StepTitle,StepDescription")] Step step)
         {
-            step.ElectionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            step.ElectionId = _managedElectionID;
 
             if (ModelState.IsValid)
             {
@@ -98,7 +99,7 @@ namespace Web.CmsControllers
                 return NotFound();
             }
 
-            step.ElectionId = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            step.ElectionId = _managedElectionID;
             if (ModelState.IsValid)
             {
                 try

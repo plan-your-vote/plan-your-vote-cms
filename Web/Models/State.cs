@@ -14,10 +14,16 @@ namespace Web.Models
         [DisplayName("StateId")]
         public int StateId { get; set; }
 
-        [DisplayName("CurrentElection")]
-        public int CurrentElection { get; set; }
+        [DisplayName("RunningElectionID")]
+        public int RunningElectionID { get; set; }
 
-        [DisplayName("Election")]
-        public Election Election { get; set; }
+        [DisplayName("Running Election")]
+        public Election RunningElection { get; set; }
+
+        [DisplayName("ManagedElectionID")]
+        public int ManagedElectionID { get; set; }
+
+        [DisplayName("Managed Election")]
+        public Election ManagedElection { get; set; }
     }
 }
