@@ -16,12 +16,12 @@ namespace Web.ApiControllers
     public class PollingStationsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private int _currentElection;
+        private int _runningElectionID;
 
         public PollingStationsController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            _runningElectionID = _context.StateSingleton.Find(State.STATE_ID).RunningElectionID;
         }
 
         // GET: api/PollingStations
@@ -35,7 +35,7 @@ namespace Web.ApiControllers
                 PageNumber = 3,
             };
 
-            var pollingStations = await _context.PollingStations.Where(b => b.ElectionId == _currentElection).ToListAsync();
+            var pollingStations = await _context.PollingStations.Where(b => b.ElectionId == _runningElectionID).ToListAsync();
 
             return Ok(new
             {

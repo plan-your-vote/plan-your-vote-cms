@@ -8,35 +8,25 @@ using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Web.Data;
 using Microsoft.AspNetCore.Authorization;
+using Web.ViewModels;
 
 namespace Web.CmsControllers
 {
-    [Authorize]
-    public class RaceViewModel
-    {
-        public int ElectionId { get; set; }
-        public int RaceId { get; set; }
-        public string PositionName { get; set; }
-        public string Description { get; set; }
-        public int NumberNeeded { get; set; }
-        public IList<int> RaceCandidatesIds { get; set; }
-    }
-
     public class RacesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private State State;
+        private readonly int _managedElectionID;
 
         public RacesController(ApplicationDbContext context)
         {
             _context = context;
-            State = _context.StateSingleton.Find(State.STATE_ID);
+            _managedElectionID = _context.StateSingleton.Find(State.STATE_ID).ManagedElectionID;
         }
 
         // GET: Races
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Races.Where(r => r.ElectionId == State.CurrentElection).ToListAsync());
+            return View(await _context.Races.Where(r => r.ElectionId == _managedElectionID).ToListAsync());
         }
 
         // GET: Races/Details/5
@@ -98,7 +88,7 @@ namespace Web.CmsControllers
                 .ToListAsync();
 
             List<int> raceCandidateIds = new List<int>();
-            foreach(var cr in crs)
+            foreach (var cr in crs)
             {
                 raceCandidateIds.Add(cr.CandidateId);
             }
@@ -118,7 +108,7 @@ namespace Web.CmsControllers
                 return NotFound();
             }
             ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName");
-            ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c=>c.ElectionId==State.CurrentElection), "CandidateId", "LastName");
+            ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c => c.ElectionId == _managedElectionID), "CandidateId", "LastName");
             return View(model);
         }
 
@@ -147,8 +137,8 @@ namespace Web.CmsControllers
 
                     var crs = _context.CandidateRaces.Where(cr => cr.RaceId == id).ToList();
                     _context.RemoveRange(crs);
-                    
-                    foreach(var cr in model.RaceCandidatesIds)
+
+                    foreach (var cr in model.RaceCandidatesIds)
                         _context.Add(new CandidateRace
                         {
                             CandidateId = cr,

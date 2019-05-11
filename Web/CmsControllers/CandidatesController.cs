@@ -17,19 +17,19 @@ namespace Web
     public class CandidatesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly int _currentElection;
+        private readonly int _managedElectionID;
 
         public CandidatesController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            _managedElectionID = _context.StateSingleton.Find(State.STATE_ID).ManagedElectionID;
         }
 
         // GET: Candidates
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Candidates
-                .Where(c => c.ElectionId == _currentElection)
+                .Where(c => c.ElectionId == _managedElectionID)
                 .Include(c => c.Organization).Include(c => c.Contacts).Include(c => c.CandidateRaces);
             return View(await applicationDbContext.ToListAsync());
         }
@@ -117,7 +117,7 @@ namespace Web
             Candidate candidate = new Candidate
             {
                 CandidateId = model.CandidateId,
-                ElectionId = _currentElection,
+                ElectionId = _managedElectionID,
                 Name = model.Name,
                 Picture = model.Picture,
                 OrganizationId = organizationId,
@@ -215,7 +215,7 @@ namespace Web
             Candidate candidate = new Candidate
             {
                 CandidateId = id,
-                ElectionId = _currentElection,
+                ElectionId = _managedElectionID,
                 Name = model.Name,
                 OrganizationId = model.OrganizationId,
                 Details = model.Details,

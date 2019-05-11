@@ -15,19 +15,19 @@ namespace Web.ApiControllers
     public class StepsApiController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private int _currentElection;
+        private int _runningElectionID;
 
         public StepsApiController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            _runningElectionID = _context.StateSingleton.Find(State.STATE_ID).RunningElectionID;
         }
 
         // GET: api/StepsApi
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Step>>> GetSteps()
         {
-            return await _context.Steps.Where(s => s.ElectionId == _currentElection).ToListAsync();
+            return await _context.Steps.Where(s => s.ElectionId == _runningElectionID).ToListAsync();
         }
 
         // GET: api/StepsApi/5
