@@ -14,8 +14,8 @@ namespace Web.Data
             {
                 State state = new State
                 {
-                   
-                    CurrentElection = 1,
+                    RunningElectionID = 1,
+                    ManagedElectionID = 1,
                 };
                 context.Add(state);
                 context.SaveChanges();

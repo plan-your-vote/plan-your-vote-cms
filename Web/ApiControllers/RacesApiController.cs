@@ -18,12 +18,12 @@ namespace Web.Controllers
     {
 
         private readonly ApplicationDbContext _context;
-        private int _currentElection;
+        private int _runningElection;
 
         public RacesApiController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            _runningElection = context.StateSingleton.Find(State.STATE_ID).RunningElectionID;
         }
 
         // GET: api/Races
@@ -38,7 +38,7 @@ namespace Web.Controllers
             };
 
             var races = await _context.Races
-                .Where(race => race.ElectionId == _currentElection)
+                .Where(race => race.ElectionId == _runningElection)
                 .Select(race => new
                 {
                     race,
