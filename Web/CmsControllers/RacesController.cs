@@ -71,7 +71,7 @@ namespace Web.CmsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RaceId,ElectionId,PositionName,NumberNeeded")] Race race)
+        public async Task<IActionResult> Create([Bind("RaceId,ElectionId,PositionName,Description,NumberNeeded")] Race race)
         {
             if (ModelState.IsValid)
             {

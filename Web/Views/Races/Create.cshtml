@@ -9,14 +9,14 @@
 <h1>@Localizer["Create"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Race"]Race</h4>
+    <h4>@Localizer["Race"]</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="ElectionId" class="control-label"></label>
+                    <label for="ElectionId" class="control-label">@Html.DisplayNameFor(r => r.Election)</label>
                     <select asp-for="ElectionId" class="form-control" asp-items="ViewBag.Elections"></select>
                 </div>
                 <div class="form-group">

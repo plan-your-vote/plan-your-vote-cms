@@ -58,7 +58,7 @@ namespace Web
         // GET: Candidates/Create
         public IActionResult Create()
         {
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId");
+            ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name");
             return View();
         }
 
@@ -78,14 +78,14 @@ namespace Web
                         && image.ContentType != "image/gif")
                 {
                     ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
-                    ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId");
+                    ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", organizationId);
                     return View();
                 }
 
                 if (image.Length < 4500)
                 {
                     ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
-                    ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId");
+                    ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", organizationId);
                     return View();
                 }
 
@@ -133,7 +133,7 @@ namespace Web
                 return RedirectToAction(nameof(Index));
             }
             var errors = ModelState.Values.SelectMany(v => v.Errors);
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
+            ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId);
             return View(candidate);
         }
 
@@ -177,7 +177,7 @@ namespace Web
             {
                 return NotFound();
             }
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
+            ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId);
             return View(candidate);
         }
 
@@ -233,14 +233,14 @@ namespace Web
                         && image.ContentType != "image/gif")
                     {
                         ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
-                        ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", model.OrganizationId);
+                        ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", model.OrganizationId);
                         return View(model);
                     }
 
                     if (image.Length < 4500)
                     {
                         ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
-                        ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", model.OrganizationId);
+                        ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", model.OrganizationId);
                         return View(model);
                     }
 
@@ -284,7 +284,7 @@ namespace Web
                 return RedirectToAction(nameof(Index));
             }
             var errors = ModelState.Values.SelectMany(v => v.Errors);
-            ViewData["OrganizationId"] = new SelectList(_context.Organizations, "OrganizationId", "OrganizationId", candidate.OrganizationId);
+            ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId);
             return View(model);
         }
 
