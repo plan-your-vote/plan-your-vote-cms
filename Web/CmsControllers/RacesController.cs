@@ -136,13 +136,16 @@ namespace Web.CmsControllers
                     var crs = _context.CandidateRaces.Where(cr => cr.RaceId == id).ToList();
                     _context.RemoveRange(crs);
 
-                    foreach (var cr in model.RaceCandidatesIds)
-                        _context.Add(new CandidateRace
-                        {
-                            CandidateId = cr,
-                            RaceId = id,
-                            PositionName = race.PositionName
-                        });
+                    if (model.RaceCandidatesIds != null)
+                    {
+                        foreach (var cr in model.RaceCandidatesIds)
+                            _context.Add(new CandidateRace
+                            {
+                                CandidateId = cr,
+                                RaceId = id,
+                                PositionName = race.PositionName
+                            });
+                    }
 
                     await _context.SaveChangesAsync();
                 }
