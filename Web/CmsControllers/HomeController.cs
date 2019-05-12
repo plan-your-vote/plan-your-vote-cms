@@ -36,7 +36,7 @@ namespace Web.Controllers
                 BallotIssuesCount = _context.BallotIssues
                     .Where(c => c.ElectionId == _managedElectionID)
                     .Count(),
-                PollingStationsCount = _context.PollingStations
+                PollingPlacesCount = _context.PollingPlaces
                     .Where(c => c.ElectionId == _managedElectionID)
                     .Count()
             };

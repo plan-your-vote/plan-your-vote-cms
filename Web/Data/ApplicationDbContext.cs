@@ -35,8 +35,8 @@ namespace Web.Data
         public DbSet<CandidateRace> CandidateRaces { get; set; }
         public DbSet<BallotIssue> BallotIssues { get; set; }
         public DbSet<IssueOption> IssueOptions { get; set; }
-        public DbSet<PollingStation> PollingStations { get; set; }
-        public DbSet<PollingStationDate> PollingStationDates { get; set; }
+        public DbSet<PollingPlace> PollingPlaces { get; set; }
+        public DbSet<PollingPlaceDate> PollingPlaceDates { get; set; }
         public DbSet<Theme> Themes { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }

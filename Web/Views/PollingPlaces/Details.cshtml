@@ -1,4 +1,4 @@
-﻿@model Web.Models.PollingStation
+﻿@model Web.Models.PollingPlace
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
@@ -9,14 +9,26 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["PollingStation"]</h4>
+    <h4>@Localizer["PollingPlace"]</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.PollingPlaceName)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.PollingPlaceName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PollingStationName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PollingStationName)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Latitude)
@@ -29,12 +41,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Longitude)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Address)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.WheelchairInfo)
@@ -60,41 +66,35 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.GeneralAccessInfo)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AdditionalInfo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AdditionalInfo)
-        </dd>
     </dl>
     <div id="polling-dates">
-        @Html.DisplayNameFor(model => model.PollingStationDates)
-        @for(int i = 0; i < Model.PollingStationDates.Count; i++)
+        @Html.DisplayNameFor(model => model.PollingPlaceDates)
+        @for(int i = 0; i < Model.PollingPlaceDates.Count; i++)
         {
             <dl class="row">
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(m => m.PollingStationDates[i].PollingDate)
+                    @Html.DisplayNameFor(m => m.PollingPlaceDates[i].PollingDate)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(m => m.PollingStationDates[i].PollingDate)
+                    @Html.DisplayFor(m => m.PollingPlaceDates[i].PollingDate)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(m => m.PollingStationDates[i].StartTime)
+                    @Html.DisplayNameFor(m => m.PollingPlaceDates[i].StartTime)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(m => m.PollingStationDates[i].StartTime)
+                    @Html.DisplayFor(m => m.PollingPlaceDates[i].StartTime)
                 </dd>
                 <dt class="col-sm-2">
-                    @Html.DisplayNameFor(m => m.PollingStationDates[i].EndTime)
+                    @Html.DisplayNameFor(m => m.PollingPlaceDates[i].EndTime)
                 </dt>
                 <dd class="col-sm-10">
-                    @Html.DisplayFor(m => m.PollingStationDates[i].EndTime)
+                    @Html.DisplayFor(m => m.PollingPlaceDates[i].EndTime)
                 </dd>
             </dl>
         }
     </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.PollingStationId">@Localizer["Edit"]</a> |
+    <a asp-action="Edit" asp-route-id="@Model.PollingPlaceId">@Localizer["Edit"]</a> |
     <a asp-action="Index">@Localizer["Back to List"]</a>
 </div>

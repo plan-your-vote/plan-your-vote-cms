@@ -1,4 +1,4 @@
-﻿@model Web.Models.PollingStationGroup
+﻿@model Web.Models.PollingPlaceGroup
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
@@ -9,12 +9,22 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Polling Station"]</h4>
+    <h4>@Localizer["Polling Place"]</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger">@ViewData["Error"]</div>
+                <div class="form-group">
+                    <label asp-for="PollingPlaceName" class="control-label"></label>
+                    <input asp-for="PollingPlaceName" class="form-control" />
+                    <span asp-validation-for="PollingPlaceName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="PollingStationName" class="control-label"></label>
                     <input asp-for="PollingStationName" class="form-control" />
@@ -29,12 +39,6 @@
                     <label asp-for="Longitude" class="control-label"></label>
                     <input asp-for="Longitude" class="form-control" />
                     <span asp-validation-for="Longitude" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="WheelchairInfo" class="control-label"></label>
@@ -56,11 +60,6 @@
                     <input asp-for="GeneralAccessInfo" class="form-control" />
                     <span asp-validation-for="GeneralAccessInfo" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="AdditionalInfo" class="control-label"></label>
-                    <input asp-for="AdditionalInfo" class="form-control" />
-                    <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
-                </div>
 
                 <script>
                     function appendDateFields(e) {
@@ -72,11 +71,11 @@
                         formGroup1.setAttribute("class", "form-group");
                         let dateLabel = document.createElement("label");
                         dateLabel.setAttribute("class", "control-label");
-                        dateLabel.setAttribute("for", "PollingStationDates");
+                        dateLabel.setAttribute("for", "PollingPlaceDates");
                         dateLabel.appendChild(document.createTextNode("Poll Date"));
                         let dateInput = document.createElement("input");
-                        dateInput.setAttribute("id", `PollingStationDates_${datesDiv.childElementCount}_`);
-                        dateInput.setAttribute("name", `PollingStationDates[${datesDiv.childElementCount}]`);
+                        dateInput.setAttribute("id", `PollingPlaceDates_${datesDiv.childElementCount}_`);
+                        dateInput.setAttribute("name", `PollingPlaceDates[${datesDiv.childElementCount}]`);
                         dateInput.setAttribute('type', "date");
                         dateInput.setAttribute('class', 'form-control');
                         formGroup1.appendChild(dateLabel);
@@ -116,14 +115,15 @@
                         datesDiv.append(group);
                     }
 
-                </script>
-                <label class="control-label">@Localizer["Polling Station Operating Hours"]</label>
+
+/**/</script>
+                <label class="control-label">@Localizer["Polling Place Operating Hours"]</label>
                 <div id="polling-dates">
                     <div>
                         <div class="form-group">
-                            <label for="PollingStationDates" class="control-label">PollingStationDates</label>
-                            <input type="date" class="form-control" id="PollingStationDates_0_" name="PollingStationDates[0]" />
-                            <span validation-for="PollingStationDates" class="text-danger"></span>
+                            <label for="PollingPlaceDates" class="control-label">PollingPlaceDates</label>
+                            <input type="date" class="form-control" id="PollingPlaceDates_0_" name="PollingPlaceDates[0]" />
+                            <span validation-for="PollingPlaceDates" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label for="PollingStartTimes" class="control-label">PollingStartTimes</label>
