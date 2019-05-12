@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Web.Models
 {
-    public class PollingStation
+    public class PollingPlace
     {
         [Key]
-        [Display(Name = "PollingStationId")]
-        public int PollingStationId { get; set; }
+        [Display(Name = "PollingPlaceId")]
+        public int PollingPlaceId { get; set; }
 
         [Display(Name = "ElectionId")]
         public int ElectionId { get; set; }
@@ -17,11 +17,11 @@ namespace Web.Models
         [Display(Name = "Election")]
         public Election Election { get; set; }
 
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        [Display(Name = "Polling Place")]
+        public string PollingPlaceName { get; set; }
 
-        [Display(Name = "AdditionalInfo")]
-        public string AdditionalInfo { get; set; }
+        [Display(Name = "Polling Station")]
+        public string PollingStationName { get; set; }
 
         [Display(Name = "Address")]
         public string Address { get; set; }
@@ -44,7 +44,7 @@ namespace Web.Models
         [Display(Name = "Longitude")]
         public double Longitude { get; set; }
 
-        [Display(Name = "PollingStationDates")]
-        public List<PollingStationDate> PollingStationDates { get; set; }
+        [Display(Name = "PollingPlaceDates")]
+        public List<PollingPlaceDate> PollingPlaceDates { get; set; }
     }
 }

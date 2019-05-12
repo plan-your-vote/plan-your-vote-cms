@@ -1,4 +1,4 @@
-﻿@model Web.Models.PollingStationGroup
+﻿@model Web.Models.PollingPlaceGroup
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
@@ -9,12 +9,22 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["PollingStation"]</h4>
+    <h4>@Localizer["PollingPlace"]</h4>
     <hr />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="PollingPlaceName" class="control-label"></label>
+                    <input asp-for="PollingPlaceName" class="form-control" />
+                    <span asp-validation-for="PollingPlaceName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="PollingStationName" class="control-label"></label>
                     <input asp-for="PollingStationName" class="form-control" />
@@ -29,11 +39,6 @@
                     <label asp-for="Longitude" class="control-label"></label>
                     <input asp-for="Longitude" class="form-control" />
                     <span asp-validation-for="Longitude" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="WheelchairInfo" class="control-label"></label>
@@ -55,11 +60,6 @@
                     <input asp-for="GeneralAccessInfo" class="form-control" />
                     <span asp-validation-for="GeneralAccessInfo" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="AdditionalInfo" class="control-label"></label>
-                    <input asp-for="AdditionalInfo" class="form-control" />
-                    <span asp-validation-for="AdditionalInfo" class="text-danger"></span>
-                </div>
 
                 <script>
                     function appendDateFields(e) {
@@ -71,11 +71,11 @@
                         formGroup1.setAttribute("class", "form-group");
                         let dateLabel = document.createElement("label");
                         dateLabel.setAttribute("class", "control-label");
-                        dateLabel.setAttribute("for", "PollingStationDates");
+                        dateLabel.setAttribute("for", "PollingPlaceDates");
                         dateLabel.appendChild(document.createTextNode("Poll Date"));
                         let dateInput = document.createElement("input");
-                        dateInput.setAttribute("id", `PollingStationDates_${datesDiv.childElementCount}_`);
-                        dateInput.setAttribute("name", `PollingStationDates[${datesDiv.childElementCount}]`);
+                        dateInput.setAttribute("id", `PollingPlaceDates_${datesDiv.childElementCount}_`);
+                        dateInput.setAttribute("name", `PollingPlaceDates[${datesDiv.childElementCount}]`);
                         dateInput.setAttribute('type', "date");
                         dateInput.setAttribute('class', 'form-control');
                         formGroup1.appendChild(dateLabel);
@@ -115,29 +115,30 @@
                         datesDiv.append(group);
                     }
 
-                </script>
-                <label class="control-label">@Localizer["Polling Station Operating Hours"]</label>
+
+/**/</script>
+                <label class="control-label">@Localizer["Polling Place Operating Hours"]</label>
                 <div id="polling-dates">
 
-                    @for (var i = 0; i < Model.PollingStationDates.Count; i++)
+                    @for (var i = 0; i < Model.PollingPlaceDates.Count; i++)
                     {
-                    <div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.PollingStationDates, new { @class = "control-label" })
-                            @Html.EditorFor(m => m.PollingStationDates[i], new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(m => m.PollingStationDates[i], "", new { @class = "text-danger" })
+                        <div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PollingPlaceDates, new { @class = "control-label" })
+                                @Html.EditorFor(m => m.PollingPlaceDates[i], new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(m => m.PollingPlaceDates[i], "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PollingStartTimes, new { @class = "control-label" })
+                                @Html.EditorFor(m => m.PollingStartTimes[i], new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(m => m.PollingStartTimes[i], "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.PollingEndTimes, new { @class = "control-label" })
+                                @Html.EditorFor(m => m.PollingEndTimes[i], new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(m => m.PollingEndTimes[i], "", new { @class = "text-danger" })
+                            </div>
                         </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.PollingStartTimes, new { @class = "control-label" })
-                            @Html.EditorFor(m => m.PollingStartTimes[i], new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(m => m.PollingStartTimes[i], "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.PollingEndTimes, new { @class = "control-label" })
-                            @Html.EditorFor(m => m.PollingEndTimes[i], new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(m => m.PollingEndTimes[i], "", new { @class = "text-danger" })
-                        </div>
-                    </div>
                     }
                 </div>
                 <button id="AddDateField" type="button" role="button" class="btn btn-primary" onClick="appendDateFields(event)">

@@ -44,25 +44,25 @@ namespace Web.Data
             context.Elections.AddRange(elections);
             context.SaveChanges();
 
-            const string pollingStationsFile = "wwwroot/Data/pollingStations.json";
-            List<JSONPollingStation> pollingStationsData = GetJsonData<JSONPollingStation>(pollingStationsFile);
+            const string pollingPlacesFile = "wwwroot/Data/pollingPlaces.json";
+            List<JSONPollingPlaces> pollingPlacesData = GetJsonData<JSONPollingPlaces>(pollingPlacesFile);
 
-            List<PollingStation> pollingStations = pollingStationsData
-                .Select(psd => new PollingStation()
+            List<PollingPlace> pollingPlaces = pollingPlacesData
+                .Select(ppd => new PollingPlace()
                 {
                     ElectionId = DummyElectionId,
-                    PollingStationId = psd.VotingPlaceID,
-                    Name = psd.FacilityName,
-                    Address = psd.FacilityAddress,
-                    AdditionalInfo = psd.Location,
-                    Latitude = psd.Latitude,
-                    Longitude = psd.Longitude,
+                    PollingPlaceId = ppd.VotingPlaceID,
+                    PollingPlaceName = ppd.FacilityName,
+                    Address = ppd.FacilityAddress,
+                    PollingStationName = ppd.Location,
+                    Latitude = ppd.Latitude,
+                    Longitude = ppd.Longitude,
                     // = psd.AdvancedOnly,
                     // = psd.LocalArea,
 
                 })
                 .ToList();
-            context.PollingStations.AddRange(pollingStations);
+            context.PollingPlaces.AddRange(pollingPlaces);
             context.SaveChanges();
 
             var organizations = GetOrganizations(candidateData).ToArray();

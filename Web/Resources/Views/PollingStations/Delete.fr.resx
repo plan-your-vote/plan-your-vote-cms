@@ -126,7 +126,7 @@
   <data name="Delete" xml:space="preserve">
     <value>Effacer</value>
   </data>
-  <data name="PollingStation" xml:space="preserve">
+  <data name="PollingPlace" xml:space="preserve">
     <value>Bureau de vote</value>
   </data>
 </root>

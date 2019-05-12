@@ -123,7 +123,7 @@
   <data name="Edit" xml:space="preserve">
     <value>modifier</value>
   </data>
-  <data name="PollingStation" xml:space="preserve">
+  <data name="PollingPlace" xml:space="preserve">
     <value>Bureau de vote</value>
   </data>
   <data name="Save" xml:space="preserve">

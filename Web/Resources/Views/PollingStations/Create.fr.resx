@@ -123,7 +123,7 @@
   <data name="Create" xml:space="preserve">
     <value>Créer</value>
   </data>
-  <data name="Polling Station" xml:space="preserve">
+  <data name="Polling Place" xml:space="preserve">
     <value>Bureau de vote</value>
   </data>
 </root>

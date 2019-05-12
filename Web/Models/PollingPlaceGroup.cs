@@ -1,18 +1,17 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
 namespace Web.Models
 {
-    public class PollingStationGroup
+    public class PollingPlaceGroup
     {
-        [Display(Name = "PollingStationName")]
-        public string PollingStationName { get; set; }
+        [Display(Name = "Polling Place")]
+        public string PollingPlaceName { get; set; }
 
-        [Display(Name = "AdditionalInfo")]
-        public string AdditionalInfo { get; set; }
+        [Display(Name = "Polling Station")]
+        public string PollingStationName { get; set; }
 
         [Display(Name = "Address")]
         public string Address { get; set; }
@@ -35,14 +34,14 @@ namespace Web.Models
         [Display(Name = "Longitude")]
         public double Longitude { get; set; }
 
-        [Display(Name = "PollingStationDates")]
-        public List<DateTime> PollingStationDates { get; set; }
+        [Display(Name = "PollingPlaceDates")]
+        public List<DateTime> PollingPlaceDates { get; set; }
 
-        [Microsoft.AspNetCore.Mvc.Remote(action: "VerifyStartTime", controller: "PollingStations", AdditionalFields = nameof(PollingStationDates))]
+        [Remote(action: "VerifyStartTime", controller: "PollingPlaces", AdditionalFields = nameof(PollingPlaceDates))]
         [Display(Name = "PollingStartTimes")]
         public List<DateTime> PollingStartTimes { get; set; }
 
-        [Microsoft.AspNetCore.Mvc.Remote(action: "VerifyEndTime", controller: "PollingStations", AdditionalFields = nameof(PollingStationDates))]
+        [Remote(action: "VerifyEndTime", controller: "PollingPlaces", AdditionalFields = nameof(PollingPlaceDates))]
         [Display(Name = "PollingEndTimes")]
         public List<DateTime> PollingEndTimes { get; set; }
     }

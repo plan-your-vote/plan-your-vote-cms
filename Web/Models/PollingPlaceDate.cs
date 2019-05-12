@@ -7,15 +7,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Web.Models
 {
-    public class PollingStationDate
+    public class PollingPlaceDate
     {
         [Key]
         public int PollingDateId { get; set; }
 
-        [ForeignKey("PollingStationId")]
-        [Display(Name = "PollingStationId")]
-        public int PollingStationId { get; set; }
-        public PollingStation PollingStation { get; set; }
+        [ForeignKey("PollingPlaceId")]
+        [Display(Name = "PollingPlaceId")]
+        public int PollingPlaceId { get; set; }
+
+        public PollingPlace PollingPlace { get; set; }
 
         [Display(Name = "Date")]
         [DataType(DataType.Date)]

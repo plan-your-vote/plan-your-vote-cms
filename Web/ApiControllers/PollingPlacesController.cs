@@ -13,20 +13,20 @@ namespace Web.ApiControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PollingStationsController : ControllerBase
+    public class PollingPlacesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
         private int _runningElectionID;
 
-        public PollingStationsController(ApplicationDbContext context)
+        public PollingPlacesController(ApplicationDbContext context)
         {
             _context = context;
             _runningElectionID = _context.StateSingleton.Find(State.STATE_ID).RunningElectionID;
         }
 
-        // GET: api/PollingStations
+        // GET: api/PollingPlaces
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<PollingStation>>> GetPollingStations()
+        public async Task<ActionResult<IEnumerable<PollingPlace>>> GetPollingPlaces()
         {
             VotingPage votingPage = new VotingPage()
             {
@@ -35,32 +35,32 @@ namespace Web.ApiControllers
                 PageNumber = 3,
             };
 
-            var pollingStations = await _context.PollingStations.Where(b => b.ElectionId == _runningElectionID).ToListAsync();
+            var pollingPlaces = await _context.PollingPlaces.Where(b => b.ElectionId == _runningElectionID).ToListAsync();
 
             return Ok(new
             {
                 votingPage,
-                pollingStations
+                pollingPlaces
             });
         }
 
-        // GET: api/PollingStations/5
+        // GET: api/PollingPlaces/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PollingStation>> GetPollingStation(int id)
+        public async Task<ActionResult<PollingPlace>> GetPollingPlace(int id)
         {
-            var pollingStation = await _context.PollingStations.FindAsync(id);
+            var pollingPlaces = await _context.PollingPlaces.FindAsync(id);
 
-            if (pollingStation == null)
+            if (pollingPlaces == null)
             {
                 return NotFound();
             }
 
-            return pollingStation;
+            return pollingPlaces;
         }
 
-        private bool PollingStationExists(int id)
+        private bool PollingPlaceExists(int id)
         {
-            return _context.PollingStations.Any(e => e.PollingStationId == id);
+            return _context.PollingPlaces.Any(e => e.PollingPlaceId == id);
         }
     }
 }

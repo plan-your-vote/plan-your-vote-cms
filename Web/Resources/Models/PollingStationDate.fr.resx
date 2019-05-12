@@ -123,7 +123,7 @@
   <data name="EndTime" xml:space="preserve">
     <value>Heure de fin</value>
   </data>
-  <data name="PollingStationId" xml:space="preserve">
+  <data name="PollingPlaceId" xml:space="preserve">
     <value>Numéro du bureaux de vote</value>
   </data>
   <data name="StartTime" xml:space="preserve">

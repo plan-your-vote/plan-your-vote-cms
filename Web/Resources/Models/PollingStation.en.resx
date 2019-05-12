@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AdditionalInfo" xml:space="preserve">
-    <value>Additional Information</value>
+  <data name="PollingStationName" xml:space="preserve">
+    <value>Polling Station</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
@@ -144,11 +144,11 @@
   <data name="ParkingInfo" xml:space="preserve">
     <value>Parking Information</value>
   </data>
-  <data name="PollingStationDates" xml:space="preserve">
-    <value>Polling Station Dates</value>
+  <data name="PollingPlaceDates" xml:space="preserve">
+    <value>Polling Place Dates</value>
   </data>
-  <data name="PollingStationId" xml:space="preserve">
-    <value>Polling Station Id</value>
+  <data name="PollingPlaceId" xml:space="preserve">
+    <value>Polling Place Id</value>
   </data>
   <data name="WashroomInfo" xml:space="preserve">
     <value>Washroom Information</value>

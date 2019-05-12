@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AdditionalInfo" xml:space="preserve">
-    <value>Information additionnelle</value>
+  <data name="PollingStationName" xml:space="preserve">
+    <value>Nom du bureau de vote</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>Adresse</value>
@@ -141,10 +141,10 @@
   <data name="PollingStartTimes" xml:space="preserve">
     <value>Heure de début</value>
   </data>
-  <data name="PollingStationDates" xml:space="preserve">
+  <data name="PollingPlaceDates" xml:space="preserve">
     <value>Date de vote</value>
   </data>
-  <data name="PollingStationName" xml:space="preserve">
+  <data name="PollingPlaceName" xml:space="preserve">
     <value>Nom</value>
   </data>
   <data name="WashroomInfo" xml:space="preserve">

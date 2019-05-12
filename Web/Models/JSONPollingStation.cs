@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Web.Models
 {
-    public class JSONPollingStation
+    public class JSONPollingPlaces
     {
         public int VotingPlaceID { get; set; }
         public string FacilityName { get; set; }
