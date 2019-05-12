@@ -1,65 +1,106 @@
-﻿@model Web.Models.BallotIssueCreate
+﻿@model Web.ViewModels.BallotIssueViewModel
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Edit"];
+    ViewData["Title"] = @Localizer["Edit Ballot Issues"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["BallotIssue"]</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Edit">
+    <form asp-action="Edit">
+        <div class="row">
+            <div class="col-md-12">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="BallotIssueTitle" class="control-label"></label>
-                    <input asp-for="BallotIssueTitle" class="form-control" />
-                    <span asp-validation-for="BallotIssueTitle" class="text-danger"></span>
+                    @Html.LabelFor(ballotIssue => ballotIssue.BallotIssueTitle, new { @class = "control-label" })
+                    @Html.TextAreaFor(ballotIssue => ballotIssue.BallotIssueTitle, new { @class = "form-control", @rows = 2 })
+                    @Html.ValidationMessageFor(ballotIssue => ballotIssue.BallotIssueTitle, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                    @Html.LabelFor(ballotIssue => ballotIssue.Description, new { @class = "control-label" })
+                    @Html.TextAreaFor(ballotIssue => ballotIssue.Description, new { @class = "form-control", @rows = 4 })
+                    @Html.ValidationMessageFor(ballotIssue => ballotIssue.Description, "", new { @class = "text-danger" })
                 </div>
-                <label class="control-label">@Localizer["Options"]</label>
+                <label class="control-label">@Localizer["Ballot Options"]</label>
                 <script>
-                    function appendInputChild(e) {
-                        var myDiv = document.createElement('div');
-                        myDiv.setAttribute('class', 'form-group');
+                    function removeInputChild(optionIndex) {
+                        var rowDiv = document.getElementById(`OptionsTitles_${optionIndex}_`).parentNode.parentNode.parentNode;
+                        rowDiv.parentNode.removeChild(rowDiv);
 
-                        var myInput = document.createElement('input');
+                    }
 
+                    function appendInputChild() {
                         var optionsElement = document.getElementById("options");
+
+                        var row = document.createElement('div');
+                        row.setAttribute('class', 'row');
+
+                        var optionColumn = document.createElement('div');
+                        optionColumn.setAttribute('class', 'col-md-10');
+
+                        var optionDiv = document.createElement('div');
+                        optionDiv.setAttribute('class', 'form-group');
+
+                        var myInput = document.createElement('textarea');
                         myInput.setAttribute('id', `OptionsTitles_${optionsElement.childElementCount}_`);
                         myInput.setAttribute('name', `OptionsTitles[${optionsElement.childElementCount}]`);
                         myInput.setAttribute('type', "text");
                         myInput.setAttribute('class', 'form-control');
+                        myInput.setAttribute('rows', 2);
 
-                        myDiv.append(myInput);
+                        optionDiv.append(myInput);
 
-                        optionsElement.append(myDiv);
-                    }
-                </script>
+                        optionColumn.append(optionDiv);
+
+                        var removeColumn = document.createElement('div');
+                        removeColumn.setAttribute('class', 'col-md-2');
+
+                        var removeButton = document.createElement('button');
+                        removeButton.setAttribute('type', 'button');
+                        removeButton.setAttribute('role', 'button');
+                        removeButton.classList.add("btn", "btn-primary");
+                        removeButton.innerText = "Remove Option";
+
+                        removeColumn.append(removeButton);
+
+                        row.append(optionColumn);
+                        row.append(removeColumn);
+
+                        optionsElement.append(row);
+
+                    }</script>
+
                 <div id="options">
                     @for (int i = 0; i < Model.OptionsTitles.Count; i++)
                     {
-                        <div class="form-group">
-                            @Html.TextBoxFor(m => m.OptionsTitles[i], new { @class = "form-control" })
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    @Html.TextAreaFor(m => m.OptionsTitles[i], new { @class = "form-control", @rows = 2 })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary" onClick="removeInputChild(@i)">Remove Option</button>
+                            </div>
                         </div>
+
                     }
                 </div>
-                <button id="AddIssueOption" type="button" role="button" class="btn btn-primary" onClick="appendInputChild(event)">Add</button>
-                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <button type="button" role="button" class="btn btn-primary" onClick="appendInputChild()">Add Option</button>
+                </div>
                 <div class="form-group">
                     <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 </div>
 
 <div>

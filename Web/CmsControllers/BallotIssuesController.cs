@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Models;
+using Web.ViewModels;
 
 namespace Web
 {
@@ -52,7 +50,7 @@ namespace Web
         // GET: BallotIssues/Create
         public IActionResult Create()
         {
-            return View(new BallotIssueCreate()
+            return View(new BallotIssueViewModel()
             {
                 OptionsTitles = new List<string>
                 {
@@ -66,7 +64,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BallotIssueCreate model)
+        public async Task<IActionResult> Create(BallotIssueViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -78,9 +76,9 @@ namespace Web
                 };
                 _context.Add(issue);
 
-                foreach(string title in model.OptionsTitles)
+                foreach (string title in model.OptionsTitles)
                 {
-                    if(title != null && title.Length > 0)
+                    if (title != null && title.Length > 0)
                     {
                         IssueOption opt = new IssueOption
                         {
@@ -116,7 +114,7 @@ namespace Web
             var options = _context.IssueOptions.Where(op => op.BallotIssueId == id).ToList();
             List<string> optionTitles = options.Select(optionTitle => optionTitle.IssueOptionTitle).ToList();
 
-            BallotIssueCreate model = new BallotIssueCreate
+            BallotIssueViewModel model = new BallotIssueViewModel
             {
                 BallotIssueTitle = ballotIssue.BallotIssueTitle,
                 Description = ballotIssue.Description,
@@ -131,7 +129,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BallotIssueTitle,Description,OptionsTitles")] BallotIssueCreate model)
+        public async Task<IActionResult> Edit(int id, [Bind("BallotIssueTitle,Description,OptionsTitles")] BallotIssueViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -186,6 +184,7 @@ namespace Web
             }
 
             var ballotIssue = await _context.BallotIssues
+                .Include(b => b.BallotIssueOptions)
                 .FirstOrDefaultAsync(m => m.BallotIssueId == id);
             if (ballotIssue == null)
             {
