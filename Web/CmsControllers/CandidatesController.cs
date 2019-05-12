@@ -46,6 +46,7 @@ namespace Web
                 .Include(c => c.Details)
                 .Include(c => c.Organization)
                 .Include(c => c.CandidateRaces)
+                .Include(c => c.Contacts)
                 .FirstOrDefaultAsync(m => m.CandidateId == id);
             if (candidate == null)
             {
@@ -67,7 +68,8 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Candidate model, IFormFile image, int organizationId, string removedDetails)
+        public async Task<IActionResult> Create(Candidate model, IFormFile image, int organizationId, 
+            string removedDetails, string removedContacts)
         {
             var fileName = "";
             var nameOfile = "";
@@ -95,7 +97,7 @@ namespace Web
                 model.Picture = nameOfile;
             }
 
-            // Remove the "deleted" items from the list
+            // Remove the "deleted" details from the list
             if (removedDetails != null && removedDetails != "")
             {
                 string[] itemsToRemove = removedDetails.Split(',', StringSplitOptions.RemoveEmptyEntries);
@@ -111,6 +113,29 @@ namespace Web
                 for (int i = indexes.Length - 1; i >= 0; --i)
                 {
                     model.Details.RemoveAt(indexes[i]);
+                }
+            }
+            else
+            {
+                model.Picture = "images\\default.jpg";
+            }
+
+            // Remove the "deleted" contacts from the list
+            if (removedContacts != null && removedContacts != "")
+            {
+                string[] contactsToRemove = removedContacts.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                int[] indexes = new int[contactsToRemove.Length];
+                for (int i = 0; i < contactsToRemove.Length; ++i)
+                {
+                    indexes[i] = int.Parse(contactsToRemove[i]);
+                }
+
+                // sort in ascending order
+                indexes = indexes.OrderBy(i => i).ToArray();
+
+                for (int i = indexes.Length - 1; i >= 0; --i)
+                {
+                    model.Contacts.RemoveAt(indexes[i]);
                 }
             }
 
@@ -145,7 +170,7 @@ namespace Web
             return strDateTimeNumber + strRandomResult;
         }
 
-        public virtual IActionResult GetFields(int count)
+        public virtual IActionResult GetDetailFields(int count)
         {
             List<CandidateDetail> list = new List<CandidateDetail>();
 
@@ -162,6 +187,23 @@ namespace Web
             return PartialView("CandidateDetail", candidate);
         }
 
+        public virtual IActionResult GetContactFields(int count)
+        {
+            List<Contact> list = new List<Contact>();
+
+            for (int i = 0; i <= count; i++)
+            {
+                list.Add(new Contact());
+            }
+
+            Candidate candidate = new Candidate
+            {
+                Contacts = list
+            };
+
+            return PartialView("CandidateContact", candidate);
+        }
+
         // GET: Candidates/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -172,6 +214,7 @@ namespace Web
 
             var candidate = await _context.Candidates
                 .Include(c => c.Details)
+                .Include(c => c.Contacts)
                 .FirstOrDefaultAsync(c => c.CandidateId == id);
             if (candidate == null)
             {
@@ -186,14 +229,15 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Candidate model, IFormFile image, string removedDetails)
+        public async Task<IActionResult> Edit(int id, Candidate model, IFormFile image, 
+            string removedDetails, string removedContacts)
         {
             if (id != model.CandidateId)
             {
                 return NotFound();
             }
 
-            // Remove the "deleted" items from the list
+            // Remove the "deleted" details from the list
             if (removedDetails != null && removedDetails != "")
             {
                 string[] itemsToRemove = removedDetails.Split(',', StringSplitOptions.RemoveEmptyEntries);
@@ -209,6 +253,25 @@ namespace Web
                 for (int i = indexes.Length-1; i >= 0; --i)
                 {
                     model.Details.RemoveAt(indexes[i]);
+                }
+            }
+
+            // Remove the "deleted" contacts from the list
+            if (removedContacts != null && removedContacts != "")
+            {
+                string[] contactsToRemove = removedContacts.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                int[] indexes = new int[contactsToRemove.Length];
+                for (int i = 0; i < contactsToRemove.Length; ++i)
+                {
+                    indexes[i] = int.Parse(contactsToRemove[i]);
+                }
+
+                // sort in ascending order
+                indexes = indexes.OrderBy(i => i).ToArray();
+
+                for (int i = indexes.Length - 1; i >= 0; --i)
+                {
+                    model.Contacts.RemoveAt(indexes[i]);
                 }
             }
 
@@ -262,10 +325,12 @@ namespace Web
 
                 try
                 {
-                    // remove all the candidate's current details from the database because the update will just
-                    // recreate them anyways
+                    // remove all the candidate's current details and contacts from the database because the 
+                    // update will just recreate them anyways
                     var existingDetails = _context.CandidateDetails.Where(cd => cd.CandidateId == id).ToList();
                     _context.RemoveRange(existingDetails);
+                    var existingContacts = _context.Contacts.Where(cd => cd.CandidateId == id).ToList();
+                    _context.RemoveRange(existingContacts);
 
                     _context.Update(candidate);
                     await _context.SaveChangesAsync();
@@ -299,6 +364,7 @@ namespace Web
             var candidate = await _context.Candidates
                 .Include(c => c.Organization)
                 .Include(c => c.Details)
+                .Include(c => c.Contacts)
                 .FirstOrDefaultAsync(m => m.CandidateId == id);
             if (candidate == null)
             {
