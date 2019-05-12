@@ -2,6 +2,27 @@
 
 namespace Web.Models
 {
+    public enum ContactMethod
+    {
+        [Display(Name = "Phone")]
+        Phone,
+        [Display(Name = "Email")]
+        Email,
+        [Display(Name = "Twitter")]
+        Twitter,
+        [Display(Name = "Facebook")]
+        Facebook,
+        [Display(Name = "Instagram")]
+        Instagram,
+        [Display(Name = "LinkedIn")]
+        LinkedIn,
+        [Display(Name = "YouTube")]
+        YouTube,
+        [Display(Name = "Website")]
+        Website,
+        [Display(Name = "Other")]
+        Other
+    }
     public class Contact
     {
         [Key]
@@ -9,7 +30,7 @@ namespace Web.Models
         public int ContactId { get; set; }
 
         [Display(Name = "ContactMethod")]
-        public string ContactMethod { get; set; }   // eg. email, phone no etc
+        public ContactMethod ContactMethod { get; set; }   // eg. email, phone no etc
 
         [Display(Name = "ContactValue")]
         public string ContactValue { get; set; }  // eg. t@t.t, 555-2325 etc

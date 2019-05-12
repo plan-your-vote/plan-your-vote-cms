@@ -74,7 +74,12 @@
                                            asp-area="" asp-controller="Candidates" asp-action="Index">@Localizer["Candidates"]</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" asp-area="" asp-controller="Contacts" asp-action="Index">@Localizer["Contacts"]</a>
+                                        <a class="nav-link text-white"
+                                           asp-area="" asp-controller="Candidates" asp-action="Create">@Localizer["Create Candidate"]</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white" 
+                                           asp-area="" asp-controller="Contacts" asp-action="Index">@Localizer["Contacts"]</a>
                                     </li>
                                 </ul>
                             </li>

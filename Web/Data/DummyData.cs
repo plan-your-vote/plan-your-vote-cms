@@ -205,7 +205,7 @@ namespace Web.Data
                 {
                     contacts.Add(new Contact()
                     {
-                        ContactMethod = "Twitter",
+                        ContactMethod = ContactMethod.Twitter,
                         ContactValue = existingCandidate.Twitter,
                         CandidateId = candidate.CandidateId,
                     });
@@ -215,7 +215,7 @@ namespace Web.Data
                 {
                     contacts.Add(new Contact()
                     {
-                        ContactMethod = "Facebook",
+                        ContactMethod = ContactMethod.Facebook,
                         ContactValue = existingCandidate.Facebook,
                         CandidateId = candidate.CandidateId,
                     });
@@ -225,7 +225,7 @@ namespace Web.Data
                 {
                     contacts.Add(new Contact()
                     {
-                        ContactMethod = "Instagram",
+                        ContactMethod = ContactMethod.Instagram,
                         ContactValue = existingCandidate.Instagram,
                         CandidateId = candidate.CandidateId,
                     });
@@ -235,7 +235,7 @@ namespace Web.Data
                 {
                     contacts.Add(new Contact()
                     {
-                        ContactMethod = "YouTube",
+                        ContactMethod = ContactMethod.YouTube,
                         ContactValue = existingCandidate.YouTube,
                         CandidateId = candidate.CandidateId,
                     });
@@ -245,7 +245,7 @@ namespace Web.Data
                 {
                     contacts.Add(new Contact()
                     {
-                        ContactMethod = "Other",
+                        ContactMethod = ContactMethod.Other,
                         ContactValue = existingCandidate.Other,
                         CandidateId = candidate.CandidateId,
                     });
@@ -255,7 +255,7 @@ namespace Web.Data
                 {
                     contacts.Add(new Contact()
                     {
-                        ContactMethod = "Phone",
+                        ContactMethod = ContactMethod.Phone,
                         ContactValue = existingCandidate.Phone,
                         CandidateId = candidate.CandidateId,
                     });
@@ -265,7 +265,7 @@ namespace Web.Data
                 {
                     contacts.Add(new Contact()
                     {
-                        ContactMethod = "Email",
+                        ContactMethod = ContactMethod.Email,
                         ContactValue = existingCandidate.Email,
                         CandidateId = candidate.CandidateId,
                     });
@@ -275,7 +275,7 @@ namespace Web.Data
                 {
                     contacts.Add(new Contact()
                     {
-                        ContactMethod = "Website",
+                        ContactMethod = ContactMethod.Website,
                         ContactValue = existingCandidate.Website,
                         CandidateId = candidate.CandidateId,
                     });

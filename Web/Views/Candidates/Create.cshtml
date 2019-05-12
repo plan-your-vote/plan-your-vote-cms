@@ -88,7 +88,7 @@
                             let count = getCount("#allDetails") + 1;
                             $("#allDetails").append($(document.createElement("div")).attr("id", "detail_" + count));
                             $("#detail_" + count)
-                                .load('@Url.Action("GetFields", "Candidates")',
+                                .load('@Url.Action("GetDetailFields", "Candidates")',
                                     { "count": count },
                                     function (response, status, xhr) {
                                         if (status == "error") {
@@ -105,10 +105,60 @@
                                 $("#removedDetails").attr("value", $("#removedDetails").attr("value") + index + ",");
                             }
                         });
+
+                        $("#addContact").click(function () {
+                            let count = getCount("#allContacts") + 1;
+                            $("#allContacts").append($(document.createElement("div")).attr("id", "contact_" + count));
+                            $("#contact_" + count)
+                                .load('@Url.Action("GetContactFields", "Candidates")',
+                                    { "count": count },
+                                    function (response, status, xhr) {
+                                        if (status == "error") {
+                                            alert("An error occurred while loading the contact fields.");
+                                        }
+                                    });
+                        });
+
+                        $("#removeContact_0").click(function () {
+                            $(this.parentNode.parentNode).attr("style", "display:none");
+                            let id = $(this.parentNode.parentNode).attr("id");
+                            if (id != null) {
+                                let index = id.charAt(id.length - 1);
+                                $("#removedContacts").attr("value", $("#removedContacts").attr("value") + index + ",");
+                            }
+                        });
                     });
                 </script>
+
+                <div>
+                    <h4><label asp-for="Contacts" class="control-label"></label></h4>
+                    <hr />
+                    <input type="hidden" id="removedContacts" name="removedContacts" value="" />
+                </div>
+                <div id="allContacts">
+                    <div id="contact_0">
+                        <div>
+                            <p class="lead">Contact 1</p>
+                            <button type="button" id="removeContact_0" class="btn btn-primary">Remove Contact</button>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.Contacts[0].ContactMethod, new { @class = "control-label" })
+                            @Html.DropDownListFor(c => c.Contacts[0].ContactMethod, Html.GetEnumSelectList(typeof(ContactMethod)), "", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(c => c.Contacts[0].ContactMethod, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(c => c.Contacts[0].ContactValue, new { @class = "control-label" })
+                            @Html.EditorFor(c => c.Contacts[0].ContactValue, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(c => c.Contacts[0].ContactValue, "", new { @class = "text-danger" })
+                        </div>
+                        <hr />
+                    </div>
+                </div>
+
                 <div>
                     <button type="button" id="addDetail" class="btn btn-primary">Add a Candidate Detail</button>
+                    &nbsp;|&nbsp;
+                    <button type="button" id="addContact" class="btn btn-primary">Add a Contact</button>
                 </div>
                 <div class="form-group">
                     <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />

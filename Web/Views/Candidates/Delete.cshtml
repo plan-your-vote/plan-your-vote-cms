@@ -69,6 +69,27 @@
         <hr />
     }
 
+    <h4>@Html.DisplayNameFor(model => model.Contacts)</h4>
+    <hr />
+    @foreach(var contact in Model.Contacts)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => contact.ContactMethod)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => contact.ContactMethod)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => contact.ContactValue)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(Model => contact.ContactValue)
+            </dd>
+        </dl>
+        <hr />
+    }
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="CandidateId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
