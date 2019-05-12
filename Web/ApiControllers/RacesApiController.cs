@@ -45,6 +45,7 @@ namespace Web.Controllers
                     race.NumberNeeded,
                     Candidates = race.CandidateRaces.Select(cr => new
                     {
+                        cr.Candidate.CandidateId,
                         cr.Candidate.Name,
                         cr.Candidate.Picture,
                         Details = cr.Candidate.Details.Select(detail => new
@@ -52,7 +53,6 @@ namespace Web.Controllers
                             detail.Title,
                             detail.Text,
                             detail.Format,
-                            detail.Lang,
                         }),
                         Contacts = cr.Candidate.Contacts.Select(contact => new
                         {
