@@ -35,9 +35,9 @@
 
     <h4>@Html.DisplayNameFor(model => model.Details)</h4>
     <hr />
-    <dl class="row">
-        @foreach (var detail in Model.Details)
-        {
+    @foreach (var detail in Model.Details)
+    {
+        <dl class="row">
             <dt class="col-sm-2">
                 @Html.DisplayNameFor(model => detail.Title)
             </dt>
@@ -65,8 +65,9 @@
                     @Html.DisplayFor(model => detail.Text)
                 }
             </dd>
-        }
-    </dl>
+        </dl>
+        <hr />
+    }
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="CandidateId" />

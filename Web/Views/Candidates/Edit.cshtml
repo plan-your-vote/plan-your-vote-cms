@@ -39,6 +39,7 @@
                     <span asp-validation-for="OrganizationId" class="text-danger"></span>
                 </div>
                 <div>
+                    <hr />
                     <h4><label asp-for="Details" class="control-label"></label></h4>
                     <hr />
                     <input type="hidden" id="removedDetails" name="removedDetails" value="" />
@@ -71,6 +72,7 @@
                             @Html.DropDownListFor(c => c.Details[i].Lang, Html.GetEnumSelectList(typeof(Language)), "", new { @class = "form-control" })
                             @Html.ValidationMessageFor(c => c.Details[i].Lang, "", new { @class = "text-danger" })
                         </div>
+                        <hr />
 
                         <script type="text/javascript">
                             $("#removeDetail_@i").click(function () {
