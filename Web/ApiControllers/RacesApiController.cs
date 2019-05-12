@@ -41,15 +41,25 @@ namespace Web.Controllers
                 .Where(race => race.ElectionId == _runningElection)
                 .Select(race => new
                 {
-                    race,
-                    candidates = race.CandidateRaces
-                    .Select(cr => new
+                    race.PositionName,
+                    race.NumberNeeded,
+                    Candidates = race.CandidateRaces.Select(cr => new
                     {
-                        cr.Candidate,
-                        cr.Candidate.Contacts,
-                        cr.Candidate.Details,
+                        cr.Candidate.Name,
+                        cr.Candidate.Picture,
+                        Details = cr.Candidate.Details.Select(detail => new
+                        {
+                            detail.Title,
+                            detail.Text,
+                            detail.Format,
+                            detail.Lang,
+                        }),
+                        Contacts = cr.Candidate.Contacts.Select(contact => new
+                        {
+                            contact.ContactMethod,
+                            contact.ContactValue,
+                        }),
                     })
-
                 })
                 .ToListAsync();
 

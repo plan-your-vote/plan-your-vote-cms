@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Web.Models
 {
@@ -12,7 +14,6 @@ namespace Web.Models
         [Key]
         public int PollingDateId { get; set; }
 
-        [ForeignKey("PollingPlaceId")]
         [Display(Name = "PollingPlaceId")]
         public int PollingPlaceId { get; set; }
 

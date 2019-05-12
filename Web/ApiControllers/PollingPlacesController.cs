@@ -35,7 +35,27 @@ namespace Web.ApiControllers
                 PageNumber = 3,
             };
 
-            var pollingPlaces = await _context.PollingPlaces.Where(b => b.ElectionId == _runningElectionID).ToListAsync();
+            var pollingPlaces = await _context.PollingPlaces
+                .Where(pp => pp.ElectionId == _runningElectionID)
+                .Select(pp => new
+                {
+                    pp.PollingPlaceName,
+                    pp.Address,
+                    pp.PollingStationName,
+                    pp.GeneralAccessInfo,
+                    pp.ParkingInfo,
+                    pp.WheelchairInfo,
+                    pp.Latitude,
+                    pp.Longitude,
+                    pp.WashroomInfo,
+                    PollingPlaceDates = pp.PollingPlaceDates.Select(ppd => new
+                    {
+                        ppd.PollingDate,
+                        ppd.StartTime,
+                        ppd.EndTime,
+                    })
+                })
+                .ToListAsync();
 
             return Ok(new
             {
