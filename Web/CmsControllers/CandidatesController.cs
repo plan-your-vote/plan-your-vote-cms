@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
+using Web.ViewModels;
 using Web.Data;
 
 namespace Web
@@ -28,10 +29,28 @@ namespace Web
         // GET: Candidates
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Candidates
-                .Where(c => c.ElectionId == _managedElectionID)
-                .Include(c => c.Organization).Include(c => c.Contacts).Include(c => c.CandidateRaces);
-            return View(await applicationDbContext.ToListAsync());
+            var races = await _context.Races
+                .Where(r => r.ElectionId == _managedElectionID)
+                .ToListAsync();
+            var candidateRaces = await _context.CandidateRaces
+                .Include(cr => cr.Race)
+                .Include(cr => cr.Candidate)
+                .Include(cr => cr.Candidate.Organization)
+                .OrderBy(cr => cr.RaceId)
+                .GroupBy(cr => cr.RaceId)
+                .ToListAsync();
+            var unlisted = await _context.Candidates
+                .Include(c => c.Organization)
+                .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
+                .ToListAsync();
+
+            CandidatesByRaceViewModel model = new CandidatesByRaceViewModel
+            {
+                Races = races,
+                CandidatesByRace = candidateRaces,
+                UnlistedCandidates = unlisted
+            };
+            return View(model);
         }
 
         // GET: Candidates/Details/5
