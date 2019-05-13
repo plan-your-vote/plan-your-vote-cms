@@ -45,6 +45,10 @@ namespace Web.ApiControllers
                     pp.PollingStationName,
                     pp.ParkingInfo,
                     pp.WheelchairInfo,
+                    pp.AdvanceOnly,
+                    pp.LocalArea,
+                    pp.Phone,
+                    pp.Email,
                     pp.Latitude,
                     pp.Longitude,
                     PollingPlaceDates = pp.PollingPlaceDates.Select(ppd => new
