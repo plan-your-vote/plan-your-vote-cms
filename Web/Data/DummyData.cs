@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -45,7 +46,7 @@ namespace Web.Data
             context.SaveChanges();
 
             const string pollingPlacesFile = "wwwroot/Data/pollingPlaces.json";
-            List<JSONPollingPlaces> pollingPlacesData = GetJsonData<JSONPollingPlaces>(pollingPlacesFile);
+            List<JSONPollingPlace> pollingPlacesData = GetJsonData<JSONPollingPlace>(pollingPlacesFile);
 
             List<PollingPlace> pollingPlaces = pollingPlacesData
                 .Select(ppd => new PollingPlace()
@@ -57,9 +58,19 @@ namespace Web.Data
                     PollingStationName = ppd.Location,
                     Latitude = ppd.Latitude,
                     Longitude = ppd.Longitude,
-                    // = psd.AdvancedOnly,
-                    // = psd.LocalArea,
+                    AdvanceOnly = ppd.AdvanceOnly,
+                    LocalArea = ppd.LocalArea,
+                    WheelchairInfo = ppd.WheelchairAccess,
+                    ParkingInfo = ppd.Parking,
+                    Phone = ppd.Phone,
+                    Email = ppd.Email,
+                    PollingPlaceDates = ppd.PollingPlaceDates.Select(jsppd => new PollingPlaceDate()
+                    {
+                        PollingDate = DateTime.ParseExact(jsppd.PollingDate, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                        StartTime = DateTime.ParseExact(jsppd.StartTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                        EndTime = DateTime.ParseExact(jsppd.EndTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
 
+                    }).ToList(),
                 })
                 .ToList();
             context.PollingPlaces.AddRange(pollingPlaces);

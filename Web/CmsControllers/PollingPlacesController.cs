@@ -80,8 +80,6 @@ namespace Web
                     Address = pollingPlaceGroup.Address,
                     WheelchairInfo = pollingPlaceGroup.WheelchairInfo,
                     ParkingInfo = pollingPlaceGroup.ParkingInfo,
-                    WashroomInfo = pollingPlaceGroup.WashroomInfo,
-                    GeneralAccessInfo = pollingPlaceGroup.GeneralAccessInfo,
                     Latitude = pollingPlaceGroup.Latitude,
                     Longitude = pollingPlaceGroup.Longitude
                 };
@@ -134,10 +132,12 @@ namespace Web
                 Address = pollingPlace.Address,
                 WheelchairInfo = pollingPlace.WheelchairInfo,
                 ParkingInfo = pollingPlace.ParkingInfo,
-                WashroomInfo = pollingPlace.WashroomInfo,
-                GeneralAccessInfo = pollingPlace.GeneralAccessInfo,
                 Latitude = pollingPlace.Latitude,
                 Longitude = pollingPlace.Longitude,
+                AdvanceOnly = pollingPlace.AdvanceOnly,
+                LocalArea = pollingPlace.LocalArea,
+                Phone = pollingPlace.Phone,
+                Email = pollingPlace.Email,
                 PollingPlaceDates = PollDates,
                 PollingStartTimes = StartTimes,
                 PollingEndTimes = EndTimes
@@ -151,7 +151,7 @@ namespace Web
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("PollingPlaceName,PollingStationName,Address,WheelchairInfo,ParkingInfo,WashroomInfo,GeneralAccessInfo,Latitude,Longitude,PollingPlaceDates,PollingStartTimes,PollingEndTimes")] PollingPlaceGroup group)
+            [Bind("PollingPlaceName,PollingStationName,Address,WheelchairInfo,ParkingInfo,Latitude,Longitude,AdvanceOnly,LocalArea,Phone,Email,PollingPlaceDates,PollingStartTimes,PollingEndTimes")] PollingPlaceGroup group)
         {
             if (ModelState.IsValid)
             {
@@ -163,10 +163,13 @@ namespace Web
                     pollingPlace.Address = group.Address;
                     pollingPlace.WheelchairInfo = group.WheelchairInfo;
                     pollingPlace.ParkingInfo = group.ParkingInfo;
-                    pollingPlace.WashroomInfo = group.WashroomInfo;
-                    pollingPlace.GeneralAccessInfo = group.GeneralAccessInfo;
                     pollingPlace.Latitude = group.Latitude;
                     pollingPlace.Longitude = group.Longitude;
+                    pollingPlace.Longitude = group.Longitude;
+                    pollingPlace.AdvanceOnly = group.AdvanceOnly;
+                    pollingPlace.LocalArea = group.LocalArea;
+                    pollingPlace.Phone = group.Phone;
+                    pollingPlace.Email = group.Email;
                     _context.Update(pollingPlace);
 
                     if (group.PollingPlaceDates != null)

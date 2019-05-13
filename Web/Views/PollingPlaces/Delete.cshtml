@@ -44,6 +44,30 @@
             @Html.DisplayFor(model => model.Longitude)
         </dd>
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdvanceOnly)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.CheckBoxFor(model => model.AdvanceOnly)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LocalArea)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LocalArea)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.WheelchairInfo)
         </dt>
         <dd class="col-sm-10">
@@ -54,18 +78,6 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ParkingInfo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.WashroomInfo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.WashroomInfo)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.GeneralAccessInfo)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GeneralAccessInfo)
         </dd>
     </dl>
 
