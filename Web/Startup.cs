@@ -22,9 +22,29 @@ namespace Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public static string mapKey;
+
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("azurekeyvault.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            var config = builder.Build();
+
+            builder.AddAzureKeyVault(
+                $"https://{config["azureKeyVault:vault"]}.vault.azure.net/",
+                config["azureKeyVault:clientId"],
+                config["azureKeyVault:clientSecret"]
+            );
+
+            Configuration = builder.Build();
+
+            // two - in azure means one :
+            mapKey = Configuration["appSettings:dpyvweb:mapKey"];
         }
 
         public IConfiguration Configuration { get; }
@@ -91,12 +111,6 @@ namespace Web
                     break;
             }
 
-
-
-            /*     
-  services.AddDefaultIdentity<IdentityUser>()
-      .AddDefaultUI(UIFramework.Bootstrap4)
-      .AddEntityFrameworkStores<ApplicationDbContext>();*/
             services.AddIdentity<IdentityUser, IdentityRole>(
                option =>
                {
@@ -138,6 +152,8 @@ namespace Web
                     options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                 });
 
+            services.AddHttpClient();
+
             services.Configure<RequestLocalizationOptions>(opts =>
             {
                 var supportedCultures = new List<CultureInfo> {
@@ -149,7 +165,6 @@ namespace Web
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -274,3 +274,6 @@ Spa/ClientApp/package-lock.json
 # for mac users
 *.DS_Store
 commit counter.txt
+
+#Ignore azurekeyvault.json
+**/azurekeyvault.json
