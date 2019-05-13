@@ -23,9 +23,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.PollingStationName)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GeneralAccessInfo)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -41,9 +38,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PollingStationName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GeneralAccessInfo)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PollingPlaceId">@Localizer["Edit"]</a> |
