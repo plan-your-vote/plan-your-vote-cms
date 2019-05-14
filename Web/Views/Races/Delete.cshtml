@@ -37,6 +37,29 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NumberNeeded)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CandidateRaces)
+        </dt>
+        <dd class="col-sm-10">
+            @if (ViewBag.Candidates != null)
+            {
+                <ul>
+                    @{
+                        var candidates = (List<Candidate>)ViewBag.Candidates;
+                    }
+
+                    @foreach (var candidate in candidates)
+                    {
+                        if (Model.CandidateRaces.Exists(model => model.CandidateId == candidate.CandidateId))
+                        {
+                            <li>
+                                @Html.DisplayFor(model => candidate.Name)
+                            </li>
+                        }
+                    }
+                </ul>
+            }
+        </dd>
     </dl>
 
     <form asp-action="Delete">

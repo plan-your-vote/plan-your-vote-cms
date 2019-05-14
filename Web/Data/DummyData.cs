@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -97,6 +97,30 @@ namespace Web.Data
             var steps = GetSteps().ToArray();
             context.Steps.AddRange(steps);
             context.SaveChanges();
+        }
+
+        private static List<CandidateRace> GetCandidateRaces(List<JSONCandidate> candidateData)
+        {
+            List<CandidateRace> candidateRaces = new List<CandidateRace>();
+
+            foreach (var existingCandidate in candidateData)
+            {
+                CandidateRace candidateRace = new CandidateRace();
+
+                candidateRace.CandidateId = _context.Candidates
+                    .Where(candidate => candidate.Name == existingCandidate.Name)
+                    .First() // BUG in the future?
+                    .CandidateId;
+
+                candidateRace.RaceId = _context.Races
+                    .Where(races => races.PositionName == existingCandidate.Position)
+                    .First() //Potential bug
+                    .RaceId;
+
+                candidateRaces.Add(candidateRace);
+            }
+
+            return candidateRaces;
         }
 
         private static void GetCandidatesAndContacts(List<JSONCandidate> candidateData)

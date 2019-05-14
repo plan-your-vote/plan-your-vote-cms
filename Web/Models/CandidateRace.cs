@@ -9,15 +9,6 @@ namespace Web.Models
         [Display(Name = "CandidateRaceId")]
         public int CandidateRaceId { get; set; }
 
-        [Display(Name = "PositionName")]
-        public string PositionName { get; set; }
-
-        [Display(Name = "PlatformInfo")]
-        public string PlatformInfo { get; set; }
-
-        [Display(Name = "TopIssues")]
-        public string TopIssues { get; set; }
-
         [Display(Name = "CandidateId")]
         public int CandidateId { get; set; }
 

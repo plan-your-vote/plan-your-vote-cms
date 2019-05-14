@@ -39,12 +39,18 @@ namespace Web.CmsControllers
 
             var race = await _context.Races
                 .Include(r => r.Election)
+                .Include(r => r.CandidateRaces)
                 .FirstOrDefaultAsync(m => m.RaceId == id);
 
             if (race == null)
             {
                 return NotFound();
             }
+
+            ViewData["Candidates"] = await _context.Candidates
+                .Where(c => c.ElectionId == _managedElectionID)
+                .OrderBy(c => c.Name)
+                .ToListAsync();
 
             return View(race);
         }
@@ -81,22 +87,17 @@ namespace Web.CmsControllers
                 return NotFound();
             }
 
-            var race = await _context.Races.FindAsync(id);
-
-            var crs = await _context.CandidateRaces
-                .Where(cr => cr.RaceId == id)
-                .ToListAsync();
-
-            List<int> raceCandidateIds = new List<int>();
-            foreach (var cr in crs)
-            {
-                raceCandidateIds.Add(cr.CandidateId);
-            }
+            var race = await _context.Races
+                .Include(r => r.CandidateRaces)
+                .FirstOrDefaultAsync(r => r.RaceId == id);
 
             RaceViewModel model = new RaceViewModel
             {
                 Race = race,
-                RaceCandidatesIds = raceCandidateIds
+                Candidates = new SelectList(_context.Candidates
+                        .Where(c => c.ElectionId == _managedElectionID)
+                        .OrderBy(c => c.Name), 
+                    "CandidateId", "Name")
             };
 
             if (race == null)
@@ -105,7 +106,6 @@ namespace Web.CmsControllers
             }
 
             ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName");
-            ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c => c.ElectionId == _managedElectionID), "CandidateId", "Name");
 
             return View(model);
         }
@@ -126,24 +126,18 @@ namespace Web.CmsControllers
             {
                 try
                 {
-                    var race = _context.Races.Find(id);
-                    race.ElectionId = model.Race.ElectionId;
-                    race.PositionName = model.Race.PositionName;
-                    race.Description = model.Race.Description;
-                    race.NumberNeeded = model.Race.NumberNeeded;
-                    _context.Update(race);
+                    _context.Update(model.Race);
 
                     var crs = _context.CandidateRaces.Where(cr => cr.RaceId == id).ToList();
                     _context.RemoveRange(crs);
 
-                    if (model.RaceCandidatesIds != null)
+                    if (model.CandidateIds != null)
                     {
-                        foreach (var cr in model.RaceCandidatesIds)
+                        foreach (string cr in model.CandidateIds)
                             _context.Add(new CandidateRace
                             {
-                                CandidateId = cr,
+                                CandidateId = int.Parse(cr),
                                 RaceId = id,
-                                PositionName = race.PositionName
                             });
                     }
 
@@ -164,7 +158,6 @@ namespace Web.CmsControllers
             }
 
             ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName", model.Race.ElectionId);
-            ViewData["Candidates"] = new SelectList(_context.Candidates.Where(c => c.ElectionId == _managedElectionID), "CandidateId", "Name");
             return View(model);
         }
 
@@ -178,11 +171,18 @@ namespace Web.CmsControllers
 
             var race = await _context.Races
                 .Include(r => r.Election)
+                .Include(r => r.CandidateRaces)
                 .FirstOrDefaultAsync(m => m.RaceId == id);
+
             if (race == null)
             {
                 return NotFound();
             }
+
+            ViewData["Candidates"] = await _context.Candidates
+                .Where(c => c.ElectionId == _managedElectionID)
+                .OrderBy(c => c.Name)
+                .ToListAsync();
 
             return View(race);
         }

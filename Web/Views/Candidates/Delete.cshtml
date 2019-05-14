@@ -34,6 +34,22 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Organization.Name)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CandidateRaces)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (var candidateRace in Model.CandidateRaces)
+                {
+                    var races = (List<Race>)ViewBag.Races;
+                    var race = races.Find(r => r.RaceId == candidateRace.RaceId);
+
+                    <li>
+                        @Html.DisplayFor(model => race.PositionName)
+                    </li>
+                }
+            </ul>
+        </dd>
     </dl>
 
     <h4>@Html.DisplayNameFor(model => model.Details)</h4>
