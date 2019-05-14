@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +14,8 @@ namespace Web.ViewModels
     {
         public Race Race { get; set; }
 
-        [Display(Name = "RaceCandidatesIds")]
-        public List<int> RaceCandidatesIds { get; set; }
+        public SelectList Candidates { get; set; }
+
+        public List<string> CandidateIds { get; set; }
     }
 }
