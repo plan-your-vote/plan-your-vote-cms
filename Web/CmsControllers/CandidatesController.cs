@@ -63,14 +63,19 @@ namespace Web
 
             var candidate = await _context.Candidates
                 .Include(c => c.Details)
+                .Include(c => c.Contacts)
                 .Include(c => c.Organization)
                 .Include(c => c.CandidateRaces)
-                .Include(c => c.Contacts)
                 .FirstOrDefaultAsync(m => m.CandidateId == id);
+
             if (candidate == null)
             {
                 return NotFound();
             }
+
+            ViewData["Races"] = await _context.Races
+                .Where(r => r.ElectionId == _managedElectionID)
+                .ToListAsync();
 
             return View(candidate);
         }
@@ -78,8 +83,24 @@ namespace Web
         // GET: Candidates/Create
         public IActionResult Create()
         {
-            ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name");
-            return View();
+            CandidateViewModel model = new CandidateViewModel
+            {
+                Candidate = new Candidate
+                {
+                    Details = new List<CandidateDetail>()
+                    {
+                        new CandidateDetail()
+                    },
+                    Contacts = new List<Contact>()
+                    {
+                        new Contact()
+                    }
+                },
+                Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name"),
+                Races = new SelectList(_context.Races, "RaceId", "PositionName")
+            };
+
+            return View(model);
         }
 
         // POST: Candidates/Create
@@ -87,39 +108,40 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Candidate model, IFormFile image, int organizationId, 
-            string removedDetails, string removedContacts)
+        public async Task<IActionResult> Create(CandidateViewModel model)
         {
             var fileName = "";
             var nameOfile = "";
-            if (image != null)
+            if (model.Image != null)
             {
-                if (image.ContentType != "image/jpeg"
-                        && image.ContentType != "image/png"
-                        && image.ContentType != "image/gif")
+                if (model.Image.ContentType != "image/jpeg"
+                        && model.Image.ContentType != "image/png"
+                        && model.Image.ContentType != "image/gif")
                 {
                     ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
-                    ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", organizationId);
-                    return View();
+                    return View(model);
                 }
 
-                if (image.Length < 4500)
+                if (model.Image.Length < 4500)
                 {
                     ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
-                    ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", organizationId);
-                    return View();
+                    return View(model);
                 }
 
-                nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
+                nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(model.Image.FileName);
                 fileName = "wwwroot\\" + nameOfile;
-                image.CopyTo(new FileStream(fileName, FileMode.Create));
-                model.Picture = nameOfile;
+                model.Image.CopyTo(new FileStream(fileName, FileMode.Create));
+                model.Candidate.Picture = nameOfile;
+            }
+            else
+            {
+                model.Candidate.Picture = "images\\default.jpg";
             }
 
             // Remove the "deleted" details from the list
-            if (removedDetails != null && removedDetails != "")
+            if (model.RemovedDetails != null && model.RemovedDetails != "")
             {
-                string[] itemsToRemove = removedDetails.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                string[] itemsToRemove = model.RemovedDetails.Split(',', StringSplitOptions.RemoveEmptyEntries);
                 int[] indexes = new int[itemsToRemove.Length];
                 for (int i = 0; i < itemsToRemove.Length; ++i)
                 {
@@ -131,18 +153,14 @@ namespace Web
 
                 for (int i = indexes.Length - 1; i >= 0; --i)
                 {
-                    model.Details.RemoveAt(indexes[i]);
+                    model.Candidate.Details.RemoveAt(indexes[i]);
                 }
-            }
-            else
-            {
-                model.Picture = "images\\default.jpg";
             }
 
             // Remove the "deleted" contacts from the list
-            if (removedContacts != null && removedContacts != "")
+            if (model.RemovedContacts != null && model.RemovedContacts != "")
             {
-                string[] contactsToRemove = removedContacts.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                string[] contactsToRemove = model.RemovedContacts.Split(',', StringSplitOptions.RemoveEmptyEntries);
                 int[] indexes = new int[contactsToRemove.Length];
                 for (int i = 0; i < contactsToRemove.Length; ++i)
                 {
@@ -154,31 +172,40 @@ namespace Web
 
                 for (int i = indexes.Length - 1; i >= 0; --i)
                 {
-                    model.Contacts.RemoveAt(indexes[i]);
+                    model.Candidate.Contacts.RemoveAt(indexes[i]);
                 }
             }
 
-            Candidate candidate = new Candidate
+            List<CandidateRace> candidateRaces = null;
+
+            if (model.RaceIds != null)
             {
-                CandidateId = model.CandidateId,
-                ElectionId = _managedElectionID,
-                Name = model.Name,
-                Picture = model.Picture,
-                OrganizationId = organizationId,
-                Details = model.Details,
-                Contacts = model.Contacts
-            };
+                candidateRaces = new List<CandidateRace>();
+
+                foreach (string raceid in model.RaceIds)
+                {
+                    CandidateRace cr = new CandidateRace
+                    {
+                        CandidateId = model.Candidate.CandidateId,
+                        RaceId = int.Parse(raceid)
+                    };
+                    candidateRaces.Add(cr);
+                }
+            }
+
+            model.Candidate.ElectionId = _managedElectionID;
+            model.Candidate.CandidateRaces = candidateRaces;
+
             ModelState.Clear();
 
-            if (TryValidateModel(candidate))
+            if (TryValidateModel(model.Candidate))
             {
-                _context.Add(candidate);
+                _context.Add(model.Candidate);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             var errors = ModelState.Values.SelectMany(v => v.Errors);
-            ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId);
-            return View(candidate);
+            return View(model);
         }
 
         public static string GenerateImageId()
@@ -198,12 +225,15 @@ namespace Web
                 list.Add(new CandidateDetail());
             }
 
-            Candidate candidate = new Candidate
+            CandidateViewModel model = new CandidateViewModel
             {
-                Details = list
+                Candidate = new Candidate
+                {
+                    Details = list
+                }
             };
 
-            return PartialView("CandidateDetail", candidate);
+            return PartialView("CandidateDetail", model);
         }
 
         public virtual IActionResult GetContactFields(int count)
@@ -215,12 +245,15 @@ namespace Web
                 list.Add(new Contact());
             }
 
-            Candidate candidate = new Candidate
+            CandidateViewModel model = new CandidateViewModel
             {
-                Contacts = list
+                Candidate = new Candidate
+                {
+                    Contacts = list
+                }
             };
 
-            return PartialView("CandidateContact", candidate);
+            return PartialView("CandidateContact", model);
         }
 
         // GET: Candidates/Edit/5

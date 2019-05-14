@@ -1,4 +1,4 @@
-﻿@model Web.Models.Candidate
+﻿@model Web.ViewModels.CandidateViewModel
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
@@ -23,54 +23,42 @@
             <form asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <label asp-for="Candidate.Name" class="control-label"></label>
+                    <input asp-for="Candidate.Name" class="form-control" />
+                    <span asp-validation-for="Candidate.Name" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Picture" class="control-label"></label>
-                    <input asp-for="Picture" type="file" name="image">
-                    <span asp-validation-for="Picture" class="text-danger">@ViewData["ImageMessage"]</span>
+                    <label asp-for="Candidate.Picture" class="control-label"></label>
+                    <input asp-for="Candidate.Picture" type="file" name="Image">
+                    <span asp-validation-for="Candidate.Picture" class="text-danger">@ViewData["ImageMessage"]</span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="OrganizationId" class="control-label">@Html.DisplayNameFor(c => c.Organization.Name)</label>
-                    <select asp-for="OrganizationId" class="form-control" asp-items="ViewBag.OrganizationNames"></select>
-                    <span asp-validation-for="OrganizationId" class="text-danger"></span>
+                    <label asp-for="Candidate.OrganizationId" class="control-label">@Html.DisplayNameFor(c => c.Candidate.Organization.Name)</label>
+                    <select asp-for="Candidate.OrganizationId" class="form-control" asp-items="Model.Organizations"></select>
+                    <span asp-validation-for="Candidate.OrganizationId" class="text-danger"></span>
+                </div>
+                <div>
+                    @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
+                    <div style="max-height:120px; overflow:auto;">
+                        @foreach (var race in Model.Races)
+                        {
+                            <div>
+                                <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
+                                <label for="@race.Value">@race.Text</label>
+                            </div>
+                        }
+                    </div>
                 </div>
 
                 <div>
                     <hr />
-                    <h4><label asp-for="Details" class="control-label"></label></h4>
+                    <h4><label asp-for="Candidate.Details" class="control-label"></label></h4>
                     <hr />
-                    <input type="hidden" id="removedDetails" name="removedDetails" value="" />
+                    <input type="hidden" id="removedDetails" name="RemovedDetails" value="" />
                 </div>
                 <div id="allDetails">
                     <div id="detail_0">
-                        <div>
-                            <p class="lead">Detail 1</p>
-                            <button type="button" id="removeDetail_0" class="btn btn-primary">Remove Detail</button>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(c => c.Details[0].Title, new { @class = "control-label" })
-                            @Html.TextBoxFor(c => c.Details[0].Title, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(c => c.Details[0].Title, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(c => c.Details[0].Text, new { @class = "control-label" })
-                            @Html.TextAreaFor(c => c.Details[0].Text, new { @class = "form-control", @rows = 10 })
-                            @Html.ValidationMessageFor(c => c.Details[0].Text, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(c => c.Details[0].Format, new { @class = "control-label" })
-                            @Html.DropDownListFor(c => c.Details[0].Format, Html.GetEnumSelectList(typeof(CandidateDetailFormat)), "", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(c => c.Details[0].Text, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(c => c.Details[0].Lang, new { @class = "control-label" })
-                            @Html.DropDownListFor(c => c.Details[0].Lang, Html.GetEnumSelectList(typeof(Language)), "", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(c => c.Details[0].Lang, "", new { @class = "text-danger" })
-                        </div>
-                        <hr />
+                        @{ await Html.RenderPartialAsync("CandidateDetail", Model); }
                     </div>
                 </div>
                 <script type="text/javascript">
@@ -97,15 +85,6 @@
                                     });
                         });
 
-                        $("#removeDetail_0").click(function () {
-                            $(this.parentNode.parentNode).attr("style", "display:none");
-                            let id = $(this.parentNode.parentNode).attr("id");
-                            if (id != null) {
-                                let index = id.charAt(id.length - 1);
-                                $("#removedDetails").attr("value", $("#removedDetails").attr("value") + index + ",");
-                            }
-                        });
-
                         $("#addContact").click(function () {
                             let count = getCount("#allContacts") + 1;
                             $("#allContacts").append($(document.createElement("div")).attr("id", "contact_" + count));
@@ -118,40 +97,17 @@
                                         }
                                     });
                         });
-
-                        $("#removeContact_0").click(function () {
-                            $(this.parentNode.parentNode).attr("style", "display:none");
-                            let id = $(this.parentNode.parentNode).attr("id");
-                            if (id != null) {
-                                let index = id.charAt(id.length - 1);
-                                $("#removedContacts").attr("value", $("#removedContacts").attr("value") + index + ",");
-                            }
-                        });
                     });
                 </script>
 
                 <div>
-                    <h4><label asp-for="Contacts" class="control-label"></label></h4>
+                    <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
                     <hr />
-                    <input type="hidden" id="removedContacts" name="removedContacts" value="" />
+                    <input type="hidden" id="removedContacts" name="RemovedContacts" value="" />
                 </div>
                 <div id="allContacts">
                     <div id="contact_0">
-                        <div>
-                            <p class="lead">Contact 1</p>
-                            <button type="button" id="removeContact_0" class="btn btn-primary">Remove Contact</button>
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(c => c.Contacts[0].ContactMethod, new { @class = "control-label" })
-                            @Html.DropDownListFor(c => c.Contacts[0].ContactMethod, Html.GetEnumSelectList(typeof(ContactMethod)), "", new { @class = "form-control" })
-                            @Html.ValidationMessageFor(c => c.Contacts[0].ContactMethod, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            @Html.LabelFor(c => c.Contacts[0].ContactValue, new { @class = "control-label" })
-                            @Html.EditorFor(c => c.Contacts[0].ContactValue, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(c => c.Contacts[0].ContactValue, "", new { @class = "text-danger" })
-                        </div>
-                        <hr />
+                        @{ await Html.RenderPartialAsync("CandidateContact", Model); }
                     </div>
                 </div>
 
