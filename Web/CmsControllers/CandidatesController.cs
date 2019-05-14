@@ -393,8 +393,8 @@ namespace Web
 
                 try
                 {
-                    // remove all the candidate's current details and contacts from the database because the 
-                    // update will just recreate them anyways
+                    // remove all the candidate's current details, contacts, and races because the update
+                    // will recreate them
                     var existingDetails = _context.CandidateDetails.Where(cd => cd.CandidateId == id).ToList();
                     _context.RemoveRange(existingDetails);
                     var existingContacts = _context.Contacts.Where(cd => cd.CandidateId == id).ToList();
