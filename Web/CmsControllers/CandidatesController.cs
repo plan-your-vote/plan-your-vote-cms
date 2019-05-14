@@ -269,13 +269,20 @@ namespace Web
                 .Include(c => c.Details)
                 .Include(c => c.Contacts)
                 .FirstOrDefaultAsync(c => c.CandidateId == id);
+
             if (candidate == null)
             {
                 return NotFound();
             }
-            ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId);
-            ViewData["Races"] = new SelectList(_context.Races, "RaceId", "PositionName");
-            return View(candidate);
+
+            CandidateViewModel model = new CandidateViewModel
+            {
+                Candidate = candidate,
+                Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId),
+                Races = new SelectList(_context.Races, "RaceId", "PositionName")
+            };
+
+            return View(model);
         }
 
         // POST: Candidates/Edit/5
@@ -283,18 +290,17 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Candidate model, IFormFile image, 
-            string removedDetails, string removedContacts)
+        public async Task<IActionResult> Edit(int id, CandidateViewModel model)
         {
-            if (id != model.CandidateId)
+            if (id != model.Candidate.CandidateId)
             {
                 return NotFound();
             }
 
             // Remove the "deleted" details from the list
-            if (removedDetails != null && removedDetails != "")
+            if (model.RemovedDetails != null && model.RemovedDetails != "")
             {
-                string[] itemsToRemove = removedDetails.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                string[] itemsToRemove = model.RemovedDetails.Split(',', StringSplitOptions.RemoveEmptyEntries);
                 int[] indexes = new int[itemsToRemove.Length];
                 for (int i = 0; i < itemsToRemove.Length; ++i)
                 {
@@ -306,14 +312,14 @@ namespace Web
 
                 for (int i = indexes.Length-1; i >= 0; --i)
                 {
-                    model.Details.RemoveAt(indexes[i]);
+                    model.Candidate.Details.RemoveAt(indexes[i]);
                 }
             }
 
             // Remove the "deleted" contacts from the list
-            if (removedContacts != null && removedContacts != "")
+            if (model.RemovedContacts != null && model.RemovedContacts != "")
             {
-                string[] contactsToRemove = removedContacts.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                string[] contactsToRemove = model.RemovedContacts.Split(',', StringSplitOptions.RemoveEmptyEntries);
                 int[] indexes = new int[contactsToRemove.Length];
                 for (int i = 0; i < contactsToRemove.Length; ++i)
                 {
@@ -325,46 +331,54 @@ namespace Web
 
                 for (int i = indexes.Length - 1; i >= 0; --i)
                 {
-                    model.Contacts.RemoveAt(indexes[i]);
+                    model.Candidate.Contacts.RemoveAt(indexes[i]);
                 }
             }
 
-            Candidate candidate = new Candidate
+            List<CandidateRace> candidateRaces = null;
+
+            if (model.RaceIds != null)
             {
-                CandidateId = id,
-                ElectionId = _managedElectionID,
-                Name = model.Name,
-                OrganizationId = model.OrganizationId,
-                Details = model.Details,
-                Contacts = model.Contacts
-            };
+                candidateRaces = new List<CandidateRace>();
+
+                foreach (string raceid in model.RaceIds)
+                {
+                    CandidateRace cr = new CandidateRace
+                    {
+                        CandidateId = model.Candidate.CandidateId,
+                        RaceId = int.Parse(raceid)
+                    };
+                    candidateRaces.Add(cr);
+                }
+            }
+
+            model.Candidate.ElectionId = _managedElectionID;
+            model.Candidate.CandidateRaces = candidateRaces;
 
             ModelState.Clear();
 
-            if (TryValidateModel(candidate))
+            if (TryValidateModel(model.Candidate))
             {
-                if (image != null)
+                if (model.Image != null)
                 {
-                    if (image.ContentType != "image/jpeg" 
-                        && image.ContentType != "image/png" 
-                        && image.ContentType != "image/gif")
+                    if (model.Image.ContentType != "image/jpeg" 
+                        && model.Image.ContentType != "image/png" 
+                        && model.Image.ContentType != "image/gif")
                     {
                         ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
-                        ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", model.OrganizationId);
                         return View(model);
                     }
 
-                    if (image.Length < 4500)
+                    if (model.Image.Length < 4500)
                     {
                         ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
-                        ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", model.OrganizationId);
                         return View(model);
                     }
 
-                    string nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(image.FileName);
+                    string nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(model.Image.FileName);
                     string fileName = "wwwroot\\" + nameOfile;
-                    image.CopyTo(new FileStream(fileName, FileMode.Create));
-                    candidate.Picture = nameOfile;
+                    model.Image.CopyTo(new FileStream(fileName, FileMode.Create));
+                    model.Candidate.Picture = nameOfile;
                 }
                 else
                 {
@@ -373,7 +387,7 @@ namespace Web
                         .Select(c => new { Pic = c.Picture });
                     foreach (var result in existing)
                     {
-                        candidate.Picture = result.Pic;
+                        model.Candidate.Picture = result.Pic;
                     }
                 }
 
@@ -385,13 +399,15 @@ namespace Web
                     _context.RemoveRange(existingDetails);
                     var existingContacts = _context.Contacts.Where(cd => cd.CandidateId == id).ToList();
                     _context.RemoveRange(existingContacts);
+                    var existingRaces = _context.CandidateRaces.Where(cr => cr.CandidateId == id).ToList();
+                    _context.RemoveRange(existingRaces);
 
-                    _context.Update(candidate);
+                    _context.Update(model.Candidate);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CandidateExists(candidate.CandidateId))
+                    if (!CandidateExists(model.Candidate.CandidateId))
                     {
                         return NotFound();
                     }
@@ -403,7 +419,6 @@ namespace Web
                 return RedirectToAction(nameof(Index));
             }
             var errors = ModelState.Values.SelectMany(v => v.Errors);
-            ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId);
             return View(model);
         }
 
