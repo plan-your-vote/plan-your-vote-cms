@@ -69,7 +69,6 @@ namespace Web.Data
                         PollingDate = DateTime.ParseExact(jsppd.PollingDate, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
                         StartTime = DateTime.ParseExact(jsppd.StartTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
                         EndTime = DateTime.ParseExact(jsppd.EndTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
-
                     }).ToList(),
                 })
                 .ToList();
@@ -97,30 +96,6 @@ namespace Web.Data
             var steps = GetSteps().ToArray();
             context.Steps.AddRange(steps);
             context.SaveChanges();
-        }
-
-        private static List<CandidateRace> GetCandidateRaces(List<JSONCandidate> candidateData)
-        {
-            List<CandidateRace> candidateRaces = new List<CandidateRace>();
-
-            foreach (var existingCandidate in candidateData)
-            {
-                CandidateRace candidateRace = new CandidateRace();
-
-                candidateRace.CandidateId = _context.Candidates
-                    .Where(candidate => candidate.Name == existingCandidate.Name)
-                    .First() // BUG in the future?
-                    .CandidateId;
-
-                candidateRace.RaceId = _context.Races
-                    .Where(races => races.PositionName == existingCandidate.Position)
-                    .First() //Potential bug
-                    .RaceId;
-
-                candidateRaces.Add(candidateRace);
-            }
-
-            return candidateRaces;
         }
 
         private static void GetCandidatesAndContacts(List<JSONCandidate> candidateData)
@@ -287,16 +262,12 @@ namespace Web.Data
 
                 CandidateRace candidateRace = new CandidateRace()
                 {
-                    PlatformInfo = existingCandidate.Platform,
-                    PositionName = existingCandidate.Position,
-                };
-
-                candidateRace.CandidateId = candidate.CandidateId;
-
-                candidateRace.RaceId = _context.Races
+                    CandidateId = candidate.CandidateId,
+                    RaceId = _context.Races
                     .Where(races => races.PositionName == existingCandidate.Position)
                     .First()
-                    .RaceId;
+                    .RaceId,
+                };
 
                 candidateRaces.Add(candidateRace);
             }
