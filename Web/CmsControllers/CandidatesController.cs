@@ -265,6 +265,7 @@ namespace Web
             }
 
             var candidate = await _context.Candidates
+                .Include(c => c.CandidateRaces)
                 .Include(c => c.Details)
                 .Include(c => c.Contacts)
                 .FirstOrDefaultAsync(c => c.CandidateId == id);
@@ -273,6 +274,7 @@ namespace Web
                 return NotFound();
             }
             ViewData["OrganizationNames"] = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId);
+            ViewData["Races"] = new SelectList(_context.Races, "RaceId", "PositionName");
             return View(candidate);
         }
 
@@ -417,11 +419,17 @@ namespace Web
                 .Include(c => c.Organization)
                 .Include(c => c.Details)
                 .Include(c => c.Contacts)
+                .Include(c => c.CandidateRaces)
                 .FirstOrDefaultAsync(m => m.CandidateId == id);
+
             if (candidate == null)
             {
                 return NotFound();
             }
+
+            ViewData["Races"] = await _context.Races
+                .Where(r => r.ElectionId == _managedElectionID)
+                .ToListAsync();
 
             return View(candidate);
         }
