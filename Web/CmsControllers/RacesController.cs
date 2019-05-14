@@ -143,7 +143,6 @@ namespace Web.CmsControllers
                             {
                                 CandidateId = cr,
                                 RaceId = id,
-                                PositionName = race.PositionName
                             });
                     }
 

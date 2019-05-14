@@ -98,11 +98,7 @@ namespace Web.Data
 
             foreach (var existingCandidate in candidateData)
             {
-                CandidateRace candidateRace = new CandidateRace()
-                {
-                    PlatformInfo = existingCandidate.Platform,
-                    PositionName = existingCandidate.Position,
-                };
+                CandidateRace candidateRace = new CandidateRace();
 
                 candidateRace.CandidateId = _context.Candidates
                     .Where(candidate => candidate.Name == existingCandidate.Name)
