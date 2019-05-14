@@ -39,7 +39,7 @@
                 </div>
                 <div>
                     @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
-                    <div style="max-height:120px; overflow:auto;">
+                    <div class="multi-select">
                         @foreach (var race in Model.Races)
                         {
                             <div>
