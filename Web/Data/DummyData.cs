@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
@@ -86,10 +86,6 @@ namespace Web.Data
 
             GetCandidatesAndContacts(candidateData);
 
-            var candidateRaces = GetCandidateRaces(candidateData).ToArray();
-            context.CandidateRaces.AddRange(candidateRaces);
-            context.SaveChanges();
-
             var ballotIssues = GetBallotIssues().ToArray();
             context.BallotIssues.AddRange(ballotIssues);
             context.SaveChanges();
@@ -131,6 +127,7 @@ namespace Web.Data
         {
             List<Contact> contacts = new List<Contact>();
             List<CandidateDetail> details = new List<CandidateDetail>();
+            List<CandidateRace> candidateRaces = new List<CandidateRace>();
 
             foreach (var existingCandidate in candidateData)
             {
@@ -287,7 +284,25 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
+
+                CandidateRace candidateRace = new CandidateRace()
+                {
+                    PlatformInfo = existingCandidate.Platform,
+                    PositionName = existingCandidate.Position,
+                };
+
+                candidateRace.CandidateId = candidate.CandidateId;
+
+                candidateRace.RaceId = _context.Races
+                    .Where(races => races.PositionName == existingCandidate.Position)
+                    .First()
+                    .RaceId;
+
+                candidateRaces.Add(candidateRace);
             }
+
+            _context.CandidateRaces.AddRange(candidateRaces);
+            _context.SaveChanges();
 
             _context.CandidateDetails.AddRange(details);
             _context.SaveChanges();
