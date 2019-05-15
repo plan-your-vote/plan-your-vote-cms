@@ -28,20 +28,19 @@ namespace Web.ApiControllers
         {
             try
             {
+
+                KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+
+                var secret = await keyVaultClient
+                    .GetSecretAsync($"https://{mapConfiguration.Value.KeyVaultName}.vault.azure.net/secrets/App/{mapConfiguration.Value.SecretName}")
+                    .ConfigureAwait(false);
+
+                access_token = secret.Value;
+
+                throw new ApplicationException($"mapConfig: {mapConfiguration.Value.KeyVaultName}, {mapConfiguration.Value.SecretName} | Access token: {access_token}");
+
                 if (string.IsNullOrEmpty(access_token))
                 {
-                    KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
-
-                    var secret = await keyVaultClient
-                        .GetSecretAsync($"https://{mapConfiguration.Value.KeyVaultName}.vault.azure.net/secrets/App/{mapConfiguration.Value.SecretName}")
-                        .ConfigureAwait(false);
-
-                    access_token = secret.Value;
-
-                    throw new ApplicationException($"mapConfig: {mapConfiguration.Value.KeyVaultName}, {mapConfiguration.Value.SecretName} | Access token: {access_token}");
-                }
-
-                if (string.IsNullOrEmpty(access_token)) {
                     throw new ApplicationException("Access token is null or empty");
                 }
             }
@@ -68,6 +67,10 @@ namespace Web.ApiControllers
 
                 foreach (var pollingplace in _context.PollingPlaces)
                 {
+                    try
+                    {
+
+                    }
                     var response = await client
                         .GetAsync(
                             $"{longitude},{latitude};" +
@@ -78,7 +81,7 @@ namespace Web.ApiControllers
 
                     if (!response.IsSuccessStatusCode)
                     {
-                        throw new ArgumentException("A response received was invalid");
+                        throw new ArgumentException(response.ReasonPhrase);
                     }
 
                     var map = JsonConvert.DeserializeObject<Map>(
