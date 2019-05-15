@@ -36,6 +36,8 @@ namespace Web.ApiControllers
         [HttpGet("{location}")]
         public async Task<ActionResult<object>> GetClosestLocations(string location)
         {
+            throw new ApplicationException($"mapConfig: {MapConfiguration.KeyVaultName}, {MapConfiguration.SecretName} | Access token: {access_token}");
+
             KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
             var secret = await keyVaultClient
