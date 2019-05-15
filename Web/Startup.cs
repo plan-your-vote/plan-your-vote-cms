@@ -211,7 +211,7 @@ namespace Web
 
             if (!context.Elections.Any())
             {
-                MapController.Initialize(mapConfiguration);
+                //MapController.Initialize(mapConfiguration);
                 DummyData.Initialize(context, app).Wait();
                 StateInit.Initialize(context);
                 ThemesInit.Initialize(context);

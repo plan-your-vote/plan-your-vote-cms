@@ -24,27 +24,28 @@ namespace Web.ApiControllers
         private readonly HttpClient client = new HttpClient() { BaseAddress = new Uri("https://api.mapbox.com/directions/v5/mapbox/driving/") };
         public static string access_token;
 
-        public static async void Initialize(IOptions<MapConfiguration> mapConfiguration)
-        {
-            KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+        public MapConfiguration MapConfiguration { get; set; }
 
-            var secret = await keyVaultClient
-                .GetSecretAsync($"https://{mapConfiguration.Value.KeyVaultName}.vault.azure.net/secrets/App/{mapConfiguration.Value.SecretName}")
-                .ConfigureAwait(false);
-
-            access_token = secret.Value;
-
-            throw new ApplicationException($"mapConfig: {mapConfiguration.Value.KeyVaultName}, {mapConfiguration.Value.SecretName} | Access token: {access_token}");
-        }
-
-        public MapController(ApplicationDbContext context)
+        public MapController(ApplicationDbContext context, IOptions<MapConfiguration> mapConfiguration)
         {
             _context = context;
+
+            MapConfiguration = mapConfiguration.Value;
         }
 
         [HttpGet("{location}")]
         public async Task<ActionResult<object>> GetClosestLocations(string location)
         {
+            KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+
+            var secret = await keyVaultClient
+                .GetSecretAsync($"https://{MapConfiguration.KeyVaultName}.vault.azure.net/secrets/App/{MapConfiguration.SecretName}")
+                .ConfigureAwait(false);
+
+            access_token = secret.Value;
+
+            throw new ApplicationException($"mapConfig: {MapConfiguration.KeyVaultName}, {MapConfiguration.SecretName} | Access token: {access_token}");
+
             var distances = new List<DistanceDTO>();
 
             try
