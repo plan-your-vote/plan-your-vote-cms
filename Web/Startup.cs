@@ -15,6 +15,8 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using Web.ApiControllers;
 using Web.Data;
 using Web.Models;
 
@@ -22,29 +24,9 @@ namespace Web
 {
     public class Startup
     {
-        public static string mapKey;
-
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile("azurekeyvault.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables();
-
-            var config = builder.Build();
-
-            builder.AddAzureKeyVault(
-                $"https://{config["azureKeyVault:vault"]}.vault.azure.net/",
-                config["azureKeyVault:clientId"],
-                config["azureKeyVault:clientSecret"]
-            );
-
-            Configuration = builder.Build();
-
-            // two - in azure means one :
-            mapKey = Configuration["appSettings:dpyvweb:mapKey"];
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
@@ -68,6 +50,7 @@ namespace Web
             });
 
             services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
+            services.Configure<MapConfiguration>(Configuration.GetSection("MapConfiguration"));
 
             //Choosing a db service
             CheckDB check = new CheckDB();
@@ -165,10 +148,20 @@ namespace Web
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;
             });
+
+            var local_access_token = Configuration["mapkey"];
+            if (string.IsNullOrEmpty(local_access_token))
+            {
+                MapController.access_token = local_access_token;
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, ApplicationDbContext context, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            ApplicationDbContext context,
+            IHostingEnvironment env,
+            IOptions<MapConfiguration> mapConfiguration)
         {
             if (env.IsDevelopment())
             {
@@ -207,9 +200,15 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(context, app).Wait();
-            StateInit.Initialize(context);
-            ThemesInit.Initialize(context);
+            context.Database.EnsureCreated();
+
+            if (!context.Elections.Any())
+            {
+                MapController.Initialize(mapConfiguration);
+                DummyData.Initialize(context, app).Wait();
+                StateInit.Initialize(context);
+                ThemesInit.Initialize(context);
+            }
         }
     }
 }

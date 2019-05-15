@@ -1,10 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.KeyVault;
+using Microsoft.Azure.KeyVault.Models;
+using Microsoft.Azure.Services.AppAuthentication;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Web.ApiDTO;
 using Web.Data;
 using Web.Models;
@@ -17,14 +22,32 @@ namespace Web.ApiControllers
     {
         private readonly ApplicationDbContext _context;
         private readonly HttpClient client = new HttpClient() { BaseAddress = new Uri("https://api.mapbox.com/directions/v5/mapbox/driving/") };
-        private static string access_token;
+        public static string access_token;
+
+        public static async void Initialize(IOptions<MapConfiguration> mapConfiguration)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(access_token))
+                {
+                    KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+
+                    var secret = await keyVaultClient
+                        .GetSecretAsync($"https://{mapConfiguration.Value.KeyVaultName}.vault.azure.net/secrets/App/{mapConfiguration.Value.SecretName}")
+                        .ConfigureAwait(false);
+
+                    access_token = secret.Value;
+                }
+            }
+            catch (KeyVaultErrorException ex)
+            {
+                // TODO Logging
+            }
+        }
 
         public MapController(ApplicationDbContext context)
         {
             _context = context;
-
-            // Refactor based on: https://www.youtube.com/watch?v=cdoY_pnqPiA
-            access_token = Startup.mapKey;
         }
 
         [HttpGet("{location}")]

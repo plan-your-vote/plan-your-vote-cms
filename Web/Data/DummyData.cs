@@ -21,28 +21,19 @@ namespace Web.Data
         {
             _context = context;
 
-            context.Database.EnsureCreated();
+            InitializeDatabase();
 
-            if (!context.Candidates.Any())
-            {
-                InitializeDatabase(context);
-            }
-            else
-            {
-                return;
-            }
-
-            await InsertUserAsync(app);
+            await InsertUserAsync(app).ConfigureAwait(false);
         }
 
-        public static void InitializeDatabase(ApplicationDbContext context)
+        public static void InitializeDatabase()
         {
             const string candidatesFile = "wwwroot/Data/candidates.json";
             List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
 
             var elections = GetElections().ToArray();
-            context.Elections.AddRange(elections);
-            context.SaveChanges();
+            _context.Elections.AddRange(elections);
+            _context.SaveChanges();
 
             const string pollingPlacesFile = "wwwroot/Data/pollingPlaces.json";
             List<JSONPollingPlaces> pollingPlacesData = GetJsonData<JSONPollingPlaces>(pollingPlacesFile);
@@ -62,34 +53,34 @@ namespace Web.Data
 
                 })
                 .ToList();
-            context.PollingPlaces.AddRange(pollingPlaces);
-            context.SaveChanges();
+            _context.PollingPlaces.AddRange(pollingPlaces);
+            _context.SaveChanges();
 
             var organizations = GetOrganizations(candidateData).ToArray();
-            context.Organizations.AddRange(organizations);
-            context.SaveChanges();
+            _context.Organizations.AddRange(organizations);
+            _context.SaveChanges();
 
             var races = GetRaces(candidateData).ToArray();
-            context.Races.AddRange(races);
-            context.SaveChanges();
+            _context.Races.AddRange(races);
+            _context.SaveChanges();
 
             GetCandidatesAndContacts(candidateData);
 
             var candidateRaces = GetCandidateRaces(candidateData).ToArray();
-            context.CandidateRaces.AddRange(candidateRaces);
-            context.SaveChanges();
+            _context.CandidateRaces.AddRange(candidateRaces);
+            _context.SaveChanges();
 
             var ballotIssues = GetBallotIssues().ToArray();
-            context.BallotIssues.AddRange(ballotIssues);
-            context.SaveChanges();
+            _context.BallotIssues.AddRange(ballotIssues);
+            _context.SaveChanges();
 
             var issueOptions = GetIssueOptions().ToArray();
-            context.IssueOptions.AddRange(issueOptions);
-            context.SaveChanges();
+            _context.IssueOptions.AddRange(issueOptions);
+            _context.SaveChanges();
 
             var steps = GetSteps().ToArray();
-            context.Steps.AddRange(steps);
-            context.SaveChanges();
+            _context.Steps.AddRange(steps);
+            _context.SaveChanges();
         }
 
         private static List<CandidateRace> GetCandidateRaces(List<JSONCandidate> candidateData)
