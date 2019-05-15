@@ -38,6 +38,10 @@ namespace Web.ApiControllers
 
                     access_token = secret.Value;
                 }
+
+                if (string.IsNullOrEmpty(access_token)) {
+                    throw new ApplicationException("Access token is null or empty");
+                }
             }
             catch (KeyVaultErrorException ex)
             {
