@@ -6,6 +6,13 @@
     ViewData["Title"] = @Localizer["Create New Ballot Issue"];
 }
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+            asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+            asp-fallback-test="window.jQuery"
+            crossorigin="anonymous"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+    </script>
+
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
@@ -24,11 +31,14 @@
                     @Html.ValidationMessageFor(ballotIssue => ballotIssue.Description, "", new { @class = "text-danger" })
                 </div>
                 <label class="control-label">@Localizer["Ballot Options"]</label>
-                <script>
-                    function removeInputChild(optionIndex) {
-                        var rowDiv = document.getElementById(`OptionsTitles_${optionIndex}_`).parentNode.parentNode.parentNode;
-                        rowDiv.parentNode.removeChild(rowDiv);
+                <script type="text/javascript">
+                    function removeOption(optionIndex) {
+                        var optionInputs = $(".option-text");
 
+                        if (optionInputs.length > optionIndex) {
+                            optionInputs[optionIndex].value = "";
+                            $(".option")[optionIndex].classList.add("hide");
+                        }
                     }
 
                     function appendInputChild() {
@@ -79,10 +89,10 @@
                             <div class="col-md-10">
                                 <div class="form-group">
                                     @Html.TextAreaFor(m => m.OptionsTitles[i], new { @class = "form-control", @rows = 2 })
+                                <div class="col-md-2 form-group">
+                                    <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary" onClick="removeOption(@i)">Remove Option</button>
                                 </div>
                             </div>
-                            <div class="col-md-2">
-                                <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary" onClick="removeInputChild(@i)">Remove Option</button>
                             </div>
                         </div>
 
