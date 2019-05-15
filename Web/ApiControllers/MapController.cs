@@ -67,10 +67,6 @@ namespace Web.ApiControllers
 
                 foreach (var pollingplace in _context.PollingPlaces)
                 {
-                    try
-                    {
-
-                    }
                     var response = await client
                         .GetAsync(
                             $"{longitude},{latitude};" +
