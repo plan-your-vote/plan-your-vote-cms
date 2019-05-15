@@ -59,8 +59,7 @@ namespace Web.ApiControllers
 
                     distances.Add(new DistanceDTO
                     {
-                        Latitude = pollingplace.Latitude,
-                        Longitude = pollingplace.Longitude,
+                        PollingPlaceID = pollingplace.PollingPlaceId,
                         Distance = map.Routes
                         .Select(routes => routes.Distance)
                         .First(),

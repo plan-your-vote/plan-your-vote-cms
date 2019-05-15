@@ -7,8 +7,7 @@ namespace Web.ApiDTO
 {
     public class DistanceDTO
     {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+        public int PollingPlaceID { get; set; }
         public double Distance { get; set; }
     }
 }
