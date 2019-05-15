@@ -26,28 +26,15 @@ namespace Web.ApiControllers
 
         public static async void Initialize(IOptions<MapConfiguration> mapConfiguration)
         {
-            try
-            {
+            KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
-                KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+            var secret = await keyVaultClient
+                .GetSecretAsync($"https://{mapConfiguration.Value.KeyVaultName}.vault.azure.net/secrets/App/{mapConfiguration.Value.SecretName}")
+                .ConfigureAwait(false);
 
-                var secret = await keyVaultClient
-                    .GetSecretAsync($"https://{mapConfiguration.Value.KeyVaultName}.vault.azure.net/secrets/App/{mapConfiguration.Value.SecretName}")
-                    .ConfigureAwait(false);
+            access_token = secret.Value;
 
-                access_token = secret.Value;
-
-                throw new ApplicationException($"mapConfig: {mapConfiguration.Value.KeyVaultName}, {mapConfiguration.Value.SecretName} | Access token: {access_token}");
-
-                if (string.IsNullOrEmpty(access_token))
-                {
-                    throw new ApplicationException("Access token is null or empty");
-                }
-            }
-            catch (KeyVaultErrorException ex)
-            {
-                throw ex;
-            }
+            throw new ApplicationException($"mapConfig: {mapConfiguration.Value.KeyVaultName}, {mapConfiguration.Value.SecretName} | Access token: {access_token}");
         }
 
         public MapController(ApplicationDbContext context)
