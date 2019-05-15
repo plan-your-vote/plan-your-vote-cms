@@ -50,11 +50,15 @@ namespace Web
         // GET: BallotIssues/Create
         public IActionResult Create()
         {
-            return View(new BallotIssueViewModel()
+            return View(new BallotIssue
             {
-                OptionsTitles = new List<string>
-                {
-                    "", "",
+                BallotIssueOptions = new List<IssueOption> {
+                    new IssueOption() {
+                        IssueOptionInfo = ""
+                    },
+                    new IssueOption() {
+                        IssueOptionInfo = ""
+                    }
                 }
             });
         }
@@ -64,36 +68,31 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BallotIssueViewModel model)
+        public async Task<IActionResult> Create(BallotIssue issue)
         {
             if (ModelState.IsValid)
             {
-                BallotIssue issue = new BallotIssue
-                {
-                    BallotIssueTitle = model.BallotIssueTitle,
-                    Description = model.Description,
-                    ElectionId = _managedElectionID,
-                };
-                _context.Add(issue);
+                issue.ElectionId = _managedElectionID;
 
-                foreach (string title in model.OptionsTitles)
+                for (int i = issue.BallotIssueOptions.Count-1; i >= 0; i--)
                 {
-                    if (title != null && title.Length > 0)
+                    if (issue.BallotIssueOptions[i].IssueOptionInfo == null || issue.BallotIssueOptions[i].IssueOptionInfo == "")
                     {
-                        IssueOption opt = new IssueOption
-                        {
-                            BallotIssueId = issue.BallotIssueId,
-                            IssueOptionTitle = title,
-                            IssueOptionInfo = title,
-                        };
-                        _context.Add(opt);
+                        issue.BallotIssueOptions.RemoveAt(i);
                     }
                 }
 
+                if (issue.BallotIssueOptions.Count < 2)
+                {
+                    ViewData["IssueOptionsError"] = "Please enter at least 2 options.";
+                    return View(issue);
+                }
+
+                _context.Add(issue);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(model);
+            return View(issue);
         }
 
         // GET: BallotIssues/Edit/5
@@ -104,24 +103,16 @@ namespace Web
                 return NotFound();
             }
 
-            var ballotIssue = await _context.BallotIssues.FindAsync(id);
+            var ballotIssue = await _context.BallotIssues
+                .Include(b => b.BallotIssueOptions)
+                .FirstOrDefaultAsync(m => m.BallotIssueId == id);
 
             if (ballotIssue == null)
             {
                 return NotFound();
             }
 
-            var options = _context.IssueOptions.Where(op => op.BallotIssueId == id).ToList();
-            List<string> optionTitles = options.Select(optionTitle => optionTitle.IssueOptionTitle).ToList();
-
-            BallotIssueViewModel model = new BallotIssueViewModel
-            {
-                BallotIssueTitle = ballotIssue.BallotIssueTitle,
-                Description = ballotIssue.Description,
-                OptionsTitles = optionTitles,
-            };
-
-            return View(model);
+            return View(ballotIssue);
         }
 
         // POST: BallotIssues/Edit/5
@@ -129,33 +120,38 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BallotIssueTitle,Description,OptionsTitles")] BallotIssueViewModel model)
+        public async Task<IActionResult> Edit(int id, BallotIssue ballotIssue)
         {
+            if (id != ballotIssue.BallotIssueId)
+            {
+                return NotFound();
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var bi = _context.BallotIssues.Find(id);
-                    bi.BallotIssueTitle = model.BallotIssueTitle;
-                    bi.Description = model.Description;
-                    _context.Update(bi);
-
-                    foreach (string title in model.OptionsTitles)
+                    for (int i = ballotIssue.BallotIssueOptions.Count - 1; i >= 0; i--)
                     {
-                        if (title != null && title.Length > 0)
+                        if (ballotIssue.BallotIssueOptions[i].IssueOptionInfo == null || 
+                            ballotIssue.BallotIssueOptions[i].IssueOptionInfo == "")
                         {
-                            var existing = _context.IssueOptions.Where(op => op.BallotIssueId == id).ToList();
-                            _context.RemoveRange(existing);
-
-                            IssueOption opt = new IssueOption
-                            {
-                                BallotIssueId = id,
-                                IssueOptionTitle = title,
-                                IssueOptionInfo = title,
-                            };
-                            _context.Add(opt);
+                            ballotIssue.BallotIssueOptions.RemoveAt(i);
                         }
                     }
+
+                    if (ballotIssue.BallotIssueOptions.Count < 2)
+                    {
+                        ViewData["IssueOptionsError"] = "Please enter at least 2 options.";
+                        return View(ballotIssue);
+                    }
+
+                    // remove the existing issue options
+                    var existing = _context.IssueOptions.Where(op => op.BallotIssueId == id).ToList();
+                    _context.RemoveRange(existing);
+
+                    ballotIssue.ElectionId = _managedElectionID;
+                    _context.Update(ballotIssue);
                     await _context.SaveChangesAsync();
                 }
 
@@ -172,7 +168,7 @@ namespace Web
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(model);
+            return View(ballotIssue);
         }
 
         // GET: BallotIssues/Delete/5

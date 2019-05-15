@@ -1,4 +1,4 @@
-﻿@model Web.ViewModels.BallotIssueViewModel
+﻿@model Web.Models.BallotIssue
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
@@ -21,14 +21,14 @@
             <div class="col-md-12">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    @Html.LabelFor(ballotIssue => ballotIssue.BallotIssueTitle, new { @class = "control-label" })
-                    @Html.TextAreaFor(ballotIssue => ballotIssue.BallotIssueTitle, new { @class = "form-control", @rows = 2 })
-                    @Html.ValidationMessageFor(ballotIssue => ballotIssue.BallotIssueTitle, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.BallotIssueTitle, new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.BallotIssueTitle, new { @class = "form-control", @rows = 2 })
+                    @Html.ValidationMessageFor(model => model.BallotIssueTitle, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(ballotIssue => ballotIssue.Description, new { @class = "control-label" })
-                    @Html.TextAreaFor(ballotIssue => ballotIssue.Description, new { @class = "form-control", @rows = 4 })
-                    @Html.ValidationMessageFor(ballotIssue => ballotIssue.Description, "", new { @class = "text-danger" })
+                    @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 4 })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                 </div>
                 <label class="control-label">@Localizer["Ballot Options"]</label>
                 <script type="text/javascript">
@@ -83,20 +83,26 @@
                     }</script>
 
                 <div id="options">
-                    @for (int i = 0; i < Model.OptionsTitles.Count; i++)
+                    @if (Model.BallotIssueOptions != null)
                     {
-                        <div class="row">
-                            <div class="col-md-10">
-                                <div class="form-group">
-                                    @Html.TextAreaFor(m => m.OptionsTitles[i], new { @class = "form-control", @rows = 2 })
+                        @for (int i = 0; i < Model.BallotIssueOptions.Count; i++)
+                        {
+                            <div class="row option">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        @Html.TextAreaFor(model => model.BallotIssueOptions[i].IssueOptionInfo, new { @class = "form-control option-text", @rows = 2 })
+                                    </div>
+                                </div>
                                 <div class="col-md-2 form-group">
                                     <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary" onClick="removeOption(@i)">Remove Option</button>
                                 </div>
                             </div>
-                            </div>
-                        </div>
 
+                        }
                     }
+                </div>
+                <div>
+                    <span class="text-danger">@ViewData["IssueOptionsError"]</span>
                 </div>
             </div>
         </div>
