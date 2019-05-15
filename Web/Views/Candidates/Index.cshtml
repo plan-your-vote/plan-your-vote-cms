@@ -57,6 +57,14 @@
                         </tr>
                     }
                 }
+                else
+                {
+                    <tr>
+                        <td colspan="4">
+                            No candidates found
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
         <hr />
@@ -78,24 +86,35 @@
             </tr>
         </thead>
         <tbody>
-            @foreach(var candidate in Model.UnlistedCandidates)
+            @if (Model.UnlistedCandidates.Count > 0)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => candidate.Name)
-                </td>
-                <td>
-                    <img width="80" height="80" src="@Html.DisplayFor(model => candidate.Picture)" />
-                </td>
-                <td>
-                    @Html.DisplayFor(model => candidate.Organization.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["Edit"]</a> |
-                    <a asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["Details"]</a> |
-                    <a asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["Delete"]</a>
-                </td>
-            </tr>
+                @foreach (var candidate in Model.UnlistedCandidates)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(model => candidate.Name)
+                        </td>
+                        <td>
+                            <img width="80" height="80" src="@Html.DisplayFor(model => candidate.Picture)" />
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => candidate.Organization.Name)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["Edit"]</a> |
+                            <a asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["Details"]</a> |
+                            <a asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["Delete"]</a>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4">
+                        No candidates found
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
