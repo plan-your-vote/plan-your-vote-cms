@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Web.Models
@@ -22,6 +23,7 @@ namespace Web.Models
         public string Description { get; set; }
 
         [Display(Name = "NumberNeeded")]
+        [Range(1, Int32.MaxValue)]
         public int NumberNeeded { get; set; }
 
         [Display(Name = "CandidateRaces")]
