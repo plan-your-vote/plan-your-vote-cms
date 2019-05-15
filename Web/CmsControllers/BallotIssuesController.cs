@@ -95,6 +95,23 @@ namespace Web
             return View(issue);
         }
 
+        public virtual IActionResult GetOptionFields(int count)
+        {
+            List<IssueOption> options = new List<IssueOption>();
+
+            for (int i = 0; i <= count; i++)
+            {
+                options.Add(new IssueOption());
+            }
+
+            BallotIssue ballotIssue = new BallotIssue
+            {
+                BallotIssueOptions = options
+            };
+
+            return PartialView("IssueOption", ballotIssue);
+        }
+
         // GET: BallotIssues/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
