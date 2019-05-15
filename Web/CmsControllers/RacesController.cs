@@ -58,7 +58,6 @@ namespace Web.CmsControllers
         // GET: Races/Create
         public IActionResult Create()
         {
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName");
             return View();
         }
 
@@ -67,15 +66,16 @@ namespace Web.CmsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RaceId,ElectionId,PositionName,Description,NumberNeeded")] Race race)
+        public async Task<IActionResult> Create([Bind("RaceId,PositionName,Description,NumberNeeded")] Race race)
         {
             if (ModelState.IsValid)
             {
+                race.ElectionId = _managedElectionID;
                 _context.Add(race);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName", race.ElectionId);
+            
             return View(race);
         }
 
@@ -104,8 +104,6 @@ namespace Web.CmsControllers
             {
                 return NotFound();
             }
-
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName");
 
             return View(model);
         }
@@ -157,7 +155,6 @@ namespace Web.CmsControllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["Elections"] = new SelectList(_context.Elections, "ElectionId", "ElectionName", model.Race.ElectionId);
             return View(model);
         }
 

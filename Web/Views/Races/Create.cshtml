@@ -16,10 +16,6 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label for="ElectionId" class="control-label">@Html.DisplayNameFor(r => r.Election)</label>
-                    <select asp-for="ElectionId" class="form-control" asp-items="ViewBag.Elections"></select>
-                </div>
-                <div class="form-group">
                     <label asp-for="PositionName" class="control-label"></label>
                     <input asp-for="PositionName" class="form-control" />
                     <span asp-validation-for="PositionName" class="text-danger"></span>
