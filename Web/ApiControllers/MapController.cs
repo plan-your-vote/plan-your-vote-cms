@@ -41,7 +41,7 @@ namespace Web.ApiControllers
             }
             catch (KeyVaultErrorException ex)
             {
-                // TODO Logging
+                throw ex;
             }
         }
 
