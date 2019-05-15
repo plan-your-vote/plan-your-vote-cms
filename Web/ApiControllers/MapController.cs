@@ -23,8 +23,12 @@ namespace Web.ApiControllers
         private readonly ApplicationDbContext _context;
         private readonly HttpClient client = new HttpClient() { BaseAddress = new Uri("https://api.mapbox.com/directions/v5/mapbox/driving/") };
         public static string access_token;
-
         public MapConfiguration MapConfiguration { get; set; }
+
+        public static async void Initialize()
+        {
+            
+        }
 
         public MapController(ApplicationDbContext context, IOptions<MapConfiguration> mapConfiguration)
         {
@@ -36,8 +40,6 @@ namespace Web.ApiControllers
         [HttpGet("{location}")]
         public async Task<ActionResult<object>> GetClosestLocations(string location)
         {
-            throw new ApplicationException($"mapConfig: {MapConfiguration.KeyVaultName}, {MapConfiguration.SecretName} | Access token: {access_token}");
-
             KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
             var secret = await keyVaultClient
@@ -46,7 +48,7 @@ namespace Web.ApiControllers
 
             access_token = secret.Value;
 
-            throw new ApplicationException($"mapConfig: {MapConfiguration.KeyVaultName}, {MapConfiguration.SecretName} | Access token: {access_token}");
+            throw new ApplicationException($"mapConfig: {mapConfiguration.Value.KeyVaultName}, {MapConfiguration.SecretName} | Access token: {access_token}");
 
             var distances = new List<DistanceDTO>();
 
