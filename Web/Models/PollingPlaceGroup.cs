@@ -22,17 +22,23 @@ namespace Web.Models
         [Display(Name = "ParkingInfo")]
         public string ParkingInfo { get; set; }
 
-        [Display(Name = "WashroomInfo")]
-        public string WashroomInfo { get; set; }
-
-        [Display(Name = "GeneralAccessInfo")]
-        public string GeneralAccessInfo { get; set; }
-
         [Display(Name = "Latitude")]
         public double Latitude { get; set; }
 
         [Display(Name = "Longitude")]
         public double Longitude { get; set; }
+
+        [Display(Name = "AdvanceOnly")]
+        public bool AdvanceOnly { get; set; }
+
+        [Display(Name = "LocalArea")]
+        public string LocalArea { get; set; }
+
+        [Display(Name = "Phone")]
+        public string Phone { get; set; }
+
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
         [Display(Name = "PollingPlaceDates")]
         public List<DateTime> PollingPlaceDates { get; set; }

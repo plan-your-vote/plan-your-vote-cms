@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Web.Models
 {
-    public class JSONPollingPlaces
+    public class JSONPollingPlace
     {
         public int VotingPlaceID { get; set; }
         public string FacilityName { get; set; }
@@ -15,5 +15,17 @@ namespace Web.Models
         public double Longitude { get; set; }
         public bool AdvanceOnly { get; set; }
         public string LocalArea { get; set; }
+        public string WheelchairAccess { get; set; }
+        public string Parking { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
+        public List<JSONPollingPlaceDate> PollingPlaceDates { get; set; }
+    }
+
+    public class JSONPollingPlaceDate
+    {
+        public string PollingDate { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
     }
 }

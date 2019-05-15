@@ -39,15 +39,18 @@ namespace Web.ApiControllers
                 .Where(pp => pp.ElectionId == _runningElectionID)
                 .Select(pp => new
                 {
+                    pp.PollingPlaceId,
                     pp.PollingPlaceName,
                     pp.Address,
                     pp.PollingStationName,
-                    pp.GeneralAccessInfo,
                     pp.ParkingInfo,
                     pp.WheelchairInfo,
+                    pp.AdvanceOnly,
+                    pp.LocalArea,
+                    pp.Phone,
+                    pp.Email,
                     pp.Latitude,
                     pp.Longitude,
-                    pp.WashroomInfo,
                     PollingPlaceDates = pp.PollingPlaceDates.Select(ppd => new
                     {
                         ppd.PollingDate,

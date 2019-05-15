@@ -1,14 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Web.Models;
-using Web.Data;
 using Web.ApiDTO;
+using Web.Data;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -48,6 +45,7 @@ namespace Web.Controllers
                         cr.Candidate.CandidateId,
                         cr.Candidate.Name,
                         cr.Candidate.Picture,
+                        OrganizationName = cr.Candidate.Organization.Name,
                         Details = cr.Candidate.Details.Select(detail => new
                         {
                             detail.Title,

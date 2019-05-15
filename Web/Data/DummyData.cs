@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +37,7 @@ namespace Web.Data
             _context.SaveChanges();
 
             const string pollingPlacesFile = "wwwroot/Data/pollingPlaces.json";
-            List<JSONPollingPlaces> pollingPlacesData = GetJsonData<JSONPollingPlaces>(pollingPlacesFile);
+            List<JSONPollingPlace> pollingPlacesData = GetJsonData<JSONPollingPlace>(pollingPlacesFile);
 
             List<PollingPlace> pollingPlaces = pollingPlacesData
                 .Select(ppd => new PollingPlace()
@@ -48,9 +49,18 @@ namespace Web.Data
                     PollingStationName = ppd.Location,
                     Latitude = ppd.Latitude,
                     Longitude = ppd.Longitude,
-                    // = psd.AdvancedOnly,
-                    // = psd.LocalArea,
-
+                    AdvanceOnly = ppd.AdvanceOnly,
+                    LocalArea = ppd.LocalArea,
+                    WheelchairInfo = ppd.WheelchairAccess,
+                    ParkingInfo = ppd.Parking,
+                    Phone = ppd.Phone,
+                    Email = ppd.Email,
+                    PollingPlaceDates = ppd.PollingPlaceDates.Select(jsppd => new PollingPlaceDate()
+                    {
+                        PollingDate = DateTime.ParseExact(jsppd.PollingDate, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                        StartTime = DateTime.ParseExact(jsppd.StartTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                        EndTime = DateTime.ParseExact(jsppd.EndTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                    }).ToList(),
                 })
                 .ToList();
             _context.PollingPlaces.AddRange(pollingPlaces);
@@ -66,10 +76,6 @@ namespace Web.Data
 
             GetCandidatesAndContacts(candidateData);
 
-            var candidateRaces = GetCandidateRaces(candidateData).ToArray();
-            _context.CandidateRaces.AddRange(candidateRaces);
-            _context.SaveChanges();
-
             var ballotIssues = GetBallotIssues().ToArray();
             _context.BallotIssues.AddRange(ballotIssues);
             _context.SaveChanges();
@@ -83,38 +89,11 @@ namespace Web.Data
             _context.SaveChanges();
         }
 
-        private static List<CandidateRace> GetCandidateRaces(List<JSONCandidate> candidateData)
-        {
-            List<CandidateRace> candidateRaces = new List<CandidateRace>();
-
-            foreach (var existingCandidate in candidateData)
-            {
-                CandidateRace candidateRace = new CandidateRace()
-                {
-                    PlatformInfo = existingCandidate.Platform,
-                    PositionName = existingCandidate.Position,
-                };
-
-                candidateRace.CandidateId = _context.Candidates
-                    .Where(candidate => candidate.Name == existingCandidate.Name)
-                    .First() // BUG in the future?
-                    .CandidateId;
-
-                candidateRace.RaceId = _context.Races
-                    .Where(races => races.PositionName == existingCandidate.Position)
-                    .First() //Potential bug
-                    .RaceId;
-
-                candidateRaces.Add(candidateRace);
-            }
-
-            return candidateRaces;
-        }
-
         private static void GetCandidatesAndContacts(List<JSONCandidate> candidateData)
         {
             List<Contact> contacts = new List<Contact>();
             List<CandidateDetail> details = new List<CandidateDetail>();
+            List<CandidateRace> candidateRaces = new List<CandidateRace>();
 
             foreach (var existingCandidate in candidateData)
             {
@@ -271,7 +250,21 @@ namespace Web.Data
                         CandidateId = candidate.CandidateId,
                     });
                 }
+
+                CandidateRace candidateRace = new CandidateRace()
+                {
+                    CandidateId = candidate.CandidateId,
+                    RaceId = _context.Races
+                    .Where(races => races.PositionName == existingCandidate.Position)
+                    .First()
+                    .RaceId,
+                };
+
+                candidateRaces.Add(candidateRace);
             }
+
+            _context.CandidateRaces.AddRange(candidateRaces);
+            _context.SaveChanges();
 
             _context.CandidateDetails.AddRange(details);
             _context.SaveChanges();
