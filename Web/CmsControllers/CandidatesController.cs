@@ -36,6 +36,7 @@ namespace Web
                 .Include(cr => cr.Race)
                 .Include(cr => cr.Candidate)
                 .Include(cr => cr.Candidate.Organization)
+                .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
                 .OrderBy(cr => cr.RaceId)
                 .GroupBy(cr => cr.RaceId)
                 .ToListAsync();

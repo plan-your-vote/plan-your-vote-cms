@@ -31,28 +31,31 @@
                 </tr>
             </thead>
             <tbody>
-                @{ 
+                @{
                     var group = Model.CandidatesByRace.Where(g => g.First().RaceId == race.RaceId);
                 }
 
-                @foreach(var candidateRace in group.First())
+                @if (group != null && group.ToList().Count > 0)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(cr => candidateRace.Candidate.Name)
-                        </td>
-                        <td>
-                            <img width="80" height="80" src="@Html.DisplayFor(cr => candidateRace.Candidate.Picture)" />
-                        </td>
-                        <td>
-                            @Html.DisplayFor(cr => candidateRace.Candidate.Organization.Name)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a> |
-                            <a asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a> |
-                            <a asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a>
-                        </td>
-                    </tr>
+                    @foreach (var candidateRace in group.First())
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(cr => candidateRace.Candidate.Name)
+                            </td>
+                            <td>
+                                <img width="80" height="80" src="@Html.DisplayFor(cr => candidateRace.Candidate.Picture)" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(cr => candidateRace.Candidate.Organization.Name)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a> |
+                                <a asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a> |
+                                <a asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a>
+                            </td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
