@@ -37,6 +37,8 @@ namespace Web.ApiControllers
                         .ConfigureAwait(false);
 
                     access_token = secret.Value;
+
+                    throw new ApplicationException($"mapConfig: {mapConfiguration.Value.KeyVaultName}, {mapConfiguration.Value.SecretName} | Access token: {access_token}");
                 }
 
                 if (string.IsNullOrEmpty(access_token)) {

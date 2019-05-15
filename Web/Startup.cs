@@ -149,10 +149,17 @@ namespace Web
                 opts.SupportedUICultures = supportedCultures;
             });
 
-            var local_access_token = Configuration["mapkey"];
-            if (!string.IsNullOrEmpty(local_access_token))
+            try
             {
-                MapController.access_token = local_access_token;
+                var local_access_token = Configuration["mapkey"];
+                if (!string.IsNullOrEmpty(local_access_token))
+                {
+                    MapController.access_token = local_access_token;
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
 
