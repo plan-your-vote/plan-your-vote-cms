@@ -39,12 +39,10 @@ namespace Web.ApiControllers
             KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
             var secret = await keyVaultClient
-                .GetSecretAsync($"https://{MapConfiguration.KeyVaultName}.vault.azure.net/secrets/App/{MapConfiguration.SecretName}")
+                .GetSecretAsync($"https://{MapConfiguration.KeyVaultName}.vault.azure.net/secrets/{MapConfiguration.SecretName}")
                 .ConfigureAwait(false);
 
             access_token = secret.Value;
-
-            throw new ApplicationException($"mapConfig: {MapConfiguration.KeyVaultName}, {MapConfiguration.SecretName} | Access token: {access_token}");
 
             var distances = new List<DistanceDTO>();
 
