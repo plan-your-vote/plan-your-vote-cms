@@ -150,7 +150,7 @@ namespace Web
             });
 
             var local_access_token = Configuration["mapkey"];
-            if (string.IsNullOrEmpty(local_access_token))
+            if (!string.IsNullOrEmpty(local_access_token))
             {
                 MapController.access_token = local_access_token;
             }
