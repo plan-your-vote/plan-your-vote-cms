@@ -37,12 +37,13 @@ namespace Web
                 .Include(cr => cr.Candidate)
                 .Include(cr => cr.Candidate.Organization)
                 .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                .OrderBy(cr => cr.RaceId)
+                .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.Candidate.Name)
                 .GroupBy(cr => cr.RaceId)
                 .ToListAsync();
             var unlisted = await _context.Candidates
                 .Include(c => c.Organization)
                 .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
+                .OrderBy(c => c.Name)
                 .ToListAsync();
 
             CandidatesByRaceViewModel model = new CandidatesByRaceViewModel
@@ -52,6 +53,57 @@ namespace Web
                 UnlistedCandidates = unlisted
             };
             return View(model);
+        }
+
+        public virtual async Task<IActionResult> GetCandidates(string orderBy)
+        {
+            CandidatesByRaceViewModel model = new CandidatesByRaceViewModel
+            {
+                Races = await _context.Races
+                    .Where(r => r.ElectionId == _managedElectionID)
+                    .ToListAsync()
+            };
+
+            if ("reverse-alphabet".Equals(orderBy))
+            {
+                model.CandidatesByRace = await _context.CandidateRaces
+                    .Include(cr => cr.Race)
+                    .Include(cr => cr.Candidate)
+                    .Include(cr => cr.Candidate.Organization)
+                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                    .OrderBy(cr => cr.RaceId).ThenByDescending(cr => cr.Candidate.Name)
+                    .GroupBy(cr => cr.RaceId)
+                    .ToListAsync();
+
+                model.UnlistedCandidates = await _context.Candidates
+                    .Include(c => c.Organization)
+                    .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
+                    .OrderByDescending(c => c.Name)
+                    .ToListAsync();
+            }
+            else if ("alphabet".Equals(orderBy))
+            {
+                model.CandidatesByRace = await _context.CandidateRaces
+                    .Include(cr => cr.Race)
+                    .Include(cr => cr.Candidate)
+                    .Include(cr => cr.Candidate.Organization)
+                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.Candidate.Name)
+                    .GroupBy(cr => cr.RaceId)
+                    .ToListAsync();
+
+                model.UnlistedCandidates = await _context.Candidates
+                    .Include(c => c.Organization)
+                    .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
+                    .OrderBy(c => c.Name)
+                    .ToListAsync();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            return PartialView("CandidateList", model);
         }
 
         // GET: Candidates/Details/5

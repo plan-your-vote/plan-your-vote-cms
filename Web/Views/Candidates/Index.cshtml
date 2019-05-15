@@ -6,11 +6,44 @@
     ViewData["Title"] = @Localizer["Index"];
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+</script>
+
 <h1>@ViewData["Title"]</h1>
 
 <p>
     <a asp-action="Create">@Localizer["Create New"]</a>
 </p>
+<div class="panel panel_default">
+    <div class="row vert-center">
+        <div class="col-xs-4 col-sm-3 text-center">
+            <h5>Sort by:</h5>
+        </div>
+        <div class="col-xs-8 col-sm-9">
+            <button type="button" class="btn btn-primary col-xs-12 col-md-4">Ballot Order</button>
+            <button type="button" class="btn btn-primary col-xs-12 col-md-4" onclick="getCandidates('alphabet')">Name A-Z</button>
+            <button type="button" class="btn btn-primary col-xs-12 col-md-4" onclick="getCandidates('reverse-alphabet')">Name Z-A</button>
+        </div>
+    </div>
+</div>
 <div id="list-candidates" class="panel panel_default">
     @{ await Html.RenderPartialAsync("CandidateList", Model); }
 </div>
+
+<script>
+    function getCandidates(orderType) {
+        $('#list-candidates').empty();
+        $('#list-candidates').load('@Url.Action("GetCandidates", "Candidates")',
+                                    { "orderBy": orderType },
+                                    function (response, status, xhr) {
+                                        if (status == "error") {
+                                            alert("An error occurred while loading the candidates.");
+                                            console.log(xhr.status + " " + xhr.statusText);
+                                        }
+                                    });
+    }
+</script>
