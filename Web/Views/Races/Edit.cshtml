@@ -16,11 +16,7 @@
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @Html.TextBoxFor(r => r.Race.RaceId, new { @type = "hidden" })
-                <div class="form-group">
-                    @Html.LabelFor(r => r.Race.ElectionId, Html.DisplayNameFor(r => r.Race.Election), new { @class = "control-label" })
-                    <select asp-for="Race.ElectionId" class="form-control" asp-items="ViewBag.Elections"></select>
-                    <span asp-validation-for="Race.ElectionId" class="text-danger"></span>
-                </div>
+                @Html.TextBoxFor(r => r.Race.ElectionId, new { @type = "hidden" })
                 <div class="form-group">
                     <label asp-for="Race.PositionName" class="control-label"></label>
                     <input asp-for="Race.PositionName" class="form-control" />
@@ -39,7 +35,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Race.CandidateRaces, new { @class = "control-label" })
                     <div class="multi-select">
-                        @foreach(var candidate in Model.Candidates)
+                        @foreach (var candidate in Model.Candidates)
                         {
                             <div>
                                 @if (Model.Race.CandidateRaces.Exists(model => model.CandidateId == int.Parse(candidate.Value)))
