@@ -81,3 +81,7 @@ body {
     max-height: 120px;
     overflow: auto;
 }
+
+.hide {
+    display: none;
+}

@@ -389,25 +389,21 @@ Are you in favour of Council having the authority, without further assent of the
                 new IssueOption()
                 {
                     BallotIssueId = 1,
-                    IssueOptionTitle = "How you plan to answer Question 1. Transportation and technology",
                     IssueOptionInfo = "Yes",
                 },
                 new IssueOption()
                 {
                     BallotIssueId = 1,
-                    IssueOptionTitle = "How you plan to answer Question 1. Transportation and technology",
                     IssueOptionInfo = "No",
                 },
                 new IssueOption()
                 {
                     BallotIssueId = 2,
-                    IssueOptionTitle = "How you plan to answer Question 2. Capital maintenance and renovation programs for existing community facilities, civic facilities, and parks",
                     IssueOptionInfo = "Yes",
                 },
                 new IssueOption()
                 {
                     BallotIssueId = 2,
-                    IssueOptionTitle = "How you plan to answer Question 2. Capital maintenance and renovation programs for existing community facilities, civic facilities, and parks",
                     IssueOptionInfo = "No",
                 },
             };
