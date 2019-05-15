@@ -15,6 +15,8 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using Web.ApiControllers;
 using Web.Data;
 using Web.Models;
 
@@ -48,6 +50,7 @@ namespace Web
             });
 
             services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
+            services.Configure<MapConfiguration>(Configuration.GetSection("MapConfiguration"));
 
             //Choosing a db service
             CheckDB check = new CheckDB();
@@ -91,12 +94,6 @@ namespace Web
                     break;
             }
 
-
-
-            /*     
-  services.AddDefaultIdentity<IdentityUser>()
-      .AddDefaultUI(UIFramework.Bootstrap4)
-      .AddEntityFrameworkStores<ApplicationDbContext>();*/
             services.AddIdentity<IdentityUser, IdentityRole>(
                option =>
                {
@@ -138,6 +135,8 @@ namespace Web
                     options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                 });
 
+            services.AddHttpClient();
+
             services.Configure<RequestLocalizationOptions>(opts =>
             {
                 var supportedCultures = new List<CultureInfo> {
@@ -150,10 +149,26 @@ namespace Web
                 opts.SupportedUICultures = supportedCultures;
             });
 
+            try
+            {
+                //var local_access_token = Configuration["mapkey"];
+                //if (!string.IsNullOrEmpty(local_access_token))
+                //{
+                //    MapController.access_token = local_access_token;
+                //}
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, ApplicationDbContext context, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            ApplicationDbContext context,
+            IHostingEnvironment env,
+            IOptions<MapConfiguration> mapConfiguration)
         {
             if (env.IsDevelopment())
             {
@@ -192,9 +207,15 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(context, app).Wait();
-            StateInit.Initialize(context);
-            ThemesInit.Initialize(context);
+            context.Database.EnsureCreated();
+
+            if (!context.Elections.Any())
+            {
+                //MapController.Initialize(mapConfiguration);
+                DummyData.Initialize(context, app).Wait();
+                StateInit.Initialize(context);
+                ThemesInit.Initialize(context);
+            }
         }
     }
 }
