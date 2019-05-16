@@ -106,6 +106,21 @@ namespace Web
             return PartialView("CandidateList", model);
         }
 
+        // GET: Candidates/Reorder/5
+        public async Task<IActionResult> Reorder(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            return View(await _context.CandidateRaces
+                .Include(cr => cr.Race)
+                .Include(cr => cr.Candidate)
+                .Where(cr => cr.RaceId == id)
+                .ToListAsync());
+        }
+
         // GET: Candidates/Details/5
         public async Task<IActionResult> Details(int? id)
         {

@@ -17,6 +17,7 @@ namespace Web.Models
         public Election Election { get; set; }
 
         [Display(Name = "BallotOrder")]
+        [Range(1, Int32.MaxValue)]
         public int BallotOrder { get; set; }
 
         [Display(Name = "PositionName")]
