@@ -91,12 +91,6 @@ namespace Web
                     break;
             }
 
-
-
-            /*     
-  services.AddDefaultIdentity<IdentityUser>()
-      .AddDefaultUI(UIFramework.Bootstrap4)
-      .AddEntityFrameworkStores<ApplicationDbContext>();*/
             services.AddIdentity<IdentityUser, IdentityRole>(
                option =>
                {
@@ -192,7 +186,8 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(context, app).Wait();
+            DummyData.Initialize(context);
+            AccountsInit.InitializeAsync(app);
             StateInit.Initialize(context);
             ThemesInit.Initialize(context);
         }

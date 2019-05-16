@@ -18,22 +18,16 @@ namespace Web.Data
 
         public const int DummyElectionId = 1; // Hardcoded
 
-        public static async Task Initialize(ApplicationDbContext context, IApplicationBuilder app)
+        public static void Initialize(ApplicationDbContext context)
         {
             _context = context;
 
             context.Database.EnsureCreated();
 
-            if (!context.Candidates.Any())
+            if (!context.Elections.Any())
             {
                 InitializeDatabase(context);
             }
-            else
-            {
-                return;
-            }
-
-            await InsertUserAsync(app);
         }
 
         public static void InitializeDatabase(ApplicationDbContext context)
@@ -420,68 +414,6 @@ Are you in favour of Council having the authority, without further assent of the
                     IssueOptionInfo = "No",
                 },
             };
-        }
-
-        public static async Task InsertUserAsync(IApplicationBuilder app)
-        {
-            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                UserManager<IdentityUser> userManager = serviceScope.ServiceProvider.GetService<UserManager<IdentityUser>>();
-                RoleManager<IdentityRole> roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
-
-                var role1 = new IdentityRole
-                {
-                    Name = "Admin",
-                    NormalizedName = "Admin"
-                };
-
-                var role2 = new IdentityRole
-                {
-                    Name = "Member",
-                    NormalizedName = "Member"
-                };
-
-                if (await roleManager.FindByNameAsync(role1.Name) == null)
-                {
-
-                    await roleManager.CreateAsync(role1);
-                }
-                if (await roleManager.FindByNameAsync(role2.Name) == null)
-                {
-                    await roleManager.CreateAsync(role2);
-                }
-
-                var user = new IdentityUser
-                {
-                    Email = "a@a.a",
-                    UserName = "a@a.a",
-                    SecurityStamp = Guid.NewGuid().ToString()
-                };
-
-
-                var result = await userManager.CreateAsync(user, "P@$$w0rd");
-
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user, "Admin");
-                }
-
-                var user1 = new IdentityUser
-                {
-                    Email = "m@m.m",
-                    UserName = "m@m.m",
-                    SecurityStamp = Guid.NewGuid().ToString()
-                };
-
-                // var result = await userManager.CreateAsync(user);
-
-                var result1 = await userManager.CreateAsync(user1, "P@$$w0rd");
-
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(user1, "Member");
-                }
-            }
         }
 
         private static List<Step> GetSteps()
