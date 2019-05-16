@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Web.ApiControllers;
 using Web.Data;
 using Web.Models;
 
@@ -147,14 +148,29 @@ namespace Web
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;
             });
+
+            try
+            {
+                var local_access_token = Configuration["mapkey"];
+                if (!string.IsNullOrEmpty(local_access_token))
+                {
+                    if (string.IsNullOrEmpty(MapController.AccessToken))
+                    {
+                        MapController.AccessToken = local_access_token;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
             IApplicationBuilder app,
             ApplicationDbContext context,
-            IHostingEnvironment env,
-            IOptions<MapConfiguration> mapConfiguration)
+            IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
