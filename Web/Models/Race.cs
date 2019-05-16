@@ -16,6 +16,9 @@ namespace Web.Models
         [Display(Name = "Election")]
         public Election Election { get; set; }
 
+        [Display(Name = "BallotOrder")]
+        public int BallotOrder { get; set; }
+
         [Display(Name = "PositionName")]
         public string PositionName { get; set; }
 
