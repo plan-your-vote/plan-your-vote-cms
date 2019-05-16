@@ -16,7 +16,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Web.ApiControllers;
 using Web.Data;
 using Web.Models;
 
@@ -148,19 +147,6 @@ namespace Web
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;
             });
-
-            try
-            {
-                //var local_access_token = Configuration["mapkey"];
-                //if (!string.IsNullOrEmpty(local_access_token))
-                //{
-                //    MapController.access_token = local_access_token;
-                //}
-            }
-            catch (Exception ex)
-            {
-
-            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -211,8 +197,8 @@ namespace Web
 
             if (!context.Elections.Any())
             {
-                //MapController.Initialize(mapConfiguration);
-                DummyData.Initialize(context, app).Wait();
+                DummyData.Initialize(context);
+                AccountsInit.InitializeAsync(app);
                 StateInit.Initialize(context);
                 ThemesInit.Initialize(context);
             }

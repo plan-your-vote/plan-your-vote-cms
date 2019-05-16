@@ -4,31 +4,35 @@
 
 @{
     ViewData["Title"] = @Localizer["Index"];
+    ViewData["register"] = @Localizer["Register"];
 }
 
 <h1>@Localizer["Role Management"]</h1>
 
 <p>
-    <a asp-action="CreateRole">@Localizer["Create A New Role"]</a> |
-    <a asp-action="EditRole">@Localizer["Role List"]</a>
-</p>
-<table class="table">
+    <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">@ViewData["register"]</a></p>
+<table class="table panel panel-default">
     <thead>
         <tr>
+            <th>Username</th>
+            <th>Email</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.user.UserName)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.userId">@Localizer["Edit"]</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.UserId">@Localizer["Edit"]</a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

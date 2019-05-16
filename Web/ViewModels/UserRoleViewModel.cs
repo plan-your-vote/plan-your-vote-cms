@@ -10,10 +10,10 @@ namespace Web.ViewModels
     public class UserRoleViewModel
     {
         [Key]
-        public string userId { get; set; }
+        public string UserId { get; set; }
 
-        public IdentityUser user { get; set; }
+        public IdentityUser User { get; set; }
 
-        public List<IdentityRole> roles { get; set; }
+        public List<IdentityRole> Roles { get; set; }
     }
 }

@@ -79,12 +79,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "UserRoleViewModels")">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="UserRoleViewModels" asp-action="Index">@Localizer["User Role Management"]</a>
-                                </li>
-                            }
                             <li class="dropdown @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "Steps,Images,Themes,SocialMedias")">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">UI Details <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -102,6 +96,12 @@
                                     </li>
                                 </ul>
                             </li>
+                            @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ROLE_ADMIN))
+                            {
+                                <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "UserRoleViewModels")">
+                                    <a class="nav-link text-white" style="float: right;" asp-area="" asp-controller="UserRoleViewModels" asp-action="Index">@Localizer["User Management"]</a>
+                                </li>
+                            }
                         </ul>
                     }
                     <ul class="nav navbar-nav navbar-right">
