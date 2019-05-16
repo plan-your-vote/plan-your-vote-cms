@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GeoCoordinatePortable;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.KeyVault.Models;
 using Microsoft.Azure.Services.AppAuthentication;
@@ -22,28 +23,51 @@ namespace Web.ApiControllers
     {
         private readonly ApplicationDbContext _context;
         private readonly HttpClient client = new HttpClient() { BaseAddress = new Uri("https://api.mapbox.com/directions/v5/mapbox/driving/") };
-        public static string access_token;
-        public MapConfiguration MapConfiguration { get; set; }
+        public static string AccessToken { get; set; }
+        public static MapConfiguration MapConfiguration { get; set; }
 
+        public static async Task<string> GetAccessToken()
+        {
+            string accessToken = AccessToken;
+
+            try
+            {
+                if (string.IsNullOrEmpty(accessToken))
+                {
+                    SecretBundle secret = null;
+
+                    KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+
+                    secret = await keyVaultClient
+                        .GetSecretAsync($"https://{MapConfiguration.KeyVaultName}.vault.azure.net/secrets/{MapConfiguration.SecretName}")
+                        .ConfigureAwait(false);
+
+                    if (secret != null)
+                    {
+                        accessToken = secret.Value;
+                    }
+                }
+            }
+            catch (KeyVaultErrorException kvee)
+            {
+                // TODO
+            }
+
+            return accessToken;
+        }
 
         public MapController(ApplicationDbContext context, IOptions<MapConfiguration> mapConfiguration)
         {
             _context = context;
 
             MapConfiguration = mapConfiguration.Value;
+
+            AccessToken = GetAccessToken().GetAwaiter().GetResult();
         }
 
         [HttpGet("{location}")]
         public async Task<ActionResult<object>> GetClosestLocations(string location)
         {
-            KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
-
-            var secret = await keyVaultClient
-                .GetSecretAsync($"https://{MapConfiguration.KeyVaultName}.vault.azure.net/secrets/{MapConfiguration.SecretName}")
-                .ConfigureAwait(false);
-
-            access_token = secret.Value;
-
             var distances = new List<DistanceDTO>();
 
             try
@@ -51,13 +75,20 @@ namespace Web.ApiControllers
                 double longitude = double.Parse(location.Split(',')[0]);
                 double latitude = double.Parse(location.Split(',')[1]);
 
-                foreach (var pollingplace in _context.PollingPlaces)
+                var pollingPlaceCoordinate = new GeoCoordinate(latitude, longitude);
+
+                var nearestPollingPlaces = _context.PollingPlaces
+                                       .OrderBy(pollingPlace => new GeoCoordinate(pollingPlace.Latitude, pollingPlace.Longitude).GetDistanceTo(pollingPlaceCoordinate))
+                                       .Take(20)
+                                       .ToList();
+
+                foreach (var pollingPlace in nearestPollingPlaces)
                 {
                     var response = await client
                         .GetAsync(
                             $"{longitude},{latitude};" +
-                            $"{pollingplace.Longitude},{pollingplace.Latitude}" +
-                            $"?access_token={access_token}"
+                            $"{pollingPlace.Longitude},{pollingPlace.Latitude}" +
+                            $"?access_token={AccessToken}"
                         )
                         .ConfigureAwait(false);
 
@@ -73,7 +104,7 @@ namespace Web.ApiControllers
 
                     distances.Add(new DistanceDTO
                     {
-                        PollingPlaceID = pollingplace.PollingPlaceId,
+                        PollingPlaceID = pollingPlace.PollingPlaceId,
                         Distance = map.Routes
                         .Select(routes => routes.Distance)
                         .First(),
@@ -89,7 +120,7 @@ namespace Web.ApiControllers
                 return BadRequest(ex);
             }
 
-            return distances.OrderBy(distance => distance.Distance).ToList();
+            return distances.OrderBy(distance => distance.Distance).Take(10).ToList();
         }
     }
 }
