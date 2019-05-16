@@ -15,6 +15,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Web.Data;
 using Web.Models;
 
@@ -48,6 +49,7 @@ namespace Web
             });
 
             services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
+            services.Configure<MapConfiguration>(Configuration.GetSection("MapConfiguration"));
 
             //Choosing a db service
             CheckDB check = new CheckDB();
@@ -132,6 +134,8 @@ namespace Web
                     options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
                 });
 
+            services.AddHttpClient();
+
             services.Configure<RequestLocalizationOptions>(opts =>
             {
                 var supportedCultures = new List<CultureInfo> {
@@ -143,11 +147,14 @@ namespace Web
                 opts.SupportedCultures = supportedCultures;
                 opts.SupportedUICultures = supportedCultures;
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, ApplicationDbContext context, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            ApplicationDbContext context,
+            IHostingEnvironment env,
+            IOptions<MapConfiguration> mapConfiguration)
         {
             if (env.IsDevelopment())
             {
@@ -186,10 +193,15 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(context);
-            AccountsInit.InitializeAsync(app);
-            StateInit.Initialize(context);
-            ThemesInit.Initialize(context);
+            context.Database.EnsureCreated();
+
+            if (!context.Elections.Any())
+            {
+                DummyData.Initialize(context);
+                AccountsInit.InitializeAsync(app);
+                StateInit.Initialize(context);
+                ThemesInit.Initialize(context);
+            }
         }
     }
 }

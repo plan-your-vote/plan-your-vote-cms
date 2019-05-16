@@ -1,0 +1,16 @@
+﻿@model Web.Models.BallotIssue
+
+@{ 
+    var lastIndex = Model.BallotIssueOptions.Count - 1;
+}
+
+<div class="row option">
+    <div class="col-md-10">
+        <div class="form-group">
+            @Html.TextAreaFor(model => model.BallotIssueOptions[lastIndex].IssueOptionInfo, new { @class = "form-control option-text", @rows = 2 })
+        </div>
+    </div>
+    <div class="col-md-2 form-group">
+        <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary" onClick="removeOption(@lastIndex)">Remove Option</button>
+    </div>
+</div>

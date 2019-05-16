@@ -22,22 +22,17 @@ namespace Web.Data
         {
             _context = context;
 
-            context.Database.EnsureCreated();
-
-            if (!context.Elections.Any())
-            {
-                InitializeDatabase(context);
-            }
+            InitializeDatabase();
         }
 
-        public static void InitializeDatabase(ApplicationDbContext context)
+        public static void InitializeDatabase()
         {
             const string candidatesFile = "wwwroot/Data/candidates.json";
             List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
 
             var elections = GetElections().ToArray();
-            context.Elections.AddRange(elections);
-            context.SaveChanges();
+            _context.Elections.AddRange(elections);
+            _context.SaveChanges();
 
             const string pollingPlacesFile = "wwwroot/Data/pollingPlaces.json";
             List<JSONPollingPlace> pollingPlacesData = GetJsonData<JSONPollingPlace>(pollingPlacesFile);
@@ -66,30 +61,30 @@ namespace Web.Data
                     }).ToList(),
                 })
                 .ToList();
-            context.PollingPlaces.AddRange(pollingPlaces);
-            context.SaveChanges();
+            _context.PollingPlaces.AddRange(pollingPlaces);
+            _context.SaveChanges();
 
             var organizations = GetOrganizations(candidateData).ToArray();
-            context.Organizations.AddRange(organizations);
-            context.SaveChanges();
+            _context.Organizations.AddRange(organizations);
+            _context.SaveChanges();
 
             var races = GetRaces(candidateData).ToArray();
-            context.Races.AddRange(races);
-            context.SaveChanges();
+            _context.Races.AddRange(races);
+            _context.SaveChanges();
 
             GetCandidatesAndContacts(candidateData);
 
             var ballotIssues = GetBallotIssues().ToArray();
-            context.BallotIssues.AddRange(ballotIssues);
-            context.SaveChanges();
+            _context.BallotIssues.AddRange(ballotIssues);
+            _context.SaveChanges();
 
             var issueOptions = GetIssueOptions().ToArray();
-            context.IssueOptions.AddRange(issueOptions);
-            context.SaveChanges();
+            _context.IssueOptions.AddRange(issueOptions);
+            _context.SaveChanges();
 
             var steps = GetSteps().ToArray();
-            context.Steps.AddRange(steps);
-            context.SaveChanges();
+            _context.Steps.AddRange(steps);
+            _context.SaveChanges();
         }
 
         private static void GetCandidatesAndContacts(List<JSONCandidate> candidateData)
@@ -392,25 +387,21 @@ Are you in favour of Council having the authority, without further assent of the
                 new IssueOption()
                 {
                     BallotIssueId = 1,
-                    IssueOptionTitle = "How you plan to answer Question 1. Transportation and technology",
                     IssueOptionInfo = "Yes",
                 },
                 new IssueOption()
                 {
                     BallotIssueId = 1,
-                    IssueOptionTitle = "How you plan to answer Question 1. Transportation and technology",
                     IssueOptionInfo = "No",
                 },
                 new IssueOption()
                 {
                     BallotIssueId = 2,
-                    IssueOptionTitle = "How you plan to answer Question 2. Capital maintenance and renovation programs for existing community facilities, civic facilities, and parks",
                     IssueOptionInfo = "Yes",
                 },
                 new IssueOption()
                 {
                     BallotIssueId = 2,
-                    IssueOptionTitle = "How you plan to answer Question 2. Capital maintenance and renovation programs for existing community facilities, civic facilities, and parks",
                     IssueOptionInfo = "No",
                 },
             };
