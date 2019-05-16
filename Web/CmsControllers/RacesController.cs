@@ -110,7 +110,10 @@ namespace Web.CmsControllers
         {
             if (ModelState.IsValid)
             {
+                int next = _context.Races.Where(r => r.ElectionId == _managedElectionID).Count() + 1;
+                race.BallotOrder = next;
                 race.ElectionId = _managedElectionID;
+
                 _context.Add(race);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

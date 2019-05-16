@@ -15,6 +15,9 @@
 
 <h1>@ViewData["Title"]</h1>
 <div class="panel panel-default">
+    <p class="lead">
+        Drag items to reorder them.
+    </p>
     <form asp-action="Reorder">
         <table class="table">
             <thead>
@@ -35,7 +38,7 @@
                         @Html.HiddenFor(model => model[i].PositionName)
                         @Html.HiddenFor(model => model[i].NumberNeeded)
                         <td>
-                            @Html.TextBoxFor(model => model[i].BallotOrder, new { @class = "order" })
+                            @Html.TextBoxFor(model => model[i].BallotOrder, new { @class = "order", @disabled = "disabled", @readonly = "readonly" })
                             @Html.ValidationMessageFor(model => model[i].BallotOrder, "", new { @class = "text-danger" })
                         </td>
                         <td>

@@ -15,8 +15,9 @@
         <div class="col-md-4">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @Html.TextBoxFor(r => r.Race.RaceId, new { @type = "hidden" })
-                @Html.TextBoxFor(r => r.Race.ElectionId, new { @type = "hidden" })
+                @Html.HiddenFor(r => r.Race.RaceId)
+                @Html.HiddenFor(r => r.Race.ElectionId)
+                @Html.HiddenFor(r => r.Race.BallotOrder)
                 <div class="form-group">
                     <label asp-for="Race.PositionName" class="control-label"></label>
                     <input asp-for="Race.PositionName" class="form-control" />
