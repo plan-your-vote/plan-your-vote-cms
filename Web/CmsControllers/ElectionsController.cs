@@ -11,7 +11,7 @@ using Web.Data;
 
 namespace Web
 {
-    [Authorize]
+    [Authorize(Roles = Constants.Account.ROLE_ADMIN)]
     public class ElectionsController : Controller
     {
         private readonly ApplicationDbContext _context;

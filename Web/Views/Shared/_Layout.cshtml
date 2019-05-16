@@ -98,8 +98,8 @@
                             </li>
                             @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ROLE_ADMIN))
                             {
-                                <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "UserRoleViewModels")">
-                                    <a class="nav-link text-white" style="float: right;" asp-area="" asp-controller="UserRoleViewModels" asp-action="Index">@Localizer["User Management"]</a>
+                                <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "UserManagement")">
+                                    <a class="nav-link text-white" style="float: right;" asp-area="" asp-controller="UserManagement" asp-action="Index">@Localizer["User Management"]</a>
                                 </li>
                             }
                         </ul>
