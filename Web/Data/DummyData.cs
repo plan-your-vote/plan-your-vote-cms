@@ -1,13 +1,10 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 using Web.Models;
 
 namespace Web.Data
@@ -333,7 +330,14 @@ namespace Web.Data
 
         public static List<DataType> GetJsonData<DataType>(string filePath)
         {
-            return JsonConvert.DeserializeObject<List<DataType>>(File.ReadAllText(filePath));
+            List<DataType> data = null;
+
+            using (StreamReader streamReader = new StreamReader(filePath, Encoding.GetEncoding("iso-8859-1")))
+            {
+                data = JsonConvert.DeserializeObject<List<DataType>>(streamReader.ReadToEnd());
+            }
+
+            return data;
         }
 
         private static List<Election> GetElections()
