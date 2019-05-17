@@ -38,7 +38,7 @@
                         @Html.HiddenFor(model => model[i].PositionName)
                         @Html.HiddenFor(model => model[i].NumberNeeded)
                         <td>
-                            @Html.TextBoxFor(model => model[i].BallotOrder, new { @class = "order", @disabled = "disabled", @readonly = "readonly" })
+                            @Html.TextBoxFor(model => model[i].BallotOrder, new { @class = "order", @readonly = "readonly" })
                             @Html.ValidationMessageFor(model => model[i].BallotOrder, "", new { @class = "text-danger" })
                         </td>
                         <td>

@@ -83,7 +83,6 @@ namespace Web
                     .OrderBy(c => c.Name)
                     .ToListAsync();
             }
-            
             else if ("alphabet".Equals(orderBy))
             {
                 model.CandidatesByRace = await _context.CandidateRaces
@@ -186,7 +185,10 @@ namespace Web
                     }
                 },
                 Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name"),
-                Races = new SelectList(_context.Races.OrderBy(r => r.BallotOrder), "RaceId", "PositionName")
+                Races = new SelectList(_context.Races
+                        .Where(r => r.ElectionId == _managedElectionID)
+                        .OrderBy(r => r.BallotOrder), 
+                    "RaceId", "PositionName")
             };
 
             return View(model);
@@ -368,7 +370,10 @@ namespace Web
             {
                 Candidate = candidate,
                 Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId),
-                Races = new SelectList(_context.Races.OrderBy(r => r.BallotOrder), "RaceId", "PositionName")
+                Races = new SelectList(_context.Races
+                        .Where(r => r.ElectionId == _managedElectionID)
+                        .OrderBy(r => r.BallotOrder), 
+                    "RaceId", "PositionName")
             };
 
             return View(model);

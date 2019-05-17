@@ -36,9 +36,9 @@ namespace Web.CmsControllers
         public async Task<IActionResult> Reorder()
         {
             return View(await _context.Races
-                .Where(r => r.ElectionId == _managedElectionID)
-                .OrderBy(r => r.BallotOrder)
-                .ToListAsync());
+                    .Where(r => r.ElectionId == _managedElectionID)
+                    .OrderBy(r => r.BallotOrder)
+                    .ToListAsync());
         }
 
         [HttpPost]
@@ -108,12 +108,14 @@ namespace Web.CmsControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RaceId,PositionName,Description,NumberNeeded")] Race race)
         {
-            if (ModelState.IsValid)
-            {
-                int next = _context.Races.Where(r => r.ElectionId == _managedElectionID).Count() + 1;
-                race.BallotOrder = next;
-                race.ElectionId = _managedElectionID;
+            int next = _context.Races.Where(r => r.ElectionId == _managedElectionID).Count() + 1;
+            race.BallotOrder = next;
+            race.ElectionId = _managedElectionID;
 
+            ModelState.Clear();
+
+            if (TryValidateModel(race))
+            {
                 _context.Add(race);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

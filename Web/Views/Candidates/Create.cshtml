@@ -39,15 +39,24 @@
                 </div>
                 <div>
                     @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
-                    <div class="multi-select">
-                        @foreach (var race in Model.Races)
-                        {
-                            <div>
-                                <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
-                                <label for="@race.Value">@race.Text</label>
-                            </div>
-                        }
-                    </div>
+                    @if (Model.Races.ToList().Count == 0)
+                    {
+                        <div>
+                            <span>No races available</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="multi-select">
+                            @foreach (var race in Model.Races)
+                            {
+                                <div>
+                                    <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
+                                    <label for="@race.Value">@race.Text</label>
+                                </div>
+                            }
+                        </div>
+                    }
                 </div>
 
                 <div>

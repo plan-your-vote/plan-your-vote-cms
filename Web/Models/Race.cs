@@ -20,6 +20,7 @@ namespace Web.Models
         [Range(1, Int32.MaxValue)]
         public int BallotOrder { get; set; }
 
+        [Required]
         [Display(Name = "PositionName")]
         public string PositionName { get; set; }
 

@@ -2,63 +2,66 @@
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
-@foreach (var race in Model.Races)
+@if (Model.Races.Count > 0)
 {
-    <h5>@Html.DisplayFor(model => race.PositionName)</h5>
-    <a asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["Edit Ballot Order"]</a>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Picture)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Organization)
-                </th>
-                <th class="col-sm-2"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                var group = Model.CandidatesByRace.Where(g => g.First().RaceId == race.RaceId);
-            }
+    @foreach (var race in Model.Races)
+    {
+        <h5>@Html.DisplayFor(model => race.PositionName)</h5>
+        <a asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["Edit Ballot Order"]</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Picture)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Organization)
+                    </th>
+                    <th class="col-sm-2"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var group = Model.CandidatesByRace.Where(g => g.First().RaceId == race.RaceId);
+                }
 
-            @if (group != null && group.ToList().Count > 0)
-            {
-                @foreach (var candidateRace in group.First())
+                @if (group != null && group.ToList().Count > 0)
+                {
+                    @foreach (var candidateRace in group.First())
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(cr => candidateRace.Candidate.Name)
+                            </td>
+                            <td>
+                                <img width="80" height="80" src="@Html.DisplayFor(cr => candidateRace.Candidate.Picture)" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(cr => candidateRace.Candidate.Organization.Name)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a> |
+                                <a asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a> |
+                                <a asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(cr => candidateRace.Candidate.Name)
-                        </td>
-                        <td>
-                            <img width="80" height="80" src="@Html.DisplayFor(cr => candidateRace.Candidate.Picture)" />
-                        </td>
-                        <td>
-                            @Html.DisplayFor(cr => candidateRace.Candidate.Organization.Name)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a> |
-                            <a asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a> |
-                            <a asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a>
+                        <td colspan="4">
+                            No candidates found
                         </td>
                     </tr>
                 }
-            }
-            else
-            {
-                <tr>
-                    <td colspan="4">
-                        No candidates found
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <hr />
+            </tbody>
+        </table>
+        <hr />
+    }
 }
 <h5>Candidates Not Running</h5>
 <table class="table">
