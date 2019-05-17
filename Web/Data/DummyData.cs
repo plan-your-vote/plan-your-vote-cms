@@ -332,7 +332,7 @@ namespace Web.Data
         {
             List<DataType> data = null;
 
-            using (StreamReader streamReader = new StreamReader(filePath, Encoding.GetEncoding("iso-8859-1")))
+            using (StreamReader streamReader = new StreamReader(filePath, Encoding.UTF8))
             {
                 data = JsonConvert.DeserializeObject<List<DataType>>(streamReader.ReadToEnd());
             }
