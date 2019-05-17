@@ -46,22 +46,31 @@
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
-                    <div class="multi-select">
-                        @foreach (var race in Model.Races)
-                        {
+                    @if (Model.Races.ToList().Count == 0)
+                    {
                         <div>
-                            @if (Model.Candidate.CandidateRaces.Exists(cr => cr.RaceId == int.Parse(race.Value)))
-                            {
-                                <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" checked />
-                            }
-                            else
-                            {
-                                <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
-                            }
-                            <label for="@race.Value">@race.Text</label>
+                            <span>No races available</span>
                         </div>
-                        }
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="multi-select">
+                            @foreach (var race in Model.Races)
+                            {
+                                <div>
+                                    @if (Model.Candidate.CandidateRaces.Exists(cr => cr.RaceId == int.Parse(race.Value)))
+                                    {
+                                        <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" checked />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
+                                    }
+                                    <label for="@race.Value">@race.Text</label>
+                                </div>
+                            }
+                        </div>
+                    }
                 </div>
 
                 <div>

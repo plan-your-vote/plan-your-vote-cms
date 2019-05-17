@@ -253,6 +253,7 @@ namespace Web.Data
                     .Where(races => races.PositionName == existingCandidate.Position)
                     .First()
                     .RaceId,
+                    BallotOrder = int.Parse(existingCandidate.BallotOrder),
                 };
 
                 candidateRaces.Add(candidateRace);
@@ -292,6 +293,10 @@ namespace Web.Data
             const int NumOfCouncillorsNeeded = 10;
             const int NumOfParkCommissionersNeeded = 7;
             const int NumOfSchoolTrusteesNeeded = 9;
+            const int OrderMayor = 1;
+            const int OrderCouncillor = 2;
+            const int OrderPark = 3;
+            const int OrderSchool = 4;
 
             List<Race> races = new List<Race>();
 
@@ -309,15 +314,19 @@ namespace Web.Data
                     {
                         case "Councillor":
                             race.NumberNeeded = NumOfCouncillorsNeeded;
+                            race.BallotOrder = OrderCouncillor;
                             break;
                         case "Mayor":
                             race.NumberNeeded = NumOfMayorsNeeded;
+                            race.BallotOrder = OrderMayor;
                             break;
                         case "Park Board commissioner":
                             race.NumberNeeded = NumOfParkCommissionersNeeded;
+                            race.BallotOrder = OrderPark;
                             break;
                         case "School trustee":
                             race.NumberNeeded = NumOfSchoolTrusteesNeeded;
+                            race.BallotOrder = OrderSchool;
                             break;
                     }
 

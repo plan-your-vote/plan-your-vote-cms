@@ -31,17 +31,20 @@ namespace Web
         {
             var races = await _context.Races
                 .Where(r => r.ElectionId == _managedElectionID)
+                .OrderBy(r => r.BallotOrder)
                 .ToListAsync();
             var candidateRaces = await _context.CandidateRaces
                 .Include(cr => cr.Race)
                 .Include(cr => cr.Candidate)
                 .Include(cr => cr.Candidate.Organization)
-                .OrderBy(cr => cr.RaceId)
+                .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
                 .GroupBy(cr => cr.RaceId)
                 .ToListAsync();
             var unlisted = await _context.Candidates
                 .Include(c => c.Organization)
                 .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
+                .OrderBy(c => c.Name)
                 .ToListAsync();
 
             CandidatesByRaceViewModel model = new CandidatesByRaceViewModel
@@ -51,6 +54,125 @@ namespace Web
                 UnlistedCandidates = unlisted
             };
             return View(model);
+        }
+
+        public virtual async Task<IActionResult> GetCandidates(string orderBy)
+        {
+            CandidatesByRaceViewModel model = new CandidatesByRaceViewModel
+            {
+                Races = await _context.Races
+                    .Where(r => r.ElectionId == _managedElectionID)
+                    .OrderBy(r => r.BallotOrder)
+                    .ToListAsync()
+            };
+
+            if ("ballot-order".Equals(orderBy))
+            {
+                model.CandidatesByRace = await _context.CandidateRaces
+                    .Include(cr => cr.Race)
+                    .Include(cr => cr.Candidate)
+                    .Include(cr => cr.Candidate.Organization)
+                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
+                    .GroupBy(cr => cr.RaceId)
+                    .ToListAsync();
+
+                model.UnlistedCandidates = await _context.Candidates
+                    .Include(c => c.Organization)
+                    .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
+                    .OrderBy(c => c.Name)
+                    .ToListAsync();
+            }
+            else if ("alphabet".Equals(orderBy))
+            {
+                model.CandidatesByRace = await _context.CandidateRaces
+                    .Include(cr => cr.Race)
+                    .Include(cr => cr.Candidate)
+                    .Include(cr => cr.Candidate.Organization)
+                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.Candidate.Name)
+                    .GroupBy(cr => cr.RaceId)
+                    .ToListAsync();
+
+                model.UnlistedCandidates = await _context.Candidates
+                    .Include(c => c.Organization)
+                    .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
+                    .OrderBy(c => c.Name)
+                    .ToListAsync();
+            }
+            else if ("reverse-alphabet".Equals(orderBy))
+            {
+                model.CandidatesByRace = await _context.CandidateRaces
+                    .Include(cr => cr.Race)
+                    .Include(cr => cr.Candidate)
+                    .Include(cr => cr.Candidate.Organization)
+                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                    .OrderBy(cr => cr.RaceId).ThenByDescending(cr => cr.Candidate.Name)
+                    .GroupBy(cr => cr.RaceId)
+                    .ToListAsync();
+
+                model.UnlistedCandidates = await _context.Candidates
+                    .Include(c => c.Organization)
+                    .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
+                    .OrderByDescending(c => c.Name)
+                    .ToListAsync();
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            return PartialView("CandidateList", model);
+        }
+
+        // GET: Candidates/Reorder/5
+        public async Task<IActionResult> Reorder(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            return View(await _context.CandidateRaces
+                .Include(cr => cr.Race)
+                .Include(cr => cr.Candidate)
+                .Where(cr => cr.RaceId == id)
+                .OrderBy(cr => cr.BallotOrder)
+                .ToListAsync());
+        }
+
+        // POST: Candidates/Reorder/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reorder(int id, IList<CandidateRace> candidateRaces)
+        {
+            if (candidateRaces.Count == 0 || id != candidateRaces.First().RaceId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                IList<CandidateRace> existingRaces = await _context.CandidateRaces
+                    .Where(cr => cr.RaceId == id)
+                    .ToListAsync();
+
+                foreach (var race in candidateRaces)
+                {
+                    var current = existingRaces.Where(existing => existing.CandidateRaceId == race.CandidateRaceId);
+
+                    if (current != null && current.ToList().Count > 0)
+                    {
+                        current.First().BallotOrder = race.BallotOrder;
+                        _context.Update(current.First());
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(candidateRaces);
         }
 
         // GET: Candidates/Details/5
@@ -97,7 +219,10 @@ namespace Web
                     }
                 },
                 Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name"),
-                Races = new SelectList(_context.Races, "RaceId", "PositionName")
+                Races = new SelectList(_context.Races
+                        .Where(r => r.ElectionId == _managedElectionID)
+                        .OrderBy(r => r.BallotOrder), 
+                    "RaceId", "PositionName")
             };
 
             return View(model);
@@ -184,10 +309,13 @@ namespace Web
 
                 foreach (string raceid in model.RaceIds)
                 {
+                    int next = _context.CandidateRaces.Where(c => c.RaceId == int.Parse(raceid)).Count() + 1;
+
                     CandidateRace cr = new CandidateRace
                     {
                         CandidateId = model.Candidate.CandidateId,
-                        RaceId = int.Parse(raceid)
+                        RaceId = int.Parse(raceid),
+                        BallotOrder = next
                     };
                     candidateRaces.Add(cr);
                 }
@@ -279,7 +407,10 @@ namespace Web
             {
                 Candidate = candidate,
                 Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId),
-                Races = new SelectList(_context.Races, "RaceId", "PositionName")
+                Races = new SelectList(_context.Races
+                        .Where(r => r.ElectionId == _managedElectionID)
+                        .OrderBy(r => r.BallotOrder), 
+                    "RaceId", "PositionName")
             };
 
             return View(model);
@@ -343,10 +474,13 @@ namespace Web
 
                 foreach (string raceid in model.RaceIds)
                 {
+                    int next = _context.CandidateRaces.Where(c => c.RaceId == int.Parse(raceid)).Count() + 1;
+
                     CandidateRace cr = new CandidateRace
                     {
                         CandidateId = model.Candidate.CandidateId,
-                        RaceId = int.Parse(raceid)
+                        RaceId = int.Parse(raceid),
+                        BallotOrder = next
                     };
                     candidateRaces.Add(cr);
                 }

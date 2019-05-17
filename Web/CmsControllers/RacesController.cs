@@ -26,7 +26,48 @@ namespace Web.CmsControllers
         // GET: Races
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Races.Where(r => r.ElectionId == _managedElectionID).ToListAsync());
+            return View(await _context.Races
+                .Where(r => r.ElectionId == _managedElectionID)
+                .OrderBy(r => r.BallotOrder)
+                .ToListAsync());
+        }
+
+        // GET: Races/Reorder
+        public async Task<IActionResult> Reorder()
+        {
+            return View(await _context.Races
+                    .Where(r => r.ElectionId == _managedElectionID)
+                    .OrderBy(r => r.BallotOrder)
+                    .ToListAsync());
+        }
+
+        // POST: Races/Reorder
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reorder(IList<Race> races)
+        {
+            if (ModelState.IsValid)
+            {
+                IList<Race> existingRaces = await _context.Races
+                .Where(r => r.ElectionId == _managedElectionID)
+                .OrderBy(r => r.BallotOrder)
+                .ToListAsync();
+
+                foreach (var race in races)
+                {
+                    var current = existingRaces.Where(r => r.RaceId == race.RaceId);
+                    if (current != null && current.ToList().Count > 0)
+                    {
+                        current.First().BallotOrder = race.BallotOrder;
+                        _context.Update(current.First());
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(races);
         }
 
         // GET: Races/Details/5
@@ -68,9 +109,14 @@ namespace Web.CmsControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RaceId,PositionName,Description,NumberNeeded")] Race race)
         {
-            if (ModelState.IsValid)
+            int next = _context.Races.Where(r => r.ElectionId == _managedElectionID).Count() + 1;
+            race.BallotOrder = next;
+            race.ElectionId = _managedElectionID;
+
+            ModelState.Clear();
+
+            if (TryValidateModel(race))
             {
-                race.ElectionId = _managedElectionID;
                 _context.Add(race);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

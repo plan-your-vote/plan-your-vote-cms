@@ -77,6 +77,13 @@ body {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
 }
 
+/* Page-specific
+-------------------------------------------------- */
+.vert-center {
+    display: flex;
+    align-items: center;
+}
+
 .multi-select {
     max-height: 120px;
     overflow: auto;

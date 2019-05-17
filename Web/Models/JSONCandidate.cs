@@ -10,6 +10,7 @@ namespace Web.Models
         public string Position { get; set; }
         public string Name { get; set; }
         public string Party { get; set; }
+        public string BallotOrder { get; set; }
         public string Priority1 { get; set; }
         public string Priority2 { get; set; }
         public string Priority3 { get; set; }

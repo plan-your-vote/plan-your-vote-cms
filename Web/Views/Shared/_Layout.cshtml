@@ -51,7 +51,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown @Html.IsSelected(actions: "Index,Edit,Details,Delete,Create", controllers: "BallotIssues,Races,PollingPlaces")">
+                            <li class="dropdown @Html.IsSelected(actions: "Index,Edit,Details,Delete,Create,Reorder", controllers: "BallotIssues,Races,PollingPlaces")">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Election Details <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
 
@@ -66,7 +66,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "Candidates")">
+                            <li class="dropdown @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit,Reorder", controllers: "Candidates")">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Candidate Details <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li class="nav-item">
@@ -148,6 +148,8 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- jQuery UI library containing sortable -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
