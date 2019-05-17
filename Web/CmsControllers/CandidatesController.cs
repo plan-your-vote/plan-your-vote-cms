@@ -31,13 +31,14 @@ namespace Web
         {
             var races = await _context.Races
                 .Where(r => r.ElectionId == _managedElectionID)
+                .OrderBy(r => r.BallotOrder)
                 .ToListAsync();
             var candidateRaces = await _context.CandidateRaces
                 .Include(cr => cr.Race)
                 .Include(cr => cr.Candidate)
                 .Include(cr => cr.Candidate.Organization)
                 .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.Candidate.Name)
+                .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
                 .GroupBy(cr => cr.RaceId)
                 .ToListAsync();
             var unlisted = await _context.Candidates
@@ -61,26 +62,28 @@ namespace Web
             {
                 Races = await _context.Races
                     .Where(r => r.ElectionId == _managedElectionID)
+                    .OrderBy(r => r.BallotOrder)
                     .ToListAsync()
             };
 
-            if ("reverse-alphabet".Equals(orderBy))
+            if ("ballot-order".Equals(orderBy))
             {
                 model.CandidatesByRace = await _context.CandidateRaces
                     .Include(cr => cr.Race)
                     .Include(cr => cr.Candidate)
                     .Include(cr => cr.Candidate.Organization)
                     .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                    .OrderBy(cr => cr.RaceId).ThenByDescending(cr => cr.Candidate.Name)
+                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
                     .GroupBy(cr => cr.RaceId)
                     .ToListAsync();
 
                 model.UnlistedCandidates = await _context.Candidates
                     .Include(c => c.Organization)
                     .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
-                    .OrderByDescending(c => c.Name)
+                    .OrderBy(c => c.Name)
                     .ToListAsync();
             }
+            
             else if ("alphabet".Equals(orderBy))
             {
                 model.CandidatesByRace = await _context.CandidateRaces
@@ -96,6 +99,23 @@ namespace Web
                     .Include(c => c.Organization)
                     .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
                     .OrderBy(c => c.Name)
+                    .ToListAsync();
+            }
+            else if ("reverse-alphabet".Equals(orderBy))
+            {
+                model.CandidatesByRace = await _context.CandidateRaces
+                    .Include(cr => cr.Race)
+                    .Include(cr => cr.Candidate)
+                    .Include(cr => cr.Candidate.Organization)
+                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                    .OrderBy(cr => cr.RaceId).ThenByDescending(cr => cr.Candidate.Name)
+                    .GroupBy(cr => cr.RaceId)
+                    .ToListAsync();
+
+                model.UnlistedCandidates = await _context.Candidates
+                    .Include(c => c.Organization)
+                    .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
+                    .OrderByDescending(c => c.Name)
                     .ToListAsync();
             }
             else
@@ -118,6 +138,7 @@ namespace Web
                 .Include(cr => cr.Race)
                 .Include(cr => cr.Candidate)
                 .Where(cr => cr.RaceId == id)
+                .OrderBy(cr => cr.BallotOrder)
                 .ToListAsync());
         }
 
@@ -165,7 +186,7 @@ namespace Web
                     }
                 },
                 Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name"),
-                Races = new SelectList(_context.Races, "RaceId", "PositionName")
+                Races = new SelectList(_context.Races.OrderBy(r => r.BallotOrder), "RaceId", "PositionName")
             };
 
             return View(model);
@@ -347,7 +368,7 @@ namespace Web
             {
                 Candidate = candidate,
                 Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId),
-                Races = new SelectList(_context.Races, "RaceId", "PositionName")
+                Races = new SelectList(_context.Races.OrderBy(r => r.BallotOrder), "RaceId", "PositionName")
             };
 
             return View(model);

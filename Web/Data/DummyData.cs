@@ -258,6 +258,7 @@ namespace Web.Data
                     .Where(races => races.PositionName == existingCandidate.Position)
                     .First()
                     .RaceId,
+                    BallotOrder = int.Parse(existingCandidate.BallotOrder),
                 };
 
                 candidateRaces.Add(candidateRace);
