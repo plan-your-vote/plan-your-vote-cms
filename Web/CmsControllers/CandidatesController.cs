@@ -141,6 +141,40 @@ namespace Web
                 .ToListAsync());
         }
 
+        // POST: Candidates/Reorder/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Reorder(int id, IList<CandidateRace> candidateRaces)
+        {
+            if (candidateRaces.Count == 0 || id != candidateRaces.First().RaceId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                IList<CandidateRace> existingRaces = await _context.CandidateRaces
+                    .Where(cr => cr.RaceId == id)
+                    .ToListAsync();
+
+                foreach (var race in candidateRaces)
+                {
+                    var current = existingRaces.Where(existing => existing.CandidateRaceId == race.CandidateRaceId);
+
+                    if (current != null && current.ToList().Count > 0)
+                    {
+                        current.First().BallotOrder = race.BallotOrder;
+                        _context.Update(current.First());
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(candidateRaces);
+        }
+
         // GET: Candidates/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -275,10 +309,13 @@ namespace Web
 
                 foreach (string raceid in model.RaceIds)
                 {
+                    int next = _context.CandidateRaces.Where(c => c.RaceId == int.Parse(raceid)).Count() + 1;
+
                     CandidateRace cr = new CandidateRace
                     {
                         CandidateId = model.Candidate.CandidateId,
-                        RaceId = int.Parse(raceid)
+                        RaceId = int.Parse(raceid),
+                        BallotOrder = next
                     };
                     candidateRaces.Add(cr);
                 }
@@ -437,10 +474,13 @@ namespace Web
 
                 foreach (string raceid in model.RaceIds)
                 {
+                    int next = _context.CandidateRaces.Where(c => c.RaceId == int.Parse(raceid)).Count() + 1;
+
                     CandidateRace cr = new CandidateRace
                     {
                         CandidateId = model.Candidate.CandidateId,
-                        RaceId = int.Parse(raceid)
+                        RaceId = int.Parse(raceid),
+                        BallotOrder = next
                     };
                     candidateRaces.Add(cr);
                 }

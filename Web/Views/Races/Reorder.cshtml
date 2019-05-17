@@ -18,40 +18,47 @@
     <p class="lead">
         Drag items to reorder them.
     </p>
-    <form asp-action="Reorder">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().BallotOrder)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.First().PositionName)
-                    </th>
-                </tr>
-            </thead>
-            <tbody id="ballot-order">
-                @for (int i = 0; i < Model.Count; i++)
-                {
+    @if (Model.Count == 0)
+    {
+        <span>No races found</span>
+    }
+    else
+    {
+        <form asp-action="Reorder">
+            <table class="table">
+                <thead>
                     <tr>
-                        @Html.HiddenFor(model => model[i].RaceId)
-                        @Html.HiddenFor(model => model[i].PositionName)
-                        @Html.HiddenFor(model => model[i].NumberNeeded)
-                        <td>
-                            @Html.TextBoxFor(model => model[i].BallotOrder, new { @class = "order", @readonly = "readonly" })
-                            @Html.ValidationMessageFor(model => model[i].BallotOrder, "", new { @class = "text-danger" })
-                        </td>
-                        <td>
-                            @Html.DisplayFor(model => model[i].PositionName)
-                        </td>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().BallotOrder)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().PositionName)
+                        </th>
                     </tr>
-                }
-            </tbody>
-        </table>
-        <div class="form-group">
-            <input type="submit" value=@Localizer["Save Changes"] class="btn btn-primary" />
-        </div>
-    </form>
+                </thead>
+                <tbody id="ballot-order">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            @Html.HiddenFor(model => model[i].RaceId)
+                            @Html.HiddenFor(model => model[i].PositionName)
+                            @Html.HiddenFor(model => model[i].NumberNeeded)
+                            <td>
+                                @Html.TextBoxFor(model => model[i].BallotOrder, new { @class = "order", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model[i].BallotOrder, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model[i].PositionName)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value=@Localizer["Save Changes"] class="btn btn-primary" />
+            </div>
+        </form>
+    }
 </div>
 <div>
     <a asp-action="Index">@Localizer["Back to List"]</a>

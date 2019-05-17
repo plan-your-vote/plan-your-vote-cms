@@ -41,6 +41,7 @@ namespace Web.CmsControllers
                     .ToListAsync());
         }
 
+        // POST: Races/Reorder
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Reorder(IList<Race> races)
