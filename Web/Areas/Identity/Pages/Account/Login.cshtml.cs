@@ -37,9 +37,9 @@ namespace Web.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required(ErrorMessage = "The Email field is required.")]
-            [EmailAddress(ErrorMessage = "The Email field is not a valid e-mail address.")]           
-            public string Email { get; set; }
+            [Required(ErrorMessage = "The {0} field is required.")]
+            [Display(Name = "Username")]
+            public string UserName { get; set; } // This field was changed from Email
 
             [Required(ErrorMessage = "The Password field is required.")]
             [DataType(DataType.Password)]
@@ -74,7 +74,7 @@ namespace Web.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
+                var result = await _signInManager.PasswordSignInAsync(Input.UserName, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");

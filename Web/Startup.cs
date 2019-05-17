@@ -151,11 +151,14 @@ namespace Web
 
             try
             {
-                //var local_access_token = Configuration["mapkey"];
-                //if (!string.IsNullOrEmpty(local_access_token))
-                //{
-                //    MapController.access_token = local_access_token;
-                //}
+                var local_access_token = Configuration["mapkey"];
+                if (!string.IsNullOrEmpty(local_access_token))
+                {
+                    if (string.IsNullOrEmpty(MapController.AccessToken))
+                    {
+                        MapController.AccessToken = local_access_token;
+                    }
+                }
             }
             catch (Exception ex)
             {
@@ -167,8 +170,7 @@ namespace Web
         public void Configure(
             IApplicationBuilder app,
             ApplicationDbContext context,
-            IHostingEnvironment env,
-            IOptions<MapConfiguration> mapConfiguration)
+            IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -211,8 +213,8 @@ namespace Web
 
             if (!context.Elections.Any())
             {
-                //MapController.Initialize(mapConfiguration);
-                DummyData.Initialize(context, app).Wait();
+                DummyData.Initialize(context);
+                AccountsInit.InitializeAsync(app);
                 StateInit.Initialize(context);
                 ThemesInit.Initialize(context);
             }

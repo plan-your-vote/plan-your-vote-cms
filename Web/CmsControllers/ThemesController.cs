@@ -12,7 +12,7 @@ using Web.ViewModels;
 
 namespace Web.CmsControllers
 {
-    [Authorize]
+    [Authorize(Roles = Constants.Account.ROLE_ADMIN)]
     public class ThemesController : Controller
     {
         private readonly ApplicationDbContext _context;
