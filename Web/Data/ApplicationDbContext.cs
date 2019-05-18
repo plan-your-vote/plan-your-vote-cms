@@ -19,8 +19,6 @@ namespace Web.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Image>()
-                .HasKey(i => new { i.ThemeName, i.ID });
             builder.Entity<CandidateDetail>()
                 .HasOne(cd => cd.Candidate)
                 .WithMany(c => c.Details);

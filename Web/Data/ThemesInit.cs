@@ -41,7 +41,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Default",
-                    ID = "Logo",
+                    Placement = "Logo",
                     Type = "URL",
                     Value = "https://vancouver.ca/plan-your-vote/img/logo_home.png",
                     Format = "PNG",
@@ -50,7 +50,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Default",
-                    ID = "Footer Logo",
+                    Placement = "Footer Logo",
                     Type = "URL",
                     Value = "https://vancouver.ca/plan-your-vote/img/cov_logo.png",
                     Format = "PNG",
@@ -59,7 +59,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Snowdrop",
-                    ID = "Logo",
+                    Placement = "Logo",
                     Type = "URL",
                     Value = "https://www.bcit.ca/images/bcitlogo_fallback.png",
                     Format = "PNG",
@@ -68,7 +68,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Snowdrop",
-                    ID = "Footer Logo",
+                    Placement = "Footer Logo",
                     Type = "URL",
                     Value = "https://www.bcit.ca/images/v4_entrybanners/bcit_home/home_industryexperts2_sml_hd.jpg",
                     Format = "PNG",
@@ -77,7 +77,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Maple",
-                    ID = "Footer Logo",
+                    Placement = "Footer Logo",
                     Type = "URL",
                     Value = "https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg",
                     Format = "SVG",
@@ -86,7 +86,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Maple",
-                    ID = "Logo",
+                    Placement = "Logo",
                     Type = "URL",
                     Value = "https://www.canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-en.svg",
                     Format = "SVG",

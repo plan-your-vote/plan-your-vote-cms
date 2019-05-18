@@ -29,15 +29,15 @@ namespace Web.CmsControllers
         }
 
         // GET: Images/Details/5
-        public async Task<IActionResult> Details(string ThemeName, string ID)
+        public async Task<IActionResult> Details(int? id)
         {
-            if (ThemeName == null || ID == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var image = await _context.Images
-                .FirstOrDefaultAsync(m => m.ThemeName == ThemeName && m.ID == ID);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (image == null)
             {
                 return NotFound();
@@ -57,7 +57,7 @@ namespace Web.CmsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ThemeName,ID,Type,Value,Format,Description")] Image image)
+        public async Task<IActionResult> Create([Bind("ThemeName,Placement,Type,Value,Format,Description")] Image image)
         {
             if (ModelState.IsValid)
             {
@@ -69,14 +69,14 @@ namespace Web.CmsControllers
         }
 
         // GET: Images/Edit/5
-        public async Task<IActionResult> Edit(string ThemeName, string ID)
+        public async Task<IActionResult> Edit(int? id)
         {
-            if (ThemeName == null || ID == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var image = await _context.Images.FindAsync(ThemeName, ID);
+            var image = await _context.Images.FindAsync(id);
             if (image == null)
             {
                 return NotFound();
@@ -89,7 +89,7 @@ namespace Web.CmsControllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ThemeName,ID,Type,Value,Format,Description")] Image image)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ThemeName,Placement,Type,Value,Format,Description")] Image image)
         {
             if (id != image.ID)
             {
@@ -105,7 +105,7 @@ namespace Web.CmsControllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ImageExists(image.ThemeName, image.ID))
+                    if (!ImageExists(image.ID))
                     {
                         return NotFound();
                     }
@@ -120,15 +120,15 @@ namespace Web.CmsControllers
         }
 
         // GET: Images/Delete/5
-        public async Task<IActionResult> Delete(string ThemeName, string ID)
+        public async Task<IActionResult> Delete(int? id)
         {
-            if (ThemeName == null || ID == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
             var image = await _context.Images
-                .FirstOrDefaultAsync(m => m.ThemeName == ThemeName && m.ID == ID);
+                .FirstOrDefaultAsync(m => m.ID == id);
             if (image == null)
             {
                 return NotFound();
@@ -140,17 +140,17 @@ namespace Web.CmsControllers
         // POST: Images/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string ThemeName, string ID)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var image = await _context.Images.FindAsync(ThemeName, ID);
+            var image = await _context.Images.FindAsync(id);
             _context.Images.Remove(image);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ImageExists(string ThemeName, string ID)
+        private bool ImageExists(int id)
         {
-            return _context.Images.Any(e => e.ThemeName == ThemeName && e.ID == ID);
+            return _context.Images.Any(e => e.ID == id);
         }
     }
 }
