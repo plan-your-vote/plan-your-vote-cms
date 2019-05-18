@@ -2,7 +2,15 @@
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
-<h1>@Localizer["User Management"]</h1>
+@{
+    ViewData["Title"] = @Localizer["User Management"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div style="margin-bottom:10px;">
+    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">@Localizer["Add New User"]</a>
+</div>
 
 <table class="table panel panel-default">
     <thead>
@@ -45,6 +53,3 @@
         }
     </tbody>
 </table>
-<div>
-    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">@Localizer["Add New User"]</a>
-</div>
