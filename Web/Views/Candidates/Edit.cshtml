@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Edit"];
+    ViewData["Title"] = @Localizer["Edit Candidate"];
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -16,200 +16,194 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Candidate"]</h4>
-    <hr />
-    <div>
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Candidate.CandidateId" />
+        <div class="form-group">
+            <label asp-for="Candidate.Name" class="control-label"></label>
+            <input asp-for="Candidate.Name" class="form-control" />
+            <span asp-validation-for="Candidate.Name" class="text-danger"></span>
+        </div>
         <div>
-            <form asp-action="Edit" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Candidate.CandidateId" />
-                <div class="form-group">
-                    <label asp-for="Candidate.Name" class="control-label"></label>
-                    <input asp-for="Candidate.Name" class="form-control" />
-                    <span asp-validation-for="Candidate.Name" class="text-danger"></span>
-                </div>
+            @{
+                var url = "../../" + Model.Candidate.Picture;
+                <img width="150" height="150" src="@url">
+            }
+        </div>
+        <div class="form-group">
+            <label asp-for="Candidate.Picture" class="control-label"></label><br />
+            <input asp-for="Candidate.Picture" type="file" name="Image" />
+            <span asp-validation-for="Candidate.Picture" class="text-danger">@ViewData["ImageMessage"]</span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Candidate.OrganizationId" class="control-label">@Html.DisplayNameFor(c => c.Candidate.Organization.Name)</label>
+            <select asp-for="Candidate.OrganizationId" class="form-control" asp-items="Model.Organizations"></select>
+            <span asp-validation-for="Candidate.OrganizationId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
+            @if (Model.Races.ToList().Count == 0)
+            {
                 <div>
-                    @{
-                        var url = "../../" + Model.Candidate.Picture;
-                        <img width="150" height="150" src="@url">
-                    }
+                    <span>No races available</span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Candidate.Picture" class="control-label"></label><br />
-                    <input asp-for="Candidate.Picture" type="file" name="Image" />
-                    <span asp-validation-for="Candidate.Picture" class="text-danger">@ViewData["ImageMessage"]</span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Candidate.OrganizationId" class="control-label">@Html.DisplayNameFor(c => c.Candidate.Organization.Name)</label>
-                    <select asp-for="Candidate.OrganizationId" class="form-control" asp-items="Model.Organizations"></select>
-                    <span asp-validation-for="Candidate.OrganizationId" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
-                    @if (Model.Races.ToList().Count == 0)
+            }
+            else
+            {
+                <div class="multi-select">
+                    @foreach (var race in Model.Races)
                     {
                         <div>
-                            <span>No races available</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="multi-select">
-                            @foreach (var race in Model.Races)
+                            @if (Model.Candidate.CandidateRaces.Exists(cr => cr.RaceId == int.Parse(race.Value)))
                             {
-                                <div>
-                                    @if (Model.Candidate.CandidateRaces.Exists(cr => cr.RaceId == int.Parse(race.Value)))
-                                    {
-                                        <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" checked />
-                                    }
-                                    else
-                                    {
-                                        <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
-                                    }
-                                    <label for="@race.Value">@race.Text</label>
-                                </div>
+                                <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" checked />
                             }
-                        </div>
-                    }
-                </div>
-
-                <div>
-                    <hr />
-                    <h4><label asp-for="Candidate.Details" class="control-label"></label></h4>
-                    <hr />
-                    <input type="hidden" id="removedDetails" name="RemovedDetails" value="" />
-                </div>
-                <div id="allDetails">
-                    @for (int i = 0; i < Model.Candidate.Details.Count; i++)
-                    {
-                        <div id="detail_@i">
-                            <div>
-                                <p class="lead">Detail @(i + 1)</p>
-                                <button type="button" id="removeDetail_@i" class="btn btn-primary">Remove Detail</button>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(c => c.Candidate.Details[i].Title, new { @class = "control-label" })
-                                @Html.TextBoxFor(c => c.Candidate.Details[i].Title, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(c => c.Candidate.Details[i].Title, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(c => c.Candidate.Details[i].Text, new { @class = "control-label" })
-                                @Html.TextAreaFor(c => c.Candidate.Details[i].Text, new { @class = "form-control", @rows = 10 })
-                                @Html.ValidationMessageFor(c => c.Candidate.Details[i].Text, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(c => c.Candidate.Details[i].Format, new { @class = "control-label" })
-                                @Html.DropDownListFor(c => c.Candidate.Details[i].Format, Html.GetEnumSelectList(typeof(CandidateDetailFormat)), "", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(c => c.Candidate.Details[i].Text, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(c => c.Candidate.Details[i].Lang, new { @class = "control-label" })
-                                @Html.DropDownListFor(c => c.Candidate.Details[i].Lang, Html.GetEnumSelectList(typeof(Language)), "", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(c => c.Candidate.Details[i].Lang, "", new { @class = "text-danger" })
-                            </div>
-                            <hr />
-
-                            <script type="text/javascript">
-                            $("#removeDetail_@i").click(function () {
-                                $(this.parentNode.parentNode).attr("style", "display:none");
-                                let id = $(this.parentNode.parentNode).attr("id");
-                                if (id != null) {
-                                    let index = id.charAt(id.length - 1);
-                                    $("#removedDetails").attr("value", $("#removedDetails").attr("value") + index + ",");
-                                }
-                            });
-                            </script>
-                        </div>
-                    }
-                </div>
-
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        function getLast(div) {
-                            if ($(div).children().length === 0) {
-                                return -1;
+                            else
+                            {
+                                <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
                             }
-                            let id = $(div).children().last().attr("id");
-                            return parseInt(id.charAt(id.length - 1));
-                        }
-
-                        $("#addDetail").click(function () {
-                            let count = getLast("#allDetails") + 1;
-                            $("#allDetails").append($(document.createElement("div")).attr("id", "detail_" + count));
-                            $("#detail_" + count)
-                                .load('@Url.Action("GetDetailFields", "Candidates")',
-                                    { "count": count },
-                                    function (response, status, xhr) {
-                                        if (status == "error") {
-                                            alert("An error occurred while loading the detail fields.");
-                                        }
-                                    });
-                        });
-
-                        $("#addContact").click(function () {
-                            let count = getLast("#allContacts") + 1;
-                            $("#allContacts").append($(document.createElement("div")).attr("id", "contact_" + count));
-                            $("#contact_" + count)
-                                .load('@Url.Action("GetContactFields", "Candidates")',
-                                    { "count": count },
-                                    function (response, status, xhr) {
-                                        if (status == "error") {
-                                            alert("An error occurred while loading the contact fields.");
-                                        }
-                                    });
-                        });
-                    });
-                </script>
-                <div>
-                    <hr />
-                    <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
-                    <hr />
-                    <input type="hidden" id="removedContacts" name="RemovedContacts" value="" />
-                </div>
-                <div id="allContacts">
-                    @for (int j = 0; j < Model.Candidate.Contacts.Count; j++)
-                    {
-                        <div id="contact_@j">
-                            <div>
-                                <p class="lead">Contact @(j + 1)</p>
-                                <button type="button" id="removeContact_@j" class="btn btn-primary">Remove Contact</button>
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(c => c.Candidate.Contacts[j].ContactMethod, new { @class = "control-label" })
-                                @Html.DropDownListFor(c => c.Candidate.Contacts[j].ContactMethod, Html.GetEnumSelectList(typeof(ContactMethod)), "", new { @class = "form-control" })
-                                @Html.ValidationMessageFor(c => c.Candidate.Contacts[j].ContactMethod, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(c => c.Candidate.Contacts[j].ContactValue, new { @class = "control-label" })
-                                @Html.EditorFor(c => c.Candidate.Contacts[j].ContactValue, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(c => c.Candidate.Contacts[j].ContactValue, "", new { @class = "text-danger" })
-                            </div>
-                            <hr />
-
-                            <script type="text/javascript">
-                            $("#removeContact_@j").click(function () {
-                                $(this.parentNode.parentNode).attr("style", "display:none");
-                                let id = $(this.parentNode.parentNode).attr("id");
-                                if (id != null) {
-                                    let index = id.charAt(id.length - 1);
-                                    $("#removedContacts").attr("value", $("#removedContacts").attr("value") + index + ",");
-                                }
-                            });
-                            </script>
+                            <label for="@race.Value">@race.Text</label>
                         </div>
                     }
                 </div>
-                <div>
-                    <button type="button" id="addDetail" class="btn btn-primary">Add a Candidate Detail</button>
-                    &nbsp;|&nbsp;
-                    <button type="button" id="addContact" class="btn btn-primary">Add a Contact</button>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
-                </div>
-            </form>
+            }
         </div>
-    </div>
+
+        <div>
+            <hr />
+            <h4><label asp-for="Candidate.Details" class="control-label"></label></h4>
+            <hr />
+            <input type="hidden" id="removedDetails" name="RemovedDetails" value="" />
+        </div>
+        <div id="allDetails">
+            @for (int i = 0; i < Model.Candidate.Details.Count; i++)
+            {
+                <div id="detail_@i">
+                    <div>
+                        <p class="lead">Detail @(i + 1)</p>
+                        <button type="button" id="removeDetail_@i" class="btn btn-primary">Remove Detail</button>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Candidate.Details[i].Title, new { @class = "control-label" })
+                        @Html.TextBoxFor(c => c.Candidate.Details[i].Title, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(c => c.Candidate.Details[i].Title, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Candidate.Details[i].Text, new { @class = "control-label" })
+                        @Html.TextAreaFor(c => c.Candidate.Details[i].Text, new { @class = "form-control", @rows = 10 })
+                        @Html.ValidationMessageFor(c => c.Candidate.Details[i].Text, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Candidate.Details[i].Format, new { @class = "control-label" })
+                        @Html.DropDownListFor(c => c.Candidate.Details[i].Format, Html.GetEnumSelectList(typeof(CandidateDetailFormat)), "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(c => c.Candidate.Details[i].Text, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Candidate.Details[i].Lang, new { @class = "control-label" })
+                        @Html.DropDownListFor(c => c.Candidate.Details[i].Lang, Html.GetEnumSelectList(typeof(Language)), "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(c => c.Candidate.Details[i].Lang, "", new { @class = "text-danger" })
+                    </div>
+                    <hr />
+
+                    <script type="text/javascript">
+                    $("#removeDetail_@i").click(function () {
+                        $(this.parentNode.parentNode).attr("style", "display:none");
+                        let id = $(this.parentNode.parentNode).attr("id");
+                        if (id != null) {
+                            let index = id.charAt(id.length - 1);
+                            $("#removedDetails").attr("value", $("#removedDetails").attr("value") + index + ",");
+                        }
+                    });
+                    </script>
+                </div>
+            }
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                function getLast(div) {
+                    if ($(div).children().length === 0) {
+                        return -1;
+                    }
+                    let id = $(div).children().last().attr("id");
+                    return parseInt(id.charAt(id.length - 1));
+                }
+
+                $("#addDetail").click(function () {
+                    let count = getLast("#allDetails") + 1;
+                    $("#allDetails").append($(document.createElement("div")).attr("id", "detail_" + count));
+                    $("#detail_" + count)
+                        .load('@Url.Action("GetDetailFields", "Candidates")',
+                            { "count": count },
+                            function (response, status, xhr) {
+                                if (status == "error") {
+                                    alert("An error occurred while loading the detail fields.");
+                                }
+                            });
+                });
+
+                $("#addContact").click(function () {
+                    let count = getLast("#allContacts") + 1;
+                    $("#allContacts").append($(document.createElement("div")).attr("id", "contact_" + count));
+                    $("#contact_" + count)
+                        .load('@Url.Action("GetContactFields", "Candidates")',
+                            { "count": count },
+                            function (response, status, xhr) {
+                                if (status == "error") {
+                                    alert("An error occurred while loading the contact fields.");
+                                }
+                            });
+                });
+            });
+        </script>
+        <div>
+            <hr />
+            <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
+            <hr />
+            <input type="hidden" id="removedContacts" name="RemovedContacts" value="" />
+        </div>
+        <div id="allContacts">
+            @for (int j = 0; j < Model.Candidate.Contacts.Count; j++)
+            {
+                <div id="contact_@j">
+                    <div>
+                        <p class="lead">Contact @(j + 1)</p>
+                        <button type="button" id="removeContact_@j" class="btn btn-primary">Remove Contact</button>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Candidate.Contacts[j].ContactMethod, new { @class = "control-label" })
+                        @Html.DropDownListFor(c => c.Candidate.Contacts[j].ContactMethod, Html.GetEnumSelectList(typeof(ContactMethod)), "", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(c => c.Candidate.Contacts[j].ContactMethod, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(c => c.Candidate.Contacts[j].ContactValue, new { @class = "control-label" })
+                        @Html.EditorFor(c => c.Candidate.Contacts[j].ContactValue, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(c => c.Candidate.Contacts[j].ContactValue, "", new { @class = "text-danger" })
+                    </div>
+                    <hr />
+
+                    <script type="text/javascript">
+                    $("#removeContact_@j").click(function () {
+                        $(this.parentNode.parentNode).attr("style", "display:none");
+                        let id = $(this.parentNode.parentNode).attr("id");
+                        if (id != null) {
+                            let index = id.charAt(id.length - 1);
+                            $("#removedContacts").attr("value", $("#removedContacts").attr("value") + index + ",");
+                        }
+                    });
+                    </script>
+                </div>
+            }
+        </div>
+        <div>
+            <button type="button" id="addDetail" class="btn btn-primary">Add a Candidate Detail</button>
+            &nbsp;|&nbsp;
+            <button type="button" id="addContact" class="btn btn-primary">Add a Contact</button>
+        </div>
+        <div class="form-group">
+            <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
+        </div>
+    </form>
 </div>
 
 <div>
