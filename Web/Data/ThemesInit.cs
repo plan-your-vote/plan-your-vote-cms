@@ -8,6 +8,8 @@ namespace Web
 {
     internal static class ThemesInit
     {
+        internal const int DefaultElectionId = 1; // Hardcoded
+
         internal static void Initialize(ApplicationDbContext context)
         {
             if (context.Themes?.Any() != true)
@@ -121,18 +123,21 @@ namespace Web
             {
                 new SocialMedia()
                 {
+                    ElectionId = DefaultElectionId,
                     MediaName = "Facebook",
                     Message = "I'm using Plan Your Vote!",
                     Link = "https://www.facebook.com/"
                 },
                 new SocialMedia()
                 {
+                    ElectionId = DefaultElectionId,
                     MediaName = "Twitter",
                     Message = "I'm using Plan Your Vote!",
                     Link = "https://twitter.com/"
                 },
                 new SocialMedia()
                 {
+                    ElectionId = DefaultElectionId,
                     MediaName = "LinkedIn",
                     Message = "I'm using Plan Your Vote!",
                     Link = "https://ca.linkedin.com/"

@@ -13,16 +13,20 @@ namespace Web.CmsControllers
     public class SocialMediasController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly int _managedElectionID;
 
         public SocialMediasController(ApplicationDbContext context)
         {
             _context = context;
+            _managedElectionID = _context.StateSingleton.Find(State.STATE_ID).ManagedElectionID;
         }
 
         // GET: SocialMedias
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SocialMedias.ToListAsync());
+            return View(await _context.SocialMedias
+                .Where(sm => sm.ElectionId == _managedElectionID)
+                .ToListAsync());
         }
 
         // GET: SocialMedias/Details/5
@@ -56,6 +60,8 @@ namespace Web.CmsControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,MediaName,Message,Link")] SocialMedia socialMedia)
         {
+            socialMedia.ElectionId = _managedElectionID;
+
             if (ModelState.IsValid)
             {
                 _context.Add(socialMedia);
@@ -92,6 +98,8 @@ namespace Web.CmsControllers
             {
                 return NotFound();
             }
+
+            socialMedia.ElectionId = _managedElectionID;
 
             if (ModelState.IsValid)
             {
