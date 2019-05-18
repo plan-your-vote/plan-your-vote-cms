@@ -3,34 +3,40 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Details"];
+    ViewData["Title"] = @Localizer["Social Media Icon Details"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Social Media"]</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MediaName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MediaName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Message)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Message)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Link)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Link)
-        </dd>
-    </dl>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.MediaName)
+                </th>
+                <td class="col-sm-10">
+                    @Html.DisplayFor(model => model.MediaName)
+                </td>
+            </tr>
+            <tr>
+                <th class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Message)
+                </th>
+                <td class="col-sm-10">
+                    @Html.DisplayFor(model => model.Message)
+                </td>
+            </tr>
+            <tr>
+                <th class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Link)
+                </th>
+                <td class="col-sm-10">
+                    @Html.DisplayFor(model => model.Link)
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">@Localizer["Edit"]</a> |
