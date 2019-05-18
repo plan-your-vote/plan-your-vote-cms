@@ -19,10 +19,10 @@ namespace Web.Models
 
         [ForeignKey("RaceId")]
         [Display(Name = "RaceId")]
-        public int? RaceId { get; set; }
+        public int RaceId { get; set; }
 
         [Display(Name = "Race")]
-        public virtual Race Race { get; set; }
+        public Race Race { get; set; }
 
         [Display(Name = "BallotOrder")]
         [Range(1, Int32.MaxValue)]

@@ -9,7 +9,7 @@ namespace Web.ViewModels
     public class CandidatesByRaceViewModel
     {
         public IList<Race> Races { get; set; }
-        public IList<IGrouping<int?,CandidateRace>> CandidatesByRace { get; set; }
+        public List<IGrouping<int,CandidateRace>> CandidatesByRace { get; set; }
         public IList<Candidate> UnlistedCandidates { get; set; }
     }
 }
