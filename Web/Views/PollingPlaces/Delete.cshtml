@@ -3,15 +3,13 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Delete"];
+    ViewData["Title"] = @Localizer["Delete Polling Place"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <h3>@Localizer["Are you sure you want to delete this?"]</h3>
 <div class="panel panel-default">
-    <h4>@Localizer["PollingPlace"]</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PollingPlaceName)
@@ -47,7 +45,14 @@
             @Html.DisplayNameFor(model => model.AdvanceOnly)
         </dt>
         <dd class="col-sm-10">
-            @Html.CheckBoxFor(model => model.AdvanceOnly)
+            @if (Model.AdvanceOnly)
+            {
+                <span>Yes</span>
+            }
+            else
+            {
+                <span>No</span>
+            }
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LocalArea)
@@ -80,6 +85,33 @@
             @Html.DisplayFor(model => model.ParkingInfo)
         </dd>
     </dl>
+
+    <h4>@Html.DisplayNameFor(model => model.PollingPlaceDates)</h4>
+    <hr />
+    @for (int i = 0; i < Model.PollingPlaceDates.Count; i++)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(m => m.PollingPlaceDates[i].PollingDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(m => m.PollingPlaceDates[i].PollingDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(m => m.PollingPlaceDates[i].StartTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(m => m.PollingPlaceDates[i].StartTime)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(m => m.PollingPlaceDates[i].EndTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(m => m.PollingPlaceDates[i].EndTime)
+            </dd>
+        </dl>
+        <hr />
+    }
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="PollingPlaceId" />

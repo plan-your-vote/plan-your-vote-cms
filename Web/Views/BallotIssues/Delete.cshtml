@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Delete Ballot Issue"];
+    ViewData["Title"] = @Localizer["Delete Question"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -24,7 +24,7 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class="col-sm-2">
-            Ballot Options
+            @Html.DisplayNameFor(model => model.BallotIssueOptions)
         </dt>
         <dd class="col-sm-10">
             <ul>

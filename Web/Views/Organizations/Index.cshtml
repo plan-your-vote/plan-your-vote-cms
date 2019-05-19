@@ -1,9 +1,9 @@
-﻿@model IEnumerable<Web.Models.BallotIssue>
+﻿@model IEnumerable<Web.Models.Organization>
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Questions"];
+    ViewData["Title"] = Localizer["Organizations"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -15,12 +15,12 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BallotIssueTitle)
+                @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th class="col-sm-2"></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -28,15 +28,15 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BallotIssueTitle)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.BallotIssueId">@Localizer["Edit"]</a> |
-                    <a asp-action="Details" asp-route-id="@item.BallotIssueId">@Localizer["Details"]</a> |
-                    <a asp-action="Delete" asp-route-id="@item.BallotIssueId">@Localizer["Delete"]</a>
+                    <a asp-action="Edit" asp-route-id="@item.OrganizationId">@Localizer["Edit"]</a> |
+                    <a asp-action="Details" asp-route-id="@item.OrganizationId">@Localizer["Details"]</a> |
+                    <a asp-action="Delete" asp-route-id="@item.OrganizationId">@Localizer["Delete"]</a>
                 </td>
             </tr>
         }

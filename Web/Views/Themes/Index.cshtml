@@ -3,11 +3,11 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Theme"];
+    ViewData["Title"] = @Localizer["Change Theme"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@Localizer["Theme"]</h1>
+<h1>@ViewData["Title"]</h1>
 
 <link rel="stylesheet" href="~/css/Themes.css" />
 
@@ -15,7 +15,7 @@
     <form asp-controller="Themes" asp-action="Index" method="post">
         <label>@Localizer["Selected Theme:"]</label>
         <select asp-for="SelectedTheme" asp-items="Model.Themes"></select>
-        <button type="submit">Save</button>
+        <button type="submit" class="btn btn-primary">Save</button>
         <div>
             @if (ViewData["Error"] != null)
             {

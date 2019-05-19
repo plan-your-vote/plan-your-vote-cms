@@ -7,9 +7,6 @@ namespace Web.Models
 {
     public class Image
     {
-        /* Composite key via Fluent API - https://docs.microsoft.com/en-us/ef/core/modeling/keys
-         * e.g. modelBuilder.Entity<Car>().HasKey(c => new { c.State, c.LicensePlate });
-         */
         public int ID { get; set; }
 
         [Display(Name = "ThemeName")]

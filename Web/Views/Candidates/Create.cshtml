@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Create"];
+    ViewData["Title"] = @Localizer["Create New Candidate"];
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -16,121 +16,115 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Candidate"]</h4>
-    <hr />
-    <div>
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Candidate.Name" class="control-label"></label>
+            <input asp-for="Candidate.Name" class="form-control" />
+            <span asp-validation-for="Candidate.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Candidate.Picture" class="control-label"></label>
+            <input asp-for="Candidate.Picture" type="file" name="Image">
+            <span asp-validation-for="Candidate.Picture" class="text-danger">@ViewData["ImageMessage"]</span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Candidate.OrganizationId" class="control-label">@Html.DisplayNameFor(c => c.Candidate.Organization.Name)</label>
+            <select asp-for="Candidate.OrganizationId" class="form-control" asp-items="Model.Organizations"></select>
+            <span asp-validation-for="Candidate.OrganizationId" class="text-danger"></span>
+        </div>
         <div>
-            <form asp-action="Create" enctype="multipart/form-data">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Candidate.Name" class="control-label"></label>
-                    <input asp-for="Candidate.Name" class="form-control" />
-                    <span asp-validation-for="Candidate.Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Candidate.Picture" class="control-label"></label>
-                    <input asp-for="Candidate.Picture" type="file" name="Image">
-                    <span asp-validation-for="Candidate.Picture" class="text-danger">@ViewData["ImageMessage"]</span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Candidate.OrganizationId" class="control-label">@Html.DisplayNameFor(c => c.Candidate.Organization.Name)</label>
-                    <select asp-for="Candidate.OrganizationId" class="form-control" asp-items="Model.Organizations"></select>
-                    <span asp-validation-for="Candidate.OrganizationId" class="text-danger"></span>
-                </div>
+            @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
+            @if (Model.Races.ToList().Count == 0)
+            {
                 <div>
-                    @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
-                    @if (Model.Races.ToList().Count == 0)
+                    <span>No races available</span>
+                </div>
+            }
+            else
+            {
+                <div class="multi-select">
+                    @foreach (var race in Model.Races)
                     {
                         <div>
-                            <span>No races available</span>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="multi-select">
-                            @foreach (var race in Model.Races)
-                            {
-                                <div>
-                                    <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
-                                    <label for="@race.Value">@race.Text</label>
-                                </div>
-                            }
+                            <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
+                            <label for="@race.Value">@race.Text</label>
                         </div>
                     }
                 </div>
-
-                <div>
-                    <hr />
-                    <h4><label asp-for="Candidate.Details" class="control-label"></label></h4>
-                    <hr />
-                    <input type="hidden" id="removedDetails" name="RemovedDetails" value="" />
-                </div>
-                <div id="allDetails">
-                    <div id="detail_0">
-                        @{ await Html.RenderPartialAsync("CandidateDetail", Model); }
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        function getCount(div) {
-                            if ($(div).children().length === 0) {
-                                return -1;
-                            }
-
-                            let id = $(div).children().last().attr("id");
-                            return parseInt(id.charAt(id.length - 1));
-                        }
-
-                        $("#addDetail").click(function () {
-                            let count = getCount("#allDetails") + 1;
-                            $("#allDetails").append($(document.createElement("div")).attr("id", "detail_" + count));
-                            $("#detail_" + count)
-                                .load('@Url.Action("GetDetailFields", "Candidates")',
-                                    { "count": count },
-                                    function (response, status, xhr) {
-                                        if (status == "error") {
-                                            alert("An error occurred while loading the detail fields.");
-                                        }
-                                    });
-                        });
-
-                        $("#addContact").click(function () {
-                            let count = getCount("#allContacts") + 1;
-                            $("#allContacts").append($(document.createElement("div")).attr("id", "contact_" + count));
-                            $("#contact_" + count)
-                                .load('@Url.Action("GetContactFields", "Candidates")',
-                                    { "count": count },
-                                    function (response, status, xhr) {
-                                        if (status == "error") {
-                                            alert("An error occurred while loading the contact fields.");
-                                        }
-                                    });
-                        });
-                    });
-                </script>
-
-                <div>
-                    <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
-                    <hr />
-                    <input type="hidden" id="removedContacts" name="RemovedContacts" value="" />
-                </div>
-                <div id="allContacts">
-                    <div id="contact_0">
-                        @{ await Html.RenderPartialAsync("CandidateContact", Model); }
-                    </div>
-                </div>
-
-                <div>
-                    <button type="button" id="addDetail" class="btn btn-primary">Add a Candidate Detail</button>
-                    &nbsp;|&nbsp;
-                    <button type="button" id="addContact" class="btn btn-primary">Add a Contact</button>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
-                </div>
-            </form>
+            }
         </div>
-    </div>
+
+        <div>
+            <hr />
+            <h4><label asp-for="Candidate.Details" class="control-label"></label></h4>
+            <hr />
+            <input type="hidden" id="removedDetails" name="RemovedDetails" value="" />
+        </div>
+        <div id="allDetails">
+            <div id="detail_0">
+                @{ await Html.RenderPartialAsync("CandidateDetail", Model); }
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                function getCount(div) {
+                    if ($(div).children().length === 0) {
+                        return -1;
+                    }
+
+                    let id = $(div).children().last().attr("id");
+                    return parseInt(id.charAt(id.length - 1));
+                }
+
+                $("#addDetail").click(function () {
+                    let count = getCount("#allDetails") + 1;
+                    $("#allDetails").append($(document.createElement("div")).attr("id", "detail_" + count));
+                    $("#detail_" + count)
+                        .load('@Url.Action("GetDetailFields", "Candidates")',
+                            { "count": count },
+                            function (response, status, xhr) {
+                                if (status == "error") {
+                                    alert("An error occurred while loading the detail fields.");
+                                }
+                            });
+                });
+
+                $("#addContact").click(function () {
+                    let count = getCount("#allContacts") + 1;
+                    $("#allContacts").append($(document.createElement("div")).attr("id", "contact_" + count));
+                    $("#contact_" + count)
+                        .load('@Url.Action("GetContactFields", "Candidates")',
+                            { "count": count },
+                            function (response, status, xhr) {
+                                if (status == "error") {
+                                    alert("An error occurred while loading the contact fields.");
+                                }
+                            });
+                });
+            });
+        </script>
+
+        <div>
+            <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
+            <hr />
+            <input type="hidden" id="removedContacts" name="RemovedContacts" value="" />
+        </div>
+        <div id="allContacts">
+            <div id="contact_0">
+                @{ await Html.RenderPartialAsync("CandidateContact", Model); }
+            </div>
+        </div>
+
+        <div>
+            <button type="button" id="addDetail" class="btn btn-primary">Add a Candidate Detail</button>
+            &nbsp;|&nbsp;
+            <button type="button" id="addContact" class="btn btn-primary">Add a Contact</button>
+        </div>
+        <div class="form-group">
+            <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
+        </div>
+    </form>
 </div>
 
 <div>

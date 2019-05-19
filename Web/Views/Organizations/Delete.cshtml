@@ -1,9 +1,9 @@
-﻿@model Web.Models.Step
+﻿@model Web.Models.Organization
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Delete Step"];
+    ViewData["Title"] = Localizer["Delete Organization"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -12,27 +12,22 @@
 <div class="panel panel-default">
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StepNumber)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StepNumber)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StepTitle)
+            @Html.DisplayNameFor(model => model.Description)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StepTitle)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.StepDescription)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.StepDescription)
+            @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
 
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ID" />
+        <p class="text-danger">@ViewData["CandidatesFoundError"]</p>
+        <input type="hidden" asp-for="OrganizationId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">@Localizer["Back to List"]</a>
     </form>

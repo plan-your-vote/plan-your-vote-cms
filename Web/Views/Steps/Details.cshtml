@@ -3,14 +3,12 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Details"];
+    ViewData["Title"] = @Localizer["Step Details"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Step"]</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.StepNumber)
@@ -31,7 +29,8 @@
             @Html.DisplayFor(model => model.StepDescription)
         </dd>
     </dl>
-</div>
+</div> 
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">@Localizer["Edit"]</a> |
     <a asp-action="Index">@Localizer["Back to List"]</a>

@@ -1,4 +1,4 @@
-﻿/* Ballot Issues */
+﻿/* Views helper functions */
 function getCount(selector) {
     return $(selector).length;
 }

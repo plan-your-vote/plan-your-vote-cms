@@ -3,14 +3,12 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Details"];
+    ViewData["Title"] = @Localizer["Social Media Icon Details"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Social Media"]</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.MediaName)

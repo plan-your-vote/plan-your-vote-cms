@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Create New Ballot Issue"];
+    ViewData["Title"] = @Localizer["Create New Question"];
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -17,43 +17,41 @@
 
 <div class="panel panel-default">
     <form asp-action="Create">
-        <div class="row">
-            <div class="col-md-12">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BallotIssueTitle, new { @class = "control-label" })
-                    @Html.TextAreaFor(model => model.BallotIssueTitle, new { @class = "form-control", @rows = 2 })
-                    @Html.ValidationMessageFor(model => model.BallotIssueTitle, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Description, new { @class = "control-label" })
-                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 4 })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                </div>
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.BallotIssueTitle, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.BallotIssueTitle, new { @class = "form-control", @rows = 2 })
+                @Html.ValidationMessageFor(model => model.BallotIssueTitle, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
 
-                <label class="control-label">@Localizer["Ballot Options"]</label>
-                <div id="options">
-                    @if (Model.BallotIssueOptions != null)
+            <label class="control-label">@Html.LabelFor(model => model.BallotIssueOptions)</label>
+            <div id="options">
+                @if (Model.BallotIssueOptions != null)
+                {
+                    @for (int i = 0; i < Model.BallotIssueOptions.Count; i++)
                     {
-                        @for (int i = 0; i < Model.BallotIssueOptions.Count; i++)
-                        {
-                            <div class="row option">
-                                <div class="col-md-10">
-                                    <div class="form-group">
-                                        @Html.TextAreaFor(model => model.BallotIssueOptions[i].IssueOptionInfo, new { @class = "form-control option-text", @rows = 2 })
-                                    </div>
-                                </div>
-                                <div class="col-md-2 form-group">
-                                    <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary" onClick="removeOption(@i)">Remove Option</button>
+                        <div class="row option">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    @Html.TextAreaFor(model => model.BallotIssueOptions[i].IssueOptionInfo, new { @class = "form-control option-text", @rows = 2 })
                                 </div>
                             </div>
+                            <div class="col-md-2 form-group">
+                                <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary" onClick="removeOption(@i)">Remove Option</button>
+                            </div>
+                        </div>
 
-                        }
                     }
-                </div>
-                <div>
-                    <span class="text-danger">@ViewData["IssueOptionsError"]</span>
-                </div>
+                }
+            </div>
+            <div>
+                <span class="text-danger">@ViewData["IssueOptionsError"]</span>
             </div>
         </div>
 
@@ -72,14 +70,12 @@
                 );
             }
         </script>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <button type="button" role="button" class="btn btn-primary" onClick="addOption()">Add Option</button>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
-                </div>
+        <div>
+            <div class="form-group">
+                <button type="button" role="button" class="btn btn-primary" onClick="addOption()">Add Option</button>
+            </div>
+            <div class="form-group">
+                <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
             </div>
         </div>
     </form>

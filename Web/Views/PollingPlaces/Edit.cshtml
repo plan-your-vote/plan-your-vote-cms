@@ -3,163 +3,157 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Edit"];
+    ViewData["Title"] = @Localizer["Edit Polling Place"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["PollingPlace"]</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="PollingPlaceName" class="control-label"></label>
-                    <input asp-for="PollingPlaceName" class="form-control" />
-                    <span asp-validation-for="PollingPlaceName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PollingStationName" class="control-label"></label>
-                    <input asp-for="PollingStationName" class="form-control" />
-                    <span asp-validation-for="PollingStationName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Latitude" class="control-label"></label>
-                    <input asp-for="Latitude" class="form-control" />
-                    <span asp-validation-for="Latitude" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Longitude" class="control-label"></label>
-                    <input asp-for="Longitude" class="form-control" />
-                    <span asp-validation-for="Longitude" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="AdvanceOnly" class="control-label"></label>
-                    <input asp-for="AdvanceOnly" class="form-control" />
-                    <span asp-validation-for="AdvanceOnly" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="LocalArea" class="control-label"></label>
-                    <input asp-for="LocalArea" class="form-control" />
-                    <span asp-validation-for="LocalArea" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Phone" class="control-label"></label>
-                    <input asp-for="Phone" class="form-control" />
-                    <span asp-validation-for="Phone" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="WheelchairInfo" class="control-label"></label>
-                    <input asp-for="WheelchairInfo" class="form-control" />
-                    <span asp-validation-for="WheelchairInfo" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ParkingInfo" class="control-label"></label>
-                    <input asp-for="ParkingInfo" class="form-control" />
-                    <span asp-validation-for="ParkingInfo" class="text-danger"></span>
-                </div>
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="PollingPlaceName" class="control-label"></label>
+            <input asp-for="PollingPlaceName" class="form-control" />
+            <span asp-validation-for="PollingPlaceName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address" class="control-label"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PollingStationName" class="control-label"></label>
+            <input asp-for="PollingStationName" class="form-control" />
+            <span asp-validation-for="PollingStationName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Latitude" class="control-label"></label>
+            <input asp-for="Latitude" class="form-control" />
+            <span asp-validation-for="Latitude" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Longitude" class="control-label"></label>
+            <input asp-for="Longitude" class="form-control" />
+            <span asp-validation-for="Longitude" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AdvanceOnly" class="control-label"></label>
+            <input asp-for="AdvanceOnly" class="form-control" />
+            <span asp-validation-for="AdvanceOnly" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LocalArea" class="control-label"></label>
+            <input asp-for="LocalArea" class="form-control" />
+            <span asp-validation-for="LocalArea" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="WheelchairInfo" class="control-label"></label>
+            <input asp-for="WheelchairInfo" class="form-control" />
+            <span asp-validation-for="WheelchairInfo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParkingInfo" class="control-label"></label>
+            <input asp-for="ParkingInfo" class="form-control" />
+            <span asp-validation-for="ParkingInfo" class="text-danger"></span>
+        </div>
 
-                <script>
-                    function appendDateFields(e) {
-                        let datesDiv = document.getElementById("polling-dates");
-                        let group = document.createElement("div");
-                        group.setAttribute("class", "form-group");
+        <script>
+            function appendDateFields(e) {
+                let datesDiv = document.getElementById("polling-dates");
+                let group = document.createElement("div");
+                group.setAttribute("class", "form-group");
 
-                        let formGroup1 = document.createElement("div");
-                        formGroup1.setAttribute("class", "form-group");
-                        let dateLabel = document.createElement("label");
-                        dateLabel.setAttribute("class", "control-label");
-                        dateLabel.setAttribute("for", "PollingPlaceDates");
-                        dateLabel.appendChild(document.createTextNode("Poll Date"));
-                        let dateInput = document.createElement("input");
-                        dateInput.setAttribute("id", `PollingPlaceDates_${datesDiv.childElementCount}_`);
-                        dateInput.setAttribute("name", `PollingPlaceDates[${datesDiv.childElementCount}]`);
-                        dateInput.setAttribute('type', "date");
-                        dateInput.setAttribute('class', 'form-control');
-                        formGroup1.appendChild(dateLabel);
-                        formGroup1.appendChild(dateInput);
+                let formGroup1 = document.createElement("div");
+                formGroup1.setAttribute("class", "form-group");
+                let dateLabel = document.createElement("label");
+                dateLabel.setAttribute("class", "control-label");
+                dateLabel.setAttribute("for", "PollingPlaceDates");
+                dateLabel.appendChild(document.createTextNode("Poll Date"));
+                let dateInput = document.createElement("input");
+                dateInput.setAttribute("id", `PollingPlaceDates_${datesDiv.childElementCount}_`);
+                dateInput.setAttribute("name", `PollingPlaceDates[${datesDiv.childElementCount}]`);
+                dateInput.setAttribute('type', "date");
+                dateInput.setAttribute('class', 'form-control');
+                formGroup1.appendChild(dateLabel);
+                formGroup1.appendChild(dateInput);
 
-                        let formGroup2 = document.createElement("div");
-                        formGroup2.setAttribute("class", "form-group");
-                        let startLabel = document.createElement("label");
-                        startLabel.setAttribute("class", "control-label");
-                        startLabel.setAttribute("for", "PollingStartTimes");
-                        startLabel.appendChild(document.createTextNode("Start Time"));
-                        let startTime = document.createElement("input");
-                        startTime.setAttribute("id", `PollingStartTimes_${datesDiv.childElementCount}_`);
-                        startTime.setAttribute("name", `PollingStartTimes[${datesDiv.childElementCount}]`);
-                        startTime.setAttribute('type', "time");
-                        startTime.setAttribute('class', 'form-control');
-                        formGroup2.appendChild(startLabel);
-                        formGroup2.appendChild(startTime);
+                let formGroup2 = document.createElement("div");
+                formGroup2.setAttribute("class", "form-group");
+                let startLabel = document.createElement("label");
+                startLabel.setAttribute("class", "control-label");
+                startLabel.setAttribute("for", "PollingStartTimes");
+                startLabel.appendChild(document.createTextNode("Start Time"));
+                let startTime = document.createElement("input");
+                startTime.setAttribute("id", `PollingStartTimes_${datesDiv.childElementCount}_`);
+                startTime.setAttribute("name", `PollingStartTimes[${datesDiv.childElementCount}]`);
+                startTime.setAttribute('type', "time");
+                startTime.setAttribute('class', 'form-control');
+                formGroup2.appendChild(startLabel);
+                formGroup2.appendChild(startTime);
 
-                        let formGroup3 = document.createElement("div");
-                        formGroup3.setAttribute("class", "form-group");
-                        let endLabel = document.createElement("label");
-                        endLabel.setAttribute("class", "control-label");
-                        endLabel.setAttribute("for", "PollingEndTimes");
-                        endLabel.appendChild(document.createTextNode("End Time"));
-                        let endTime = document.createElement("input");
-                        endTime.setAttribute("id", `PollingEndTimes_${datesDiv.childElementCount}_`);
-                        endTime.setAttribute("name", `PollingEndTimes[${datesDiv.childElementCount}]`);
-                        endTime.setAttribute('type', "time");
-                        endTime.setAttribute('class', 'form-control');
-                        formGroup3.appendChild(endLabel);
-                        formGroup3.appendChild(endTime);
+                let formGroup3 = document.createElement("div");
+                formGroup3.setAttribute("class", "form-group");
+                let endLabel = document.createElement("label");
+                endLabel.setAttribute("class", "control-label");
+                endLabel.setAttribute("for", "PollingEndTimes");
+                endLabel.appendChild(document.createTextNode("End Time"));
+                let endTime = document.createElement("input");
+                endTime.setAttribute("id", `PollingEndTimes_${datesDiv.childElementCount}_`);
+                endTime.setAttribute("name", `PollingEndTimes[${datesDiv.childElementCount}]`);
+                endTime.setAttribute('type', "time");
+                endTime.setAttribute('class', 'form-control');
+                formGroup3.appendChild(endLabel);
+                formGroup3.appendChild(endTime);
 
-                        group.appendChild(formGroup1);
-                        group.appendChild(formGroup2);
-                        group.appendChild(formGroup3);
-                        datesDiv.append(group);
-                    }
+                group.appendChild(formGroup1);
+                group.appendChild(formGroup2);
+                group.appendChild(formGroup3);
+                datesDiv.append(group);
+            }
 
 
 /**/</script>
-                <label class="control-label">@Localizer["Polling Place Operating Hours"]</label>
-                <div id="polling-dates">
+        <label class="control-label">@Localizer["Polling Place Operating Hours"]</label>
+        <div id="polling-dates">
 
-                    @for (var i = 0; i < Model.PollingPlaceDates.Count; i++)
-                    {
-                        <div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.PollingPlaceDates, new { @class = "control-label" })
-                                @Html.EditorFor(m => m.PollingPlaceDates[i], new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(m => m.PollingPlaceDates[i], "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.PollingStartTimes, new { @class = "control-label" })
-                                @Html.EditorFor(m => m.PollingStartTimes[i], new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(m => m.PollingStartTimes[i], "", new { @class = "text-danger" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.PollingEndTimes, new { @class = "control-label" })
-                                @Html.EditorFor(m => m.PollingEndTimes[i], new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(m => m.PollingEndTimes[i], "", new { @class = "text-danger" })
-                            </div>
-                        </div>
-                    }
+            @for (var i = 0; i < Model.PollingPlaceDates.Count; i++)
+            {
+                <div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PollingPlaceDates, new { @class = "control-label" })
+                        @Html.EditorFor(m => m.PollingPlaceDates[i], new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.PollingPlaceDates[i], "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PollingStartTimes, new { @class = "control-label" })
+                        @Html.EditorFor(m => m.PollingStartTimes[i], new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.PollingStartTimes[i], "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.PollingEndTimes, new { @class = "control-label" })
+                        @Html.EditorFor(m => m.PollingEndTimes[i], new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.PollingEndTimes[i], "", new { @class = "text-danger" })
+                    </div>
                 </div>
-                <button id="AddDateField" type="button" role="button" class="btn btn-primary" onClick="appendDateFields(event)">
-                    @Localizer["Add an operating date/time"]
-                </button>
-                <div class="form-group">
-                    <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
-                </div>
-            </form>
+            }
         </div>
-    </div>
+        <button id="AddDateField" type="button" role="button" class="btn btn-primary" onClick="appendDateFields(event)">
+            @Localizer["Add an operating date/time"]
+        </button>
+        <div class="form-group">
+            <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
+        </div>
+    </form>
 </div>
 <div>
     <a asp-action="Index">@Localizer["Back to List"]</a>

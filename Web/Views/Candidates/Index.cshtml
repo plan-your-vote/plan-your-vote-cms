@@ -3,7 +3,7 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Index"];
+    ViewData["Title"] = @Localizer["Candidates"];
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -18,7 +18,7 @@
 <p>
     <a asp-action="Create">@Localizer["Create New"]</a>
 </p>
-<div class="panel panel_default">
+<div class="panel panel-default">
     <div class="row vert-center">
         <div class="col-xs-4 col-sm-3 text-center">
             <h5>Sort by:</h5>
@@ -30,7 +30,7 @@
         </div>
     </div>
 </div>
-<div id="list-candidates" class="panel panel_default">
+<div id="list-candidates" class="panel panel-default">
     @{ await Html.RenderPartialAsync("CandidateList", Model); }
 </div>
 

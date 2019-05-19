@@ -3,14 +3,12 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Details"];
+    ViewData["Title"] = @Localizer["Race Details"];
 }
 
-<h1>@Localizer["Details"]</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Race"]</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BallotOrder)

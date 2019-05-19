@@ -3,11 +3,11 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Index"];
+    ViewData["Title"] = @Localizer["Images"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>@Localizer["Index"]</h1>
+<h1>@ViewData["Title"]</h1>
 
 <p>
     <a asp-action="Create">@Localizer["Create New"]</a>
