@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using Web.Data;
 using Web.Models;
 using Web.ViewModels;
-using Web.Data;
 
 namespace Web
 {
@@ -221,7 +220,7 @@ namespace Web
                 Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name"),
                 Races = new SelectList(_context.Races
                         .Where(r => r.ElectionId == _managedElectionID)
-                        .OrderBy(r => r.BallotOrder), 
+                        .OrderBy(r => r.BallotOrder),
                     "RaceId", "PositionName")
             };
 
@@ -235,8 +234,8 @@ namespace Web
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CandidateViewModel model)
         {
-            var fileName = "";
-            var nameOfile = "";
+            var wwwrootPath = "";
+            var imagesPath = "";
             if (model.Image != null)
             {
                 if (model.Image.ContentType != "image/jpeg"
@@ -253,10 +252,10 @@ namespace Web
                     return View(model);
                 }
 
-                nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(model.Image.FileName);
-                fileName = "wwwroot\\" + nameOfile;
-                model.Image.CopyTo(new FileStream(fileName, FileMode.Create));
-                model.Candidate.Picture = nameOfile;
+                imagesPath = "images\\" + Utility.GetCurrentDateTime + Path.GetFileName(model.Image.FileName);
+                wwwrootPath = "wwwroot\\" + imagesPath;
+                model.Image.CopyTo(new FileStream(wwwrootPath, FileMode.Create));
+                model.Candidate.Picture = imagesPath;
             }
             else
             {
@@ -336,14 +335,6 @@ namespace Web
             return View(model);
         }
 
-        public static string GenerateImageId()
-        {
-            Random R = new Random();
-            string strDateTimeNumber = DateTime.Now.ToString("yyyyMMddHHmmssms");
-            string strRandomResult = R.Next(1, 1000).ToString();
-            return strDateTimeNumber + strRandomResult;
-        }
-
         public virtual IActionResult GetDetailFields(int count)
         {
             List<CandidateDetail> list = new List<CandidateDetail>();
@@ -409,7 +400,7 @@ namespace Web
                 Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name", candidate.OrganizationId),
                 Races = new SelectList(_context.Races
                         .Where(r => r.ElectionId == _managedElectionID)
-                        .OrderBy(r => r.BallotOrder), 
+                        .OrderBy(r => r.BallotOrder),
                     "RaceId", "PositionName")
             };
 
@@ -441,7 +432,7 @@ namespace Web
                 // sort in ascending order
                 indexes = indexes.OrderBy(i => i).ToArray();
 
-                for (int i = indexes.Length-1; i >= 0; --i)
+                for (int i = indexes.Length - 1; i >= 0; --i)
                 {
                     model.Candidate.Details.RemoveAt(indexes[i]);
                 }
@@ -495,8 +486,8 @@ namespace Web
             {
                 if (model.Image != null)
                 {
-                    if (model.Image.ContentType != "image/jpeg" 
-                        && model.Image.ContentType != "image/png" 
+                    if (model.Image.ContentType != "image/jpeg"
+                        && model.Image.ContentType != "image/png"
                         && model.Image.ContentType != "image/gif")
                     {
                         ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
@@ -509,7 +500,7 @@ namespace Web
                         return View(model);
                     }
 
-                    string nameOfile = "images\\" + GenerateImageId() + Path.GetFileName(model.Image.FileName);
+                    string nameOfile = "images\\" + Utility.GetCurrentDateTime + Path.GetFileName(model.Image.FileName);
                     string fileName = "wwwroot\\" + nameOfile;
                     model.Image.CopyTo(new FileStream(fileName, FileMode.Create));
                     model.Candidate.Picture = nameOfile;
