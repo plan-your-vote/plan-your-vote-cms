@@ -149,9 +149,10 @@ namespace Web.CmsControllers
                 .OrderBy(o => o.OrganizationId)
                 .ToListAsync();
 
-                /* If the organization selected for delete is the first blank-named organization
-                 * in the database (and possibly the only one) and contains candidates, don't delete it */
-                if (blankOrganization.First().OrganizationId == id)
+                /* If there isn't a blank-named organization to transfer the candidates to, or the organization 
+                 * selected for delete is the first blank-named organization (and possibly the only one) and 
+                 * contains candidates, don't delete it */
+                if (blankOrganization.Count == 0 || blankOrganization.First().OrganizationId == id)
                 {
                     ViewData["CandidatesFoundError"] = "ERROR: This organization contains candidates. " +
                         "Please remove all candidates before deleting.";
