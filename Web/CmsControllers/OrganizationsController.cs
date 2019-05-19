@@ -139,6 +139,40 @@ namespace Web.CmsControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            int numCandidates = _context.Candidates
+                .Where(c => c.OrganizationId == id).Count();
+
+            if (numCandidates > 0)
+            {
+                var blankOrganization = await _context.Organizations
+                .Where(o => o.Name == null || o.Name == "")
+                .OrderBy(o => o.OrganizationId)
+                .ToListAsync();
+
+                /* If the organization selected for delete is the first blank-named organization
+                 * in the database (and possibly the only one) and contains candidates, don't delete it */
+                if (blankOrganization.First().OrganizationId == id)
+                {
+                    ViewData["CandidatesFoundError"] = "ERROR: This organization contains candidates. " +
+                        "Please remove all candidates before deleting.";
+                    return View(await _context.Organizations.FirstOrDefaultAsync(o => o.OrganizationId == id));
+                }
+                else
+                {
+                    /* If the organization selected for delete is not the first blank-named organization
+                     * and has candidates, transfer the candidates to the other one before deleting */
+                    var candidates = await _context.Candidates
+                        .Where(c => c.OrganizationId == id)
+                        .ToListAsync();
+
+                    foreach (var candidate in candidates)
+                    {
+                        candidate.OrganizationId = blankOrganization.First().OrganizationId;
+                        _context.Update(candidate);
+                    }
+                }
+            }
+
             var organization = await _context.Organizations.FindAsync(id);
             _context.Organizations.Remove(organization);
             await _context.SaveChangesAsync();
