@@ -42,6 +42,7 @@ namespace Web.Controllers
                     race.NumberNeeded,
                     Candidates = race.CandidateRaces.Select(cr => new
                     {
+                        cr.BallotOrder,
                         cr.Candidate.CandidateId,
                         cr.Candidate.Name,
                         cr.Candidate.Picture,
