@@ -77,7 +77,7 @@ body {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
 }
 
-/* Page-specific
+/* Views Styling
 -------------------------------------------------- */
 .vert-center {
     display: flex;
@@ -91,4 +91,12 @@ body {
 
 .hide {
     display: none;
+}
+
+dt {
+    clear: both;
+}
+
+dd {
+    margin-bottom: 4px;
 }

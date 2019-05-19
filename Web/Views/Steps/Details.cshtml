@@ -8,35 +8,28 @@
 
 <h1>@ViewData["Title"]</h1>
 
-
-<table class="table panel panel-default">
-    <tbody>
-        <tr>
-            <th class="col-sm-2">
-                @Html.DisplayNameFor(model => model.StepNumber)
-            </th>
-            <td class="col-sm-10">
-                @Html.DisplayFor(model => model.StepNumber)
-            </td>
-        </tr>
-        <tr>
-            <th class="col-sm-2">
-                @Html.DisplayNameFor(model => model.StepTitle)
-            </th>
-            <td class="col-sm-10">
-                @Html.DisplayFor(model => model.StepTitle)
-            </td>
-        </tr>
-        <tr>
-            <th class="col-sm-2">
-                @Html.DisplayNameFor(model => model.StepDescription)
-            </th>
-            <td class="col-sm-10">
-                @Html.DisplayFor(model => model.StepDescription)
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="panel panel-default">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StepNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StepNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StepTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StepTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StepDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StepDescription)
+        </dd>
+    </dl>
+</div> 
 
 <div>
     <a asp-action="Edit" asp-route-id="@Model.ID">@Localizer["Edit"]</a> |
