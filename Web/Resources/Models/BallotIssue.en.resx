@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BallotIssue" xml:space="preserve">
-    <value>Ballot Question</value>
+    <value>Question</value>
   </data>
   <data name="BallotIssueId" xml:space="preserve">
-    <value>Ballot Question Id</value>
+    <value>Question Id</value>
   </data>
   <data name="BallotIssueOptions" xml:space="preserve">
-    <value>Ballot Options</value>
+    <value>Options</value>
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
