@@ -15,6 +15,8 @@ namespace Web.ApiControllers
     [ApiController]
     public class PollingPlacesController : ControllerBase
     {
+        public const int STEP_NUMBER = 3; // Hard-coded
+
         private readonly ApplicationDbContext _context;
         private int _runningElectionID;
 
@@ -28,11 +30,13 @@ namespace Web.ApiControllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PollingPlace>>> GetPollingPlaces()
         {
+            var step3 = _context.Steps.Where(step => step.StepNumber == STEP_NUMBER).First();
+
             VotingPage votingPage = new VotingPage()
             {
-                PageTitle = "CHOOSE YOUR VOTING DATE AND LOCATION",
-                PageDescription = "Not sure when you want to vote yet? Don't worry - you're not committing to a particular day or place. If you live in the UBC Lands or University Endowment Lands, you can vote at 2 voting places only on October 20 Opens in new window. These 2 places are not shown on the map below. Skip this step to review your choices and create your plan.",
-                PageNumber = 3,
+                PageTitle = step3.StepTitle,
+                PageDescription = step3.StepDescription,
+                PageNumber = STEP_NUMBER,
             };
 
             var pollingPlaces = await _context.PollingPlaces

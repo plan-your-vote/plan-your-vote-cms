@@ -376,20 +376,28 @@ namespace Web.Data
             {
                 new BallotIssue()
                 {
-                    BallotIssueTitle = "TRANSPORTATION AND TECHNOLOGY",
+                    BallotIssueTitle = "1. TRANSPORTATION AND TECHNOLOGY",
                     Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to transportation and technology.
 
 Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,353,000 for the following purposes?",
-                    ElectionId = 1
+                    ElectionId = 1,
                 },
                 new BallotIssue()
                 {
-                    BallotIssueTitle = "CAPITAL MAINTENANCE AND RENOVATION PROGRAMS FOR EXISTING COMMUNITY FACILITIES, CIVIC FACILITIES, AND PARKS",
+                    BallotIssueTitle = "2. CAPITAL MAINTENANCE AND RENOVATION PROGRAMS FOR EXISTING COMMUNITY FACILITIES, CIVIC FACILITIES, AND PARKS",
                     Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to capital maintenance and renovation programs for existing community facilities, civic facilities, and parks.
 
 Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $99,557,000 for the following purposes?",
-                    ElectionId = 1
+                    ElectionId = 1,
                 },
+                new BallotIssue()
+                {
+                    BallotIssueTitle = "3. REPLACEMENT OF EXISTING COMMUNITY FACILITIES AND CIVIC FACILITIES:",
+                    Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to replacement of existing community facilities and civic facilities.
+
+Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,090,000 for the following purposes?",
+                    ElectionId = 1,
+                }
             };
         }
 
@@ -415,6 +423,16 @@ Are you in favour of Council having the authority, without further assent of the
                 new IssueOption()
                 {
                     BallotIssueId = 2,
+                    IssueOptionInfo = "No",
+                },
+                new IssueOption()
+                {
+                    BallotIssueId = 3,
+                    IssueOptionInfo = "Yes",
+                },
+                new IssueOption()
+                {
+                    BallotIssueId = 3,
                     IssueOptionInfo = "No",
                 },
             };
