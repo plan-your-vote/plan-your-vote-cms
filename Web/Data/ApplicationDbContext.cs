@@ -40,5 +40,6 @@ namespace Web.Data
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<CandidateDetail> CandidateDetails { get; set; }
         public DbSet<Step> Steps { get; set; }
+        public DbSet<OpenGraph> OpenGraph { get; set; }
     }
 }

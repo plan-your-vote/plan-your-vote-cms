@@ -94,6 +94,9 @@
                                     <li class="nav-item">
                                         <a class="nav-link text-white" asp-area="" asp-controller="SocialMedias" asp-action="Index">@Localizer["Social Media Icons"]</a>
                                     </li>
+                                    @*<li class="nav-item">
+                                        <a class="nav-link text-white" asp-area="" asp-controller="OpenGraphs" asp-action="Index">@Localizer["Open Graphs"]</a>
+                                    </li>*@
                                 </ul>
                             </li>
                             @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ROLE_ADMIN))
