@@ -219,6 +219,7 @@ namespace Web
 
             var pollingPlace = await _context.PollingPlaces
                 .Include(p => p.Election)
+                .Include(p => p.PollingPlaceDates)
                 .FirstOrDefaultAsync(m => m.PollingPlaceId == id);
             if (pollingPlace == null)
             {
