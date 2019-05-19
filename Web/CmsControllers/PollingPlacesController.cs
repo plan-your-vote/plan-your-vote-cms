@@ -105,6 +105,25 @@ namespace Web
             return View(pollingPlaceGroup);
         }
 
+        public virtual IActionResult GetDateFields(int count)
+        {
+            List<PollingPlaceDate> dates = new List<PollingPlaceDate>();
+
+            for (int i = 0; i <= count; i++)
+            {
+                dates.Add(new PollingPlaceDate {
+                    PollingDate = DateTime.Now
+                });
+            }
+
+            PollingPlace pollingPlace = new PollingPlace
+            {
+                PollingPlaceDates = dates
+            };
+
+            return PartialView("PollingDate", pollingPlace);
+        }
+
         // GET: PollingPlaces/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

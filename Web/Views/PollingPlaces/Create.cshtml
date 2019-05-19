@@ -6,6 +6,13 @@
     ViewData["Title"] = @Localizer["Create New Polling Place"];
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+</script>
+
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
@@ -67,83 +74,25 @@
             <span asp-validation-for="ParkingInfo" class="text-danger"></span>
         </div>
 
-        <script>
-            function appendDateFields(e) {
-                let datesDiv = document.getElementById("polling-dates");
-                let group = document.createElement("div");
-                group.setAttribute("class", "form-group");
-
-                let formGroup1 = document.createElement("div");
-                formGroup1.setAttribute("class", "form-group");
-                let dateLabel = document.createElement("label");
-                dateLabel.setAttribute("class", "control-label");
-                dateLabel.setAttribute("for", "PollingPlaceDates");
-                dateLabel.appendChild(document.createTextNode("Poll Date"));
-                let dateInput = document.createElement("input");
-                dateInput.setAttribute("id", `PollingPlaceDates_${datesDiv.childElementCount}_`);
-                dateInput.setAttribute("name", `PollingPlaceDates[${datesDiv.childElementCount}]`);
-                dateInput.setAttribute('type', "date");
-                dateInput.setAttribute('class', 'form-control');
-                formGroup1.appendChild(dateLabel);
-                formGroup1.appendChild(dateInput);
-
-                let formGroup2 = document.createElement("div");
-                formGroup2.setAttribute("class", "form-group");
-                let startLabel = document.createElement("label");
-                startLabel.setAttribute("class", "control-label");
-                startLabel.setAttribute("for", "PollingStartTimes");
-                startLabel.appendChild(document.createTextNode("Start Time"));
-                let startTime = document.createElement("input");
-                startTime.setAttribute("id", `PollingStartTimes_${datesDiv.childElementCount}_`);
-                startTime.setAttribute("name", `PollingStartTimes[${datesDiv.childElementCount}]`);
-                startTime.setAttribute('type', "time");
-                startTime.setAttribute('class', 'form-control');
-                formGroup2.appendChild(startLabel);
-                formGroup2.appendChild(startTime);
-
-                let formGroup3 = document.createElement("div");
-                formGroup3.setAttribute("class", "form-group");
-                let endLabel = document.createElement("label");
-                endLabel.setAttribute("class", "control-label");
-                endLabel.setAttribute("for", "PollingEndTimes");
-                endLabel.appendChild(document.createTextNode("End Time"));
-                let endTime = document.createElement("input");
-                endTime.setAttribute("id", `PollingEndTimes_${datesDiv.childElementCount}_`);
-                endTime.setAttribute("name", `PollingEndTimes[${datesDiv.childElementCount}]`);
-                endTime.setAttribute('type', "time");
-                endTime.setAttribute('class', 'form-control');
-                formGroup3.appendChild(endLabel);
-                formGroup3.appendChild(endTime);
-
-                group.appendChild(formGroup1);
-                group.appendChild(formGroup2);
-                group.appendChild(formGroup3);
-                datesDiv.append(group);
-            }
-
-
-/**/</script>
         <label class="control-label">@Localizer["Polling Place Operating Hours"]</label>
-        <div id="polling-dates">
-            <div>
-                <div class="form-group">
-                    <label for="PollingPlaceDates" class="control-label">PollingPlaceDates</label>
-                    <input type="date" class="form-control" id="PollingPlaceDates_0_" name="PollingPlaceDates[0]" />
-                    <span validation-for="PollingPlaceDates" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="PollingStartTimes" class="control-label">PollingStartTimes</label>
-                    <input type="time" class="form-control" id="PollingStartTimes_0_" name="PollingStartTimes[0]" />
-                    <span validation-for="PollingStartTimes" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label for="PollingEndTimes" class="control-label">PollingEndTimes</label>
-                    <input type="time" class="form-control" id="PollingEndTimes_0_" name="PollingEndTimes[0]" />
-                    <span validation-for="PollingEndTimes" class="text-danger"></span>
-                </div>
-            </div>
-        </div>
-        <button id="AddDateField" type="button" role="button" class="btn btn-primary" onClick="appendDateFields(event)">
+        <div id="polling-dates"></div>
+
+        <script>
+            function addDate() {
+                let count = getCount(".date-group");
+
+                $("#polling-dates").append($(document.createElement("div")).attr("class", "date-group")
+                    .load('@Url.Action("GetDateFields", "PollingPlaces")',
+                        { "count": count },
+                        function (response, status, xhr) {
+                            if (status === "error") {
+                                alert("An error occurred while loading the date fields.");
+                            }
+                        })
+                );
+            }
+        </script>
+        <button id="AddDateField" type="button" role="button" class="btn btn-primary" onClick="addDate()">
             @Localizer["Add an operating date/time"]
         </button>
         <div class="form-group">
