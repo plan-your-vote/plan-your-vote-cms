@@ -17,11 +17,6 @@
                 @if(UserManager.GetUserAsync(User).Result != null) {
                     @UserManager.GetUserAsync(User).Result.UserName
                 }
-                else
-                {
-                    <p>Hi</p>
-                }
-
             </a>
         </li>
         <li class="nav-item">
