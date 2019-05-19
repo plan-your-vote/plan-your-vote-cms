@@ -10,11 +10,27 @@ namespace Web.Models
         /* Composite key via Fluent API - https://docs.microsoft.com/en-us/ef/core/modeling/keys
          * e.g. modelBuilder.Entity<Car>().HasKey(c => new { c.State, c.LicensePlate });
          */
+        public int ID { get; set; }
+
+        [Display(Name = "ThemeName")]
+        [Required(ErrorMessage = "Please enter the theme to associate this image with.")]
         public string ThemeName { get; set; }
-        public string ID { get; set; }
+
+        [Display(Name = "Placement")]
+        [Required(ErrorMessage = "Please enter the area to place the image, eg. Logo, Footer Logo, etc.")]
+        public string Placement { get; set; }
+
+        [Display(Name = "Type")]
         public string Type { get; set; }
+        [Required(ErrorMessage = "Please enter the url that the image will link to.")]
+
+        [Display(Name = "Value")]
         public string Value { get; set; }
+
+        [Display(Name = "Format")]
         public string Format { get; set; }
+
+        [Display(Name = "Description")]
         public string Description { get; set; }
     }
 }

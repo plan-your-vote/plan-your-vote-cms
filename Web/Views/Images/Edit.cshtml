@@ -16,12 +16,21 @@
         <div class="col-md-4">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="ThemeName" />
                 <input type="hidden" asp-for="ID" />
+                <div class="form-group">
+                    <label asp-for="ThemeName" class="control-label"></label>
+                    <input asp-for="ThemeName" class="form-control" />
+                    <span asp-validation-for="ThemeName" class="text-danger"></span>
+                </div>
                 <div class="form-group">
                     <label asp-for="Type" class="control-label"></label>
                     <input asp-for="Type" class="form-control" />
                     <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Placement" class="control-label"></label>
+                    <input asp-for="Placement" class="form-control" />
+                    <span asp-validation-for="Placement" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Value" class="control-label"></label>

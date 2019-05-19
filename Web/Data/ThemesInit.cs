@@ -8,6 +8,8 @@ namespace Web
 {
     internal static class ThemesInit
     {
+        internal const int DefaultElectionId = 1; // Hardcoded
+
         internal static void Initialize(ApplicationDbContext context)
         {
             if (context.Themes?.Any() != true)
@@ -39,7 +41,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Default",
-                    ID = "Logo",
+                    Placement = "Logo",
                     Type = "URL",
                     Value = "https://vancouver.ca/plan-your-vote/img/logo_home.png",
                     Format = "PNG",
@@ -48,7 +50,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Default",
-                    ID = "Footer Logo",
+                    Placement = "Footer Logo",
                     Type = "URL",
                     Value = "https://vancouver.ca/plan-your-vote/img/cov_logo.png",
                     Format = "PNG",
@@ -57,7 +59,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Snowdrop",
-                    ID = "Logo",
+                    Placement = "Logo",
                     Type = "URL",
                     Value = "https://www.bcit.ca/images/bcitlogo_fallback.png",
                     Format = "PNG",
@@ -66,7 +68,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Snowdrop",
-                    ID = "Footer Logo",
+                    Placement = "Footer Logo",
                     Type = "URL",
                     Value = "https://www.bcit.ca/images/v4_entrybanners/bcit_home/home_industryexperts2_sml_hd.jpg",
                     Format = "PNG",
@@ -75,7 +77,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Maple",
-                    ID = "Footer Logo",
+                    Placement = "Footer Logo",
                     Type = "URL",
                     Value = "https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg",
                     Format = "SVG",
@@ -84,7 +86,7 @@ namespace Web
                 new Image()
                 {
                     ThemeName = "Maple",
-                    ID = "Logo",
+                    Placement = "Logo",
                     Type = "URL",
                     Value = "https://www.canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-en.svg",
                     Format = "SVG",
@@ -121,18 +123,21 @@ namespace Web
             {
                 new SocialMedia()
                 {
+                    ElectionId = DefaultElectionId,
                     MediaName = "Facebook",
                     Message = "I'm using Plan Your Vote!",
                     Link = "https://www.facebook.com/"
                 },
                 new SocialMedia()
                 {
+                    ElectionId = DefaultElectionId,
                     MediaName = "Twitter",
                     Message = "I'm using Plan Your Vote!",
                     Link = "https://twitter.com/"
                 },
                 new SocialMedia()
                 {
+                    ElectionId = DefaultElectionId,
                     MediaName = "LinkedIn",
                     Message = "I'm using Plan Your Vote!",
                     Link = "https://ca.linkedin.com/"
