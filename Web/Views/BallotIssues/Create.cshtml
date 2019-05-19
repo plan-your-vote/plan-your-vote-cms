@@ -30,7 +30,7 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
 
-            <label class="control-label">@Localizer["Ballot Options"]</label>
+            <label class="control-label">@Html.LabelFor(model => model.BallotIssueOptions)</label>
             <div id="options">
                 @if (Model.BallotIssueOptions != null)
                 {
