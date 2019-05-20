@@ -21,17 +21,17 @@ namespace Web.Models
 
         [Display(Name = "Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}", ApplyFormatInEditMode = false)]
+        [DisplayFormat(DataFormatString = "{0:D}", ApplyFormatInEditMode = false)]
         public DateTime PollingDate { get; set; }
 
         [Display(Name = "StartTime")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:t}", ApplyFormatInEditMode = false)]
         public DateTime StartTime { get; set; }
 
         [Display(Name = "EndTime")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:t}", ApplyFormatInEditMode = false)]
         public DateTime EndTime { get; set; }
     }
 }

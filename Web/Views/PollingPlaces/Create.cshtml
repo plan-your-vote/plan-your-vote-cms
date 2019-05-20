@@ -1,4 +1,4 @@
-﻿@model Web.Models.PollingPlaceGroup
+﻿@model Web.Models.PollingPlace
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
@@ -17,7 +17,7 @@
 
 <div class="panel panel-default">
     <form asp-action="Create">
-        <div asp-validation-summary="ModelOnly" class="text-danger">@ViewData["Error"]</div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="PollingPlaceName" class="control-label"></label>
             <input asp-for="PollingPlaceName" class="form-control" />
@@ -75,7 +75,12 @@
         </div>
 
         <label class="control-label">@Localizer["Polling Place Operating Hours"]</label>
-        <div id="polling-dates"></div>
+        <input type="hidden" id="removedDates" name="removedDates" value="" />
+        <div id="polling-dates">
+            <div class="date-group">
+                @{ await Html.RenderPartialAsync("PollingDate", Model); }
+            </div>
+        </div>
 
         <script>
             function addDate() {

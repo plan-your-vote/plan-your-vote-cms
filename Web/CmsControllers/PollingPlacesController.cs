@@ -55,11 +55,16 @@ namespace Web
         // GET: PollingPlaces/Create
         public IActionResult Create()
         {
-            return View(new PollingPlaceGroup()
+            return View(new PollingPlace
             {
-                PollingPlaceDates = new List<DateTime>(),
-                PollingStartTimes = new List<DateTime>(),
-                PollingEndTimes = new List<DateTime>()
+                PollingPlaceDates = new List<PollingPlaceDate>
+                {
+                    // Add one date to populate the partial view
+                    new PollingPlaceDate
+                    {
+                        PollingDate = DateTime.Now
+                    }
+                }
             });
         }
 
@@ -68,41 +73,41 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(PollingPlaceGroup pollingPlaceGroup)
+        public async Task<IActionResult> Create(PollingPlace pollingPlace, string removedDates)
         {
+            pollingPlace.ElectionId = _managedElectionID;
+
+            if (removedDates != null && !removedDates.Equals(""))
+            {
+                string[] itemsToRemove = removedDates.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                int[] indexes = new int[itemsToRemove.Length];
+                for (int i = 0; i < itemsToRemove.Length; ++i)
+                {
+                    indexes[i] = int.Parse(itemsToRemove[i]);
+                }
+
+                // sort in ascending order
+                indexes = indexes.OrderBy(i => i).ToArray();
+
+                for (int i = indexes.Length - 1; i >= 0; --i)
+                {
+                    pollingPlace.PollingPlaceDates.RemoveAt(indexes[i]);
+                }
+            }
+
             if (ModelState.IsValid)
             {
-                PollingPlace pollingPlace = new PollingPlace
+                foreach (var date in pollingPlace.PollingPlaceDates)
                 {
-                    ElectionId = _managedElectionID,
-                    PollingPlaceName = pollingPlaceGroup.PollingPlaceName,
-                    PollingStationName = pollingPlaceGroup.PollingStationName,
-                    Address = pollingPlaceGroup.Address,
-                    WheelchairInfo = pollingPlaceGroup.WheelchairInfo,
-                    ParkingInfo = pollingPlaceGroup.ParkingInfo,
-                    Latitude = pollingPlaceGroup.Latitude,
-                    Longitude = pollingPlaceGroup.Longitude
-                };
-                _context.Add(pollingPlace);
-
-                if (pollingPlaceGroup.PollingPlaceDates != null)
-                {
-                    for (var i = 0; i < pollingPlaceGroup.PollingPlaceDates.Count; ++i)
-                    {
-                        PollingPlaceDate pollingDate = new PollingPlaceDate
-                        {
-                            PollingPlaceId = pollingPlace.PollingPlaceId,
-                            PollingDate = pollingPlaceGroup.PollingPlaceDates[i].Date,
-                            StartTime = pollingPlaceGroup.PollingPlaceDates[i].Date.Add(pollingPlaceGroup.PollingStartTimes[i].TimeOfDay),
-                            EndTime = pollingPlaceGroup.PollingPlaceDates[i].Date.Add(pollingPlaceGroup.PollingEndTimes[i].TimeOfDay)
-                        };
-                        _context.Add(pollingDate);
-                    }
+                    date.StartTime = date.PollingDate.Add(date.StartTime.TimeOfDay);
+                    date.EndTime = date.PollingDate.Add(date.EndTime.TimeOfDay);
                 }
+
+                _context.Add(pollingPlace);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(pollingPlaceGroup);
+            return View(pollingPlace);
         }
 
         public virtual IActionResult GetDateFields(int count)
@@ -132,36 +137,16 @@ namespace Web
                 return NotFound();
             }
 
-            var pollingPlace = await _context.PollingPlaces.FindAsync(id);
+            var pollingPlace = await _context.PollingPlaces
+                .Include(p => p.PollingPlaceDates)
+                .FirstOrDefaultAsync(p => p.PollingPlaceId == id);
 
             if (pollingPlace == null)
             {
                 return NotFound();
             }
 
-            var DateGroup = _context.PollingPlaceDates.Where(op => op.PollingPlaceId == id).ToList();
-            List<DateTime> PollDates = DateGroup.Select(d => d.PollingDate).ToList();
-            List<DateTime> StartTimes = DateGroup.Select(d => d.StartTime).ToList();
-            List<DateTime> EndTimes = DateGroup.Select(d => d.EndTime).ToList();
-
-            PollingPlaceGroup group = new PollingPlaceGroup
-            {
-                PollingPlaceName = pollingPlace.PollingPlaceName,
-                PollingStationName = pollingPlace.PollingStationName,
-                Address = pollingPlace.Address,
-                WheelchairInfo = pollingPlace.WheelchairInfo,
-                ParkingInfo = pollingPlace.ParkingInfo,
-                Latitude = pollingPlace.Latitude,
-                Longitude = pollingPlace.Longitude,
-                AdvanceOnly = pollingPlace.AdvanceOnly,
-                LocalArea = pollingPlace.LocalArea,
-                Phone = pollingPlace.Phone,
-                Email = pollingPlace.Email,
-                PollingPlaceDates = PollDates,
-                PollingStartTimes = StartTimes,
-                PollingEndTimes = EndTimes
-            };
-            return View(group);
+            return View(pollingPlace);
         }
 
         // POST: PollingPlaces/Edit/5
@@ -169,47 +154,48 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,
-            [Bind("PollingPlaceName,PollingStationName,Address,WheelchairInfo,ParkingInfo,Latitude,Longitude,AdvanceOnly,LocalArea,Phone,Email,PollingPlaceDates,PollingStartTimes,PollingEndTimes")] PollingPlaceGroup group)
+        public async Task<IActionResult> Edit(int id, PollingPlace pollingPlace, string removedDates)
         {
+            pollingPlace.ElectionId = _managedElectionID;
+
+            if (removedDates != null && !removedDates.Equals(""))
+            {
+                string[] itemsToRemove = removedDates.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                int[] indexes = new int[itemsToRemove.Length];
+                for (int i = 0; i < itemsToRemove.Length; ++i)
+                {
+                    indexes[i] = int.Parse(itemsToRemove[i]);
+                }
+
+                // sort in ascending order
+                indexes = indexes.OrderBy(i => i).ToArray();
+
+                for (int i = indexes.Length - 1; i >= 0; --i)
+                {
+                    pollingPlace.PollingPlaceDates.RemoveAt(indexes[i]);
+                }
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var pollingPlace = _context.PollingPlaces.Find(id);
-                    pollingPlace.PollingPlaceName = group.PollingPlaceName;
-                    pollingPlace.PollingStationName = group.PollingStationName;
-                    pollingPlace.Address = group.Address;
-                    pollingPlace.WheelchairInfo = group.WheelchairInfo;
-                    pollingPlace.ParkingInfo = group.ParkingInfo;
-                    pollingPlace.Latitude = group.Latitude;
-                    pollingPlace.Longitude = group.Longitude;
-                    pollingPlace.Longitude = group.Longitude;
-                    pollingPlace.AdvanceOnly = group.AdvanceOnly;
-                    pollingPlace.LocalArea = group.LocalArea;
-                    pollingPlace.Phone = group.Phone;
-                    pollingPlace.Email = group.Email;
-                    _context.Update(pollingPlace);
-
-                    if (group.PollingPlaceDates != null)
+                    if (pollingPlace.PollingPlaceDates != null)
                     {
-                        for (var i = 0; i < group.PollingPlaceDates.Count; i++)
-                        {
-                            var existing = _context.PollingPlaceDates
-                                .Where(psd => psd.PollingPlaceId == id)
-                                .ToList();
-                            _context.RemoveRange(existing);
+                        // remove the existing dates from the database so they do not get duplicated
+                        var existing = await _context.PollingPlaceDates
+                            .Where(pollDate => pollDate.PollingPlaceId == id)
+                            .ToListAsync();
+                        _context.RemoveRange(existing);
 
-                            PollingPlaceDate psDate = new PollingPlaceDate
-                            {
-                                PollingPlaceId = pollingPlace.PollingPlaceId,
-                                PollingDate = group.PollingPlaceDates[i].Date,
-                                StartTime = group.PollingPlaceDates[i].Date.Add(group.PollingStartTimes[i].TimeOfDay),
-                                EndTime = group.PollingPlaceDates[i].Date.Add(group.PollingEndTimes[i].TimeOfDay)
-                            };
-                            _context.Add(psDate);
+                        foreach (var date in pollingPlace.PollingPlaceDates)
+                        {
+                            date.StartTime = date.PollingDate.Add(date.StartTime.TimeOfDay);
+                            date.EndTime = date.PollingDate.Add(date.EndTime.TimeOfDay);
                         }
                     }
+
+                    _context.Update(pollingPlace);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -225,7 +211,7 @@ namespace Web
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(group);
+            return View(pollingPlace);
         }
 
         // GET: PollingPlaces/Delete/5
