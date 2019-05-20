@@ -78,10 +78,10 @@
         <div id="allDetails">
             @for (int i = 0; i < Model.Candidate.Details.Count; i++)
             {
-                <div id="detail_@i">
+                <div class="detail-group">
                     <div>
                         <p class="lead">Detail @(i + 1)</p>
-                        <button type="button" id="removeDetail_@i" class="btn btn-primary">Remove Detail</button>
+                        <button type="button" id="removeDetail_@i" class="btn btn-primary" onclick="removeDetail(@i)">Remove Detail</button>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.Candidate.Details[i].Title, new { @class = "control-label" })
@@ -104,58 +104,9 @@
                         @Html.ValidationMessageFor(c => c.Candidate.Details[i].Lang, "", new { @class = "text-danger" })
                     </div>
                     <hr />
-
-                    <script type="text/javascript">
-                    $("#removeDetail_@i").click(function () {
-                        $(this.parentNode.parentNode).attr("style", "display:none");
-                        let id = $(this.parentNode.parentNode).attr("id");
-                        if (id != null) {
-                            let index = id.charAt(id.length - 1);
-                            $("#removedDetails").attr("value", $("#removedDetails").attr("value") + index + ",");
-                        }
-                    });
-                    </script>
                 </div>
             }
         </div>
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                function getLast(div) {
-                    if ($(div).children().length === 0) {
-                        return -1;
-                    }
-                    let id = $(div).children().last().attr("id");
-                    return parseInt(id.charAt(id.length - 1));
-                }
-
-                $("#addDetail").click(function () {
-                    let count = getLast("#allDetails") + 1;
-                    $("#allDetails").append($(document.createElement("div")).attr("id", "detail_" + count));
-                    $("#detail_" + count)
-                        .load('@Url.Action("GetDetailFields", "Candidates")',
-                            { "count": count },
-                            function (response, status, xhr) {
-                                if (status == "error") {
-                                    alert("An error occurred while loading the detail fields.");
-                                }
-                            });
-                });
-
-                $("#addContact").click(function () {
-                    let count = getLast("#allContacts") + 1;
-                    $("#allContacts").append($(document.createElement("div")).attr("id", "contact_" + count));
-                    $("#contact_" + count)
-                        .load('@Url.Action("GetContactFields", "Candidates")',
-                            { "count": count },
-                            function (response, status, xhr) {
-                                if (status == "error") {
-                                    alert("An error occurred while loading the contact fields.");
-                                }
-                            });
-                });
-            });
-        </script>
         <div>
             <hr />
             <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
@@ -165,10 +116,10 @@
         <div id="allContacts">
             @for (int j = 0; j < Model.Candidate.Contacts.Count; j++)
             {
-                <div id="contact_@j">
+                <div class="contact-group">
                     <div>
                         <p class="lead">Contact @(j + 1)</p>
-                        <button type="button" id="removeContact_@j" class="btn btn-primary">Remove Contact</button>
+                        <button type="button" id="removeContact_@j" class="btn btn-primary" onclick="removeContact(@j)">Remove Contact</button>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.Candidate.Contacts[j].ContactMethod, new { @class = "control-label" })
@@ -181,24 +132,44 @@
                         @Html.ValidationMessageFor(c => c.Candidate.Contacts[j].ContactValue, "", new { @class = "text-danger" })
                     </div>
                     <hr />
-
-                    <script type="text/javascript">
-                    $("#removeContact_@j").click(function () {
-                        $(this.parentNode.parentNode).attr("style", "display:none");
-                        let id = $(this.parentNode.parentNode).attr("id");
-                        if (id != null) {
-                            let index = id.charAt(id.length - 1);
-                            $("#removedContacts").attr("value", $("#removedContacts").attr("value") + index + ",");
-                        }
-                    });
-                    </script>
                 </div>
             }
         </div>
+
+
+        <script>
+            function addDetail() {
+                let count = getCount(".detail-group");
+
+                $("#allDetails").append($(document.createElement("div")).attr("class", "detail-group")
+                    .load('@Url.Action("GetDetailFields", "Candidates")',
+                        { "count": count },
+                        function (response, status, xhr) {
+                            if (status === "error") {
+                                alert("An error occurred while loading the detail fields.");
+                            }
+                        })
+                );
+            }
+
+            function addContact() {
+                let count = getCount(".contact-group");
+
+                $("#allContacts").append($(document.createElement("div")).attr("class", "contact-group")
+                    .load('@Url.Action("GetContactFields", "Candidates")',
+                        { "count": count },
+                        function (response, status, xhr) {
+                            if (status === "error") {
+                                alert("An error occurred while loading the contact fields.");
+                            }
+                        })
+                );
+            }
+        </script>
         <div>
-            <button type="button" id="addDetail" class="btn btn-primary">Add a Candidate Detail</button>
+            <button type="button" id="AddDetailField" class="btn btn-primary" onclick="addDetail()">Add a Candidate Detail</button>
             &nbsp;|&nbsp;
-            <button type="button" id="addContact" class="btn btn-primary">Add a Contact</button>
+            <button type="button" id="AddContactField" class="btn btn-primary" onclick="addContact()">Add a Contact</button>
         </div>
         <div class="form-group">
             <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />

@@ -17,10 +17,10 @@ namespace Web.Models
         [Display(Name = "Election")]
         public Election Election { get; set; }
 
-        [Display(Name = "Polling Place")]
+        [Display(Name = "PollingPlace")]
         public string PollingPlaceName { get; set; }
 
-        [Display(Name = "Polling Station")]
+        [Display(Name = "PollingStation")]
         public string PollingStationName { get; set; }
 
         [Display(Name = "Address")]

@@ -51,20 +51,20 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li class="dropdown @Html.IsSelected(actions: "Index,Edit,Details,Delete,Create,Reorder", controllers: "Steps,BallotIssues,Races,PollingPlaces")">
+                            <li class="dropdown @Html.IsSelected(actions: "Index,Edit,Details,Delete,Create,Reorder", controllers: "Races,BallotIssues,PollingPlaces,Steps")">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Election Details <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" asp-area="" asp-controller="Steps" asp-action="Index">@Localizer["Steps"]</a>
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Races" asp-action="Index">@Localizer["Races"]</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link text-white" asp-area="" asp-controller="BallotIssues" asp-action="Index">@Localizer["Questions"]</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" asp-area="" asp-controller="Races" asp-action="Index">@Localizer["Races"]</a>
+                                        <a class="nav-link text-white" asp-area="" asp-controller="PollingPlaces" asp-action="Index">@Localizer["Polling Places"]</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-white" asp-area="" asp-controller="PollingPlaces" asp-action="Index">@Localizer["Polling Places"]</a>
+                                        <a class="nav-link text-white" asp-area="" asp-controller="Steps" asp-action="Index">@Localizer["Steps"]</a>
                                     </li>
                                 </ul>
                             </li>

@@ -4,20 +4,9 @@
     var lastIndex = Model.Candidate.Contacts.Count - 1;
 }
 
-<script>
-    $("#removeContact_@lastIndex").click(function () {
-        $(this.parentNode.parentNode).attr("style", "display:none");
-        let id = $(this.parentNode.parentNode).attr("id");
-        if (id != null) {
-            let index = id.charAt(id.length - 1);
-            $("#removedContacts").attr("value", $("#removedContacts").attr("value") + index + ",");
-        }
-    });
-</script>
-
 <div>
     <p class="lead">Contact @(lastIndex+1)</p>
-    <button type="button" id="removeContact_@lastIndex" class="btn btn-primary">Remove Contact</button>
+    <button type="button" id="removeContact_@lastIndex" class="btn btn-primary" onclick="removeContact(@lastIndex)">Remove Contact</button>
 </div>
 <div class="form-group">
     @Html.LabelFor(c => c.Candidate.Contacts[lastIndex].ContactMethod, new { @class = "control-label" })
