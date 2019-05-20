@@ -11,3 +11,8 @@ function removeOption(optionIndex) {
         $(".option")[optionIndex].classList.add("hide");
     }
 }
+
+function removeDate(dateIndex) {
+    $("#removedDates").val($("#removedDates").val() + dateIndex + ",");
+    $(".date-group")[dateIndex].classList.add("hide");
+}
