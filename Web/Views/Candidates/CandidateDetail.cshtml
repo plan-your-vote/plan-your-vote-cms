@@ -4,20 +4,9 @@
     var lastIndex = Model.Candidate.Details.Count - 1;
 }
 
-<script>
-    $("#removeDetail_@lastIndex").click(function () {
-        $(this.parentNode.parentNode).attr("style", "display:none");
-        let id = $(this.parentNode.parentNode).attr("id");
-        if (id != null) {
-            let index = id.charAt(id.length - 1);
-            $("#removedDetails").attr("value", $("#removedDetails").attr("value") + index + ",");
-        }
-    });
-</script>
-
 <div>
     <p class="lead">Detail @(lastIndex+1)</p>
-    <button type="button" id="removeDetail_@lastIndex" class="btn btn-primary">Remove Detail</button>
+    <button type="button" id="removeDetail_@lastIndex" class="btn btn-primary" onclick="removeDetail(@lastIndex)">Remove Detail</button>
 </div>
 <div class="form-group">
     @Html.LabelFor(c => c.Candidate.Details[lastIndex].Title, new { @class = "control-label" })
