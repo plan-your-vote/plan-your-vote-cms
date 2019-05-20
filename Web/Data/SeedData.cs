@@ -9,7 +9,7 @@ using Web.Models;
 
 namespace Web.Data
 {
-    public static class DummyData
+    public static class SeedData
     {
         public static ApplicationDbContext _context;
 

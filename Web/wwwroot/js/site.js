@@ -16,3 +16,13 @@ function removeDate(dateIndex) {
     $("#removedDates").val($("#removedDates").val() + dateIndex + ",");
     $(".date-group")[dateIndex].classList.add("hide");
 }
+
+function removeDetail(detailIndex) {
+    $("#removedDetails").val($("#removedDetails").val() + detailIndex + ",");
+    $(".detail-group")[detailIndex].classList.add("hide");
+}
+
+function removeContact(contactIndex) {
+    $("#removedContacts").val($("#removedContacts").val() + contactIndex + ",");
+    $(".contact-group")[contactIndex].classList.add("hide");
+}
