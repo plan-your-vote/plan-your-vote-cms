@@ -56,6 +56,7 @@ namespace Web.CmsControllers
         // POST: State/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = Constants.Account.ROLE_ADMIN)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("StateId,RunningElectionID,ManagedElectionID")] State state)
