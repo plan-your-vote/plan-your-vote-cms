@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Web.Controllers;
 using Web.Data;
 using Web.ViewModels;
 
@@ -120,7 +121,19 @@ namespace Web.CmsControllers
                     var newRole = await _roleManager.FindByIdAsync(userRoleViewModel.IdentityRole.Id);
                     await _userManager.AddToRoleAsync(identityUser, newRole.Name);
 
-                    await _signInManager.RefreshSignInAsync(identityUser);
+                    // Refresh cookies if current user is not Admin since cookies stores user
+                    var currentUser = await _userManager.GetUserAsync(HttpContext.User).ConfigureAwait(false);
+                    var userRoles = await _userManager.GetRolesAsync(currentUser).ConfigureAwait(false);
+                    var userRole = userRoles.First(); // Only one
+                    if (userRole != Constants.Account.ROLE_ADMIN)
+                    {
+                        await _signInManager.RefreshSignInAsync(
+                            await _userManager.GetUserAsync(HttpContext.User)
+                            .ConfigureAwait(false)
+                        ).ConfigureAwait(false);
+
+                        return RedirectToAction(nameof(Index), nameof(HomeController));
+                    }
 
                     return RedirectToAction(nameof(Index));
                 }

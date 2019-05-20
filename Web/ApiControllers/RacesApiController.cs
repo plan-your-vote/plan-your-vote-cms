@@ -13,6 +13,7 @@ namespace Web.Controllers
     [ApiController]
     public class RacesApiController : ControllerBase
     {
+        public const int STEP_NUMBER = 1; // Hard-coded
 
         private readonly ApplicationDbContext _context;
         private int _runningElection;
@@ -27,11 +28,13 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Race>>> Get()
         {
+            var step1 = _context.Steps.Where(step => step.StepNumber == STEP_NUMBER).First();
+
             VotingPage votingPage = new VotingPage()
             {
-                PageTitle = "REVIEW AND SELECT CANDIDATES",
-                PageDescription = "Add up to 1 mayor, 10 councillors, 7 Park Board commissioners, and 9 school trustees to your plan. Open a candidate to read their profile and add them to your plan. Change your choices in the selected candidates area above.\nA candidate’s profile expresses their views alone and these views aren’t endorsed by the City of Vancouver. Profiles are included exactly as candidates wrote them.\nIf you live in the UBC Lands or University Endowment Lands, and you do not own property in Vancouver, you can only vote for school trustees in the election.",
-                PageNumber = 1,
+                PageTitle = step1.StepTitle,
+                PageDescription = step1.StepDescription,
+                PageNumber = STEP_NUMBER,
             };
 
             var races = await _context.Races

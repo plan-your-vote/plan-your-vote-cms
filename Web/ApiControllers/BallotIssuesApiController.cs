@@ -16,9 +16,10 @@ namespace Web.Controllers
     [ApiController]
     public class BallotIssuesApiController : ControllerBase
     {
+        public const int STEP_NUMBER = 2; // Hard-coded
 
         private readonly ApplicationDbContext _context;
-        private int _runningElectionID;
+        private readonly int _runningElectionID;
 
         public BallotIssuesApiController(ApplicationDbContext context)
         {
@@ -30,11 +31,13 @@ namespace Web.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BallotIssue>>> Get()
         {
+            var step2 = _context.Steps.Where(step => step.StepNumber == STEP_NUMBER).First();
+
             VotingPage votingPage = new VotingPage()
             {
-                PageTitle = "REVIEW CAPITAL PLAN BORROWING QUESTIONS",
-                PageDescription = @"Add your response to the Capital Plan borrowing questions to your plan. \n The ballot will have 3 ""yes"" or ""no"" questions on whether the City can borrow $300 million to help pay for projects in the Capital Plan. \n The 2019-2022 Capital Plan invests $300,000,000 in City facilities and infrastructure to provide services to the people of Vancouver. \n If a majority of voters vote yes, then City Council can borrow the funds for these projects.",
-                PageNumber = 2,
+                PageTitle = step2.StepTitle,
+                PageDescription = step2.StepDescription,
+                PageNumber = STEP_NUMBER,
             };
 
             var ballotIssues = await _context.BallotIssues
