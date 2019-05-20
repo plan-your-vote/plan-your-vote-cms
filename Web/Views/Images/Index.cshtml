@@ -10,7 +10,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">@Localizer["Create New"]</a>
+    <a class="btn btn-primary" asp-action="Create">@Localizer["Create New"]</a>
 </p>
 <table class="table panel panel-default">
     <thead>
@@ -46,12 +46,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { ID = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { ID = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { ID = item.ID })
+                <td class="button-group">
+                    @Html.ActionLink("Edit", "Edit", new { ID = item.ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Details", "Details", new { ID = item.ID }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Delete", "Delete", new { ID = item.ID }, new { @class = "btn btn-primary" })
                 </td>
             </tr>
-        }
+}
     </tbody>
 </table>
