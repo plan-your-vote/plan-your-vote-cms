@@ -213,7 +213,7 @@ namespace Web
 
             if (!context.Elections.Any())
             {
-                DummyData.Initialize(context);
+                SeedData.Initialize(context);
                 AccountsInit.InitializeAsync(app);
                 StateInit.Initialize(context);
                 ThemesInit.Initialize(context);
