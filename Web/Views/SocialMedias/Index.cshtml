@@ -7,7 +7,7 @@
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
 <table class="table panel panel-default">
     <thead>
@@ -36,10 +36,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Link)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            <td class="button-group">
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                <a class="btn btn-primary" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
 }

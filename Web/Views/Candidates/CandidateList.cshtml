@@ -7,7 +7,7 @@
     @foreach (var race in Model.Races)
     {
         <h5>@Html.DisplayFor(model => race.PositionName)</h5>
-        <a asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["Edit Ballot Order"]</a>
+        <a class="btn btn-primary" asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["Edit Ballot Order"]</a>
         <table class="table">
             <thead>
                 <tr>
@@ -42,10 +42,10 @@
                             <td>
                                 @Html.DisplayFor(cr => candidateRace.Candidate.Organization.Name)
                             </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a> |
-                                <a asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a> |
-                                <a asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a>
+                            <td class="button-group">
+                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a>
+                                <a class="btn btn-primary" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a>
+                                <a class="btn btn-primary" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a>
                             </td>
                         </tr>
                     }
@@ -94,10 +94,10 @@
                     <td>
                         @Html.DisplayFor(model => candidate.Organization.Name)
                     </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["Edit"]</a> |
-                        <a asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["Details"]</a> |
-                        <a asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["Delete"]</a>
+                    <td class="button-group">
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["Edit"]</a>
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["Details"]</a>
+                        <a class="btn btn-primary" asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["Delete"]</a>
                     </td>
                 </tr>
             }

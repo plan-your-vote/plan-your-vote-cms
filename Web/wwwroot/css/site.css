@@ -79,6 +79,11 @@ body {
 
 /* Views Styling
 -------------------------------------------------- */
+.button-group {
+    display: flex;
+    flex-direction: column;
+}
+
 .vert-center {
     display: flex;
     align-items: center;
