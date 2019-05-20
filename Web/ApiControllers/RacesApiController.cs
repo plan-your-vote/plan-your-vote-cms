@@ -41,6 +41,7 @@ namespace Web.Controllers
                 .Where(race => race.ElectionId == _runningElection)
                 .Select(race => new
                 {
+                    race.BallotOrder,
                     race.PositionName,
                     race.NumberNeeded,
                     Candidates = race.CandidateRaces.Select(cr => new
