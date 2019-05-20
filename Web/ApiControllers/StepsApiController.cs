@@ -34,7 +34,10 @@ namespace Web.ApiControllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Step>> GetStep(int id)
         {
-            var step = await _context.Steps.FindAsync(id);
+            var runningElectionID = _context.StateSingleton.First().RunningElectionID;
+            var steps = await _context.Steps.Where(s => s.ElectionId == runningElectionID && s.StepNumber == id).ToListAsync();
+
+            var step = steps.First();
 
             if (step == null)
             {
