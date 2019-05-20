@@ -78,9 +78,10 @@ namespace Web.ApiControllers
                 var pollingPlaceCoordinate = new GeoCoordinate(latitude, longitude);
 
                 var nearestPollingPlaces = _context.PollingPlaces
-                                       .OrderBy(pollingPlace => new GeoCoordinate(pollingPlace.Latitude, pollingPlace.Longitude).GetDistanceTo(pollingPlaceCoordinate))
-                                       .Take(20)
-                                       .ToList();
+                                        .Where(pollingPlace => pollingPlace.ElectionId == _context.StateSingleton.First().RunningElectionID)
+                                        .OrderBy(pollingPlace => new GeoCoordinate(pollingPlace.Latitude, pollingPlace.Longitude).GetDistanceTo(pollingPlaceCoordinate))
+                                        .Take(20)
+                                        .ToList();
 
                 foreach (var pollingPlace in nearestPollingPlaces)
                 {
