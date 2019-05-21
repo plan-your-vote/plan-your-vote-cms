@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Web.Models
@@ -15,10 +16,19 @@ namespace Web.Models
         [Display(Name = "Election")]
         public Election Election { get; set; }
 
+        [Display(Name = "BallotOrder")]
+        [Range(1, Int32.MaxValue)]
+        public int BallotOrder { get; set; }
+
+        [Required]
         [Display(Name = "PositionName")]
         public string PositionName { get; set; }
 
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
         [Display(Name = "NumberNeeded")]
+        [Range(1, Int32.MaxValue)]
         public int NumberNeeded { get; set; }
 
         [Display(Name = "CandidateRaces")]

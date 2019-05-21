@@ -3,43 +3,40 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Details"];
+    ViewData["Title"] = @Localizer["Election Details"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>
-        @Localizer["Election"]</h4>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DateStart)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DateStart)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.DateEnd)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.DateEnd)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-        </dl>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ElectionName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ElectionName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+    <a asp-action="Edit" asp-route-id="@Model.ElectionId" class="btn btn-primary">@Localizer["Edit"]</a>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ElectionId">@Localizer["Edit"]</a> |
-    <a asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
 </div>

@@ -9,7 +9,7 @@ namespace Web.Models
         [Display(Name = "BallotIssueId")]
         public int BallotIssueId { get; set; }
 
-         [Display(Name = "ElectionId")]
+        [Display(Name = "ElectionId")]
         public int ElectionId { get; set; }
 
         [Display(Name = "Election")]

@@ -3,14 +3,12 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Details"];
+    ViewData["Title"] = @Localizer["Question Details"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["BallotIssue"]</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BallotIssueTitle)
@@ -25,7 +23,7 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class="col-sm-2">
-            Ballot Options
+            @Html.DisplayNameFor(model => model.BallotIssueOptions)
         </dt>
         <dd class="col-sm-10">
             <ul>
@@ -37,10 +35,9 @@
                 }
             </ul>
         </dd>
-
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.BallotIssueId">@Localizer["Edit"]</a> |
-    <a asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.BallotIssueId">@Localizer["Edit"]</a> |
+    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
 </div>

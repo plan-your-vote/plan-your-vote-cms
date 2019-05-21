@@ -3,60 +3,110 @@
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Details"];
+    ViewData["Title"] = @Localizer["Candidate Details"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Candidate"]</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FirstName)
+            @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastName)
+            @Html.DisplayFor(model => model.Name)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Picture)
         </dt>
         <dd class="col-sm-10">
-            <img width="150" height="150" src="@Html.DisplayFor(model => model.Picture)">
+            @{
+                var url = "../../" + Model.Picture;
+                <img width="150" height="150" src="@url">
+            }
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Biography)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Biography)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Organization)
+            @Html.DisplayNameFor(model => model.Organization.Name)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Organization.Name)
         </dd>
-        @*
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CandidateRaces)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (var candidateRace in Model.CandidateRaces)
+                {
+                    var races = (List<Race>)ViewBag.Races;
+                    var race = races.Find(r => r.RaceId == candidateRace.RaceId);
+
+                    <li>
+                        @Html.DisplayFor(model => race.PositionName)
+                    </li>
+                }
+            </ul>
+        </dd>
+    </dl>
+
+    <h4>@Html.DisplayNameFor(model => model.Details)</h4>
+    <hr />
+    @foreach (var detail in Model.Details)
+    {
+        <dl class="row">
             <dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Contacts)
+                @Html.DisplayNameFor(model => detail.Title)
             </dt>
             <dd class="col-sm-10">
-                @foreach (var i in Model.Contacts)
+                @Html.DisplayFor(model => detail.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => detail.Text)
+            </dt>
+            <dd class="col-sm-10">
+                @if (detail.Format == CandidateDetailFormat.List)
                 {
-                    @i.ContactMethod
-                    @i.ContactValue
+                    <ul>
+                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                    </ul>
+                }
+                else if (detail.Format == CandidateDetailFormat.OrderedList)
+                {
+                    <ol>
+                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                    </ol>
+                }
+                else
+                {
+                    @Html.DisplayFor(model => detail.Text)
                 }
             </dd>
-        *@
-    </dl>
+        </dl>
+        <hr />
+    }
+
+    <h4>@Html.DisplayNameFor(model => model.Contacts)</h4>
+    <hr />
+    @foreach (var contact in Model.Contacts)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => contact.ContactMethod)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => contact.ContactMethod)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => contact.ContactValue)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(Model => contact.ContactValue)
+            </dd>
+        </dl>
+        <hr />
+    }
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.CandidateId">@Localizer["Edit"]</a> |
-    <a asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.CandidateId">@Localizer["Edit"]</a> |
+    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
 </div>

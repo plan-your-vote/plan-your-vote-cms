@@ -124,7 +124,7 @@
     <value>La description</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>prénom</value>
+    <value>Nom d'organisation</value>
   </data>
   <data name="OrganizationId" xml:space="preserve">
     <value>Identifiant d'organisation</value>

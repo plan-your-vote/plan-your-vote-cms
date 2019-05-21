@@ -15,27 +15,29 @@ namespace Web.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly int _managedElectionID;
 
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
+            _managedElectionID = _context.StateSingleton.Find(State.STATE_ID).ManagedElectionID;
         }
 
         public IActionResult Index()
         {
             State s = _context.StateSingleton.Find(State.STATE_ID);
-            Election e = _context.Elections.Where(el => el.ElectionId == s.CurrentElection).First();
+            Election e = _context.Elections.Where(el => el.ElectionId == _managedElectionID).First();
             DashboardViewModel dashboard = new DashboardViewModel
             {
-                ElectionName = e.Name,
+                ElectionName = e.ElectionName,
                 CandidatesCount = _context.Candidates
-                    .Where(c => c.ElectionId == s.CurrentElection)
+                    .Where(c => c.ElectionId == _managedElectionID)
                     .Count(),
                 BallotIssuesCount = _context.BallotIssues
-                    .Where(c => c.ElectionId == s.CurrentElection)
+                    .Where(c => c.ElectionId == _managedElectionID)
                     .Count(),
-                PollingStationsCount = _context.PollingStations
-                    .Where(c => c.ElectionId == s.CurrentElection)
+                PollingPlacesCount = _context.PollingPlaces
+                    .Where(c => c.ElectionId == _managedElectionID)
                     .Count()
             };
 

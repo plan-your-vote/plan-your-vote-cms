@@ -11,14 +11,14 @@ namespace Web.Models
         [Display(Name = "ElectionId")]
         public int ElectionId { get; set; }
 
-        [Display (Name = "StartDate")]
-        public string DateStart { get; set; }
+        [Display(Name = "StartDate")]
+        public DateTime StartDate { get; set; }
 
         [Display(Name = "EndDate")]
-        public string DateEnd { get; set; }
+        public DateTime EndDate { get; set; }
 
-        [Display(Name = "Name")]
-        public string Name { get; set; }
+        [Display(Name = "ElectionName")]
+        public string ElectionName { get; set; }
 
         [Display(Name = "Description")]
         public string Description { get; set; }

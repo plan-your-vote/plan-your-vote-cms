@@ -1,25 +1,34 @@
-﻿@model IEnumerable<Web.Models.State>
+﻿@model Web.Models.State
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Index"];
+    ViewData["Title"] = @Localizer["Manage Elections"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <table class="table panel panel-default">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RunningElection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManagedElection)
+            </th>
+        </tr>
+    </thead>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @ViewBag.ElectionName
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.StateId">@Localizer["Change"]</a>
-                </td>
-            </tr>
-        }
+
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.RunningElection.ElectionName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ManagedElection.ElectionName)
+            </td>
+        </tr>
     </tbody>
 </table>
+<a asp-action="Edit" asp-route-id="@Model.StateId" class="btn btn-primary">@Localizer["Change"]</a>

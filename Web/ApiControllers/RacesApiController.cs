@@ -1,13 +1,11 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Web.Models;
+using Web.ApiDTO;
 using Web.Data;
+using Web.Models;
 
 namespace Web.Controllers
 {
@@ -15,24 +13,65 @@ namespace Web.Controllers
     [ApiController]
     public class RacesApiController : ControllerBase
     {
+        public const int STEP_NUMBER = 1; // Hard-coded
 
         private readonly ApplicationDbContext _context;
-        private int _currentElection;
+        private int _runningElection;
 
         public RacesApiController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            _runningElection = context.StateSingleton.Find(State.STATE_ID).RunningElectionID;
         }
 
         // GET: api/Races
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Race>>> Get()
         {
-            return await _context.Races.Include(c => c.CandidateRaces).ThenInclude(p => p.Candidate).Where(b => b.ElectionId == _currentElection).ToListAsync();
+            var step1 = _context.Steps.Where(step => step.StepNumber == STEP_NUMBER).First();
 
+            VotingPage votingPage = new VotingPage()
+            {
+                PageTitle = step1.StepTitle,
+                PageDescription = step1.StepDescription,
+                PageNumber = STEP_NUMBER,
+            };
+
+            var races = await _context.Races
+                .Where(race => race.ElectionId == _runningElection)
+                .Select(race => new
+                {
+                    race.BallotOrder,
+                    race.PositionName,
+                    race.NumberNeeded,
+                    Candidates = race.CandidateRaces.Select(cr => new
+                    {
+                        cr.BallotOrder,
+                        cr.Candidate.CandidateId,
+                        cr.Candidate.Name,
+                        cr.Candidate.Picture,
+                        OrganizationName = cr.Candidate.Organization.Name,
+                        Details = cr.Candidate.Details.Select(detail => new
+                        {
+                            detail.Title,
+                            detail.Text,
+                            detail.Format,
+                        }),
+                        Contacts = cr.Candidate.Contacts.Select(contact => new
+                        {
+                            contact.ContactMethod,
+                            contact.ContactValue,
+                        }),
+                    })
+                })
+                .ToListAsync();
+
+            return Ok(new
+            {
+                votingPage,
+                races,
+            });
         }
-
 
         // GET: api/Races/5
         [HttpGet("{id}")]

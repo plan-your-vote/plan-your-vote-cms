@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Web.Data;
+using Web.ApiDTO;
 
 namespace Web.Controllers
 {
@@ -15,24 +16,40 @@ namespace Web.Controllers
     [ApiController]
     public class BallotIssuesApiController : ControllerBase
     {
+        public const int STEP_NUMBER = 2; // Hard-coded
 
         private readonly ApplicationDbContext _context;
-        private int _currentElection;
+        private readonly int _runningElectionID;
 
         public BallotIssuesApiController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            _runningElectionID = _context.StateSingleton.Find(State.STATE_ID).RunningElectionID;
         }
 
         // GET: api/BallotIssues
         [HttpGet]
         public async Task<ActionResult<IEnumerable<BallotIssue>>> Get()
         {
-            return await _context.BallotIssues
+            var step2 = _context.Steps.Where(step => step.StepNumber == STEP_NUMBER).First();
+
+            VotingPage votingPage = new VotingPage()
+            {
+                PageTitle = step2.StepTitle,
+                PageDescription = step2.StepDescription,
+                PageNumber = STEP_NUMBER,
+            };
+
+            var ballotIssues = await _context.BallotIssues
                 .Include(b => b.BallotIssueOptions)
-                .Where(b => b.ElectionId == _currentElection)
+                .Where(b => b.ElectionId == _runningElectionID)
                 .ToListAsync();
+
+            return Ok(new
+            {
+                votingPage,
+                ballotIssues
+            });
         }
 
         // GET: api/BallotIssues/5

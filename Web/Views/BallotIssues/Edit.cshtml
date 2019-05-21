@@ -1,53 +1,87 @@
-﻿@model Web.Models.BallotIssueCreate
+﻿@model Web.Models.BallotIssue
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Edit"];
+    ViewData["Title"] = @Localizer["Edit Question"];
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+</script>
 
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["BallotIssue"]</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="BallotIssueTitle" class="control-label"></label>
-                    <input asp-for="BallotIssueTitle" class="form-control" />
-                    <span asp-validation-for="BallotIssueTitle" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <label class="control-label">@Localizer["Options"]</label>
-                <div class="form-group">
-                    <input asp-for="OptionsTitles[0]" value="Yes" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input asp-for="OptionsTitles[1]" value="No" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input asp-for="OptionsTitles[2]" placeholder="Optional" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input asp-for="OptionsTitles[3]" placeholder="Optional" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
-                </div>
-            </form>
+    <form asp-action="Edit">
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BallotIssueId" />
+            <div class="form-group">
+                @Html.LabelFor(ballotIssue => ballotIssue.BallotIssueTitle, new { @class = "control-label" })
+                @Html.TextAreaFor(ballotIssue => ballotIssue.BallotIssueTitle, new { @class = "form-control", @rows = 2 })
+                @Html.ValidationMessageFor(ballotIssue => ballotIssue.BallotIssueTitle, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(ballotIssue => ballotIssue.Description, new { @class = "control-label" })
+                @Html.TextAreaFor(ballotIssue => ballotIssue.Description, new { @class = "form-control", @rows = 4 })
+                @Html.ValidationMessageFor(ballotIssue => ballotIssue.Description, "", new { @class = "text-danger" })
+            </div>
+
+            @Html.LabelFor(ballotIssue => ballotIssue.BallotIssueOptions, new { @class = "control-label" })
+            <div id="options">
+                @for (int i = 0; i < Model.BallotIssueOptions.Count; i++)
+                {
+                    <div class="row option">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                @Html.TextAreaFor(model => model.BallotIssueOptions[i].IssueOptionInfo, new { @class = "form-control option-text", @rows = 2 })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary" onClick="removeOption(@i)">Remove Option</button>
+                        </div>
+                    </div>
+
+                }
+            </div>
+            <div>
+                <span class="text-danger">@ViewData["IssueOptionsError"]</span>
+            </div>
         </div>
-    </div>
+
+        <script>
+            function addOption() {
+                let count = getCount(".option-text");
+
+                $("#options").append($(document.createElement("div"))
+                    .load('@Url.Action("GetOptionFields", "BallotIssues")',
+                        { "count": count },
+                        function (response, status, xhr) {
+                            if (status === "error") {
+                                alert("An error occurred while loading the option fields.");
+                            }
+                        })
+                );
+            }
+        </script>
+
+        <div>
+            <div class="form-group">
+                <button type="button" role="button" class="btn btn-primary" onClick="addOption()">Add Option</button>
+            </div>
+            <div class="form-group">
+                <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
 </div>
 
 <div>
-    <a asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
 </div>
 
 @section Scripts {

@@ -1,27 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
-using Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Swashbuckle.AspNetCore.Swagger;
-using Web.Models;
-using Microsoft.AspNetCore.Mvc.Razor;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Swashbuckle.AspNetCore.Swagger;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using Web.ApiControllers;
+using Web.Data;
+using Web.Models;
 
 namespace Web
 {
@@ -53,12 +50,7 @@ namespace Web
             });
 
             services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
-
-            // string executableLocation = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            // string path = Path.GetDirectoryName(executableLocation).Split("bin")[0];
-            //string cs = Configuration.GetConnectionString("DefaultConnection");
-            // string[] csSplit = cs.Split("=");
-            // cs = csSplit[0] + "=" + path + csSplit[1];
+            services.Configure<MapConfiguration>(Configuration.GetSection("MapConfiguration"));
 
             //Choosing a db service
             CheckDB check = new CheckDB();
@@ -102,12 +94,6 @@ namespace Web
                     break;
             }
 
-
-
-            /*     
-  services.AddDefaultIdentity<IdentityUser>()
-      .AddDefaultUI(UIFramework.Bootstrap4)
-      .AddEntityFrameworkStores<ApplicationDbContext>();*/
             services.AddIdentity<IdentityUser, IdentityRole>(
                option =>
                {
@@ -141,7 +127,15 @@ namespace Web
             services.AddMvc()
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
             .AddDataAnnotationsLocalization()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+            .AddJsonOptions(
+                options =>
+                {
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                });
+
+            services.AddHttpClient();
 
             services.Configure<RequestLocalizationOptions>(opts =>
             {
@@ -155,10 +149,28 @@ namespace Web
                 opts.SupportedUICultures = supportedCultures;
             });
 
+            try
+            {
+                var local_access_token = Configuration["mapkey"];
+                if (!string.IsNullOrEmpty(local_access_token))
+                {
+                    if (string.IsNullOrEmpty(MapController.AccessToken))
+                    {
+                        MapController.AccessToken = local_access_token;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, ApplicationDbContext context, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app,
+            ApplicationDbContext context,
+            IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -197,9 +209,15 @@ namespace Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            DummyData.Initialize(app).Wait();
-            StateInit.Initialize(context);
-            ThemesInit.Initialize(context);
+            context.Database.EnsureCreated();
+
+            if (!context.Elections.Any())
+            {
+                SeedData.Initialize(context);
+                AccountsInit.InitializeAsync(app);
+                StateInit.Initialize(context);
+                ThemesInit.Initialize(context);
+            }
         }
     }
 }

@@ -1,49 +1,62 @@
-﻿@model Web.CmsControllers.RaceViewModel
+﻿@model Web.ViewModels.RaceViewModel
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Edit"];
+    ViewData["Title"] = @Localizer["Edit Race"];
 }
 
-<h1>@Localizer["Edit"]</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
-    <h4>@Localizer["Race"]</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="RaceId" />
-                <div class="form-group">
-                    <label asp-for="ElectionId" class="control-label"></label>
-                    <select asp-for="ElectionId" class="form-control" asp-items="ViewBag.Elections"></select>
-                    <span asp-validation-for="ElectionId" class="text-danger"></span>
+    <div>
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(r => r.Race.RaceId)
+            @Html.HiddenFor(r => r.Race.ElectionId)
+            @Html.HiddenFor(r => r.Race.BallotOrder)
+            <div class="form-group">
+                <label asp-for="Race.PositionName" class="control-label"></label>
+                <input asp-for="Race.PositionName" class="form-control" />
+                <span asp-validation-for="Race.PositionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Race.Description" class="control-label"></label>
+                <input asp-for="Race.Description" class="form-control" />
+                <span asp-validation-for="Race.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Race.NumberNeeded" class="control-label"></label>
+                <input asp-for="Race.NumberNeeded" class="form-control" min="1"/>
+                <span asp-validation-for="Race.NumberNeeded" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Race.CandidateRaces, new { @class = "control-label" })
+                <div class="multi-select">
+                    @foreach (var candidate in Model.Candidates)
+                    {
+                        <div>
+                            @if (Model.Race.CandidateRaces.Exists(model => model.CandidateId == int.Parse(candidate.Value)))
+                            {
+                                <input type="checkbox" id="@candidate.Value" name="CandidateIds" value="@candidate.Value" checked />
+                            }
+                            else
+                            {
+                                <input type="checkbox" id="@candidate.Value" name="CandidateIds" value="@candidate.Value" />
+                            }
+                            <label for="@candidate.Value">@candidate.Text</label>
+                        </div>
+                    }
                 </div>
-                <div class="form-group">
-                    <label asp-for="PositionName" class="control-label"></label>
-                    <input asp-for="PositionName" class="form-control" />
-                    <span asp-validation-for="PositionName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="NumberNeeded" class="control-label"></label>
-                    <input asp-for="NumberNeeded" class="form-control" />
-                    <span asp-validation-for="NumberNeeded" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="RaceCandidatesIds" class="control-label"></label>
-                    <select asp-for="RaceCandidatesIds" class="form-control" asp-items="ViewBag.Candidates"></select>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </form>
-        </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
 </div>
 <div>
-    <a asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
 </div>
 
 @section Scripts {

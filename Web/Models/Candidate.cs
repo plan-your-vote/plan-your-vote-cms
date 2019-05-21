@@ -12,20 +12,17 @@ namespace Web.Models
         [Display(Name = "ElectionId")]
         public int ElectionId { get; set; }
 
+        [Display(Name = "Election")]
         public Election Election { get; set; }
 
-        [Display (Name="FirstName")]
-        public string FirstName { get; set; }
-
-        [Display(Name = "LastName")]
-
-        public string LastName { get; set; }
+        [Display(Name = "Name")]
+        public string Name { get; set; }
 
         [Display(Name = "Picture")]
         public string Picture { get; set; }
 
-        [Display(Name = "Biography")]
-        public string Biography { get; set; }
+        [Display(Name = "CandidateDetails")]
+        public List<CandidateDetail> Details { get; set; }
 
         [Display(Name = "OrganizationId")]
         public int OrganizationId { get; set; }

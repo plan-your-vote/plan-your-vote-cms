@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BallotOrder" xml:space="preserve">
+    <value>Ordre de bulletin de vote</value>
+  </data>
   <data name="CandidateRaces" xml:space="preserve">
-    <value>Courses de candidats</value>
+    <value>Candidats en lice</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>La description</value>
   </data>
   <data name="Election" xml:space="preserve">
     <value>Élection</value>

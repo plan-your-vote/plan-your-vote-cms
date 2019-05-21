@@ -11,7 +11,7 @@ using Web.Data;
 
 namespace Web
 {
-    [Authorize]
+    [Authorize(Roles = Constants.Account.ROLE_ADMIN)]
     public class ElectionsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -56,7 +56,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ElectionId,DateStart,DateEnd,Name,Description")] Election election)
+        public async Task<IActionResult> Create([Bind("ElectionName,StartDate,EndDate,Description")] Election election)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +88,7 @@ namespace Web
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ElectionId,DateStart,DateEnd,Name,Description")] Election election)
+        public async Task<IActionResult> Edit(int id, [Bind("ElectionId,ElectionName,StartDate,EndDate,Description")] Election election)
         {
             if (id != election.ElectionId)
             {

@@ -17,19 +17,19 @@ namespace Web.Controllers
     {
 
         private readonly ApplicationDbContext _context;
-        private int _currentElection;
+        private int _runningElection;
 
         public CandidatesApiController(ApplicationDbContext context)
         {
             _context = context;
-            _currentElection = _context.StateSingleton.Find(State.STATE_ID).CurrentElection;
+            _runningElection = _context.StateSingleton.Find(State.STATE_ID).RunningElectionID;
         }
 
         // GET: api/Candidates
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Candidate>>> Get()
         {
-            return await _context.Candidates.Where(b => b.ElectionId == _currentElection).ToListAsync();
+            return await _context.Candidates.Where(b => b.ElectionId == _runningElection).ToListAsync();
         }
 
         // GET: api/Candidates/1

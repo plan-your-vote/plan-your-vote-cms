@@ -1,62 +1,49 @@
-﻿@model IEnumerable<Web.Models.Candidate>
+﻿@model Web.ViewModels.CandidatesByRaceViewModel
 @using  Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Index"];
+    ViewData["Title"] = @Localizer["Candidates"];
 }
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+</script>
 
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <a asp-action="Create">@Localizer["Create New"]</a>
+    <a class="btn btn-primary" asp-action="Create">@Localizer["Create New"]</a>
 </p>
-<table class="table panel panel-default">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Picture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Biography)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Organization)
-            </th>
-            <th class="col-sm-2"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    <img width="80" height="80" src="@Html.DisplayFor(modelItem => item.Picture)">
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Biography)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Organization.Name)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.CandidateId">@Localizer["Edit"]</a> |
-                    <a asp-action="Details" asp-route-id="@item.CandidateId">@Localizer["Details"]</a> |
-                    <a asp-action="Delete" asp-route-id="@item.CandidateId">@Localizer["Delete"]</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="panel panel-default">
+    <div class="row vert-center">
+        <div class="col-xs-4 col-sm-3 text-center">
+            <h5>Sort by:</h5>
+        </div>
+        <div class="col-xs-8 col-sm-9">
+            <button type="button" class="btn btn-primary col-xs-12 col-md-4" onclick="getCandidates('ballot-order')">Ballot Order</button>
+            <button type="button" class="btn btn-primary col-xs-12 col-md-4" onclick="getCandidates('alphabet')">Name A-Z</button>
+            <button type="button" class="btn btn-primary col-xs-12 col-md-4" onclick="getCandidates('reverse-alphabet')">Name Z-A</button>
+        </div>
+    </div>
+</div>
+<div id="list-candidates" class="panel panel-default">
+    @{ await Html.RenderPartialAsync("CandidateList", Model); }
+</div>
+
+<script>
+    function getCandidates(orderType) {
+        $('#list-candidates').empty();
+        $('#list-candidates').load('@Url.Action("GetCandidates", "Candidates")',
+                                    { "orderBy": orderType },
+                                    function (response, status, xhr) {
+                                        if (status == "error") {
+                                            alert("An error occurred while loading the candidates.");
+                                            console.log(xhr.status + " " + xhr.statusText);
+                                        }
+                                    });
+    }
+</script>

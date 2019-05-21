@@ -123,6 +123,9 @@
   <data name="ElectionId" xml:space="preserve">
     <value>Id d'élection</value>
   </data>
+  <data name="ElectionName" xml:space="preserve">
+    <value>Nom de l'élection</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>Date de fin</value>
   </data>
