@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -15,25 +16,253 @@ namespace Web.Data
 
         public const int DummyElectionId = 1; // Hardcoded
 
-        public static void Initialize(ApplicationDbContext context)
+        public static void Seed(this ModelBuilder modelBuilder)
         {
-            _context = context;
-
-            InitializeDatabase();
+                modelBuilder.Entity<Election>().HasData(GetElections().ToArray());
+                modelBuilder.Entity<Organization>().HasData(GetOrganizations());
+                modelBuilder.Entity<Race>().HasData(GetRaces());
+                modelBuilder.Entity<Candidate>().HasData(GetCandidates());
+                modelBuilder.Entity<CandidateDetail>().HasData(GetCandidateDetails());
+                modelBuilder.Entity<Contact>().HasData(GetCandidateContacts());
+                modelBuilder.Entity<CandidateRace>().HasData(GetCandidateRaces());
+                modelBuilder.Entity<PollingPlace>().HasData(GetPollingPlaces());
+                modelBuilder.Entity<PollingPlaceDate>().HasData(GetPollingPlaceDates());
+                modelBuilder.Entity<BallotIssue>().HasData(GetBallotIssues());
+                modelBuilder.Entity<IssueOption>().HasData(GetIssueOptions());
+                modelBuilder.Entity<Step>().HasData(GetSteps());
         }
 
-        public static void InitializeDatabase()
+        public static List<Candidate> GetCandidates()
         {
             const string candidatesFile = "wwwroot/Data/candidates.json";
             List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
+            List<Candidate> candidates = new List<Candidate>();
+            foreach (JSONCandidate existingCandidate in candidateData)
+            {
+                candidates.Add(new Candidate {
+                    CandidateId = existingCandidate.CandidateId,
+                    ElectionId = DummyElectionId,
+                    Name = existingCandidate.Name,
+                    Picture = "images/" + existingCandidate.Picture,
+                    OrganizationId = 1,
+                });
+            }
+            return candidates;
+        }
 
-            var elections = GetElections().ToArray();
-            _context.Elections.AddRange(elections);
-            _context.SaveChanges();
+        public static List<CandidateDetail> GetCandidateDetails()
+        {
+            const string candidatesFile = "wwwroot/Data/candidates.json";
+            List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
+            List<CandidateDetail> candidateDetails = new List<CandidateDetail>();
+            int id = 1;
+            foreach (JSONCandidate existingCandidate in candidateData)
+            {
+                if (!string.IsNullOrEmpty(existingCandidate.Priority1))
+                {
+                    candidateDetails.Add(new CandidateDetail()
+                    {
+                        ID = id,
+                        Title = "Priority 1",
+                        Format = CandidateDetailFormat.OrderedList,
+                        Text = existingCandidate.Priority1,
+                        Lang = Language.en,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
 
+                if (!string.IsNullOrEmpty(existingCandidate.Priority2))
+                {
+                    candidateDetails.Add(new CandidateDetail()
+                    {
+                        ID = id,
+                        Title = "Priority 2",
+                        Format = CandidateDetailFormat.OrderedList,
+                        Text = existingCandidate.Priority2,
+                        Lang = Language.en,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Priority3))
+                {
+                    candidateDetails.Add(new CandidateDetail()
+                    {
+                        ID = id,
+                        Title = "Priority 3",
+                        Format = CandidateDetailFormat.OrderedList,
+                        Text = existingCandidate.Priority3,
+                        Lang = Language.en,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Platform))
+                {
+                    candidateDetails.Add(new CandidateDetail()
+                    {
+                        ID = id,
+                        Title = "Platform",
+                        Format = CandidateDetailFormat.Text,
+                        Text = existingCandidate.Platform,
+                        Lang = Language.en,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Biography))
+                {
+                    candidateDetails.Add(new CandidateDetail()
+                    {
+                        ID = id,
+                        Title = "Biography",
+                        Format = CandidateDetailFormat.Text,
+                        Text = existingCandidate.Biography,
+                        Lang = Language.en,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+            }
+            return candidateDetails;
+        }
+
+        public static List<Contact> GetCandidateContacts()
+        {
+            const string candidatesFile = "wwwroot/Data/candidates.json";
+            List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
+            List<Contact> candidateContacts = new List<Contact>();
+            int id = 1;
+            foreach (JSONCandidate existingCandidate in candidateData)
+            {
+                if (!string.IsNullOrEmpty(existingCandidate.Twitter))
+                {
+                    candidateContacts.Add(new Contact()
+                    {
+                        ContactId = id,
+                        ContactMethod = ContactMethod.Twitter,
+                        ContactValue = existingCandidate.Twitter,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Facebook))
+                {
+                    candidateContacts.Add(new Contact()
+                    {
+                        ContactId = id,
+                        ContactMethod = ContactMethod.Facebook,
+                        ContactValue = existingCandidate.Facebook,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Instagram))
+                {
+                    candidateContacts.Add(new Contact()
+                    {
+                        ContactId = id,
+                        ContactMethod = ContactMethod.Instagram,
+                        ContactValue = existingCandidate.Instagram,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.YouTube))
+                {
+                    candidateContacts.Add(new Contact()
+                    {
+                        ContactId = id,
+                        ContactMethod = ContactMethod.YouTube,
+                        ContactValue = existingCandidate.YouTube,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Other))
+                {
+                    candidateContacts.Add(new Contact()
+                    {
+                        ContactId = id,
+                        ContactMethod = ContactMethod.Other,
+                        ContactValue = existingCandidate.Other,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Phone))
+                {
+                    candidateContacts.Add(new Contact()
+                    {
+                        ContactId = id,
+                        ContactMethod = ContactMethod.Phone,
+                        ContactValue = existingCandidate.Phone,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Email))
+                {
+                    candidateContacts.Add(new Contact()
+                    {
+                        ContactId = id,
+                        ContactMethod = ContactMethod.Email,
+                        ContactValue = existingCandidate.Email,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+
+                if (!string.IsNullOrEmpty(existingCandidate.Website))
+                {
+                    candidateContacts.Add(new Contact()
+                    {
+                        ContactId = id,
+                        ContactMethod = ContactMethod.Website,
+                        ContactValue = existingCandidate.Website,
+                        CandidateId = existingCandidate.CandidateId,
+                    });
+                    id++;
+                }
+            }
+            return candidateContacts;
+        }
+
+        public static List<CandidateRace> GetCandidateRaces()
+        {
+            const string candidatesFile = "wwwroot/Data/candidates.json";
+            List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
+            List<CandidateRace> candidateRaces = new List<CandidateRace>();
+            List<Race> races = GetRaces();
+            int id = 1;
+            foreach (JSONCandidate existingCandidate in candidateData)
+            {
+                candidateRaces.Add(new CandidateRace()
+                {
+                    CandidateRaceId = id,
+                    CandidateId = existingCandidate.CandidateId,
+                    RaceId = races.Where(race => race.PositionName == existingCandidate.Position).First().RaceId,
+                    BallotOrder = int.Parse(existingCandidate.BallotOrder),
+                });
+                id++;
+            }
+            return candidateRaces;
+        }
+        
+        public static List<PollingPlace> GetPollingPlaces()
+        {
             const string pollingPlacesFile = "wwwroot/Data/pollingPlaces.json";
             List<JSONPollingPlace> pollingPlacesData = GetJsonData<JSONPollingPlace>(pollingPlacesFile);
-
             List<PollingPlace> pollingPlaces = pollingPlacesData
                 .Select(ppd => new PollingPlace()
                 {
@@ -49,245 +278,53 @@ namespace Web.Data
                     WheelchairInfo = ppd.WheelchairAccess,
                     ParkingInfo = ppd.Parking,
                     Phone = ppd.Phone,
-                    Email = ppd.Email,
-                    PollingPlaceDates = ppd.PollingPlaceDates.Select(jsppd => new PollingPlaceDate()
-                    {
-                        PollingDate = DateTime.ParseExact(jsppd.PollingDate, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
-                        StartTime = DateTime.ParseExact(jsppd.StartTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
-                        EndTime = DateTime.ParseExact(jsppd.EndTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
-                    }).ToList(),
+                    Email = ppd.Email
                 })
                 .ToList();
-            _context.PollingPlaces.AddRange(pollingPlaces);
-            _context.SaveChanges();
-
-            var organizations = GetOrganizations(candidateData).ToArray();
-            _context.Organizations.AddRange(organizations);
-            _context.SaveChanges();
-
-            var races = GetRaces(candidateData).ToArray();
-            _context.Races.AddRange(races);
-            _context.SaveChanges();
-
-            GetCandidatesAndContacts(candidateData);
-
-            var ballotIssues = GetBallotIssues().ToArray();
-            _context.BallotIssues.AddRange(ballotIssues);
-            _context.SaveChanges();
-
-            var issueOptions = GetIssueOptions().ToArray();
-            _context.IssueOptions.AddRange(issueOptions);
-            _context.SaveChanges();
-
-            var steps = GetSteps().ToArray();
-            _context.Steps.AddRange(steps);
-            _context.SaveChanges();
+            return pollingPlaces;
         }
 
-        private static void GetCandidatesAndContacts(List<JSONCandidate> candidateData)
+        public static List<PollingPlaceDate> GetPollingPlaceDates()
         {
-            List<Contact> contacts = new List<Contact>();
-            List<CandidateDetail> details = new List<CandidateDetail>();
-            List<CandidateRace> candidateRaces = new List<CandidateRace>();
-
-            foreach (var existingCandidate in candidateData)
+            const string pollingPlacesFile = "wwwroot/Data/pollingPlaces.json";
+            List<JSONPollingPlace> pollingPlacesData = GetJsonData<JSONPollingPlace>(pollingPlacesFile);
+            List<PollingPlaceDate> pollingDates = new List<PollingPlaceDate>();
+            foreach(JSONPollingPlace p in pollingPlacesData)
             {
-                Candidate candidate = new Candidate()
-                {
-                    ElectionId = DummyElectionId,
-                    Name = existingCandidate.Name,
-                    Picture = "images/" + existingCandidate.Picture,
-                    OrganizationId = _context.Organizations
-                        .Where(organization => organization.Name == existingCandidate.Party)
-                        .Single()
-                        .OrganizationId,
-                };
-
-                _context.Candidates.Add(candidate);
-                _context.SaveChanges();
-
-                if (!string.IsNullOrEmpty(existingCandidate.Priority1))
-                {
-                    details.Add(new CandidateDetail()
-                    {
-                        Title = "Priority 1",
-                        Format = CandidateDetailFormat.OrderedList,
-                        Text = existingCandidate.Priority1,
-                        Lang = Language.en,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Priority2))
-                {
-                    details.Add(new CandidateDetail()
-                    {
-                        Title = "Priority 2",
-                        Format = CandidateDetailFormat.OrderedList,
-                        Text = existingCandidate.Priority2,
-                        Lang = Language.en,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Priority3))
-                {
-                    details.Add(new CandidateDetail()
-                    {
-                        Title = "Priority 3",
-                        Format = CandidateDetailFormat.OrderedList,
-                        Text = existingCandidate.Priority3,
-                        Lang = Language.en,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Platform))
-                {
-                    details.Add(new CandidateDetail()
-                    {
-                        Title = "Platform",
-                        Format = CandidateDetailFormat.Text,
-                        Text = existingCandidate.Platform,
-                        Lang = Language.en,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Biography))
-                {
-                    details.Add(new CandidateDetail()
-                    {
-                        Title = "Biography",
-                        Format = CandidateDetailFormat.Text,
-                        Text = existingCandidate.Biography,
-                        Lang = Language.en,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Twitter))
-                {
-                    contacts.Add(new Contact()
-                    {
-                        ContactMethod = ContactMethod.Twitter,
-                        ContactValue = existingCandidate.Twitter,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Facebook))
-                {
-                    contacts.Add(new Contact()
-                    {
-                        ContactMethod = ContactMethod.Facebook,
-                        ContactValue = existingCandidate.Facebook,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Instagram))
-                {
-                    contacts.Add(new Contact()
-                    {
-                        ContactMethod = ContactMethod.Instagram,
-                        ContactValue = existingCandidate.Instagram,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.YouTube))
-                {
-                    contacts.Add(new Contact()
-                    {
-                        ContactMethod = ContactMethod.YouTube,
-                        ContactValue = existingCandidate.YouTube,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Other))
-                {
-                    contacts.Add(new Contact()
-                    {
-                        ContactMethod = ContactMethod.Other,
-                        ContactValue = existingCandidate.Other,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Phone))
-                {
-                    contacts.Add(new Contact()
-                    {
-                        ContactMethod = ContactMethod.Phone,
-                        ContactValue = existingCandidate.Phone,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Email))
-                {
-                    contacts.Add(new Contact()
-                    {
-                        ContactMethod = ContactMethod.Email,
-                        ContactValue = existingCandidate.Email,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                if (!string.IsNullOrEmpty(existingCandidate.Website))
-                {
-                    contacts.Add(new Contact()
-                    {
-                        ContactMethod = ContactMethod.Website,
-                        ContactValue = existingCandidate.Website,
-                        CandidateId = candidate.CandidateId,
-                    });
-                }
-
-                CandidateRace candidateRace = new CandidateRace()
-                {
-                    CandidateId = candidate.CandidateId,
-                    RaceId = _context.Races
-                    .Where(races => races.PositionName == existingCandidate.Position)
-                    .First()
-                    .RaceId,
-                    BallotOrder = int.Parse(existingCandidate.BallotOrder),
-                };
-
-                candidateRaces.Add(candidateRace);
+                pollingDates = p.PollingPlaceDates.Select(jsppd => new PollingPlaceDate() {
+                    PollingDateId = jsppd.PollingDateId,
+                    PollingPlaceId = p.VotingPlaceID,
+                    PollingDate = DateTime.ParseExact(jsppd.PollingDate, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                    StartTime = DateTime.ParseExact(jsppd.StartTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                    EndTime = DateTime.ParseExact(jsppd.EndTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                }).ToList();
             }
-
-            _context.CandidateRaces.AddRange(candidateRaces);
-            _context.SaveChanges();
-
-            _context.CandidateDetails.AddRange(details);
-            _context.SaveChanges();
-
-            _context.Contacts.AddRange(contacts);
-            _context.SaveChanges();
+            return pollingDates;
         }
 
-        private static List<Organization> GetOrganizations(List<JSONCandidate> candidateData)
+        private static List<Organization> GetOrganizations()
         {
+            const string candidatesFile = "wwwroot/Data/candidates.json";
+            List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
             List<Organization> organizations = new List<Organization>();
-
+            int id = 1;
             foreach (var candidate in candidateData)
             {
                 if (organizations.FindIndex(existingOrg => candidate.Party == existingOrg.Name) == -1)
                 {
                     organizations.Add(new Organization()
                     {
+                        OrganizationId = id,
                         Name = candidate.Party,
                     });
+                    id++;
                 }
             }
 
             return organizations;
         }
 
-        private static List<Race> GetRaces(List<JSONCandidate> candidateData)
+        private static List<Race> GetRaces()
         {
             const int NumOfMayorsNeeded = 1;
             const int NumOfCouncillorsNeeded = 10;
@@ -298,7 +335,10 @@ namespace Web.Data
             const int OrderPark = 3;
             const int OrderSchool = 4;
 
+            const string candidatesFile = "wwwroot/Data/candidates.json";
+            List<JSONCandidate> candidateData = GetJsonData<JSONCandidate>(candidatesFile);
             List<Race> races = new List<Race>();
+            int id = 1;
 
             foreach (var candidate in candidateData)
             {
@@ -306,9 +346,11 @@ namespace Web.Data
                 {
                     Race race = new Race()
                     {
+                        RaceId = id,
                         ElectionId = DummyElectionId,
                         PositionName = candidate.Position,
                     };
+                    id++;
 
                     switch (candidate.Position)
                     {
@@ -355,6 +397,7 @@ namespace Web.Data
             {
                 new Election()
                 {
+                    ElectionId = 1,
                     ElectionName = "City of Vancouver 2018 Municipal Election",
                     EndDate = new DateTime(2019, 10, 21),
                     StartDate = new DateTime(2018, 9, 14),
@@ -362,6 +405,7 @@ namespace Web.Data
                 },
                 new Election()
                 {
+                    ElectionId = 2,
                     ElectionName = "Canadian Federal Election 2019",
                     EndDate = new DateTime(2019, 10, 21),
                     StartDate = new DateTime(2019, 10, 21),
@@ -376,26 +420,23 @@ namespace Web.Data
             {
                 new BallotIssue()
                 {
+                    BallotIssueId = 1,
                     BallotIssueTitle = "1. TRANSPORTATION AND TECHNOLOGY",
-                    Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to transportation and technology.
-
-Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,353,000 for the following purposes?",
+                    Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to transportation and technology. Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,353,000 for the following purposes?",
                     ElectionId = 1,
                 },
                 new BallotIssue()
                 {
+                    BallotIssueId = 2,
                     BallotIssueTitle = "2. CAPITAL MAINTENANCE AND RENOVATION PROGRAMS FOR EXISTING COMMUNITY FACILITIES, CIVIC FACILITIES, AND PARKS",
-                    Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to capital maintenance and renovation programs for existing community facilities, civic facilities, and parks.
-
-Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $99,557,000 for the following purposes?",
+                    Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to capital maintenance and renovation programs for existing community facilities, civic facilities, and parks. Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $99,557,000 for the following purposes?",
                     ElectionId = 1,
                 },
                 new BallotIssue()
                 {
+                    BallotIssueId = 3,
                     BallotIssueTitle = "3. REPLACEMENT OF EXISTING COMMUNITY FACILITIES AND CIVIC FACILITIES:",
-                    Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to replacement of existing community facilities and civic facilities.
-
-Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,090,000 for the following purposes?",
+                    Description = @"This question seeks authority to borrow funds to be used in carrying out the basic capital works program with respect to replacement of existing community facilities and civic facilities. Are you in favour of Council having the authority, without further assent of the electors, to pass bylaws between January 1, 2019, and December 31, 2022, to borrow an aggregate $100,090,000 for the following purposes?",
                     ElectionId = 1,
                 }
             };
@@ -407,31 +448,37 @@ Are you in favour of Council having the authority, without further assent of the
             {
                 new IssueOption()
                 {
+                    IssueOptionId = 1,
                     BallotIssueId = 1,
                     IssueOptionInfo = "Yes",
                 },
                 new IssueOption()
                 {
+                    IssueOptionId = 2,
                     BallotIssueId = 1,
                     IssueOptionInfo = "No",
                 },
                 new IssueOption()
                 {
+                    IssueOptionId = 3,
                     BallotIssueId = 2,
                     IssueOptionInfo = "Yes",
                 },
                 new IssueOption()
                 {
+                    IssueOptionId = 4,
                     BallotIssueId = 2,
                     IssueOptionInfo = "No",
                 },
                 new IssueOption()
                 {
+                    IssueOptionId = 5,
                     BallotIssueId = 3,
                     IssueOptionInfo = "Yes",
                 },
                 new IssueOption()
                 {
+                    IssueOptionId = 6,
                     BallotIssueId = 3,
                     IssueOptionInfo = "No",
                 },
@@ -444,30 +491,23 @@ Are you in favour of Council having the authority, without further assent of the
             {
                 new Step()
                 {
+                    ID = 1,
                     ElectionId = 1,
                     StepNumber = 1,
                     StepTitle = "STEP 1: REVIEW AND SELECT CANDIDATES",
-                    StepDescription = @"Add up to 1 mayor, 10 councillors, 7 Park Board commissioners, and 9 school trustees to your plan. Open a candidate to read their profile and add them to your plan. Change your choices in the selected candidates area above.
-
-A candidate’s profile expresses their views alone and these views aren’t endorsed by the City of Vancouver. Profiles are included exactly as candidates wrote them.
-
-If you live in the UBC Lands or University Endowment Lands, and you do not own property in Vancouver, you can only vote for school trustees in the election."
+                    StepDescription = @"Add up to 1 mayor, 10 councillors, 7 Park Board commissioners, and 9 school trustees to your plan. Open a candidate to read their profile and add them to your plan. Change your choices in the selected candidates area above. A candidate’s profile expresses their views alone and these views aren’t endorsed by the City of Vancouver. Profiles are included exactly as candidates wrote them. If you live in the UBC Lands or University Endowment Lands, and you do not own property in Vancouver, you can only vote for school trustees in the election."
                 },
                 new Step()
                 {
+                    ID = 2,
                     ElectionId = 1,
                     StepNumber = 2,
                     StepTitle = "STEP 2: REVIEW CAPITAL PLAN BORROWING QUESTIONS",
-                    StepDescription = @"Add your response to the Capital Plan borrowing questions to your plan.
-
-The ballot will have 3 ""yes"" or ""no"" questions on whether the City can borrow $300 million to help pay for projects in the Capital Plan.
-
-The 2019-2022 Capital Plan invests $300,000,000 in City facilities and infrastructure to provide services to the people of Vancouver.
-
-If a majority of voters vote yes, then City Council can borrow the funds for these projects."
+                    StepDescription = @"Add your response to the Capital Plan borrowing questions to your plan. The ballot will have 3 ""yes"" or ""no"" questions on whether the City can borrow $300 million to help pay for projects in the Capital Plan. The 2019-2022 Capital Plan invests $300,000,000 in City facilities and infrastructure to provide services to the people of Vancouver. If a majority of voters vote yes, then City Council can borrow the funds for these projects."
                 },
                 new Step()
                 {
+                    ID = 3,
                     ElectionId = 1,
                     StepNumber = 3,
                     StepTitle = "STEP 3: CHOOSE YOUR VOTING DATE AND LOCATION",
@@ -475,6 +515,7 @@ If a majority of voters vote yes, then City Council can borrow the funds for the
                 },
                 new Step()
                 {
+                    ID = 4,
                     ElectionId = 1,
                     StepNumber = 4,
                     StepTitle = "STEP 4: REVIEW YOUR PLAN",
