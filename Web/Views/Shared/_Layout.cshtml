@@ -105,12 +105,12 @@
                             @if (SignInManager.IsSignedIn(User) && User.IsInRole(Constants.Account.ROLE_ADMIN))
                             {
                                 <li class="nav-item @Html.IsSelected(actions: "Index,Create,Details,Delete,Edit", controllers: "UserManagement")">
-                                    <a class="nav-link text-white" style="float: right;" asp-area="" asp-controller="UserManagement" asp-action="Index">@Localizer["User Management"]</a>
+                                    <a class="nav-link text-white"  asp-area="" asp-controller="UserManagement" asp-action="Index">@Localizer["User Management"]</a>
                                 </li>
                             }
                         </ul>
                     }
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right" style="margin-left: 0">
                         <partial name="_LoginPartial" />
                     </ul>
                 </div>
