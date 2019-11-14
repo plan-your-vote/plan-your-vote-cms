@@ -157,6 +157,10 @@ dd {
     align-items: center;
 }
 
+.margin-left-0 {
+    margin-left: 0;
+}
+
 @media (max-width: 768px){
     h1{
         font-size: 2.5rem;
