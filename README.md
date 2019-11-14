@@ -1,35 +1,92 @@
-# OpenVoting
-Open Voting Tool
+## Getting started
 
-## Table of Contents
-- [What is Open Voting Tool?](#what-is-open-voting-tool)
-- [Feature Documents](#feature-documents)
-- [Branch Structure](#branch-structure)
-- [Links for Live Sites](#links-for-live-sites)
+### Terminal side
 
-## What is Open Voting Tool
-Open Voting Tool is a open source project created by Medhat & BCIT CST Information Systems students. Originally City of Vancouver has an app https://vancouver.ca/plan-your-vote/index.aspx, but the app was built on jQuery with HTML & CSS, without any modern web frameworks.
+##### Clone the repo
 
-The purpose of this project is to develop a web app look like the one that City of Vancouver currently has, but can be used by anyone using CMS. The application must be used and implemented by anyone and any organization
+```bash
+$ git clone https://github.com/msalamat/plan-your-vote-cms.git
+$ cd plan-your-vote-cms/
+```
 
-## Feature Documents
-- [PDF Generator](./doc/pdf-generator.md)
-- [Localization](./doc/localization.md)
-- [Database Config](./doc/dbconfig.md)
-- [Accessibility](./doc/accessibility.md)
-- [Docker](./doc/docker.md)
-- [Local Storage](./doc/localstorage.md)
-- [Unit Tests](./doc/unit-tests.md)
+##### Make sure everything is fine
 
-## Branch Structure
-Developers must not push their changes directly to `master`. They can push currently to `develop`, but we recommend protect `develop` so that they cannot push directly. We do not have naming conventions for branches as well, but recommend setup conventions.
+```bash
+$ git status
+$ git branch -a
+```
 
-`master` - the current live sites are automatically deployed from master whenever a change is made. This should be carefully maintained and only have tested code pushed to it
+##### Make sure we are in develop, if not,
 
-`develop` - currently develop branch is not protected from the direct pushing, but we recommend protect this branch as well. We would recommend setup testing live sites as well on develop, so that feature owners can merge their changes develop and do the testing right away.
+```bash
+$ git checkout develop
+```
 
-`user branches` - branch off of develop, keep to small contained features
+##### Branch off and checkout into it using following the naming convention
 
-## Links for Live Sites
-- [Front end single page app](http://pyvspa.azurewebsites.net/)
-- [Backend CMS](https://pyv.azurewebsites.net/)
+```bash
+$ git checkout -b issue-<number>
+```
+e.g.
+```bash
+$ git checkout -b issue-999
+```
+
+##### Make your changes. Then commit them to your own branch.
+
+e.g.
+I make changes to src/pages/home/index.jsx
+
+```bash
+$ git add . OR $ git add src/pages/home/index.jsx
+$ git commit -m "issue-999 update main page title"
+$ git push
+```
+
+You will be asked to set your upstream before. Set it like so while pushing:
+
+```bash
+$ git push --set-upstream origin issue-<number>
+```
+e.g.
+```bash
+$ git push --set-upstream origin issue-999
+```
+
+Your changes to git will be either approved or disapproved.
+
+#### GitHub side
+
+
+>Now, it's time to head over to GitHub. You should see your recently pushed branch viewable on GitHub's interface. Click "Compare & pull request".
+
+[Figure 1](https://imgur.com/5wlN54W)
+
+>Now, make sure to change to the right base repository. This step is very important, as we are not pushing into the original repository.
+
+[Figure 2](https://imgur.com/uYQDZm2)
+
+>We wish to push our commits into the develop branch, so we select the base branch to be develop.
+
+[Figure 3](https://imgur.com/HE74cns)
+
+>Now, give a meaningful name to your pull request by prepending your issue number to the title section.
+
+[Figure 4](https://imgur.com/27gCLII)
+
+Now, you can finally click the green "Create pull request" button.
+
+>If everything proceeded without failure, you should see the following page. The review will be done soon and your hard earned work will be etched into the project's history.
+
+[Figure 5](https://imgur.com/xq1JTJc)
+
+##### Ending
+
+With a good mental, this should have been a great and easy process. Good work for helping progress your city's future, citizen.
+
+>Once the pull request has been approved, you are safe to delete your branch.
+
+```bash
+$ git checkout develop
+$ git branch -D issue-999
+```
