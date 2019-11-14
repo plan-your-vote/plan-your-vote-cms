@@ -8,16 +8,16 @@
     {
         <h5>@Html.DisplayFor(model => race.PositionName)</h5>
         <a class="btn btn-primary" asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["Edit Ballot Order"]</a>
-        <table class="table">
+        <table class="table candidate-list">
             <thead>
             <tr>
-                <th>
+                <th scope="col" class="col-sm-3">
                     @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Name)
                 </th>
-                <th>
+                <th scope="col" class="col-sm-4">
                     @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Picture)
                 </th>
-                <th>
+                <th scope="col" class="col-sm-4">
                     @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Organization)
                 </th>
                 @* <th class="col-sm-2"></th> *@
@@ -53,7 +53,7 @@
                             <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a>
                             <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a>
                             <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a>
-                           
+
                         </td>
                     </tr>
                 }
@@ -104,13 +104,11 @@
                 </td>
             </tr>
             <tr>
-                <td></td>
-                <td colspan="2">
-                    <div class="button-group">
-                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["Edit"]</a>
-                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["Details"]</a>
-                        <a class="btn btn-primary" asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["Delete"]</a>
-                    </div>
+                <td class="text-right" colspan="3">
+
+                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["Edit"]</a>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["Details"]</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["Delete"]</a>
                 </td>
             </tr>
         }
