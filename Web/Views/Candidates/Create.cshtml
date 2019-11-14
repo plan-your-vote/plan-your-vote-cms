@@ -107,19 +107,18 @@
             }
         </script>
 
-        <div>
-            <button type="button" id="AddDetailField" class="btn btn-primary" onClick="addDetail()">Add a Candidate Detail</button>
-            &nbsp;|&nbsp;
-            <button type="button" id="AddContactField" class="btn btn-primary" onClick="addContact()">Add a Contact</button>
+        <div class="form-group">
+            <button type="button" id="AddDetailField" class="btn btn-primary btn-sm" onClick="addDetail()">Add a Candidate Detail</button>
+            <button type="button" id="AddContactField" class="btn btn-primary btn-sm" onClick="addContact()">Add a Contact</button>
         </div>
         <div class="form-group">
-            <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
+            <input type="submit" value=@Localizer["Create"] class="btn btn-success" />
         </div>
     </form>
 </div>
 
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-info" asp-action="Index">@Localizer["Back to List"]</a>
 </div>
 
 @section Scripts {

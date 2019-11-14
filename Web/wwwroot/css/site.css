@@ -105,3 +105,73 @@ dt {
 dd {
     margin-bottom: 4px;
 }
+
+/* CandidateList --------------------------------*/
+/*.table thead tr th, .table tbody tr td {*/
+/*    border: none;*/
+/*}*/
+
+.candidate-list .justify-content-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.candidate-list tr:nth-child(2n+1) td{
+    border-bottom: none !important;
+}
+
+.candidate-list tr:nth-child(2n) td{
+    border-top: none !important;
+}
+
+.candidate-list td {
+    vertical-align: baseline !important;
+}
+
+.candidate-sort-btns {
+    display: flex;
+    flex-direction: row;
+    flex-flow: nowrap;
+    justify-content: space-evenly;
+}
+
+.user-management-btns {
+    
+    border-top: none !important;
+}
+
+.user-management-btns div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.user-management-btns div a {
+    margin-right: 1rem;
+}
+
+.one-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 768px){
+    h1{
+        font-size: 2.5rem;
+    }
+    
+    h2{
+        font-size: 2rem;
+    }
+    h3{
+        font-size: 1.5rem;
+    }
+    .candidate-sort-btns {
+       flex-direction: column;
+    }
+}
+
+
+
