@@ -6,7 +6,7 @@
 {
     @foreach (var race in Model.Races)
     {
-        <div class="race-header">
+        <div class="one-line">
             <h5 class="font-weight-bold">@Html.DisplayFor(model => race.PositionName)</h5>
             <a class="btn btn-primary" asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["Edit Ballot Order"]</a>
         </div>

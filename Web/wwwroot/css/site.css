@@ -135,7 +135,23 @@ dd {
     justify-content: space-evenly;
 }
 
-.race-header {
+.user-management-btns {
+    
+    border-top: none !important;
+}
+
+.user-management-btns div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.user-management-btns div a {
+    margin-right: 1rem;
+}
+
+.one-line {
     display: flex;
     justify-content: space-between;
     align-items: center;

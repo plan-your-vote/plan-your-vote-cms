@@ -28,7 +28,7 @@
     <form asp-action="Delete">
         <p class="text-danger">@ViewData["CandidatesFoundError"]</p>
         <input type="hidden" asp-for="OrganizationId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        <a class="btn btn-info" asp-action="Index">@Localizer["Back to List"]</a>
     </form>
 </div>

@@ -79,7 +79,7 @@
             @for (int i = 0; i < Model.Candidate.Details.Count; i++)
             {
                 <div class="detail-group">
-                    <div>
+                    <div class="one-line">
                         <p class="lead">Detail @(i + 1)</p>
                         <button type="button" id="removeDetail_@i" class="btn btn-primary" onclick="removeDetail(@i)">Remove Detail</button>
                     </div>
@@ -117,7 +117,7 @@
             @for (int j = 0; j < Model.Candidate.Contacts.Count; j++)
             {
                 <div class="contact-group">
-                    <div>
+                    <div class="one-line">
                         <p class="lead">Contact @(j + 1)</p>
                         <button type="button" id="removeContact_@j" class="btn btn-primary" onclick="removeContact(@j)">Remove Contact</button>
                     </div>
@@ -166,19 +166,18 @@
                 );
             }
         </script>
-        <div>
-            <button type="button" id="AddDetailField" class="btn btn-primary" onclick="addDetail()">Add a Candidate Detail</button>
-            &nbsp;|&nbsp;
-            <button type="button" id="AddContactField" class="btn btn-primary" onclick="addContact()">Add a Contact</button>
+        <div class="form-group">
+            <button type="button" id="AddDetailField" class="btn btn-primary btn-sm" onclick="addDetail()">Add a Candidate Detail</button>
+            <button type="button" id="AddContactField" class="btn btn-primary btn-sm" onclick="addContact()">Add a Contact</button>
         </div>
         <div class="form-group">
-            <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
+            <input type="submit" value=@Localizer["Save"] class="btn btn-success" />
         </div>
     </form>
 </div>
 
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-info" asp-action="Index">@Localizer["Back to List"]</a>
 </div>
 
 @section Scripts {
