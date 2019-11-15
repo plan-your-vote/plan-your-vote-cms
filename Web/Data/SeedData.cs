@@ -291,13 +291,15 @@ namespace Web.Data
             List<PollingPlaceDate> pollingDates = new List<PollingPlaceDate>();
             foreach(JSONPollingPlace p in pollingPlacesData)
             {
-                pollingDates = p.PollingPlaceDates.Select(jsppd => new PollingPlaceDate() {
-                    PollingDateId = jsppd.PollingDateId,
-                    PollingPlaceId = p.VotingPlaceID,
-                    PollingDate = DateTime.ParseExact(jsppd.PollingDate, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
-                    StartTime = DateTime.ParseExact(jsppd.StartTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
-                    EndTime = DateTime.ParseExact(jsppd.EndTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
-                }).ToList();
+                foreach(var ppd in p.PollingPlaceDates){
+                    pollingDates.Add(new PollingPlaceDate() {
+                        PollingDateId = ppd.PollingDateId,
+                        PollingPlaceId = p.VotingPlaceID,
+                        PollingDate = DateTime.ParseExact(ppd.PollingDate, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                        StartTime = DateTime.ParseExact(ppd.StartTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                        EndTime = DateTime.ParseExact(ppd.EndTime, "yyyy/MM/dd HH:mm:ss", CultureInfo.InvariantCulture),
+                    });
+                }
             }
             return pollingDates;
         }
