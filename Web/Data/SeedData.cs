@@ -364,11 +364,11 @@ namespace Web.Data
                             race.NumberNeeded = NumOfMayorsNeeded;
                             race.BallotOrder = OrderMayor;
                             break;
-                        case "Park Board commissioner":
+                        case "Park Board Commissioner":
                             race.NumberNeeded = NumOfParkCommissionersNeeded;
                             race.BallotOrder = OrderPark;
                             break;
-                        case "School trustee":
+                        case "School Trustee":
                             race.NumberNeeded = NumOfSchoolTrusteesNeeded;
                             race.BallotOrder = OrderSchool;
                             break;
