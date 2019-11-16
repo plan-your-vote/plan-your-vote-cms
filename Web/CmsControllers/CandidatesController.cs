@@ -482,6 +482,12 @@ namespace Web
 
             ModelState.Clear();
 
+            model.Races = new SelectList(_context.Races
+                        .Where(r => r.ElectionId == _managedElectionID)
+                        .OrderBy(r => r.BallotOrder),
+                        "RaceId", "PositionName");
+            model.Organizations = new SelectList(_context.Organizations, "OrganizationId", "Name", model.Candidate.OrganizationId);
+
             if (TryValidateModel(model.Candidate))
             {
                 if (model.Image != null)
@@ -502,8 +508,16 @@ namespace Web
 
                     string nameOfile = "images\\" + Utility.GetCurrentDateTime + Path.GetFileName(model.Image.FileName);
                     string fileName = "wwwroot\\" + nameOfile;
-                    model.Image.CopyTo(new FileStream(fileName, FileMode.Create));
+                    var oldFileName = "wwwroot\\" + model.Candidate.Picture;
+                    var newFile = new FileStream(fileName, FileMode.Create);
+                    model.Image.CopyTo(newFile);
+                    newFile.Dispose();
                     model.Candidate.Picture = nameOfile;
+                    if (System.IO.File.Exists(oldFileName))
+                    {
+                        System.IO.File.Delete(oldFileName);
+                    }
+
                 }
                 else
                 {
@@ -544,6 +558,7 @@ namespace Web
                 return RedirectToAction(nameof(Index));
             }
             var errors = ModelState.Values.SelectMany(v => v.Errors);
+
             return View(model);
         }
 
