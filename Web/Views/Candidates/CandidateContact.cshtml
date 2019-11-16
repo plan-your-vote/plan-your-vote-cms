@@ -6,7 +6,7 @@
 
 <div class="one-line">
     <p class="lead">Contact @(lastIndex+1)</p>
-    <button type="button" id="removeContact_@lastIndex" class="btn btn-primary" onclick="removeContact(@lastIndex)">Remove Contact</button>
+    <button type="button" id="removeContact_@lastIndex" class="btn btn-primary margin-bottom" onclick="removeContact(@lastIndex)">Remove Contact</button>
 </div>
 <div class="form-group">
     @Html.LabelFor(c => c.Candidate.Contacts[lastIndex].ContactMethod, new { @class = "control-label" })

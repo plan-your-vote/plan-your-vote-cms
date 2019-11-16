@@ -67,18 +67,18 @@
                 @if (detail.Format == CandidateDetailFormat.List)
                 {
                     <ul>
-                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                        <li>@Html.Raw(detail.Text)</li>
                     </ul>
                 }
                 else if (detail.Format == CandidateDetailFormat.OrderedList)
                 {
                     <ol>
-                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                        <li>@Html.Raw(detail.Text)</li>
                     </ol>
                 }
                 else
                 {
-                    @Html.DisplayFor(model => detail.Text)
+                    @Html.Raw(detail.Text)
                 }
             </dd>
         </dl>
