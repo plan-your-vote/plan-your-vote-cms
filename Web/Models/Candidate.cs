@@ -19,9 +19,11 @@ namespace Web.Models
         public string Name { get; set; }
 
         [Display(Name = "Picture")]
+        [Required(ErrorMessage = "Please select an image to upload.")]
         public string Picture { get; set; }
 
         [Display(Name = "CandidateDetails")]
+        [Required(ErrorMessage = "Please enter candidate details.")]
         public List<CandidateDetail> Details { get; set; }
 
         [Display(Name = "OrganizationId")]
@@ -34,6 +36,7 @@ namespace Web.Models
         public List<CandidateRace> CandidateRaces { get; set; }
 
         [Display(Name = "Contacts")]
+        [Required(ErrorMessage = "Please enter at least one contact.")]
         public List<Contact> Contacts { get; set; }
     }
 }

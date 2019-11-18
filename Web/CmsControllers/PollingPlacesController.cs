@@ -94,7 +94,7 @@ namespace Web
                     pollingPlace.PollingPlaceDates.RemoveAt(indexes[i]);
                 }
             }
-
+ 
             if (ModelState.IsValid)
             {
                 foreach (var date in pollingPlace.PollingPlaceDates)
