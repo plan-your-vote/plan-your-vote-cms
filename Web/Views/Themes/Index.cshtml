@@ -12,25 +12,28 @@
 <link rel="stylesheet" href="~/css/Themes.css"/>
 
 <div class="panel panel-default col-sm-5">
-    <form asp-controller="Themes" asp-action="Index" method="post">
-        <div class="one-line">
+    <form asp-controller="Themes" asp-action="Index" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label class="control-label">@Localizer["Selected Theme:"]</label>
+            <select asp-for="SelectedTheme" asp-items="Model.Themes"></select>
             <div>
-                <label>@Localizer["Selected Theme:"]</label>
-                            <select asp-for="SelectedTheme" asp-items="Model.Themes"></select>
+                @if (ViewData["Error"] != null) {
+                    <p>
+                        <strong>Error: </strong> @ViewData["Error"].ToString()</p>
+                }
+                @if (TempData["Success"] != null) {
+                    <p>
+                        <strong>Success!</strong> @TempData["Success"].ToString()</p>
+                }
             </div>
-            <button type="submit" class="btn btn-success">Save</button>
         </div>
-        <div>
-            @if (ViewData["Error"] != null)
-            {
-                <p>
-                    <strong class="text-danger">Error: </strong> @ViewData["Error"].ToString()</p>
-            }
-            @if (TempData["Success"] != null)
-            {
-                <p>
-                    <strong class="text-success">Success!</strong> @TempData["Success"].ToString()</p>
-            }
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Save</button>
+    </form>
+    <form asp-controller="Themes" asp-action="UploadFile" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label class="control-label">Logo:</label>
+            <input type="file" name="file">
         </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px">Save</button>
     </form>
 </div>

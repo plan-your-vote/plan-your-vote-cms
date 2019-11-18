@@ -15,13 +15,12 @@
 
 <h1>@ViewData["Title"]</h1>
 
-
-<form asp-action="Create" enctype="multipart/form-data">
-    <div class="panel panel-default">
+<div class="panel panel-default">
+    <form asp-action="Create" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Candidate.Name" class="control-label"></label>
-            <input asp-for="Candidate.Name" class="form-control" />
+            <input asp-for="Candidate.Name" class="form-control" required />
             <span asp-validation-for="Candidate.Name" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -48,42 +47,37 @@
                     @foreach (var race in Model.Races)
                     {
                         <div>
-                            <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
+                            <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" required/>
                             <label for="@race.Value">@race.Text</label>
                         </div>
                     }
                 </div>
             }
         </div>
-    </div>
-    <div class="panel panel-default">
-        <h4>
-            <label asp-for="Candidate.Details" class="control-label"></label>
-        </h4>
-        <hr />
-        <input type="hidden" id="removedDetails" name="RemovedDetails" value="" />
+
+        <div>
+            <hr />
+            <h4><label asp-for="Candidate.Details" class="control-label"></label></h4>
+            <hr />
+            <input type="hidden" id="removedDetails" name="RemovedDetails" value="" required/>
+        </div>
         <div id="allDetails">
-            <div class="detail-group panel panel-default">
+            <div class="detail-group">
                 @{ await Html.RenderPartialAsync("CandidateDetail", Model); }
             </div>
         </div>
-    </div>
-
-    <div class="panel panel-default">
-        <h4>
-            <label asp-for="Candidate.Contacts" class="control-label"></label>
-        </h4>
-        <hr />
-        <input type="hidden" id="removedContacts" name="RemovedContacts" value="" />
-
+        <div>
+            <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
+            <hr />
+            <input type="hidden" id="removedContacts" name="RemovedContacts" value="" required/>
+        </div>
         <div id="allContacts">
-
-            <div class="contact-group panel panel-default">
+            <div class="contact-group">
                 @{ await Html.RenderPartialAsync("CandidateContact", Model); }
             </div>
         </div>
-    </div>
-    <script>
+
+        <script>
             function addDetail() {
                 let count = getCount(".detail-group");
 
@@ -111,21 +105,21 @@
                         })
                 );
             }
-    </script>
+        </script>
 
-        <div class="form-group panel panel-default">
-            <button type="button" id="AddDetailField" class="btn btn-primary btn-sm" onClick="addDetail()">Add a Candidate Detail</button>
-            <button type="button" id="AddContactField" class="btn btn-primary btn-sm" onClick="addContact()">Add a Contact</button>
+        <div>
+            <button type="button" id="AddDetailField" class="btn btn-primary" onClick="addDetail()">Add a Candidate Detail</button>
+            &nbsp;|&nbsp;
+            <button type="button" id="AddContactField" class="btn btn-primary" onClick="addContact()">Add a Contact</button>
         </div>
         <div class="form-group">
-            <input type="submit" value=@Localizer["Create"] class="btn btn-success" />
+            <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
         </div>
-    </div>
-</form>
-
+    </form>
+</div>
 
 <div>
-    <a class="btn btn-info" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
 </div>
 
 @section Scripts {
