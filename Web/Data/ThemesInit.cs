@@ -10,29 +10,56 @@ namespace Web
     {
         internal const int DefaultElectionId = 1; // Hardcoded
 
-        internal static void Initialize(ApplicationDbContext context)
-        {
-            if (context.Themes?.Any() != true)
-            {
-                var themes = GetThemes().ToArray();
-                context.Themes.AddRange(themes);
-                context.SaveChanges();
-            }
+        internal static void Initialize(ApplicationDbContext context) {
+           var themes = GetThemes().ToArray();
+           context.Themes.AddRange(themes);
+           context.SaveChanges();
+           var images = GetImages().ToArray();
+           context.Images.AddRange(images);
+           context.SaveChanges();
+           if (context.Themes?.Any() != true)
+           {
+               themes = GetThemes().ToArray();
+               context.Themes.AddRange(themes);
+               context.SaveChanges();
+           }
+           if (context.Images?.Any() != true)
+           {
+               images = GetImages().ToArray();
+               context.Images.AddRange(images);
+               context.SaveChanges();
+           }
+           if (context.SocialMedias?.Any() != true)
+           {
+               var socialMedias = GetSocialMedias().ToArray();
+               context.SocialMedias.AddRange(socialMedias);
+               context.SaveChanges();
+           }
+       }
 
-            if (context.Images?.Any() != true)
-            {
-                var images = GetImages().ToArray();
-                context.Images.AddRange(images);
-                context.SaveChanges();
-            }
+        // internal static void Initialize(ApplicationDbContext context)
+        // {
+        //     if (context.Themes?.Any() != true)
+        //     {
+        //         var themes = GetThemes().ToArray();
+        //         context.Themes.AddRange(themes);
+        //         context.SaveChanges();
+        //     }
 
-            if (context.SocialMedias?.Any() != true)
-            {
-                var socialMedias = GetSocialMedias().ToArray();
-                context.SocialMedias.AddRange(socialMedias);
-                context.SaveChanges();
-            }
-        }
+        //     if (context.Images?.Any() != true)
+        //     {
+        //         var images = GetImages().ToArray();
+        //         context.Images.AddRange(images);
+        //         context.SaveChanges();
+        //     }
+
+        //     if (context.SocialMedias?.Any() != true)
+        //     {
+        //         var socialMedias = GetSocialMedias().ToArray();
+        //         context.SocialMedias.AddRange(socialMedias);
+        //         context.SaveChanges();
+        //     }
+        // }
 
         private static List<Image> GetImages()
         {
@@ -61,37 +88,73 @@ namespace Web
                     ThemeName = "Snowdrop",
                     Placement = "Logo",
                     Type = "URL",
-                    Value = "https://www.bcit.ca/images/bcitlogo_fallback.png",
+                    Value = "https://vancouver.ca/plan-your-vote/img/logo_home.png",
                     Format = "PNG",
-                    Description = "BCIT Logo",
+                    Description = "Vancouver Votes",
                 },
                 new Image()
                 {
                     ThemeName = "Snowdrop",
                     Placement = "Footer Logo",
                     Type = "URL",
-                    Value = "https://www.bcit.ca/images/v4_entrybanners/bcit_home/home_industryexperts2_sml_hd.jpg",
+                    Value = "https://vancouver.ca/plan-your-vote/img/cov_logo.png",
                     Format = "PNG",
-                    Description = "Education For a Complex World",
+                    Description = "City of Vancouver",
                 },
                 new Image()
                 {
                     ThemeName = "Maple",
                     Placement = "Footer Logo",
                     Type = "URL",
-                    Value = "https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg",
-                    Format = "SVG",
-                    Description = "Canadian Flag",
+                    Value = "https://vancouver.ca/plan-your-vote/img/logo_home.png",
+                    Format = "PNG",
+                    Description = "Vancouver Votes",
                 },
                 new Image()
                 {
                     ThemeName = "Maple",
                     Placement = "Logo",
                     Type = "URL",
-                    Value = "https://www.canada.ca/etc/designs/canada/wet-boew/assets/sig-blk-en.svg",
-                    Format = "SVG",
-                    Description = "Government of Canada",
-                }
+                    Value = "https://vancouver.ca/plan-your-vote/img/cov_logo.png",
+                    Format = "PNG",
+                    Description = "City of Vancouver",
+                },
+                new Image()
+                {
+                    ThemeName = "Ocean",
+                    Placement = "Footer Logo",
+                    Type = "URL",
+                    Value = "https://vancouver.ca/plan-your-vote/img/logo_home.png",
+                    Format = "PNG",
+                    Description = "Vancouver Votes",
+                },
+                new Image()
+                {
+                    ThemeName = "Ocean",
+                    Placement = "Logo",
+                    Type = "URL",
+                    Value = "https://vancouver.ca/plan-your-vote/img/cov_logo.png",
+                    Format = "PNG",
+                    Description = "City of Vancouver",
+                },
+                                new Image()
+                {
+                    ThemeName = "Green",
+                    Placement = "Footer Logo",
+                    Type = "URL",
+                    Value = "https://vancouver.ca/plan-your-vote/img/logo_home.png",
+                    Format = "PNG",
+                    Description = "Vancouver Votes",
+                },
+                new Image()
+                {
+                    ThemeName = "Green",
+                    Placement = "Logo",
+                    Type = "URL",
+                    Value = "https://vancouver.ca/plan-your-vote/img/cov_logo.png",
+                    Format = "PNG",
+                    Description = "City of Vancouver",
+                },
             };
         }
 
@@ -99,21 +162,31 @@ namespace Web
         {
             return new List<Theme>()
             {
-                new Theme()
-                {
-                    ThemeName = "Default",
-                    Selected = true,
-                },
-                new Theme()
-                {
-                    ThemeName = "Snowdrop",
-                    Selected = false,
-                },
-                new Theme()
-                {
-                    ThemeName = "Maple",
-                    Selected = false,
-                },
+                // new Theme()
+                // {
+                //     ThemeName = "Default",
+                //     Selected = true,
+                // },
+                // new Theme()
+                // {
+                //     ThemeName = "Snowdrop",
+                //     Selected = false,
+                // },
+                // new Theme()
+                // {
+                //     ThemeName = "Maple",
+                //     Selected = false,
+                // },
+                // new Theme()
+                // {
+                //     ThemeName = "Ocean",
+                //     Selected = false,
+                // },
+                // new Theme()
+                // {
+                //     ThemeName = "Green",
+                //     Selected = false,
+                // },
             };
         }
 
