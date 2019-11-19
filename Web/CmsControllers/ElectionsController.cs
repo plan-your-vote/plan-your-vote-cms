@@ -86,11 +86,8 @@ namespace Web
             var oldRaceIdCount = _context.Races.OrderByDescending( r => r.ElectionId).FirstOrDefault().ElectionId + _context.Races.Count();
             foreach(var r in races){
                 var tempRace = r;
-                Console.WriteLine("hellllllloooooooooooooooooooooo");
-                Console.WriteLine(oldRaceIdCount);
                 tempRace.RaceId = ++raceId;
                 tempRace.ElectionId = election.ElectionId;
-                Console.WriteLine(tempRace.RaceId);
                 _context.Add(tempRace);
                 await _context.SaveChangesAsync();
             }
