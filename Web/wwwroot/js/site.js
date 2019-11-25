@@ -33,7 +33,8 @@ function removeContact(contactIndex) {
     tinymce.init({
       selector: "textarea",
       editor_selector: "rte",
-      menubar: "edit view format"
+      menubar: "edit view format tools",
+        browser_spellcheck: true,
     });
   });
 })(this.jQuery);
@@ -42,7 +43,7 @@ function removeContact(contactIndex) {
   "use strict";
   $(document).ready(function() {
     setTimeout(function() {
-      $('.mce-notification-warning').remove();
+      $(".mce-notification-warning").remove();
     }, 1000);
   });
 })(this.jQuery);
