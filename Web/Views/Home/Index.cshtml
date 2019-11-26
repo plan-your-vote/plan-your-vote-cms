@@ -1,7 +1,8 @@
 ﻿@model Web.ViewModels.DashboardViewModel;
 @using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
 @inject IViewLocalizer Localizer
-
+@inject IStringLocalizer<SharedResource> _sharedLocalizer
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -9,6 +10,7 @@
 <div class="text-center">
     <h1 class="display-4">@Localizer["Plan Your Vote - CMS"]</h1>
     <h3>@Model.ElectionName</h3>
+    <h4>@_sharedLocalizer["Hello"]</h4>
 </div>
 
 <br />
