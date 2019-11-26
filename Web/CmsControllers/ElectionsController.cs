@@ -77,6 +77,7 @@ namespace Web
             // New Election
             var election = await _context.Elections.FindAsync(id);
             election.ElectionId = _context.Elections.OrderByDescending( e => e.ElectionId).FirstOrDefault().ElectionId + 1;
+            election.ElectionName = "Copy of " + election.ElectionName;
             _context.Add(election);
             await _context.SaveChangesAsync();
 
