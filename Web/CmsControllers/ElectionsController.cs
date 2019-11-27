@@ -80,116 +80,180 @@ namespace Web
             election.ElectionName = "Copy of " + election.ElectionName;
             _context.Add(election);
             await _context.SaveChangesAsync();
-
+            
             // Copy Races
             var races = _context.Races.Where(r => r.ElectionId == id);
-            var raceId = _context.Races.OrderByDescending( r => r.ElectionId).FirstOrDefault().ElectionId + _context.Races.Count();
-            var oldRaceIdCount = _context.Races.OrderByDescending( r => r.ElectionId).FirstOrDefault().ElectionId + _context.Races.Count();
+            var raceId = _context.Races.OrderByDescending( r => r.RaceId).FirstOrDefault().RaceId;
+            var i = 1;
             foreach(var r in races){
                 var tempRace = r;
-                tempRace.RaceId = ++raceId;
+                tempRace.RaceId = raceId + i;
                 tempRace.ElectionId = election.ElectionId;
                 _context.Add(tempRace);
+                await _context.SaveChangesAsync();
+                i++;
+            }
+
+            // Copy Steps
+            var steps = _context.Steps.Where(s => s.ElectionId == id);
+            var stepsId = _context.Steps.OrderByDescending( s => s.ID).FirstOrDefault().ID;
+            foreach(var s in steps){
+                var tempS = s;
+                tempS.ID = ++stepsId;
+                tempS.ElectionId = election.ElectionId;
+                _context.Add(tempS);
                 await _context.SaveChangesAsync();
             }
 
             // Copy Candidate
             var candidates = _context.Candidates.Where(c => c.ElectionId == id);
-            var candidatesId = _context.Candidates.OrderByDescending( c => c.ElectionId).FirstOrDefault().ElectionId + _context.Candidates.Count();
+            var candidatesId = _context.Candidates.OrderByDescending( c => c.CandidateId).FirstOrDefault().CandidateId;
+            i = 1;
             foreach(var c in candidates){
-                var tempCandidate = c;
-                var cId = c.CandidateId;
-                tempCandidate.CandidateId = ++candidatesId;
-                tempCandidate.ElectionId = election.ElectionId;
+                var tempCandidate = new Candidate{
+                        CandidateId = candidatesId + i,
+                        ElectionId = election.ElectionId,
+                        Name = c.Name,
+                        Picture = c.Picture,
+                        OrganizationId = c.OrganizationId
+                    };
                 _context.Add(tempCandidate);
                 await _context.SaveChangesAsync();
+                i++;
 
                 // Copy CandidateDetails
-                var candidateDetails = _context.CandidateDetails.Where(cd => cd.CandidateId == cId);
-                var candidateDetailsId = _context.CandidateDetails.OrderByDescending( cd => cd.CandidateId).FirstOrDefault().CandidateId + _context.CandidateDetails.Count();
+                var candidateDetails = _context.CandidateDetails.Where(cd => cd.CandidateId == c.CandidateId);
+                var candidateDetailsId = _context.CandidateDetails.OrderByDescending( cd => cd.ID).FirstOrDefault().ID;
+                var j = 1;
                 foreach(var cd in candidateDetails){
-                    var tempCandidateDetails = cd;
-                    tempCandidateDetails.CandidateId = tempCandidate.CandidateId;
-                    tempCandidateDetails.ID = ++candidateDetailsId;
+                    var tempCandidateDetails = new CandidateDetail{
+                        ID = candidateDetailsId + j,
+                        CandidateId = tempCandidate.CandidateId,
+                        Title = cd.Title,
+                        Text = cd.Text,
+                        Format = cd.Format,
+                        Lang = cd.Lang
+                    };
                     _context.Add(tempCandidateDetails);
                     await _context.SaveChangesAsync();
+                    j++;
                 }
 
                 // Copy Candidate Contacts
-                var candidateContacts = _context.Contacts.Where(con => con.CandidateId == cId);
-                var candidateContactsId = _context.Contacts.OrderByDescending( con => con.CandidateId).FirstOrDefault().CandidateId + _context.Contacts.Count();
+                var candidateContacts = _context.Contacts.Where(con => con.CandidateId == c.CandidateId);
+                var candidateContactsId = _context.Contacts.OrderByDescending( con => con.ContactId).FirstOrDefault().ContactId;
+                j = 1;
                 foreach(var con in candidateContacts){
-                    var tempCandidateContacts = con;
-                    tempCandidateContacts.CandidateId = tempCandidate.CandidateId;
-                    tempCandidateContacts.ContactId = ++candidateContactsId;
+                    var tempCandidateContacts = new Contact{
+                        ContactId = candidateContactsId + j,
+                        ContactMethod = con.ContactMethod,
+                        ContactValue = con.ContactValue,
+                        CandidateId = tempCandidate.CandidateId
+                    };
                     _context.Add(tempCandidateContacts);
                     await _context.SaveChangesAsync();
+                    j++;
                 }
 
                 // Copy Candidate Races
-                var candidateRaces = _context.CandidateRaces.Where(r => r.CandidateId == cId);
-                var candidateRacesId = _context.CandidateRaces.OrderByDescending( cr => cr.CandidateId).FirstOrDefault().CandidateId + _context.CandidateRaces.Count();
-
-                foreach(var r in candidateRaces){
-                    var tempRace = r;
-                    tempRace.RaceId = oldRaceIdCount + r.RaceId;
-                    tempRace.CandidateId = tempCandidate.CandidateId;
-                    tempRace.CandidateRaceId = ++candidateRacesId;
-                    _context.Add(tempRace);
-                    await _context.SaveChangesAsync();
+                var newRaces = _context.Races.Where(r => r.ElectionId == election.ElectionId);
+                var k = 0;
+                foreach(var r in races){
+                    var candidateRaces = _context.CandidateRaces.Where(cr => cr.CandidateId == c.CandidateId && cr.RaceId == r.RaceId);
+                    var candidateRacesId = _context.CandidateRaces.OrderByDescending( cr => cr.CandidateRaceId).FirstOrDefault().CandidateRaceId;
+                    j = 1;
+                    foreach(var cr in candidateRaces){
+                        var tempCR = new CandidateRace{
+                            CandidateRaceId = candidateRacesId + j,
+                            CandidateId = tempCandidate.CandidateId,
+                            RaceId = newRaces.Skip(k).First().RaceId,
+                            BallotOrder = cr.BallotOrder
+                        };
+                        _context.Add(tempCR);
+                        await _context.SaveChangesAsync();
+                        j++;
+                    }
+                    k++;
                 }
             }
 
             // Copy Polling Places
             var pollingPlaces = _context.PollingPlaces.Where(c => c.ElectionId == id);
-            var pollingPlacesId = _context.PollingPlaces.OrderByDescending( pp => pp.ElectionId).FirstOrDefault().ElectionId + _context.PollingPlaces.Count();
+            var pollingPlacesId = _context.PollingPlaces.OrderByDescending( pp => pp.PollingPlaceId).FirstOrDefault().PollingPlaceId;
+            i = 1;
             foreach(var pp in pollingPlaces){
-                var tempPp = pp;
-                var ppId = pp.PollingPlaceId;
-                tempPp.ElectionId = election.ElectionId;
-                tempPp.PollingPlaceId = ++pollingPlacesId;
+                var tempPp = new PollingPlace{
+                    PollingPlaceId = pollingPlacesId + i,
+                    ElectionId = election.ElectionId,
+                    PollingPlaceName = pp.PollingPlaceName,
+                    PollingStationName = pp.PollingStationName,
+                    Address = pp.Address,
+                    WheelchairInfo = pp.WheelchairInfo,
+                    ParkingInfo = pp.ParkingInfo,
+                    Latitude = pp.Latitude,
+                    Longitude = pp.Longitude,
+                    AdvanceOnly = pp.AdvanceOnly,
+                    LocalArea = pp.LocalArea,
+                    Phone = pp.Phone,
+                    Email = pp.Email
+                };
                 _context.Add(tempPp);
                 await _context.SaveChangesAsync();
+                i++;
 
                 // Copy PollingPlaceDates
-                var pollingPlaceDates = _context.PollingPlaceDates.Where(ppd => ppd.PollingPlaceId == ppId);
-                var pollingDateId = _context.PollingPlaceDates.OrderByDescending( ppd => ppd.PollingPlaceId).FirstOrDefault().PollingPlaceId + _context.PollingPlaceDates.Count();
+                var pollingPlaceDates = _context.PollingPlaceDates.Where(ppd => ppd.PollingPlaceId == pp.PollingPlaceId);
+                var pollingDateId = _context.PollingPlaceDates.OrderByDescending( ppd => ppd.PollingDateId).FirstOrDefault().PollingDateId;
+                var j = 1;
                 foreach(var ppd in pollingPlaceDates){
-                    var tempPpd = ppd;
-                    tempPpd.PollingPlaceId = tempPp.PollingPlaceId;
-                    tempPpd.PollingDateId = ++pollingDateId;
+                    var tempPpd = new PollingPlaceDate{
+                        PollingDateId = pollingDateId + j,
+                        PollingPlaceId = tempPp.PollingPlaceId,
+                        PollingDate = ppd.PollingDate,
+                        StartTime = ppd.StartTime,
+                        EndTime = ppd.EndTime
+                    };
                     _context.Add(tempPpd);
                     await _context.SaveChangesAsync();
+                    j++;
                 }
             }
             
             // Copy BallotIssues
             var ballotIssues = _context.BallotIssues.Where(b => b.ElectionId == id);
-            var ballotIssuesId = _context.BallotIssues.OrderByDescending( b => b.ElectionId).FirstOrDefault().ElectionId + _context.BallotIssues.Count();
+            var ballotIssuesId = _context.BallotIssues.OrderByDescending( b => b.BallotIssueId).FirstOrDefault().BallotIssueId;
+            i = 1;
             foreach(var b in ballotIssues){
-                var tempB = b;
-                var bId = b.BallotIssueId;
-                tempB.ElectionId = election.ElectionId;
-                tempB.BallotIssueId = ++ballotIssuesId;
+                var tempB = new BallotIssue{
+                    BallotIssueId = ballotIssuesId + i,
+                    ElectionId = election.ElectionId,
+                    BallotIssueTitle = b.BallotIssueTitle,
+                    Description = b.Description
+                };
                 _context.Add(tempB);
                 await _context.SaveChangesAsync();
+                i++;
 
                 // IssueOptions
-                var issueOptions = _context.IssueOptions.Where(i => i.BallotIssueId == bId);
-                var issueOptionsId = _context.IssueOptions.OrderByDescending( i => i.BallotIssueId).FirstOrDefault().BallotIssueId + _context.IssueOptions.Count();
+                var issueOptions = _context.IssueOptions.Where(io => io.BallotIssueId == b.BallotIssueId);
+                var issueOptionsId = _context.IssueOptions.OrderByDescending( io => io.IssueOptionId).FirstOrDefault().IssueOptionId;
+                var j = 1;
                 foreach(var bi in issueOptions){
-                    var tempBi = bi;
-                    tempBi.BallotIssueId = tempB.BallotIssueId;
-                    tempBi.IssueOptionId = ++issueOptionsId;
+                    var tempBi = new IssueOption{
+                        IssueOptionId = issueOptionsId + j,
+                        IssueOptionInfo = bi.IssueOptionInfo,
+                        BallotIssueId = tempB.BallotIssueId
+                    };
                     _context.Add(tempBi);
                     await _context.SaveChangesAsync();
+                    j++;
                 }
 
             }
 
             // Copy Social Medias
             var socialMedias = _context.SocialMedias.Where(c => c.ElectionId == id);
-            var socialMediasId = _context.SocialMedias.OrderByDescending( sm => sm.ElectionId).FirstOrDefault().ElectionId + _context.SocialMedias.Count();
+            var socialMediasId = _context.SocialMedias.OrderByDescending( sm => sm.ID).FirstOrDefault().ID;
             foreach(var sm in socialMedias){
                 var tempSM = sm;
                 tempSM.ID = ++socialMediasId;
