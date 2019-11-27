@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,11 @@ namespace Web.Controllers
             };
 
             return View(dashboard);
+        }
+
+        public void Diagram()
+        { 
+            Response.Redirect("../diagram.html");
         }
 
         public IActionResult Privacy()
