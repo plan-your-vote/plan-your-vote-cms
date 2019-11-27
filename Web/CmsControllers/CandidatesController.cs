@@ -513,7 +513,7 @@ namespace Web
                     model.Image.CopyTo(newFile);
                     newFile.Dispose();
                     model.Candidate.Picture = nameOfile;
-                    if (System.IO.File.Exists(oldFileName))
+                    if (System.IO.File.Exists(oldFileName) && oldFileName != "wwwroot\\images/default.jpg")
                     {
                         System.IO.File.Delete(oldFileName);
                     }
