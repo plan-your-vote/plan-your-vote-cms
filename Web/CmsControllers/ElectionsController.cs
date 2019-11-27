@@ -114,7 +114,7 @@ namespace Web
                         CandidateId = candidatesId + i,
                         ElectionId = election.ElectionId,
                         Name = c.Name,
-                        Picture = c.Picture,
+                        Picture = "images/default.jpg",
                         OrganizationId = c.OrganizationId
                     };
                 _context.Add(tempCandidate);
