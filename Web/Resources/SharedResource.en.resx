@@ -23,8 +23,20 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
-    <!-- Shared Value, such as buttons -->
+    
     <data name="Hello" xml:space="preserve">
         <value>Hello world!</value>
     </data>
+
+    <!-- Models Localization -->
+    <!-- Models shared keys -->
+    <!-- Models BallotIssue -->
+
+
+    <!-- View Localization -->
+    <!-- View Shared Buttons -->
+    
+    <!-- View Localization -->
+    
+    
 </root>
