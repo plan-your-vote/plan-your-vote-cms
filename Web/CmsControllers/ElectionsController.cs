@@ -339,9 +339,18 @@ namespace Web
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var election = await _context.Elections.FindAsync(id);
-            _context.Elections.Remove(election);
-            await _context.SaveChangesAsync();
+            // Need to catch in the case of this being the last election, 'nextElection' line will crash
+            try{
+                var nextElection = _context.Elections.Where(e => e.ElectionId != id).First();
+                var newState = _context.StateSingleton.Find(State.STATE_ID);
+                newState.RunningElectionID = nextElection.ElectionId;
+                newState.ManagedElectionID = nextElection.ElectionId;
+                await _context.SaveChangesAsync();
+
+                var election = await _context.Elections.FindAsync(id);
+                _context.Elections.Remove(election);
+                await _context.SaveChangesAsync();
+            } catch {}
             return RedirectToAction(nameof(Index));
         }
 
