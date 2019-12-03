@@ -30,13 +30,36 @@
 
     <!-- Models Localization -->
     <!-- Models shared keys -->
-    <!-- Models BallotIssue -->
+    <!-- Models - BallotIssue -->
 
 
     <!-- View Localization -->
     <!-- View Shared Buttons -->
+    <data name="editButton" xml:space="preserve">
+        <value>EDIT</value>
+    </data>
+    <data name="detailButton" xml:space="preserve">
+        <value>DETAILS</value>
+    </data>
+    <data name="deleteButton" xml:space="preserve">
+        <value>DELETE</value>
+    </data>
+    <data name="createNewButton" xml:space="preserve">
+        <value>CREATE NEW</value>
+    </data>
+    <data name="backButton" xml:space="preserve">
+        <value>BACK TO LIST</value>
+    </data>
+    <data name="saveButton" xml:space="preserve">
+        <value>SAVE</value>
+    </data>
     
-    <!-- View Localization -->
+    <!-- View - BallotIssues -->
+    <!-- View - BallotIssues - Index -->
+    <data name="ballotIndexQuestion" xml:space="preserve">
+        <value>Questions</value>
+    </data>
+    
     
     
 </root>
