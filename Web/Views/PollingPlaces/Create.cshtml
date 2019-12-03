@@ -19,62 +19,62 @@
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
-            <label asp-for="PollingPlaceName" class="control-label"></label>
+            <label asp-for="@Localizer[PollingPlaceName]" class="control-label"></label>
             <input asp-for="PollingPlaceName" class="form-control" required/>
             <span asp-validation-for="PollingPlaceName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Address" class="control-label"></label>
+            <label asp-for="@Localizer[Address]" class="control-label"></label>
             <input asp-for="Address" class="form-control" required/>
             <span asp-validation-for="Address" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="PollingStationName" class="control-label"></label>
+            <label asp-for="@Localizer[PollingStationName]" class="control-label"></label>
             <input asp-for="PollingStationName" class="form-control" required/>
             <span asp-validation-for="PollingStationName" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Latitude" class="control-label"></label>
+            <label asp-for="@Localizer[Latitude]" class="control-label"></label>
             <input asp-for="Latitude" class="form-control" required min="1"/>
             <span asp-validation-for="Latitude" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Longitude" class="control-label"></label>
+            <label asp-for="@Localizer[Longitude]" class="control-label"></label>
             <input asp-for="Longitude" class="form-control" required min="1"/>
             <span asp-validation-for="Longitude" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="AdvanceOnly" class="control-label"></label>
+            <label asp-for="@Localizer[AdvanceOnly]" class="control-label"></label>
             <input asp-for="AdvanceOnly" class="form-control" required/>
             <span asp-validation-for="AdvanceOnly" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="LocalArea" class="control-label"></label>
+            <label asp-for="@Localizer[LocalArea]" class="control-label"></label>
             <input asp-for="LocalArea" class="form-control" required/>
             <span asp-validation-for="LocalArea" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Phone" class="control-label"></label>
+            <label asp-for="@Localizer[Phone]" class="control-label"></label>
             <input asp-for="Phone" class="form-control" required/>
             <span asp-validation-for="Phone" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="Email" class="control-label"></label>
+            <label asp-for="@Localizer[Email]" class="control-label"></label>
             <input asp-for="Email" class="form-control" required/>
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="WheelchairInfo" class="control-label"></label>
+            <label asp-for="@Localizer[WheelchairInfo]" class="control-label"></label>
             <input asp-for="WheelchairInfo" class="form-control" />
             <span asp-validation-for="WheelchairInfo" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ParkingInfo" class="control-label"></label>
+            <label asp-for="@Localizer[ParkingInfo]" class="control-label"></label>
             <input asp-for="ParkingInfo" class="form-control" />
             <span asp-validation-for="ParkingInfo" class="text-danger"></span>
         </div>
 
-        <h4><label asp-for="PollingPlaceDates" class="control-label"></label></h4>
+        <h4><label asp-for="@Localizer[PollingPlaceDates]" class="control-label"></label></h4>
         <input type="hidden" id="removedDates" name="removedDates" value="" />
         <div id="polling-dates">
             <div class="date-group">
