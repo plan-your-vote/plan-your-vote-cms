@@ -211,11 +211,11 @@ namespace Web
 
             context.Database.EnsureCreated();
 
-            if(!context.Elections.Any()) {
+            //if(!context.Elections.Any()) {
                 AccountsInit.InitializeAsync(app);
                 StateInit.Initialize(context);
                 ThemesInit.Initialize(context);
-            }
+            //}
         }
     }
 }
