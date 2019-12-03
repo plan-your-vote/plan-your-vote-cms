@@ -162,31 +162,31 @@ namespace Web
         {
             return new List<Theme>()
             {
-                // new Theme()
-                // {
-                //     ThemeName = "Default",
-                //     Selected = true,
-                // },
-                // new Theme()
-                // {
-                //     ThemeName = "Snowdrop",
-                //     Selected = false,
-                // },
-                // new Theme()
-                // {
-                //     ThemeName = "Maple",
-                //     Selected = false,
-                // },
-                // new Theme()
-                // {
-                //     ThemeName = "Ocean",
-                //     Selected = false,
-                // },
-                // new Theme()
-                // {
-                //     ThemeName = "Green",
-                //     Selected = false,
-                // },
+                new Theme()
+                {
+                    ThemeName = "Default",
+                    Selected = true,
+                },
+                new Theme()
+                {
+                    ThemeName = "Snowdrop",
+                    Selected = false,
+                },
+                new Theme()
+                {
+                    ThemeName = "Maple",
+                    Selected = false,
+                },
+                new Theme()
+                {
+                    ThemeName = "Ocean",
+                    Selected = false,
+                },
+                new Theme()
+                {
+                    ThemeName = "Green",
+                    Selected = false,
+                },
             };
         }
 
