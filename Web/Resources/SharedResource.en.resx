@@ -61,6 +61,308 @@
         <value>Questions</value>
     </data>
     
+    <!-- View Localization -->
+<!-- SocialMedias -->
+<data name="backButton" xml:space="preserve">
+    <value>BACK TO LIST</value>
+</data>
+
+<data name="editButton" xml:space="preserve">
+    <value>EDIT</value>
+</data>
+
+<data name="areYouSureYouWantToDeleteThisLabel" xml:space="preserve">
+    <value>ARE YOU SURE YOU WANT TO DELETE THIS ?</value>
+</data>
+
+<data name="createNewSocialMediaIcon" xml:space="preserve">
+    <value>Create New Social Media Icon</value>
+</data>
+
+<data name="deleteSocialMediaIcon" xml:space="preserve">
+    <value>Delete Social Media Icon</value>
+</data>
+
+<data name="socialMediaIconDetails" xml:space="preserve">
+    <value>Social Media Icon Details</value>
+</data>
+
+<data name="editSocialMediaIcon" xml:space="preserve">
+    <value>Edit Social Media Icon</value>
+</data>
     
-    
+<!-- state -->
+<data name="changeElection" xml:space="preserve">
+    <value>Change Election</value>
+</data>
+
+<data name="manageElections" xml:space="preserve">
+    <value>Manage Elections</value>
+</data>
+
+<data name="saveButton" xml:space="preserve">
+    <value>SAVE</value>
+</data>
+
+<data name="backButton" xml:space="preserve">
+    <value>BACK TO LIST</value>
+</data>
+
+<data name="changeButton" xml:space="preserve">
+    <value>CHANGE</value>
+</data>
+
+<!-- Steps -->
+<data name="createNewStep" xml:space="preserve">
+    <value>Create New Step</value>
+</data>
+
+<data name="deleteStep" xml:space="preserve">
+    <value>Delete Step</value>
+</data>
+
+<data name="stepDetails" xml:space="preserve">
+    <value>Step Details</value>
+</data>
+
+<data name="editStep" xml:space="preserve">
+    <value>Edit Step</value>
+</data>
+
+<data name="steps" xml:space="preserve">
+    <value>Steps</value>
+</data>
+
+<data name="backButton" xml:space="preserve">
+    <value>BACK TO LIST</value>
+</data>
+
+<!-- two edit button with different ids -->
+<data name="editButton" xml:space="preserve">
+    <value>EDIT</value>
+</data>
+
+<data name="createNewButton" xml:space="preserve">
+    <value>CREATE NEW</value>
+</data>
+
+<data name="detailsButton" xml:space="preserve">
+    <value>DETAILS</value>
+</data>
+
+<data name="deleteButton" xml:space="preserve">
+    <value>DELETE</value>
+</data>
+
+<!-- Themes -->
+<data name="changeTheme" xml:space="preserve">
+    <value>Change Theme</value>
+</data>
+
+<data name="userManagement" xml:space="preserve">
+    <value>User Management</value>
+</data>
+
+<data name="selectedThemeLabel" xml:space="preserve">
+    <value>SELECTED THEMES:</value>
+</data>
+
+<!-- UserManagement -->
+<data name="editUserRole" xml:space="preserve">
+    <value>Edit User Role</value>
+</data>
+
+<data name="addNewUserButton" xml:space="preserve">
+    <value>ADD NEW USER</value>
+</data>
+
+<!-- BallotIssues -->
+<data name="createNewQuestion" xml:space="preserve">
+    <value>Create New Question</value>
+</data>
+
+<data name="deleteQuestion" xml:space="preserve">
+    <value>Delete Question</value>
+</data>
+
+<data name="questionDetails" xml:space="preserve">
+    <value>Question Details</value>
+</data>
+
+<data name="editQuestion" xml:space="preserve">
+    <value>Edit Question</value>
+</data>
+
+<data name="questions" xml:space="preserve">
+    <value>Questions</value>
+</data>
+
+
+
+<data name="areYouSureYouWantToDeleteThisLabel" xml:space="preserve">
+    <value>ARE YOU SURE YOU WANT TO DELETE THIS ?</value>
+</data>
+
+
+<!-- Candidates -->
+<data name="createNewCandidate" xml:space="preserve">
+    <value>Create New Candidate</value>
+</data>
+
+<data name="deleteCandidate" xml:space="preserve">
+    <value>Delete Candidate</value>
+</data>
+
+<data name="candidateDetails" xml:space="preserve">
+    <value>Candidate Details</value>
+</data>
+
+<data name="editCandidate" xml:space="preserve">
+    <value>Edit Candidate</value>
+</data>
+
+<data name="candidates" xml:space="preserve">
+    <value>Candidates</value>
+</data>
+
+<data name="reorderCandidates" xml:space="preserve">
+    <value>Reorder Candidates</value>
+</data>
+
+
+<data name="editBallotOrderButton" xml:space="preserve">
+    <value>EDIT BALLOT ORDER</value>
+</data>
+
+<data name="backButton" xml:space="preserve">
+    <value>BACK TO LIST</value>
+</data>
+
+<data name="editButton" xml:space="preserve">
+    <value>EDIT</value>
+</data>
+
+<data name="createNewButton" xml:space="preserve">
+    <value>CREATE NEW</value>
+</data>
+
+<data name="saveChangeButton" xml:space="preserve">
+    <value>SAVE CHANGES</value>
+</data>
+
+<!-- Elections -->
+<data name="createNewElection" xml:space="preserve">
+    <value>Create New Election</value>
+</data>
+
+<data name="electionDetails" xml:space="preserve">
+    <value>Election Details</value>
+</data>
+
+<data name="editElection" xml:space="preserve">
+    <value>Edit Election</value>
+</data>
+
+<data name="allElections" xml:space="preserve">
+    <value>All Elections</value>
+</data>
+
+
+<data name="createNewElection" xml:space="preserve">
+    <value>Create New Election</value>
+</data>
+
+<data name="backButton" xml:space="preserve">
+    <value>BACK TO LIST</value>
+</data>
+
+<data name="editButton" xml:space="preserve">
+    <value>EDIT</value>
+</data>
+
+<data name="createNewButton" xml:space="preserve">
+    <value>CREATE NEW</value>
+</data>
+
+<data name="detailsButton" xml:space="preserve">
+    <value>DETAILS</value>
+</data>
+
+<data name="deleteButton" xml:space="preserve">
+    <value>DELETE</value>
+</data>
+
+<data name="copyButton" xml:space="preserve">
+    <value>COPY</value>
+</data>
+
+<!-- Home -->
+<data name="planYourVoteText" xml:space="preserve">
+    <value>Plan Your Vote - CMS</value>
+</data>
+
+<data name="dashboardText" xml:space="preserve">
+    <value>Dashboard</value>
+</data>
+
+<data name="candidatesText" xml:space="preserve">
+    <value>Candidates</value>
+</data>
+
+<data name="moreInfoButton" xml:space="preserve">
+    <value>More info</value>
+</data>
+
+<data name="pollingPlacesText" xml:space="preserve">
+    <value>Polling Places</value>
+</data>
+
+<data name="ballotIssuesText" xml:space="preserve">
+    <value>Ballot Issues</value>
+</data>
+
+<data name="databaseRelationalEntityDiagramButton" xml:space="preserve">
+    <value>Database Relational Entity Diagram</value>
+</data>
+
+<data name="useThisPageToDetailYourSitePrivacyPolicy" xml:space="preserve">
+    <value>Use this page to detail your site's privacy policy.</value>
+</data>
+
+<data name="privacyPolicy" xml:space="preserve">
+    <value>Privacy policy</value>
+</data>
+
+
+<!-- Images -->
+
+<data name="createNewImage" xml:space="preserve">
+    <value>Create New Image</value>
+</data>
+
+<data name="deleteImage" xml:space="preserve">
+    <value>Delete Image</value>
+</data>
+
+<data name="imageDetails" xml:space="preserve">
+    <value>Image Details</value>
+</data>
+
+<data name="images" xml:space="preserve">
+    <value>Images</value>
+</data>
+
+<data name="imageDetails" xml:space="preserve">
+    <value>Image Details</value>
+</data>
+
+<data name="backButton" xml:space="preserve">
+    <value>BACK TO LIST</value>
+</data>
+
+<data name="createNewButton" xml:space="preserve">
+    <value>CREATE NEW</value>
+</data>
+
+
 </root>
