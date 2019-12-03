@@ -10,22 +10,23 @@
 @{
     var requestCulture = Context.Features.Get<IRequestCultureFeature>();
     var cultureItems = LocalizationOptions.Value.SupportedUICultures
-        .Select(c => new SelectListItem { Value = c.Name, Text = Localizer.GetString(c.Name) })
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.NativeName })
         .ToList();
-//    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}{Context.Request.QueryString}";
+    var returnUrl = string.IsNullOrEmpty(Context.Request.Path) ? "~/" : $"~{Context.Request.Path.Value}";
 }
 <div >
     <form id="selectLanguage" 
           asp-controller="Home" 
           asp-action="SetLanguage" 
-          asp-route-returnUrl="@Context.Request.Path"
+          asp-route-returnUrl="@returnUrl"
           method="post" 
           class="form-horizontal" 
           role="form">
         <select name="culture"
                 onchange="this.form.submit();"
                 asp-for="@requestCulture.RequestCulture.UICulture.Name"
-                asp-items="cultureItems">
+                asp-items="cultureItems"
+                class="form-control">
         </select>
     </form>
 </div>

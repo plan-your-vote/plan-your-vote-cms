@@ -64,7 +64,9 @@ namespace Web.Controllers
             Response.Cookies.Append(
                 CookieRequestCultureProvider.DefaultCookieName,
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
-                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) }
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1), IsEssential = true}
+                // isEssential = true is necessary here to possibly bypass consent policy check, otherwise, the culture might
+                // not be switched properly
             );
 
             return LocalRedirect(returnUrl);

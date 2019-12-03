@@ -1,12 +1,16 @@
 ﻿@model Web.Models.OpenGraph
 
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = @Localizer["Create"];
 }
 
-<h1>Create</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h4>OpenGraph</h4>
+<h4> @Localizer["openGraphs_subtitle"]</h4>
 <hr />
 <div class="row panel panel-default">
     <div class="col-md-4">
@@ -50,6 +54,6 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">@Localizer["backButton"]</a>
 </div>
 

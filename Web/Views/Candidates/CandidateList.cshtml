@@ -1,6 +1,8 @@
 ﻿@model Web.ViewModels.CandidatesByRaceViewModel
 @using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @if (Model.Races.Count > 0)
 {
@@ -8,7 +10,7 @@
     {
         <div class="one-line">
             <h5 class="font-weight-bold">@Html.DisplayFor(model => race.PositionName)</h5>
-            <a class="btn btn-primary" asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["Edit Ballot Order"]</a>
+            <a class="btn btn-primary" asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["candidates_list_reorderButton"]</a>
         </div>
         <table class="table candidate-list">
             <thead>
@@ -52,9 +54,9 @@
                     </tr>
                     <tr>
                         <td class="text-right" colspan="3">
-                            <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a>
-                            <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a>
-                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a>
+                            <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["editButton"]</a>
+                            <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["detailButton"]</a>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["deleteButton"]</a>
 
                         </td>
                     </tr>
@@ -108,9 +110,9 @@
             <tr>
                 <td class="text-right" colspan="3">
 
-                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["Edit"]</a>
-                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["Details"]</a>
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["Delete"]</a>
+                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["editButton"]</a>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["detailButton"]</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["deleteButton"]</a>
                 </td>
             </tr>
         }

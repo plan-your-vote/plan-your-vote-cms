@@ -1,9 +1,11 @@
 ﻿@model Web.Models.Step
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Delete Step"];
+    ViewData["Title"] = @Localizer["steps_delete_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -34,6 +36,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> 
-        <a class="btn btn-info" asp-action="Index">@Localizer["Back to List"]</a>
+        <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
     </form>
 </div>

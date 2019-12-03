@@ -177,5 +177,11 @@ dd {
     }
 }
 
+/* set language*/
 
-
+#selectLanguage {
+    display: inline-flex;
+    background-color: white;
+    padding: 0 15px;
+    border-radius: 5px;
+}

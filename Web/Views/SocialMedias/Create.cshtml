@@ -1,9 +1,12 @@
 ﻿@model Web.Models.SocialMedia
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
-
+@using Microsoft.Extensions.Localization
+@using Web
+@* @inject IViewLocalizer Localizer *@
+@inject IStringLocalizer<SharedResource> Localizer
+    
 @{
-    ViewData["Title"] = @Localizer["Create New Social Media Icon"];
+    ViewData["Title"] = @Localizer["socialMedia_create_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -33,7 +36,7 @@
 </div>
 
 <div>
-    <a class="btn btn-info" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
 </div>
 
 @section Scripts {

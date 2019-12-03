@@ -1,9 +1,11 @@
 ﻿@model Web.ViewModels.CandidateViewModel
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Create New Candidate"];
+    ViewData["Title"] = @Localizer["candidates_create_title"];
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -108,18 +110,18 @@
         </script>
 
         <div>
-            <button type="button" id="AddDetailField" class="btn btn-primary" onClick="addDetail()">Add a Candidate Detail</button>
+            <button type="button" id="AddDetailField" class="btn btn-primary" onClick="addDetail()">@Localizer["candidates_addDetailButton"]</button>
             &nbsp;|&nbsp;
-            <button type="button" id="AddContactField" class="btn btn-primary" onClick="addContact()">Add a Contact</button>
+            <button type="button" id="AddContactField" class="btn btn-primary" onClick="addContact()">@Localizer["candidates_addContactButton"]</button>
         </div>
         <div class="form-group">
-            <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
+            <input type="submit" value=@Localizer["createButton"] class="btn btn-primary" />
         </div>
     </form>
 </div>
 
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["backButton"]</a>
 </div>
 
 @section Scripts {

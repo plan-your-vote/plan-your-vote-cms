@@ -1,9 +1,11 @@
 ﻿@model Web.Models.Organization
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = Localizer["Create New Organization"];
+    ViewData["Title"] = Localizer["organizations_create_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -28,6 +30,6 @@
 </div>
 
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["backButton"]</a>
 </div>
 
