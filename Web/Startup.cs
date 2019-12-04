@@ -147,9 +147,8 @@ namespace Web
                 var supportedCultures = new List<CultureInfo> {
                     new CultureInfo("en"),
                     new CultureInfo("fr"),
-                    new CultureInfo("es"),
-                    new CultureInfo("zh"),
-                  };
+                    new CultureInfo("es")
+                };
 
                 opts.DefaultRequestCulture = new RequestCulture("en");
                 opts.SupportedCultures = supportedCultures;
