@@ -1,6 +1,8 @@
 ﻿@model Web.Models.PollingPlace
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
     var lastIndex = Model.PollingPlaceDates.Count - 1;
@@ -8,7 +10,7 @@
 
 <div class="one-line">
     <span>@Localizer["Date " + (lastIndex+1)]</span>
-    <button type="button" role="button" class="btn btn-primary btn-sm" onclick="removeDate(@lastIndex)">@Localizer["Remove Date"]</button>
+    <button type="button" role="button" class="btn btn-primary btn-sm" onclick="removeDate(@lastIndex)">@Localizer["pollingPlaces_pollingDate_removeDate"]</button>
 </div>
 <div class="form-group">
     @Html.LabelFor(model => model.PollingPlaceDates[lastIndex].PollingDate, new { @class = "control-label" })

@@ -1,14 +1,16 @@
 ﻿@model Web.Models.OpenGraph
-
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = Localizer["openGraphs_delete_title"];
 }
 
-<h1>Delete</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>@Localizer["deleteWarning"]</h3>
 <div>
-    <h4>OpenGraph</h4>
+    <h4>@Localizer["openGraphs_subtitle"]</h4>
     <hr />
     <dl class="row panel panel-default">
         <dt class = "col-sm-2">
@@ -52,6 +54,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="OpenGraphId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <a asp-action="Index">@Localizer["backButton"]</a>
     </form>
 </div>

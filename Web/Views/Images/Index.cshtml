@@ -1,16 +1,19 @@
 ﻿@model IEnumerable<Web.Models.Image>
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@* @inject IViewLocalizer Localizer *@
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Images"];
+    ViewData["Title"] = @Localizer["images_index_title"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create">@Localizer["Create New"]</a>
+    <a class="btn btn-primary" asp-action="Create">@Localizer["createNewButton"]</a>
 </p>
 <table class="table panel panel-default">
     <thead>

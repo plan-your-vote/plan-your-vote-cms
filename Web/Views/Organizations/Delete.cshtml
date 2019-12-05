@@ -1,14 +1,16 @@
 ﻿@model Web.Models.Organization
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = Localizer["Delete Organization"];
+    ViewData["Title"] = Localizer["organizations_delete_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<h3>@Localizer["Are you sure you want to delete this?"]</h3>
+<h3>@Localizer["deleteWarning"]</h3>
 <div class="panel panel-default">
     <dl class="row">
         <dt class="col-sm-2">
@@ -29,6 +31,6 @@
         <p class="text-danger">@ViewData["CandidatesFoundError"]</p>
         <input type="hidden" asp-for="OrganizationId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> 
-        <a class="btn btn-info" asp-action="Index">@Localizer["Back to List"]</a>
+        <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
     </form>
 </div>

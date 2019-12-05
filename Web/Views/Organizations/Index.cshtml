@@ -1,15 +1,17 @@
 ﻿@model IEnumerable<Web.Models.Organization>
-@using Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = Localizer["Organizations"];
+    ViewData["Title"] = Localizer["organizations_index_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <p>
-    <a class="btn btn-primary" asp-action="Create">@Localizer["Create New"]</a>
+    <a class="btn btn-primary" asp-action="Create">@Localizer["organizations_index_create"]</a>
 </p>
 <div class="table-responsive-sm">
     <table class="table panel panel-default">
@@ -35,9 +37,9 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td class="button-group">
-                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.OrganizationId">@Localizer["Edit"]</a>
-                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.OrganizationId">@Localizer["Details"]</a>
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.OrganizationId">@Localizer["Delete"]</a>
+                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.OrganizationId">@Localizer["editButton"]</a>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.OrganizationId">@Localizer["detailButton"]</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.OrganizationId">@Localizer["deleteButton"]</a>
                 </td>
             </tr>
         }

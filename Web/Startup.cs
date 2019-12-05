@@ -16,9 +16,11 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using Web.ApiControllers;
 using Web.Data;
 using Web.Models;
+using Web;
 
 namespace Web
 {
@@ -126,13 +128,16 @@ namespace Web
 
             services.AddMvc()
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-            .AddDataAnnotationsLocalization()
+            .AddDataAnnotationsLocalization(
+                // config to use sharedResource as localization provider for data annotation
+                options => { options.DataAnnotationLocalizerProvider = (type, factory) => factory.Create(typeof(SharedResource)); })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddJsonOptions(
                 options =>
                 {
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                     options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                    
                 });
 
             services.AddHttpClient();
@@ -142,7 +147,8 @@ namespace Web
                 var supportedCultures = new List<CultureInfo> {
                     new CultureInfo("en"),
                     new CultureInfo("fr"),
-                  };
+                    new CultureInfo("es")
+                };
 
                 opts.DefaultRequestCulture = new RequestCulture("en");
                 opts.SupportedCultures = supportedCultures;
@@ -187,6 +193,10 @@ namespace Web
             app.UseCors("EmailPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
+
             app.UseCookiePolicy();
 
             app.UseAuthentication();
@@ -198,10 +208,7 @@ namespace Web
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "VotingTool API V1");
             });
-
-            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(options.Value);
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

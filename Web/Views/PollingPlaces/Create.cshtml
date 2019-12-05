@@ -1,9 +1,11 @@
 ﻿@model Web.Models.PollingPlace
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Create New Polling Place"];
+    ViewData["Title"] = @Localizer["pollingPlaces_create_title"];
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -98,15 +100,15 @@
             }
         </script>
         <button id="AddDateField" type="button" role="button" class="btn btn-primary" onClick="addDate()">
-            @Localizer["Add an operating date/time"]
+            @Localizer["pollingPlaces_create_add"]
         </button>
         <div class="form-group">
-            <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
+            <input type="submit" value=@Localizer["createButton"] class="btn btn-primary" />
         </div>
     </form>
 </div>
     <div>
-        <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+        <a class="btn btn-primary" asp-action="Index">@Localizer["backButton"]</a>
     </div>
 
     @section Scripts {

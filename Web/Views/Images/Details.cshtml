@@ -1,9 +1,12 @@
 ﻿@model Web.Models.Image
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@* @inject IViewLocalizer Localizer *@
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Image Details"];
+    ViewData["Title"] = @Localizer["images_details_title"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -51,5 +54,5 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-primary" })
-    <a class="btn btn-info" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
 </div>
