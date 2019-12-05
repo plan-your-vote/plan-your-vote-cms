@@ -1,9 +1,9 @@
 ﻿@model Web.Models.Image
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@* @inject IViewLocalizer Localizer *@
 @using Microsoft.Extensions.Localization
 @using Web
-@inject IStringLocalizer<SharedResource> _sharedLocalizer
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
     ViewData["Title"] = @Localizer["images_delete_title"];

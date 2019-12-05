@@ -527,7 +527,7 @@
         <value>Candidatos</value>
     </data>
 
-    <data name="reorderCandidates" xml:space="preserve">
+    <data name="candidates_reorder_title" xml:space="preserve">
         <value>Reordenar candidatos</value>
     </data>
 

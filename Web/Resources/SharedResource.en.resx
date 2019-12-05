@@ -414,14 +414,6 @@
     <data name="state_index_changeButton" xml:space="preserve">
         <value>CHANGE</value>
     </data>
-
-<data name="saveButton" xml:space="preserve">
-    <value>SAVE</value>
-</data>
-
-<data name="backButton" xml:space="preserve">
-    <value>BACK TO LIST</value>
-</data>
     <!-- Steps -->
     <data name="steps_create_title" xml:space="preserve">
         <value>Create New Step</value>
@@ -550,6 +542,9 @@
     
     <data name="candidates_list_reorderButton" xml:space="preserve">
     <value>EDIT BALLOT ORDER</value>
+</data>    
+    <data name="candidates_reorder_title" xml:space="preserve">
+    <value>Reorder Ballot</value>
 </data>
     
     <data name="saveChangeButton" xml:space="preserve">
@@ -757,104 +752,6 @@
     </data>   
     <data name="openGraphs_index_title" xml:space="preserve">
         <value>Index</value>
-    </data>
-
-    <!-- Organizations -->
-    <data name="organizations_create_title" xml:space="preserve">
-        <value>Create New Organization</value>
-    </data>
-
-    <data name="organizations_delete_title" xml:space="preserve">
-        <value>Delete Organization</value>
-    </data>
-
-    <data name="organizations_details_title" xml:space="preserve">
-        <value>Organization Details</value>
-    </data>
-
-    <data name="organizations_edit_title" xml:space="preserve">
-        <value>Edit Organization</value>
-    </data>
-
-    <data name="organizations_index_title" xml:space="preserve">
-        <value>Organizations</value>
-    </data>
-
-    <data name="organizations_index_create" xml:space="preserve">
-        <value>Create New</value>
-    </data>
-
-    <!-- Polling Places -->
-    <data name="pollingPlaces_create_title" xml:space="preserve">
-        <value>Create New Polling Place</value>
-    </data>
-
-    <data name="pollingPlaces_create_add" xml:space="preserve">
-        <value>Add an operating date/time</value>
-    </data>
-
-    <data name="pollingPlaces_delete_title" xml:space="preserve">
-        <value>Delete Polling Place</value>
-    </data>
-
-    <data name="pollingPlaces_details_title" xml:space="preserve">
-        <value>Polling Place Details</value>
-    </data>
-
-    <data name="pollingPlaces_edit_title" xml:space="preserve">
-        <value>Edit Polling Place</value>
-    </data>
-
-    <data name="pollingPlaces_edit_delete" xml:space="preserve">
-        <value>Remove Date</value>
-    </data>
-
-    <data name="pollingPlaces_edit_add" xml:space="preserve">
-        <value>Add an operating date/time</value>
-    </data>
-
-    <data name="pollingPlaces_index_title" xml:space="preserve">
-        <value>Polling Places</value>
-    </data>
-
-    <data name="pollingPlaces_index_create" xml:space="preserve">
-        <value>Create New</value>
-    </data>
-
-    <data name="pollingPlaces_pollingDate_removeDate" xml:space="preserve">
-        <value>Remove Date</value>
-    </data>
-
-    <!-- Races -->
-    <data name="races_create_title" xml:space="preserve">
-        <value>Create New Race</value>
-    </data>
-    <data name="races_delete_title" xml:space="preserve">
-        <value>Delete Race</value>
-    </data>
-
-    <data name="races_details_title" xml:space="preserve">
-        <value>Race Details</value>
-    </data>
-
-    <data name="races_edit_title" xml:space="preserve">
-        <value>Edit Race</value>
-    </data>
-
-    <data name="races_index_title" xml:space="preserve">
-        <value>Races</value>
-    </data>
-
-    <data name="races_index_create" xml:space="preserve">
-        <value>Create New</value>
-    </data>
-
-    <data name="races_index_reorder" xml:space="preserve">
-        <value>Edit Ballot Order</value>
-    </data>
-
-    <data name="races_reorder_title" xml:space="preserve">
-        <value>Reorder Races</value>
     </data>
 
     <!-- Shared Views -->

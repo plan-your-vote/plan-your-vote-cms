@@ -522,7 +522,7 @@
         <value>Candidats</value>
     </data>
 
-    <data name="reorderCandidates" xml:space="preserve">
+    <data name="candidates_reorder_title" xml:space="preserve">
         <value>Réorganiser les candidats</value>
     </data>
 
@@ -539,7 +539,8 @@
     
     <data name="candidates_list_reorderButton" xml:space="preserve">
         <value>MODIFIER LA COMMANDE DE BULLETIN</value>
-    </data>
+    </data>  
+
     
     <!-- Elections -->
     <data name="elections_create_title" xml:space="preserve">
