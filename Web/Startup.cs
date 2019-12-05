@@ -218,13 +218,15 @@ namespace Web
 
             context.Database.EnsureCreated();
 
-            ThemesInit.Initialize(context);
-            //if(!context.Elections.Any()) {
-                AccountsInit.InitializeAsync(app);
-                StateInit.Initialize(context);
+
+            AccountsInit.InitializeAsync(app);
+            StateInit.Initialize(context);
+            if (!context.Themes.Any())
+            {
                 ThemesInit.Initialize(context);
-                //SeedData.Initialize(context);
-            //}
+            }
+
+
         }
     }
 }
