@@ -80,6 +80,17 @@
         </div>
 
         <script>
+            function addRTE() {
+              tinymce.init({
+                selector: ".rich-text-editor",
+                editor_selector: "rte",
+                menubar: "edit view format tools",
+                  browser_spellcheck: true,
+              });
+              setTimeout(function() {
+              $(".mce-notification-warning").remove();
+            }, 500);
+            }
             function addDetail() {
                 let count = getCount(".detail-group");
 
@@ -90,6 +101,7 @@
                             if (status === "error") {
                                 alert("An error occurred while loading the detail fields.");
                             }
+                            addRTE();
                         })
                 );
             }
