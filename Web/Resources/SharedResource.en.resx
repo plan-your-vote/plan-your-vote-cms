@@ -497,10 +497,10 @@
     <!-- Candidates -->
     <!-- Candidates Shared-->
     <data name="candidates_removeContactButton" xml:space="preserve">
-        <value>Create New Candidate</value>
+        <value>Remove Contact</value>
     </data>
     <data name="candidates_removeDetailButton" xml:space="preserve">
-        <value>Create New Candidate</value>
+        <value>Remove Detail</value>
     </data>
     <data name="candidates_addDetailButton" xml:space="preserve">
         <value>Add a Candidate Detail</value>

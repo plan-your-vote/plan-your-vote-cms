@@ -491,10 +491,10 @@
     <!-- Candidates -->
     <!-- Candidates Shared-->
     <data name="candidates_removeContactButton" xml:space="preserve">
-        <value>Créer un nouveau candidat</value>
+        <value>Supprimer contact</value>
     </data>
     <data name="candidates_removeDetailButton" xml:space="preserve">
-        <value>Créer un nouveau candidat</value>
+        <value>Supprimer les détails</value>
     </data>
     <data name="candidates_addDetailButton" xml:space="preserve">
         <value>Ajouter un détail de candidat</value>
