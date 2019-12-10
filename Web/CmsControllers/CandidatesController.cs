@@ -515,6 +515,8 @@ namespace Web
                     model.Candidate.Picture = nameOfile;
                     if (System.IO.File.Exists(oldFileName) && oldFileName != "wwwroot\\images/default.jpg")
                     {
+                        System.GC.Collect(); 
+                        System.GC.WaitForPendingFinalizers(); 
                         System.IO.File.Delete(oldFileName);
                     }
 
