@@ -96,7 +96,7 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.Candidate.Details[i].Text, new { @class = "control-label" })
-                        @Html.TextAreaFor(c => c.Candidate.Details[i].Text, new { @class = "form-control", @rows = 10 })
+                        @Html.TextAreaFor(c => c.Candidate.Details[i].Text, new { @class = "form-control rich-text-editor", @rows = 10 })
                         @Html.ValidationMessageFor(c => c.Candidate.Details[i].Text, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">

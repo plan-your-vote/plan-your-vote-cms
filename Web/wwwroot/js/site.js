@@ -31,7 +31,7 @@ function removeContact(contactIndex) {
   "use strict";
   $(document).ready(function() {
     tinymce.init({
-      selector: "textarea",
+      selector: ".rich-text-editor",
       editor_selector: "rte",
       menubar: "edit view format tools",
         browser_spellcheck: true,
