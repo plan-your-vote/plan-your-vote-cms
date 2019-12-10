@@ -52,7 +52,7 @@
                     <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.ElectionId">@Localizer["detailButton"]</a>
                     <form asp-action="Copy">
                         <input type="hidden" name="id" value="@item.ElectionId" />
-                        <input type="submit" value=@Localizer["copyButton"] class="btn btn-info btn-sm" />
+                        <input type="submit" value=@Localizer["copyButton"] class="btn btn-info btn-sm" id="copyBtn" />
                     </form>
                     <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.ElectionId">@Localizer["deleteButton"]</a>
                 </td>

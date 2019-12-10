@@ -185,3 +185,8 @@ dd {
     padding: 0 15px;
     border-radius: 5px;
 }
+
+/* Election page */
+#copyBtn {
+    width: 100%;
+}
