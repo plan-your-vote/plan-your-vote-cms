@@ -18,7 +18,7 @@ The purpose of this project is to develop a web app look like the one that City 
 - [Accessibility](./doc/Accessibility.md)
 - [Docker](./doc/Dockerization.md)
 - [Unit Tests](./doc/unit-test.md)
-
+- [Localization](./doc/Localization.md)
 
 ## Branch Structure
 Developers must not push their changes directly to `master`. They can push currently to `develop`, but we recommend protect `develop` so that they cannot push directly. We do not have naming conventions for branches as well, but recommend setup conventions.
