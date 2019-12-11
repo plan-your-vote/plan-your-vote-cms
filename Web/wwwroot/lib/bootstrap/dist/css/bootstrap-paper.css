@@ -6577,7 +6577,7 @@ button.list-group-item-danger {
     border: 1px solid transparent;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-    padding: 8px;
+    padding: 2em;
 }
 
 .panel-body {
@@ -6813,6 +6813,10 @@ button.list-group-item-danger {
 .panel > .table-responsive {
     margin-bottom: 0;
     border: 0;
+}
+
+.margin-bottom {
+    margin-bottom: 23px;
 }
 
 .panel-group {

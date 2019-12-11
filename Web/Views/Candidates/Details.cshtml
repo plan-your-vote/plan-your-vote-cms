@@ -1,9 +1,11 @@
 ﻿@model Web.Models.Candidate
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Candidate Details"];
+    ViewData["Title"] = @Localizer["candidates_details_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -67,18 +69,18 @@
                 @if (detail.Format == CandidateDetailFormat.List)
                 {
                     <ul>
-                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                        <li>@Html.Raw(detail.Text)</li>
                     </ul>
                 }
                 else if (detail.Format == CandidateDetailFormat.OrderedList)
                 {
                     <ol>
-                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                        <li>@Html.Raw(detail.Text)</li>
                     </ol>
                 }
                 else
                 {
-                    @Html.DisplayFor(model => detail.Text)
+                    @Html.Raw(detail.Text)
                 }
             </dd>
         </dl>
@@ -107,6 +109,6 @@
     }
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.CandidateId">@Localizer["Edit"]</a> |
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.CandidateId">@Localizer["editButton"]</a> 
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
 </div>

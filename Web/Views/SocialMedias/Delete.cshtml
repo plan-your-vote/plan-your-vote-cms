@@ -1,14 +1,17 @@
 ﻿@model Web.Models.SocialMedia
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
 
 @{
-    ViewData["Title"] = @Localizer["Delete Social Media Icon"];
+    ViewData["Title"] = @Localizer["socialMedia_delete_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
-<h3>@Localizer["Are you sure you want to delete this ?"]</h3>
+<h3>@Localizer["socialMedia_delete_warning"]</h3>
 <div class="panel panel-default">
     <dl class="row">
         <dt class="col-sm-2">
@@ -33,7 +36,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="ID" />
-        <input type="submit" value=@Localizer["Delete"] class="btn btn-danger" /> |
-        <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+        <input type="submit" value=@Localizer["deleteButton"] class="btn btn-danger" />
+        <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
     </form>
 </div>

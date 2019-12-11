@@ -1,9 +1,11 @@
 ﻿@model Web.Models.SocialMedia
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Edit Social Media Icon"];
+    ViewData["Title"] = @Localizer["socialMedia_edit_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -28,13 +30,13 @@
             <span asp-validation-for="Link" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
+            <input type="submit" value="Save" class="btn btn-success" />
         </div>
     </form>
 </div>
 
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
 </div>
 
 @section Scripts {

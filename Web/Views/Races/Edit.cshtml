@@ -1,9 +1,11 @@
 ﻿@model Web.ViewModels.RaceViewModel
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Edit Race"];
+    ViewData["Title"] = @Localizer["races_edit_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -56,7 +58,7 @@
     </div>
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a asp-action="Index" class="btn btn-info">@Localizer["backButton"]</a>
 </div>
 
 @section Scripts {

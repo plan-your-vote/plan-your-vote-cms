@@ -1,9 +1,11 @@
 ﻿@model Web.ViewModels.CandidateViewModel
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Create New Candidate"];
+    ViewData["Title"] = @Localizer["candidates_create_title"];
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -20,7 +22,7 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Candidate.Name" class="control-label"></label>
-            <input asp-for="Candidate.Name" class="form-control" />
+            <input asp-for="Candidate.Name" class="form-control" required />
             <span asp-validation-for="Candidate.Name" class="text-danger"></span>
         </div>
         <div class="form-group">
@@ -47,7 +49,7 @@
                     @foreach (var race in Model.Races)
                     {
                         <div>
-                            <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" />
+                            <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" required/>
                             <label for="@race.Value">@race.Text</label>
                         </div>
                     }
@@ -59,7 +61,7 @@
             <hr />
             <h4><label asp-for="Candidate.Details" class="control-label"></label></h4>
             <hr />
-            <input type="hidden" id="removedDetails" name="RemovedDetails" value="" />
+            <input type="hidden" id="removedDetails" name="RemovedDetails" value="" required/>
         </div>
         <div id="allDetails">
             <div class="detail-group">
@@ -69,7 +71,7 @@
         <div>
             <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
             <hr />
-            <input type="hidden" id="removedContacts" name="RemovedContacts" value="" />
+            <input type="hidden" id="removedContacts" name="RemovedContacts" value="" required/>
         </div>
         <div id="allContacts">
             <div class="contact-group">
@@ -78,6 +80,17 @@
         </div>
 
         <script>
+            function addRTE() {
+              tinymce.init({
+                selector: ".rich-text-editor",
+                editor_selector: "rte",
+                menubar: "edit view format tools",
+                  browser_spellcheck: true,
+              });
+              setTimeout(function() {
+              $(".mce-notification-warning").remove();
+            }, 500);
+            }
             function addDetail() {
                 let count = getCount(".detail-group");
 
@@ -88,6 +101,7 @@
                             if (status === "error") {
                                 alert("An error occurred while loading the detail fields.");
                             }
+                            addRTE();
                         })
                 );
             }
@@ -108,18 +122,18 @@
         </script>
 
         <div>
-            <button type="button" id="AddDetailField" class="btn btn-primary" onClick="addDetail()">Add a Candidate Detail</button>
+            <button type="button" id="AddDetailField" class="btn btn-primary" onClick="addDetail()">@Localizer["candidates_addDetailButton"]</button>
             &nbsp;|&nbsp;
-            <button type="button" id="AddContactField" class="btn btn-primary" onClick="addContact()">Add a Contact</button>
+            <button type="button" id="AddContactField" class="btn btn-primary" onClick="addContact()">@Localizer["candidates_addContactButton"]</button>
         </div>
         <div class="form-group">
-            <input type="submit" value=@Localizer["Create"] class="btn btn-primary" />
+            <input type="submit" value=@Localizer["createButton"] class="btn btn-primary" />
         </div>
     </form>
 </div>
 
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["backButton"]</a>
 </div>
 
 @section Scripts {

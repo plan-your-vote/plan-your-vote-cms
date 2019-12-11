@@ -5,7 +5,7 @@
 
 
 *.db
-Web/Migrations/
+# Web/Migrations/
 
 
 # User-specific files

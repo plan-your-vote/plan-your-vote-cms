@@ -1,9 +1,11 @@
 ﻿@model IList<Web.Models.Race>
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Reorder Races"];
+    ViewData["Title"] = @Localizer["races_reorder_title"];
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -55,13 +57,13 @@
                 </tbody>
             </table>
             <div class="form-group">
-                <input type="submit" value=@Localizer["Save Changes"] class="btn btn-primary" />
+                <input type="submit" value=@Localizer["saveButton"] class="btn btn-primary" />
             </div>
         </form>
     }
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
 </div>
 
 <script>

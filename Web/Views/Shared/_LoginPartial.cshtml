@@ -2,11 +2,14 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@* @inject IViewLocalizer Localizer *@
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["login"] = @Localizer["Login"];
-    ViewData["logout"] = @Localizer["Logout"];
+    ViewData["login"] = @Localizer["shared_login_login"];
+    ViewData["logout"] = @Localizer["shared_login_logout"];
 }
 
 <ul class="nav navbar-nav">

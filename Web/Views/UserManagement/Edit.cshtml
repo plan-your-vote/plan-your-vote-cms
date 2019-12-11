@@ -1,9 +1,11 @@
 ﻿@model Web.ViewModels.UserRoleViewModel
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Edit User Role"];
+    ViewData["Title"] = @Localizer["UserManagement_edit_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -35,6 +37,6 @@
             </tr>
         </tbody>
     </table>
-    <button type="submit" class="btn btn-primary">Save</button> |
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <button type="submit" class="btn btn-success">@Localizer["saveButton"]</button> 
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
 </form>

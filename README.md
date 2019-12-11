@@ -13,13 +13,14 @@ Open Voting Tool is a open source project created by Medhat & BCIT CST Informati
 The purpose of this project is to develop a web app look like the one that City of Vancouver currently has, but can be used by anyone using CMS. The application must be used and implemented by anyone and any organization
 
 ## Feature Documents
-- [PDF Generator](./doc/pdf-generator.md)
-- [Localization](./doc/localization.md)
-- [Database Config](./doc/dbconfig.md)
-- [Accessibility](./doc/accessibility.md)
-- [Docker](./doc/docker.md)
-- [Local Storage](./doc/localstorage.md)
-- [Unit Tests](./doc/unit-tests.md)
+- [PDF Generator](./doc/PDF.md)
+- [Database Config](./doc/DBConfig.md)
+- [Accessibility](./doc/Accessibility.md)
+- [Docker](./doc/Dockerization.md)
+- [Unit Tests](./doc/unit-test.md)
+- [Localization](./doc/Localization.md)
+- [Customizability](./doc/Customizability.md)
+- [DBConfig](./doc/DBConfig.md)
 
 ## Branch Structure
 Developers must not push their changes directly to `master`. They can push currently to `develop`, but we recommend protect `develop` so that they cannot push directly. We do not have naming conventions for branches as well, but recommend setup conventions.

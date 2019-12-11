@@ -1,9 +1,11 @@
 ﻿@model Web.Models.Election
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Election Details"];
+    ViewData["Title"] = @Localizer["elections_details_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -35,8 +37,8 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
     </dl>
-    <a asp-action="Edit" asp-route-id="@Model.ElectionId" class="btn btn-primary">@Localizer["Edit"]</a>
+    <a asp-action="Edit" asp-route-id="@Model.ElectionId" class="btn btn-primary">@Localizer["editButton"]</a>
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
 </div>

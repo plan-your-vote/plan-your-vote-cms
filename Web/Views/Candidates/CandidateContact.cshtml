@@ -1,12 +1,16 @@
-﻿@model Web.ViewModels.CandidateViewModel
+﻿@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@model Web.ViewModels.CandidateViewModel
 
 @{
     var lastIndex = Model.Candidate.Contacts.Count - 1;
 }
 
-<div>
+<div class="one-line">
     <p class="lead">Contact @(lastIndex+1)</p>
-    <button type="button" id="removeContact_@lastIndex" class="btn btn-primary" onclick="removeContact(@lastIndex)">Remove Contact</button>
+    <button type="button" id="removeContact_@lastIndex" class="btn btn-primary margin-bottom" onclick="removeContact(@lastIndex)">@Localizer["candidates_removeContactButton"]</button>
 </div>
 <div class="form-group">
     @Html.LabelFor(c => c.Candidate.Contacts[lastIndex].ContactMethod, new { @class = "control-label" })

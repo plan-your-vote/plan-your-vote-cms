@@ -1,9 +1,11 @@
 ﻿@model Web.Models.Race
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Race Details"];
+    ViewData["Title"] = @Localizer["races_details_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -60,6 +62,6 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.RaceId">@Localizer["Edit"]</a> |
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.RaceId">@Localizer["editButton"]</a> 
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
 </div>

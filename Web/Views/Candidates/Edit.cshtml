@@ -1,9 +1,11 @@
 ﻿@model Web.ViewModels.CandidateViewModel
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["Edit Candidate"];
+    ViewData["Title"] = @Localizer["candidates_edit_title"];
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -15,32 +17,36 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<div class="panel panel-default">
-    <form asp-action="Edit" enctype="multipart/form-data">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Candidate.CandidateId" />
-        <div class="form-group">
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Candidate.CandidateId" />
+    <input type="hidden" asp-for="Candidate.Picture" />
+    <div class="panel panel-default">
+        <div class="panel panel-default">
             <label asp-for="Candidate.Name" class="control-label"></label>
             <input asp-for="Candidate.Name" class="form-control" />
             <span asp-validation-for="Candidate.Name" class="text-danger"></span>
         </div>
-        <div>
-            @{
-                var url = "../../" + Model.Candidate.Picture;
-                <img width="150" height="150" src="@url">
-            }
+        <div class="panel panel-default center">
+            <div>
+                @{
+                    var url = "../../" + Model.Candidate.Picture;
+                    <img width="150" height="150" src="@url">
+                }
+            </div>
+            <div class="form-group">
+                <label asp-for="Candidate.Picture" class="control-label"></label><br />
+                <input asp-for="Candidate.Picture" type="file" name="Image" />
+                <span asp-validation-for="Candidate.Picture" class="text-danger">@ViewData["ImageMessage"]</span>
+            </div>
         </div>
-        <div class="form-group">
-            <label asp-for="Candidate.Picture" class="control-label"></label><br />
-            <input asp-for="Candidate.Picture" type="file" name="Image" />
-            <span asp-validation-for="Candidate.Picture" class="text-danger">@ViewData["ImageMessage"]</span>
-        </div>
-        <div class="form-group">
+        <div class="panel panel-default">
             <label asp-for="Candidate.OrganizationId" class="control-label">@Html.DisplayNameFor(c => c.Candidate.Organization.Name)</label>
             <select asp-for="Candidate.OrganizationId" class="form-control" asp-items="Model.Organizations"></select>
             <span asp-validation-for="Candidate.OrganizationId" class="text-danger"></span>
         </div>
-        <div class="form-group">
+        <div class="panel panel-default">
             @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
             @if (Model.Races.ToList().Count == 0)
             {
@@ -68,9 +74,9 @@
                 </div>
             }
         </div>
-
+    </div>
+    <div class="panel panel-default">
         <div>
-            <hr />
             <h4><label asp-for="Candidate.Details" class="control-label"></label></h4>
             <hr />
             <input type="hidden" id="removedDetails" name="RemovedDetails" value="" />
@@ -78,10 +84,10 @@
         <div id="allDetails">
             @for (int i = 0; i < Model.Candidate.Details.Count; i++)
             {
-                <div class="detail-group">
-                    <div>
+                <div class="detail-group panel panel-default">
+                    <div class="one-line">
                         <p class="lead">Detail @(i + 1)</p>
-                        <button type="button" id="removeDetail_@i" class="btn btn-primary" onclick="removeDetail(@i)">Remove Detail</button>
+                        <button type="button" id="removeDetail_@i" class="btn btn-primary" onclick="removeDetail(@i)">@Localizer["candidates_removeDetailButton"]</button>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.Candidate.Details[i].Title, new { @class = "control-label" })
@@ -90,7 +96,7 @@
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.Candidate.Details[i].Text, new { @class = "control-label" })
-                        @Html.TextAreaFor(c => c.Candidate.Details[i].Text, new { @class = "form-control", @rows = 10 })
+                        @Html.TextAreaFor(c => c.Candidate.Details[i].Text, new { @class = "form-control rich-text-editor", @rows = 10 })
                         @Html.ValidationMessageFor(c => c.Candidate.Details[i].Text, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group">
@@ -107,19 +113,20 @@
                 </div>
             }
         </div>
-        <div>
-            <hr />
-            <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
-            <hr />
-            <input type="hidden" id="removedContacts" name="RemovedContacts" value="" />
-        </div>
+    </div>
+
+
+    <div class="panel panel-default">
+        <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
+        <hr />
+        <input type="hidden" id="removedContacts" name="RemovedContacts" value="" />
         <div id="allContacts">
             @for (int j = 0; j < Model.Candidate.Contacts.Count; j++)
             {
-                <div class="contact-group">
-                    <div>
+                <div class="contact-group panel panel-default">
+                    <div class="one-line">
                         <p class="lead">Contact @(j + 1)</p>
-                        <button type="button" id="removeContact_@j" class="btn btn-primary" onclick="removeContact(@j)">Remove Contact</button>
+                        <button type="button" id="removeContact_@j" class="btn btn-primary margin-bottom" onclick="removeContact(@j)">@Localizer["candidates_removeContactButton"]</button>
                     </div>
                     <div class="form-group">
                         @Html.LabelFor(c => c.Candidate.Contacts[j].ContactMethod, new { @class = "control-label" })
@@ -135,25 +142,26 @@
                 </div>
             }
         </div>
+    </div>
 
 
-        <script>
-            function addDetail() {
-                let count = getCount(".detail-group");
+    <script>
+        function addDetail() {
+            let count = getCount(".detail-group");
 
-                $("#allDetails").append($(document.createElement("div")).attr("class", "detail-group")
-                    .load('@Url.Action("GetDetailFields", "Candidates")',
-                        { "count": count },
-                        function (response, status, xhr) {
-                            if (status === "error") {
-                                alert("An error occurred while loading the detail fields.");
-                            }
-                        })
-                );
-            }
+            $("#allDetails").append($(document.createElement("div")).attr("class", "detail-group")
+                .load('@Url.Action("GetDetailFields", "Candidates")',
+                    { "count": count },
+                    function (response, status, xhr) {
+                        if (status === "error") {
+                            alert("An error occurred while loading the detail fields.");
+                        }
+                    })
+            );
+        }
 
-            function addContact() {
-                let count = getCount(".contact-group");
+        function addContact() {
+            let count = getCount(".contact-group");
 
                 $("#allContacts").append($(document.createElement("div")).attr("class", "contact-group")
                     .load('@Url.Action("GetContactFields", "Candidates")',
@@ -165,20 +173,19 @@
                         })
                 );
             }
-        </script>
-        <div>
-            <button type="button" id="AddDetailField" class="btn btn-primary" onclick="addDetail()">Add a Candidate Detail</button>
-            &nbsp;|&nbsp;
-            <button type="button" id="AddContactField" class="btn btn-primary" onclick="addContact()">Add a Contact</button>
-        </div>
-        <div class="form-group">
-            <input type="submit" value=@Localizer["Save"] class="btn btn-primary" />
-        </div>
-    </form>
-</div>
+    </script>
+    <div class="form-group panel panel-default">
+        <button type="button" id="AddDetailField" class="btn btn-primary btn-sm" onclick="addDetail()">@Localizer["candidates_addDetailButton"]</button>
+        <button type="button" id="AddContactField" class="btn btn-primary btn-sm" onclick="addContact()">@Localizer["candidates_addContactButton"]</button>
+    </div>
+    <div class="form-group">
+        <input type="submit" value=@Localizer["saveButton"] class="btn btn-success" />
+    </div>
+</form>
+
 
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["Back to List"]</a>
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
 </div>
 
 @section Scripts {

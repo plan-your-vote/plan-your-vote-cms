@@ -1,55 +1,74 @@
 ﻿@model IEnumerable<Web.ViewModels.UserRoleViewModel>
-@using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
 
 @{
-    ViewData["Title"] = @Localizer["User Management"];
+    ViewData["Title"] = @Localizer["userManagement_edit_title"];
 }
 
 <h1>@ViewData["Title"]</h1>
 
 <div style="margin-bottom:10px;">
-    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">@Localizer["Add New User"]</a>
+    <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Register">@Localizer["userManagement_index_registerButton"]</a>
 </div>
 
-<table class="table panel panel-default">
+<table class="table panel panel-default user-management">
     <thead>
-        <tr>
-            <th class="col-sm-3">Username</th>
-            <th class="col-sm-3">Email</th>
-            <th class="col-sm-3">Role</th>
-            <th></th>
-            <th></th>
-        </tr>
+    <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        @* <th></th> *@
+        @* <th></th> *@
+    </tr>
     </thead>
     <tbody>
-        @foreach (var userRoleViewModel in Model)
+    @foreach (var userRoleViewModel in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(_ => userRoleViewModel.IdentityUser.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(_ => userRoleViewModel.IdentityUser.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(_ => userRoleViewModel.IdentityRole.Name)
+            </td>
+            @*                 <td> *@
+            @*                     @if (userRoleViewModel.IdentityUser.UserName != Constants.Account.ADMIN_USERNAME) *@
+            @*                     { *@
+            @*                         <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@userRoleViewModel.IdentityUser.UserName">@Localizer["editButton"]</a> *@
+            @*                         <form asp-action="Delete" asp-route-id="@userRoleViewModel.IdentityUser.Id"> *@
+            @*                             <input type="submit" class="btn btn-danger btn-sm" value=@Localizer["deleteButton"] /> *@
+            @*                         </form> *@
+            @*                     } *@
+            @*                 </td> *@
+            @*                 <td> *@
+            @*                     @if (userRoleViewModel.IdentityUser.UserName != Constants.Account.ADMIN_USERNAME) *@
+            @*                     { *@
+            @*                         <form asp-action="Delete" asp-route-id="@userRoleViewModel.IdentityUser.Id"> *@
+            @*                             <input type="submit" class="btn btn-danger btn-sm" value=@Localizer["deleteButton"] /> *@
+            @*                         </form> *@
+            @*                     } *@
+            @*                 </td> *@
+        </tr>
+        @if (userRoleViewModel.IdentityUser.UserName != Constants.Account.ADMIN_USERNAME)
         {
             <tr>
-                <td class="col-sm-3">
-                    @Html.DisplayFor(_ => userRoleViewModel.IdentityUser.UserName)
-                </td>
-                <td class="col-sm-3">
-                    @Html.DisplayFor(_ => userRoleViewModel.IdentityUser.Email)
-                </td>
-                <td class="col-sm-3">
-                    @Html.DisplayFor(_ => userRoleViewModel.IdentityRole.Name)
-                </td>
-                <td>
-                    @if (userRoleViewModel.IdentityUser.UserName != Constants.Account.ADMIN_USERNAME)
-                    {
-                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@userRoleViewModel.IdentityUser.UserName">@Localizer["Edit"]</a>
-                    }
-                </td>
-                <td>
-                    @if (userRoleViewModel.IdentityUser.UserName != Constants.Account.ADMIN_USERNAME)
-                    {
+                <td colspan="3" class="user-management-btns">
+                    <div>
+                        <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@userRoleViewModel.IdentityUser.UserName">@Localizer["editButton"]</a>
                         <form asp-action="Delete" asp-route-id="@userRoleViewModel.IdentityUser.Id">
-                            <input type="submit" class="btn btn-danger" value=@Localizer["Delete"] />
+                            <input type="submit" class="btn btn-danger btn-sm" value=@Localizer["deleteButton"] />
                         </form>
-                    }
+                    </div>
+
                 </td>
             </tr>
         }
+    }
     </tbody>
 </table>
