@@ -67,7 +67,7 @@ namespace Web
             String ConnectionString = check.getConnectionStringEnvVar() ?? _configuration.GetConnectionString("DefaultConnection");
 
             //if not set just use sqlite
-            String DatabaseType = check.checkType() ?? "sqlite";
+            String DatabaseType = check.checkType() ?? "mssql";
 
             switch (DatabaseType)
             {
