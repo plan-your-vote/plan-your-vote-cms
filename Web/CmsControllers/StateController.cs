@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Web.Data;
+using Microsoft.Extensions.Localization;
 
 namespace Web.CmsControllers
 {
@@ -16,6 +17,8 @@ namespace Web.CmsControllers
     {
         private static ApplicationDbContext _context;
         private int _managedElectionID;
+        private readonly IStringLocalizer<StateController> _localizer;
+
 
         public StateController(ApplicationDbContext context)
         {

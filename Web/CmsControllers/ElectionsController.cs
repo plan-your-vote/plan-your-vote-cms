@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Web.Data;
+using Microsoft.Extensions.Localization;
 
 namespace Web
 {
@@ -15,6 +16,8 @@ namespace Web
     public class ElectionsController : Controller
     {
         private readonly ApplicationDbContext _context;
+
+        private readonly IStringLocalizer<ElectionsController> _localizer;
 
         public ElectionsController(ApplicationDbContext context)
         {

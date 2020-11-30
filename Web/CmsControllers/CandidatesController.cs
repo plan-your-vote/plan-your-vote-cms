@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Web.Data;
 using Web.Models;
 using Web.ViewModels;
+using Microsoft.Extensions.Localization;
 
 namespace Web
 {
@@ -18,6 +19,8 @@ namespace Web
     {
         private readonly ApplicationDbContext _context;
         private readonly int _managedElectionID;
+
+        private readonly IStringLocalizer<CandidatesController> _localizer;
 
         public CandidatesController(ApplicationDbContext context)
         {
@@ -257,13 +260,13 @@ namespace Web
                         && model.Image.ContentType != "image/png"
                         && model.Image.ContentType != "image/gif")
                 {
-                    ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
+                    ViewData["ImageMessage"] = _localizer["Invalid image type. Image must be a JPEG, GIF, or PNG."];
                     return View(model);
                 }
 
                 if (model.Image.Length < 4500)
                 {
-                    ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
+                    ViewData["ImageMessage"] = _localizer["Invalid image size. Image must be a minimum size of 5KB."];
                     return View(model);
                 }
 
@@ -505,13 +508,13 @@ namespace Web
                         && model.Image.ContentType != "image/png"
                         && model.Image.ContentType != "image/gif")
                     {
-                        ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
+                        ViewData["ImageMessage"] = _localizer["Invalid image type. Image must be a JPEG, GIF, or PNG."];
                         return View(model);
                     }
 
                     if (model.Image.Length < 4500)
                     {
-                        ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
+                        ViewData["ImageMessage"] = _localizer["Invalid image size. Image must be a minimum size of 5KB."];
                         return View(model);
                     }
 

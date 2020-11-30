@@ -67,27 +67,29 @@ namespace Web
             String ConnectionString = check.getConnectionStringEnvVar() ?? _configuration.GetConnectionString("DefaultConnection");
 
             //if not set just use sqlite
-            String DatabaseType = check.checkType() ?? "sqlite";
+            // String DatabaseType = check.checkType() ?? "sqlite";
+            String DatabaseType = "";
 
             switch (DatabaseType)
             {
                 case "mssql":
-                    var host = _configuration["DBHOST"] ?? "172.19.0.1";
+                    var host = _configuration["DBHOST"] ?? "localhost";
+                    var port = _configuration["DBPORT"] ?? "1444";
                     var db = _configuration["DBNAME"] ?? "openvoting";
-                    var port = _configuration["DBPORT"] ?? "1433";
                     var username = _configuration["DBUSERNAME"] ?? "sa";
-                    var password = _configuration["DBPASSWORD"] ?? "Sql!Expre55";
+                    var password = _configuration["DBPASSWORD"] ?? "SqlExpress!";
 
-                    string connStr = $"Data Source={host},{port};Integrated Security=False;";
-                    connStr += $"User ID={username};Password={password};Database={db};";
-                    connStr += $"Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                    string connStr = $"Server=tcp:{host}, {port};Database={db};UID={username};PWD={password};";
+                    // string connStr = $"Data Source={host},{port};Integrated Security=False;";
+                    // connStr += $"User ID={username};Password={password};Database={db};";
+                    // connStr += $"Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                     services.AddDbContext<ApplicationDbContext>(options =>
                         options.UseSqlServer(connStr));
                     break;
                 case "mysql":
                     host = _configuration["DBHOST"] ?? "localhost";
                     port = _configuration["DBPORT"] ?? "3306";
-                    password = _configuration["DBPASSWORD"] ?? "secret";
+                    password = _configuration["DBPASSWORD"] ?? "";
                     db = _configuration["DBNAME"] ?? "openvoting";
                     services.AddDbContext<ApplicationDbContext>(options =>
                     {

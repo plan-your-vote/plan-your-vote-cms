@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Models;
+using Microsoft.Extensions.Localization;
 
 namespace Web.CmsControllers
 {
@@ -15,7 +16,7 @@ namespace Web.CmsControllers
     public class OpenGraphsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly IStringLocalizer<OpenGraphsController> _localizer;
         public OpenGraphsController(ApplicationDbContext context)
         {
             _context = context;

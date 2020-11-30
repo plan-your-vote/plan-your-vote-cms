@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Models;
+using Microsoft.Extensions.Localization;
 
 namespace Web.CmsControllers
 {
@@ -14,6 +15,7 @@ namespace Web.CmsControllers
     {
         private readonly ApplicationDbContext _context;
 
+        private readonly IStringLocalizer<OrganizationsController> _localizer;
         public OrganizationsController(ApplicationDbContext context)
         {
             _context = context;

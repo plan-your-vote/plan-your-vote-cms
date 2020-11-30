@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Models;
+using Microsoft.Extensions.Localization;
 
 namespace Web.CmsControllers
 {
@@ -14,6 +15,8 @@ namespace Web.CmsControllers
     {
         private readonly ApplicationDbContext _context;
         private readonly int _managedElectionID;
+        private readonly IStringLocalizer<StepsController> _localizer;
+
 
         public StepsController(ApplicationDbContext context)
         {

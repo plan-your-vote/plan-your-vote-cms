@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Web.Data;
 using Web.Models;
 using Web.ViewModels;
+using Microsoft.Extensions.Localization;
 
 namespace Web.Controllers
 {
@@ -18,6 +19,7 @@ namespace Web.Controllers
         private readonly ApplicationDbContext _context;
         private readonly int _managedElectionID;
         private readonly ILogger _logger;
+        private readonly IStringLocalizer<HomeController> _localizer;
 
         public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
         {
@@ -32,7 +34,7 @@ namespace Web.Controllers
             Election e = _context.Elections.Where(el => el.ElectionId == _managedElectionID).First();
             DashboardViewModel dashboard = new DashboardViewModel
             {
-                ElectionName = e.ElectionName,
+                ElectionName = _localizer[e.ElectionName],
                 CandidatesCount = _context.Candidates
                     .Where(c => c.ElectionId == _managedElectionID)
                     .Count(),

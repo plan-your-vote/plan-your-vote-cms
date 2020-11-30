@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Web.Data;
+using Microsoft.Extensions.Localization;
 
 namespace Web.CmsControllers
 {
@@ -16,7 +17,7 @@ namespace Web.CmsControllers
     public class ImagesController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly IStringLocalizer<ImagesController> _localizer;
         public ImagesController(ApplicationDbContext context)
         {
             _context = context;
