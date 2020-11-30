@@ -9,6 +9,7 @@ using Web.Models;
 using Web.Data;
 using Microsoft.AspNetCore.Authorization;
 using Web.ViewModels;
+using Microsoft.Extensions.Localization;
 
 namespace Web.CmsControllers
 {
@@ -16,6 +17,8 @@ namespace Web.CmsControllers
     {
         private readonly ApplicationDbContext _context;
         private readonly int _managedElectionID;
+        private readonly IStringLocalizer<RacesController> _localizer;
+
 
         public RacesController(ApplicationDbContext context)
         {

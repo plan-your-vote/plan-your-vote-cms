@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Web.Data;
 using Web.Models;
 using Web.ViewModels;
+using Microsoft.Extensions.Localization;
 
 namespace Web.CmsControllers
 {
@@ -16,6 +17,7 @@ namespace Web.CmsControllers
     public class ThemesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IStringLocalizer<ThemesController> _localizer;
 
         public ThemesController(ApplicationDbContext context)
         {
@@ -39,12 +41,12 @@ namespace Web.CmsControllers
                 try
                 {
                     newThemeName = ChangeCurrentTheme(viewModel);
-                    TempData["Success"] = $"{newThemeName} voting theme has been selected";
+                    TempData["Success"] = _localizer[$"{newThemeName} voting theme has been selected"];
                 }
                 catch (Exception)
                 {
                     //TODO Log error
-                    ViewData["Error"] = $"Error occurred while changing voting theme";
+                    ViewData["Error"] = _localizer[$"Error occurred while changing voting theme"];
                 }
             }
             return View(GetThemesViewModel());

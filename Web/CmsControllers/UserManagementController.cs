@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Web.Controllers;
 using Web.Data;
 using Web.ViewModels;
+using Microsoft.Extensions.Localization;
 
 namespace Web.CmsControllers
 {
@@ -18,6 +19,7 @@ namespace Web.CmsControllers
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly IStringLocalizer<UserManagementController> _localizer;
 
         public UserManagementController(
             ApplicationDbContext context,
@@ -124,7 +126,7 @@ namespace Web.CmsControllers
                     // Refresh cookies if current user is not Admin since cookies stores user
                     var currentUser = await _userManager.GetUserAsync(HttpContext.User).ConfigureAwait(false);
                     var userRoles = await _userManager.GetRolesAsync(currentUser).ConfigureAwait(false);
-                    var userRole = userRoles.First(); // Only one
+                    var userRole = _localizer[userRoles.First()]; // Only one
                     if (userRole != Constants.Account.ROLE_ADMIN)
                     {
                         await _signInManager.RefreshSignInAsync(

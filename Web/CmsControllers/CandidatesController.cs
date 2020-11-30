@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Web.Data;
 using Web.Models;
 using Web.ViewModels;
+using Microsoft.Extensions.Localization;
 
 namespace Web
 {
@@ -18,6 +19,8 @@ namespace Web
     {
         private readonly ApplicationDbContext _context;
         private readonly int _managedElectionID;
+
+        private readonly IStringLocalizer<CandidatesController> _localizer;
 
         public CandidatesController(ApplicationDbContext context)
         {
@@ -32,14 +35,20 @@ namespace Web
                 .Where(r => r.ElectionId == _managedElectionID)
                 .OrderBy(r => r.BallotOrder)
                 .ToListAsync();
-            var candidateRaces = await _context.CandidateRaces
-                .Include(cr => cr.Race)
-                .Include(cr => cr.Candidate)
-                .Include(cr => cr.Candidate.Organization)
-                .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
+
+            var candidateRaces = (
+                await _context.CandidateRaces
+                    .Include(cr => cr.Race)
+                    .Include(cr => cr.Candidate)
+                    .Include(cr => cr.Candidate.Organization)
+                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
+                    .ToListAsync()
+                )
                 .GroupBy(cr => cr.RaceId)
-                .ToListAsync();
+                .Select(cr => cr).ToList();
+
+
             var unlisted = await _context.Candidates
                 .Include(c => c.Organization)
                 .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
@@ -67,14 +76,17 @@ namespace Web
 
             if ("ballot-order".Equals(orderBy))
             {
-                model.CandidatesByRace = await _context.CandidateRaces
-                    .Include(cr => cr.Race)
-                    .Include(cr => cr.Candidate)
-                    .Include(cr => cr.Candidate.Organization)
-                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
+                model.CandidatesByRace = (
+                    await _context.CandidateRaces
+                        .Include(cr => cr.Race)
+                        .Include(cr => cr.Candidate)
+                        .Include(cr => cr.Candidate.Organization)
+                        .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                        .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
+                        .ToListAsync()
+                    )
                     .GroupBy(cr => cr.RaceId)
-                    .ToListAsync();
+                    .Select(cr => cr).ToList();
 
                 model.UnlistedCandidates = await _context.Candidates
                     .Include(c => c.Organization)
@@ -84,14 +96,17 @@ namespace Web
             }
             else if ("alphabet".Equals(orderBy))
             {
-                model.CandidatesByRace = await _context.CandidateRaces
-                    .Include(cr => cr.Race)
-                    .Include(cr => cr.Candidate)
-                    .Include(cr => cr.Candidate.Organization)
-                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.Candidate.Name)
+                model.CandidatesByRace = (
+                    await _context.CandidateRaces
+                        .Include(cr => cr.Race)
+                        .Include(cr => cr.Candidate)
+                        .Include(cr => cr.Candidate.Organization)
+                        .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                        .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.Candidate.Name)
+                        .ToListAsync()
+                    )
                     .GroupBy(cr => cr.RaceId)
-                    .ToListAsync();
+                    .Select(cr => cr).ToList();
 
                 model.UnlistedCandidates = await _context.Candidates
                     .Include(c => c.Organization)
@@ -101,14 +116,17 @@ namespace Web
             }
             else if ("reverse-alphabet".Equals(orderBy))
             {
-                model.CandidatesByRace = await _context.CandidateRaces
-                    .Include(cr => cr.Race)
-                    .Include(cr => cr.Candidate)
-                    .Include(cr => cr.Candidate.Organization)
-                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                    .OrderBy(cr => cr.RaceId).ThenByDescending(cr => cr.Candidate.Name)
+                model.CandidatesByRace = (
+                    await _context.CandidateRaces
+                        .Include(cr => cr.Race)
+                        .Include(cr => cr.Candidate)
+                        .Include(cr => cr.Candidate.Organization)
+                        .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                        .OrderBy(cr => cr.RaceId).ThenByDescending(cr => cr.Candidate.Name)
+                        .ToListAsync()
+                    )
                     .GroupBy(cr => cr.RaceId)
-                    .ToListAsync();
+                    .Select(cr => cr).ToList();
 
                 model.UnlistedCandidates = await _context.Candidates
                     .Include(c => c.Organization)
@@ -242,13 +260,13 @@ namespace Web
                         && model.Image.ContentType != "image/png"
                         && model.Image.ContentType != "image/gif")
                 {
-                    ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
+                    ViewData["ImageMessage"] = _localizer["Invalid image type. Image must be a JPEG, GIF, or PNG."];
                     return View(model);
                 }
 
                 if (model.Image.Length < 4500)
                 {
-                    ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
+                    ViewData["ImageMessage"] = _localizer["Invalid image size. Image must be a minimum size of 5KB."];
                     return View(model);
                 }
 
@@ -490,13 +508,13 @@ namespace Web
                         && model.Image.ContentType != "image/png"
                         && model.Image.ContentType != "image/gif")
                     {
-                        ViewData["ImageMessage"] = "Invalid image type. Image must be a JPEG, GIF, or PNG.";
+                        ViewData["ImageMessage"] = _localizer["Invalid image type. Image must be a JPEG, GIF, or PNG."];
                         return View(model);
                     }
 
                     if (model.Image.Length < 4500)
                     {
-                        ViewData["ImageMessage"] = "Invalid image size. Image must be a minimum size of 5KB.";
+                        ViewData["ImageMessage"] = _localizer["Invalid image size. Image must be a minimum size of 5KB."];
                         return View(model);
                     }
 

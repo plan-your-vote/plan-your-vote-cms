@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Data;
+using Microsoft.Extensions.Localization;
 using Web.Models;
 using Web.ViewModels;
 
@@ -15,7 +16,7 @@ namespace Web
     {
         private readonly ApplicationDbContext _context;
         private int _managedElectionID;
-
+        private readonly IStringLocalizer<BallotIssuesController> _localizer;
         public BallotIssuesController(ApplicationDbContext context)
         {
             _context = context;
@@ -84,7 +85,7 @@ namespace Web
 
                 if (issue.BallotIssueOptions.Count < 2)
                 {
-                    ViewData["IssueOptionsError"] = "Please enter at least 2 options.";
+                    ViewData["IssueOptionsError"] = _localizer["Please enter at least 2 options."];
                     return View(issue);
                 }
 
@@ -159,7 +160,7 @@ namespace Web
 
                     if (ballotIssue.BallotIssueOptions.Count < 2)
                     {
-                        ViewData["IssueOptionsError"] = "Please enter at least 2 options.";
+                        ViewData["IssueOptionsError"] = _localizer["Please enter at least 2 options."];
                         return View(ballotIssue);
                     }
 

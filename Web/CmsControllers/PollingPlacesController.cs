@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Web.Models;
 using Web.Data;
+using Microsoft.Extensions.Localization;
 
 namespace Web
 {
@@ -16,6 +17,8 @@ namespace Web
     {
         private readonly ApplicationDbContext _context;
         private readonly int _managedElectionID;
+        private readonly IStringLocalizer<PollingPlacesController> _localizer;
+
 
         public PollingPlacesController(ApplicationDbContext context)
         {
@@ -250,7 +253,7 @@ namespace Web
         {
             if (PollingPlaceDates.Count != PollingStartTimes.Count)
             {
-                return Json(data: "Please enter a start time for each poll date.");
+                return Json(data: _localizer["Please enter a start time for each poll date."]);
             }
 
             return Json(data: true);
@@ -261,7 +264,7 @@ namespace Web
         {
             if (PollingPlaceDates.Count != PollingEndTimes.Count)
             {
-                return Json(data: "Please enter an end time for each poll date.");
+                return Json(data: _localizer["Please enter an end time for each poll date."]);
             }
 
             return Json(data: true);
