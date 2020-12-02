@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace PlanYourVoteLibrary2
+
 {
     public class Candidate
     {

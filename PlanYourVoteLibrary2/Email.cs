@@ -1,4 +1,5 @@
 ﻿namespace PlanYourVoteLibrary2
+
 {
     public class Email
     {
