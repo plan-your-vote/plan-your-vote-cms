@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Data;
-using Web.Models;
+using PlanYourVoteLibrary2;
 using Web.ViewModels;
 
 namespace Web

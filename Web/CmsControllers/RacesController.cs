@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Web.Models;
+using PlanYourVoteLibrary2;
 using Web.Data;
 using Microsoft.AspNetCore.Authorization;
 using Web.ViewModels;

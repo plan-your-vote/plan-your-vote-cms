@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Web.Models;
+using PlanYourVoteLibrary2;
 using Xunit;
 
 namespace BackEndTests

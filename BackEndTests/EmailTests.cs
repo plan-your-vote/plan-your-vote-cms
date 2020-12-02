@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Options;
 using System;
 using Web.Controllers;
-using Web.Models;
+using PlanYourVoteLibrary2;
 using Xunit;
 
 
