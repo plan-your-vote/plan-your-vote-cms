@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Web.Models
+namespace PlanYourVoteLibrary2
+
 {
     public class Candidate
     {

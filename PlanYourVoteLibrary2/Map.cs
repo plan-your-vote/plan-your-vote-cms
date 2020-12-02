@@ -3,7 +3,9 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.Globalization;
 
-namespace Web.Models
+
+namespace PlanYourVoteLibrary2
+
 {
     public partial class Map
     {

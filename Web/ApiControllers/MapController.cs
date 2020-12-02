@@ -3,17 +3,19 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.KeyVault;
 using Microsoft.Azure.KeyVault.Models;
 using Microsoft.Azure.Services.AppAuthentication;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Web.ApiDTO;
 using Web.Data;
-using Web.Models;
+using PlanYourVoteLibrary2;
 
 namespace Web.ApiControllers
 {
@@ -21,10 +23,24 @@ namespace Web.ApiControllers
     [ApiController]
     public class MapController : ControllerBase
     {
+        private readonly ILogger _logger;
         private readonly ApplicationDbContext _context;
         private readonly HttpClient client = new HttpClient() { BaseAddress = new Uri("https://api.mapbox.com/directions/v5/mapbox/driving/") };
         public static string AccessToken { get; set; }
         public static MapConfiguration MapConfiguration { get; set; }
+
+
+        public MapController(ApplicationDbContext context, 
+            IOptions<MapConfiguration> mapConfiguration,
+            ILogger<MapController> logger)
+        {
+            _context = context;
+            _logger = logger;
+
+            MapConfiguration = mapConfiguration.Value;
+
+            AccessToken = GetAccessToken().GetAwaiter().GetResult();
+        }
 
         public static async Task<string> GetAccessToken()
         {
@@ -51,20 +67,11 @@ namespace Web.ApiControllers
             catch (KeyVaultErrorException kvee)
             {
                 // TODO
+                Debug.WriteLine(kvee.Message);
             }
 
             return accessToken;
         }
-
-        public MapController(ApplicationDbContext context, IOptions<MapConfiguration> mapConfiguration)
-        {
-            _context = context;
-
-            MapConfiguration = mapConfiguration.Value;
-
-            AccessToken = GetAccessToken().GetAwaiter().GetResult();
-        }
-
         [HttpGet("{location}")]
         public async Task<ActionResult<object>> GetClosestLocations(string location)
         {
@@ -77,11 +84,14 @@ namespace Web.ApiControllers
 
                 var pollingPlaceCoordinate = new GeoCoordinate(latitude, longitude);
 
-                var nearestPollingPlaces = _context.PollingPlaces
-                                        .Where(pollingPlace => pollingPlace.ElectionId == _context.StateSingleton.First().RunningElectionID)
-                                        .OrderBy(pollingPlace => new GeoCoordinate(pollingPlace.Latitude, pollingPlace.Longitude).GetDistanceTo(pollingPlaceCoordinate))
-                                        .Take(20)
-                                        .ToList();
+                var nearestPollingPlaces = (
+                    _context.PollingPlaces
+                        .Where(pollingPlace => pollingPlace.ElectionId == _context.StateSingleton.First().RunningElectionID)                                       
+                        .Take(20)
+                        .ToList()
+                    )
+                    .OrderBy(pp => new GeoCoordinate(pp.Latitude, pp.Longitude).GetDistanceTo(pollingPlaceCoordinate))
+                    .Select(cr => cr).ToList();
 
                 foreach (var pollingPlace in nearestPollingPlaces)
                 {

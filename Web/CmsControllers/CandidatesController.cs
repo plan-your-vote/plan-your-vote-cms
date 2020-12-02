@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Data;
-using Web.Models;
+using PlanYourVoteLibrary2;
 using Web.ViewModels;
 
 namespace Web
@@ -32,14 +32,20 @@ namespace Web
                 .Where(r => r.ElectionId == _managedElectionID)
                 .OrderBy(r => r.BallotOrder)
                 .ToListAsync();
-            var candidateRaces = await _context.CandidateRaces
-                .Include(cr => cr.Race)
-                .Include(cr => cr.Candidate)
-                .Include(cr => cr.Candidate.Organization)
-                .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
+
+            var candidateRaces = (
+                await _context.CandidateRaces
+                    .Include(cr => cr.Race)
+                    .Include(cr => cr.Candidate)
+                    .Include(cr => cr.Candidate.Organization)
+                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
+                    .ToListAsync()
+                )
                 .GroupBy(cr => cr.RaceId)
-                .ToListAsync();
+                .Select(cr => cr).ToList();
+
+
             var unlisted = await _context.Candidates
                 .Include(c => c.Organization)
                 .Where(c => c.ElectionId == _managedElectionID && c.CandidateRaces.Count == 0)
@@ -67,14 +73,17 @@ namespace Web
 
             if ("ballot-order".Equals(orderBy))
             {
-                model.CandidatesByRace = await _context.CandidateRaces
-                    .Include(cr => cr.Race)
-                    .Include(cr => cr.Candidate)
-                    .Include(cr => cr.Candidate.Organization)
-                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
+                model.CandidatesByRace = (
+                    await _context.CandidateRaces
+                        .Include(cr => cr.Race)
+                        .Include(cr => cr.Candidate)
+                        .Include(cr => cr.Candidate.Organization)
+                        .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                        .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.BallotOrder)
+                        .ToListAsync()
+                    )
                     .GroupBy(cr => cr.RaceId)
-                    .ToListAsync();
+                    .Select(cr => cr).ToList();
 
                 model.UnlistedCandidates = await _context.Candidates
                     .Include(c => c.Organization)
@@ -84,14 +93,17 @@ namespace Web
             }
             else if ("alphabet".Equals(orderBy))
             {
-                model.CandidatesByRace = await _context.CandidateRaces
-                    .Include(cr => cr.Race)
-                    .Include(cr => cr.Candidate)
-                    .Include(cr => cr.Candidate.Organization)
-                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                    .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.Candidate.Name)
+                model.CandidatesByRace = (
+                    await _context.CandidateRaces
+                        .Include(cr => cr.Race)
+                        .Include(cr => cr.Candidate)
+                        .Include(cr => cr.Candidate.Organization)
+                        .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                        .OrderBy(cr => cr.RaceId).ThenBy(cr => cr.Candidate.Name)
+                        .ToListAsync()
+                    )
                     .GroupBy(cr => cr.RaceId)
-                    .ToListAsync();
+                    .Select(cr => cr).ToList();
 
                 model.UnlistedCandidates = await _context.Candidates
                     .Include(c => c.Organization)
@@ -101,14 +113,17 @@ namespace Web
             }
             else if ("reverse-alphabet".Equals(orderBy))
             {
-                model.CandidatesByRace = await _context.CandidateRaces
-                    .Include(cr => cr.Race)
-                    .Include(cr => cr.Candidate)
-                    .Include(cr => cr.Candidate.Organization)
-                    .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
-                    .OrderBy(cr => cr.RaceId).ThenByDescending(cr => cr.Candidate.Name)
+                model.CandidatesByRace = (
+                    await _context.CandidateRaces
+                        .Include(cr => cr.Race)
+                        .Include(cr => cr.Candidate)
+                        .Include(cr => cr.Candidate.Organization)
+                        .Where(cr => cr.Candidate.ElectionId == _managedElectionID)
+                        .OrderBy(cr => cr.RaceId).ThenByDescending(cr => cr.Candidate.Name)
+                        .ToListAsync()
+                    )
                     .GroupBy(cr => cr.RaceId)
-                    .ToListAsync();
+                    .Select(cr => cr).ToList();
 
                 model.UnlistedCandidates = await _context.Candidates
                     .Include(c => c.Organization)

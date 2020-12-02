@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Web.Models
+namespace PlanYourVoteLibrary2
+
 {
     public enum ContactMethod
     {

@@ -1,4 +1,7 @@
-﻿namespace Web.Models
+
+﻿namespace PlanYourVoteLibrary2
+
+>>>>>>> e052836aeeba1471d7e823423ddcd29a2b74fee1
 {
     public class EmailConfiguration
     {

@@ -1,4 +1,5 @@
-﻿namespace Web.Models
+﻿namespace PlanYourVoteLibrary2
+
 {
     public class Email
     {

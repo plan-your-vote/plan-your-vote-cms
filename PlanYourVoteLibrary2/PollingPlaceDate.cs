@@ -7,7 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace Web.Models
+
+namespace PlanYourVoteLibrary2
+
 {
     public class PollingPlaceDate
     {

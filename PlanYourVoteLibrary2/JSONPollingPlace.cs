@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.Models
+
+namespace PlanYourVoteLibrary2
+
 {
     public class JSONPollingPlace
     {

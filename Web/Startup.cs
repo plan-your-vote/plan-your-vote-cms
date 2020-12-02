@@ -2,45 +2,52 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Web.ApiControllers;
 using Web.Data;
-using Web.Models;
+using PlanYourVoteLibrary2;
+using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        public IConfiguration _configuration { get; }
+        public IWebHostEnvironment _hostingEnvironment { get; }
 
-        public IConfiguration Configuration { get; }
+        public Startup(IConfiguration configuration,
+            IWebHostEnvironment hostingEnvironment)
+        {
+            _configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o => o.AddPolicy("EmailPolicy", builder =>
+            services.AddCors(options =>
             {
-                builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
-            }));
+                options.AddPolicy("EmailPolicy",
+                    builder => builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        //.AllowCredentials()
+                        .AllowAnyHeader()
+                );
+            });
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -49,15 +56,15 @@ namespace Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
-            services.Configure<MapConfiguration>(Configuration.GetSection("MapConfiguration"));
+            services.Configure<EmailConfiguration>(_configuration.GetSection("EmailConfiguration"));
+            services.Configure<MapConfiguration>(_configuration.GetSection("MapConfiguration"));
 
             //Choosing a db service
             CheckDB check = new CheckDB();
 
             //check for environment variables (described in docs/dbconfig.md)
             //if variable is not set, grab from appsettings.json
-            String ConnectionString = check.getConnectionStringEnvVar() ?? Configuration.GetConnectionString("DefaultConnection");
+            String ConnectionString = check.getConnectionStringEnvVar() ?? _configuration.GetConnectionString("DefaultConnection");
 
             //if not set just use sqlite
             String DatabaseType = check.checkType() ?? "sqlite";
@@ -65,11 +72,11 @@ namespace Web
             switch (DatabaseType)
             {
                 case "mssql":
-                    var host = Configuration["DBHOST"] ?? "172.19.0.1";
-                    var db = Configuration["DBNAME"] ?? "openvoting";
-                    var port = Configuration["DBPORT"] ?? "1433";
-                    var username = Configuration["DBUSERNAME"] ?? "sa";
-                    var password = Configuration["DBPASSWORD"] ?? "Sql!Expre55";
+                    var host = _configuration["DBHOST"] ?? "172.19.0.1";
+                    var db = _configuration["DBNAME"] ?? "openvoting";
+                    var port = _configuration["DBPORT"] ?? "1433";
+                    var username = _configuration["DBUSERNAME"] ?? "sa";
+                    var password = _configuration["DBPASSWORD"] ?? "Sql!Expre55";
 
                     string connStr = $"Data Source={host},{port};Integrated Security=False;";
                     connStr += $"User ID={username};Password={password};Database={db};";
@@ -78,10 +85,10 @@ namespace Web
                         options.UseSqlServer(connStr));
                     break;
                 case "mysql":
-                    host = Configuration["DBHOST"] ?? "localhost";
-                    port = Configuration["DBPORT"] ?? "3306";
-                    password = Configuration["DBPASSWORD"] ?? "secret";
-                    db = Configuration["DBNAME"] ?? "openvoting";
+                    host = _configuration["DBHOST"] ?? "localhost";
+                    port = _configuration["DBPORT"] ?? "3306";
+                    password = _configuration["DBPASSWORD"] ?? "secret";
+                    db = _configuration["DBNAME"] ?? "openvoting";
                     services.AddDbContext<ApplicationDbContext>(options =>
                     {
                         options.UseMySql($"server={host}; userid=root; pwd={password};"
@@ -94,23 +101,23 @@ namespace Web
                     break;
             }
 
-            services.AddIdentity<IdentityUser, IdentityRole>(
-               option =>
-               {
-                   option.Password.RequireDigit = false;
-                   option.Password.RequiredLength = 6;
-                   option.Password.RequireNonAlphanumeric = false;
-                   option.Password.RequireUppercase = false;
-                   option.Password.RequireLowercase = false;
-               }
-           ).AddEntityFrameworkStores<ApplicationDbContext>()
-           .AddDefaultTokenProviders()
-           .AddDefaultUI(UIFramework.Bootstrap4);
-
+            services.AddDefaultIdentity<IdentityUser>(
+             options =>
+             {
+                 options.Password.RequireDigit = false;
+                 options.Password.RequiredLength = 6;
+                 options.Password.RequireNonAlphanumeric = false;
+                 options.Password.RequireUppercase = false;
+                 options.Password.RequireLowercase = false;
+                 options.SignIn.RequireConfirmedAccount = false;
+             })
+                .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info
+                c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "VotingTool API",
                     Version = "v1",
@@ -124,18 +131,23 @@ namespace Web
                 opts.ResourcesPath = "Resources";
             });
 
-            services.AddMvc()
+            services.AddControllersWithViews()
             .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
             .AddDataAnnotationsLocalization()
-            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddJsonOptions(
                 options =>
                 {
-                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-                    options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
-                });
+                    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = null;
 
-            services.AddHttpClient();
+                    //options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    //options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+                }
+            );
+
+            services.AddRazorPages();
+
+            // 2.2   services.AddHttpClient();
 
             services.Configure<RequestLocalizationOptions>(opts =>
             {
@@ -151,7 +163,7 @@ namespace Web
 
             try
             {
-                var local_access_token = Configuration["mapkey"];
+                var local_access_token = _configuration["mapkey"];
                 if (!string.IsNullOrEmpty(local_access_token))
                 {
                     if (string.IsNullOrEmpty(MapController.AccessToken))
@@ -162,7 +174,7 @@ namespace Web
             }
             catch (Exception ex)
             {
-
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -170,26 +182,27 @@ namespace Web
         public void Configure(
             IApplicationBuilder app,
             ApplicationDbContext context,
-            IHostingEnvironment env)
+            IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseCors("EmailPolicy");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            app.UseRouting();
+            // 22 app.UseCookiePolicy();
 
             app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseSwagger();
 
@@ -202,12 +215,21 @@ namespace Web
             var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
             app.UseRequestLocalization(options.Value);
 
-            app.UseMvc(routes =>
+            // app.UseMvc(routes =>
+            // {
+            //     routes.MapRoute(
+            //         name: "default",
+            //         template: "{controller=Home}/{action=Index}/{id?}");
+            // });
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
+
 
             context.Database.EnsureCreated();
 
