@@ -4,6 +4,15 @@
     var lastIndex = Model.Candidate.Details.Count - 1;
 }
 
+<script src="https://cdn.tiny.cloud/1/nausdmhpot3ooouthd7kcs9tqpnqev62z87mt9anwycldlbd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+        tinyMCE.init({
+            mode : "textareas"
+        });
+</script>
+
+
 <div>
     <p class="lead">Detail @(lastIndex+1)</p>
     <button type="button" id="removeDetail_@lastIndex" class="btn btn-primary" onclick="removeDetail(@lastIndex)">Remove Detail</button>

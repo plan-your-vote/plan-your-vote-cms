@@ -13,6 +13,14 @@
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
 </script>
 
+<script src="https://cdn.tiny.cloud/1/nausdmhpot3ooouthd7kcs9tqpnqev62z87mt9anwycldlbd/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<script>
+        tinyMCE.init({
+            mode : "textareas"
+        });
+</script>
+
 <h1>@ViewData["Title"]</h1>
 
 <div class="panel panel-default">
@@ -22,12 +30,12 @@
             <input type="hidden" asp-for="BallotIssueId" />
             <div class="form-group">
                 @Html.LabelFor(ballotIssue => ballotIssue.BallotIssueTitle, new { @class = "control-label" })
-                @Html.TextAreaFor(ballotIssue => ballotIssue.BallotIssueTitle, new { @class = "form-control", @rows = 2 })
+                @Html.TextAreaFor(ballotIssue => ballotIssue.BallotIssueTitle, new { @class = "form-control", @rows = 2})
                 @Html.ValidationMessageFor(ballotIssue => ballotIssue.BallotIssueTitle, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">
                 @Html.LabelFor(ballotIssue => ballotIssue.Description, new { @class = "control-label" })
-                @Html.TextAreaFor(ballotIssue => ballotIssue.Description, new { @class = "form-control", @rows = 4 })
+                @Html.TextAreaFor(ballotIssue => ballotIssue.Description, new { @class = "form-control", @rows = 4,})
                 @Html.ValidationMessageFor(ballotIssue => ballotIssue.Description, "", new { @class = "text-danger" })
             </div>
 
