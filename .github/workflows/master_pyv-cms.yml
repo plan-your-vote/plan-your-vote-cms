@@ -21,6 +21,7 @@ jobs:
         dotnet-version: '2.1.804'
 
     - name: Build with dotnet
+    run: cd Web
       run: dotnet build --configuration Release
 
     - name: dotnet publish
