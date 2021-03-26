@@ -1,6 +1,4 @@
-
-1name: Deploy ASP.NET Core app to Azure Web App
-
+name: Deploy ASP.NET Core app to Azure Web App
 on:
   push:
     branches:
