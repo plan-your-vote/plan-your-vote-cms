@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Web.Models.Race>
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["races_index_title"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">@Localizer["races_index_create"]</a> 
+    <a class="btn btn-primary" asp-action="Reorder">@Localizer["races_index_reorder"]</a>
+</p>
+<table class="table panel panel-default">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PositionName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberNeeded)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PositionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberNeeded)
+            </td>
+            <td class="button-group">
+                <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@item.RaceId">@Localizer["editButton"]</a>
+                <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.RaceId">@Localizer["detailButton"]</a>
+                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.RaceId">@Localizer["deleteButton"]</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

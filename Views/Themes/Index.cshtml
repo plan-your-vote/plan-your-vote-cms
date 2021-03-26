@@ -1,0 +1,41 @@
+﻿@model Web.ViewModels.ThemesViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["themes_index_title"];
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<link rel="stylesheet" href="~/css/Themes.css"/>
+
+<div class="panel panel-default col-sm-5">
+    <form asp-controller="Themes" asp-action="Index" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label class="control-label">@Localizer["themes_index_selectLabel"]</label>
+            <select asp-for="SelectedTheme" asp-items="Model.Themes"></select>
+            <div>
+                @if (ViewData["Error"] != null) {
+                    <p>
+                        <strong>@Localizer["themes_index_error"]</strong> @ViewData["Error"].ToString()</p>
+                }
+                @if (TempData["Success"] != null) {
+                    <p>
+                        <strong>@Localizer["themes_index_success"]</strong> @TempData["Success"].ToString()</p>
+                }
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px">@Localizer["saveButton"]</button>
+    </form>
+    <form asp-controller="Themes" asp-action="UploadFile" enctype="multipart/form-data" method="post">
+        <div class="form-group">
+            <label class="control-label">Logo:</label>
+            <input type="file" name="file">
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px">@Localizer["saveButton"]</button>
+    </form>
+</div>

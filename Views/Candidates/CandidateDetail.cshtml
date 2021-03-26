@@ -1,0 +1,35 @@
+﻿@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@model Web.ViewModels.CandidateViewModel
+
+@{ 
+    var lastIndex = Model.Candidate.Details.Count - 1;
+}
+
+<div class="one-line">
+    <p class="lead">Detail @(lastIndex+1)</p>
+    <button type="button" id="removeDetail_@lastIndex" class="btn btn-primary margin-bottom" onclick="removeDetail(@lastIndex)">@Localizer["candidates_removeDetailButton"]</button>
+</div>
+<div class="form-group">
+    @Html.LabelFor(c => c.Candidate.Details[lastIndex].Title, new { @class = "control-label" })
+    @Html.TextBoxFor(c => c.Candidate.Details[lastIndex].Title, new { @class = "form-control" })
+    @Html.ValidationMessageFor(c => c.Candidate.Details[lastIndex].Title, "", new { @class = "text-danger" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(c => c.Candidate.Details[lastIndex].Text, new { @class = "control-label" })
+    @Html.TextAreaFor(c => c.Candidate.Details[lastIndex].Text, new { @class = "form-control rich-text-editor", @rows = 10 })
+    @Html.ValidationMessageFor(c => c.Candidate.Details[lastIndex].Text, "", new { @class = "text-danger" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(c => c.Candidate.Details[lastIndex].Format, new { @class = "control-label" })
+    @Html.DropDownListFor(c => c.Candidate.Details[lastIndex].Format, Html.GetEnumSelectList(typeof(CandidateDetailFormat)), "", new { @class = "form-control" })
+    @Html.ValidationMessageFor(c => c.Candidate.Details[lastIndex].Text, "", new { @class = "text-danger" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(c => c.Candidate.Details[lastIndex].Lang, new { @class = "control-label" })
+    @Html.DropDownListFor(c => c.Candidate.Details[lastIndex].Lang, Html.GetEnumSelectList(typeof(Language)), "", new { @class = "form-control" })
+    @Html.ValidationMessageFor(c => c.Candidate.Details[lastIndex].Lang, "", new { @class = "text-danger" })
+</div>
+<hr />

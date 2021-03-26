@@ -1,0 +1,36 @@
+﻿@model Web.Models.State
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["state_index_title"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table panel panel-default">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.RunningElection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ManagedElection)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.RunningElection.ElectionName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ManagedElection.ElectionName)
+            </td>
+        </tr>
+    </tbody>
+</table>
+<a asp-action="Edit" asp-route-id="@Model.StateId" class="btn btn-primary">@Localizer["state_index_changeButton"]</a>

@@ -1,0 +1,66 @@
+﻿@model Web.ViewModels.RaceViewModel
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["races_edit_title"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="panel panel-default">
+    <div>
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(r => r.Race.RaceId)
+            @Html.HiddenFor(r => r.Race.ElectionId)
+            @Html.HiddenFor(r => r.Race.BallotOrder)
+            <div class="form-group">
+                <label asp-for="Race.PositionName" class="control-label"></label>
+                <input asp-for="Race.PositionName" class="form-control" />
+                <span asp-validation-for="Race.PositionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Race.Description" class="control-label"></label>
+                <input asp-for="Race.Description" class="form-control" />
+                <span asp-validation-for="Race.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Race.NumberNeeded" class="control-label"></label>
+                <input asp-for="Race.NumberNeeded" class="form-control" min="1"/>
+                <span asp-validation-for="Race.NumberNeeded" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Race.CandidateRaces, new { @class = "control-label" })
+                <div class="multi-select">
+                    @foreach (var candidate in Model.Candidates)
+                    {
+                        <div>
+                            @if (Model.Race.CandidateRaces.Exists(model => model.CandidateId == int.Parse(candidate.Value)))
+                            {
+                                <input type="checkbox" id="@candidate.Value" name="CandidateIds" value="@candidate.Value" checked />
+                            }
+                            else
+                            {
+                                <input type="checkbox" id="@candidate.Value" name="CandidateIds" value="@candidate.Value" />
+                            }
+                            <label for="@candidate.Value">@candidate.Text</label>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-info">@Localizer["backButton"]</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

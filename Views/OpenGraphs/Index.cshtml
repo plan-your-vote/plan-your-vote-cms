@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Web.Models.OpenGraph>
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+@{
+    ViewData["Title"] = Localizer["openGraphs_index_title"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a asp-action="Create">@Localizer["createNewButton"]</a>
+</p>
+<table class="table panel panel-default">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.URL)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.URL)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Image)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.OpenGraphId">@Localizer["editButton"]</a> |
+                    <a asp-action="Details" asp-route-id="@item.OpenGraphId">@Localizer["detailButton"]</a> |
+                    <a asp-action="Delete" asp-route-id="@item.OpenGraphId">@Localizer["deleteButton"]</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

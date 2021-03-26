@@ -1,0 +1,30 @@
+﻿@model Web.Models.PollingPlace
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    var lastIndex = Model.PollingPlaceDates.Count - 1;
+}
+
+<div class="one-line">
+    <span>@Localizer["Date " + (lastIndex+1)]</span>
+    <button type="button" role="button" class="btn btn-primary btn-sm" onclick="removeDate(@lastIndex)">@Localizer["pollingPlaces_pollingDate_removeDate"]</button>
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.PollingPlaceDates[lastIndex].PollingDate, new { @class = "control-label" })
+    @Html.EditorFor(model => model.PollingPlaceDates[lastIndex].PollingDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+    @Html.ValidationMessageFor(model => model.PollingPlaceDates[lastIndex].PollingDate, "", new { @class = "text-danger" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.PollingPlaceDates[lastIndex].StartTime, new { @class = "control-label" })
+    @Html.EditorFor(model => model.PollingPlaceDates[lastIndex].StartTime, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+    @Html.ValidationMessageFor(model => model.PollingPlaceDates[lastIndex].StartTime, "", new { @class = "text-danger" })
+</div>
+<div class="form-group">
+    @Html.LabelFor(model => model.PollingPlaceDates[lastIndex].EndTime, new { @class = "control-label" })
+    @Html.EditorFor(model => model.PollingPlaceDates[lastIndex].EndTime, new { htmlAttributes = new { @class = "form-control", @type = "time" } })
+    @Html.ValidationMessageFor(model => model.PollingPlaceDates[lastIndex].EndTime, "", new { @class = "text-danger" })
+</div>
+<hr />

@@ -1,0 +1,123 @@
+﻿@model Web.Models.PollingPlace
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["pollingPlaces_delete_title"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>@Localizer["deleteWarning"]</h3>
+<div class="panel panel-default">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PollingPlaceName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PollingPlaceName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PollingStationName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PollingStationName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AdvanceOnly)
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.AdvanceOnly)
+            {
+                <span>Yes</span>
+            }
+            else
+            {
+                <span>No</span>
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LocalArea)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LocalArea)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.WheelchairInfo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.WheelchairInfo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ParkingInfo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ParkingInfo)
+        </dd>
+    </dl>
+
+    <h4>@Html.DisplayNameFor(model => model.PollingPlaceDates)</h4>
+    <hr />
+    @for (int i = 0; i < Model.PollingPlaceDates.Count; i++)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(m => m.PollingPlaceDates[i].PollingDate)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(m => m.PollingPlaceDates[i].PollingDate)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(m => m.PollingPlaceDates[i].StartTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(m => m.PollingPlaceDates[i].StartTime)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(m => m.PollingPlaceDates[i].EndTime)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(m => m.PollingPlaceDates[i].EndTime)
+            </dd>
+        </dl>
+        <hr />
+    }
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PollingPlaceId" />
+        <input type="submit" value=@Localizer["deleteButton"] class="btn btn-danger" /> 
+        <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
+    </form>
+</div>

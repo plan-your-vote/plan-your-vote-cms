@@ -1,0 +1,117 @@
+﻿@model Web.Models.Candidate
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["candidates_delete_title"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>@Localizer["deleteWarning"]</h3>
+<div class="panel panel-default">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var url = "../../" + Model.Picture;
+                <img width="150" height="150" src="@url">
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Organization.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Organization.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CandidateRaces)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (var candidateRace in Model.CandidateRaces)
+                {
+                    var races = (List<Race>)ViewBag.Races;
+                    var race = races.Find(r => r.RaceId == candidateRace.RaceId);
+
+                    <li>
+                        @Html.DisplayFor(model => race.PositionName)
+                    </li>
+                }
+            </ul>
+        </dd>
+    </dl>
+
+    <h4>@Html.DisplayNameFor(model => model.Details)</h4>
+    <hr />
+    @foreach (var detail in Model.Details)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => detail.Title)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => detail.Title)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => detail.Text)
+            </dt>
+            <dd class="col-sm-10">
+                @if (detail.Format == CandidateDetailFormat.List)
+                {
+                    <ul>
+                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                    </ul>
+                }
+                else if (detail.Format == CandidateDetailFormat.OrderedList)
+                {
+                    <ol>
+                        <li>@Html.DisplayFor(model => detail.Text)</li>
+                    </ol>
+                }
+                else
+                {
+                    @Html.DisplayFor(model => detail.Text)
+                }
+            </dd>
+        </dl>
+        <hr />
+    }
+
+    <h4>@Html.DisplayNameFor(model => model.Contacts)</h4>
+    <hr />
+    @foreach (var contact in Model.Contacts)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => contact.ContactMethod)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => contact.ContactMethod)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => contact.ContactValue)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(Model => contact.ContactValue)
+            </dd>
+        </dl>
+        <hr />
+    }
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CandidateId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> 
+        <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
+    </form>
+</div>

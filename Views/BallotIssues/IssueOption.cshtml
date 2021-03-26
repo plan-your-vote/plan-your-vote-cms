@@ -1,0 +1,19 @@
+﻿@model Web.Models.BallotIssue
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{ 
+    var lastIndex = Model.BallotIssueOptions.Count - 1;
+}
+
+<div class="row option">
+    <div class="col-md-10">
+        <div class="form-group">
+            @Html.TextAreaFor(model => model.BallotIssueOptions[lastIndex].IssueOptionInfo, new { @class = "form-control option-text", @rows = 2 })
+        </div>
+    </div>
+    <div class="col-md-2 form-group">
+        <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary btn-sm" onClick="removeOption(@lastIndex)">@Localizer["ballotIssues_removeOptionButton"]</button>
+    </div>
+</div>

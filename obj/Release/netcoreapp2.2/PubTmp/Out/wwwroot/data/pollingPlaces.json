@@ -1,0 +1,561 @@
+[
+  {
+    "VotingPlaceID": 1,
+    "FacilityName": "City Hall",
+    "FacilityAddress": "111 W 11th Avenue",
+    "Location": "Town Hall Room",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact1@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 1,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 2,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 2,
+    "FacilityName": "School 1",
+    "FacilityAddress": "222 W 12th Avenue",
+    "Location": "Cafeteria",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "Advance": false,
+    "LocalArea": "Local Neighbourhood",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "111-222-3333",
+    "Email": "contact2@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 3,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 4,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 3,
+    "FacilityName": "School 2",
+    "FacilityAddress": "333 W 13th Avenue",
+    "Location": "Cafeteria",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "Advance": false,
+    "LocalArea": "Local Neighbourhood",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "111-222-3333",
+    "Email": "contact2@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 5,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 6,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 4,
+    "FacilityName": "School 3",
+    "FacilityAddress": "444 W 14th Avenue",
+    "Location": "Auditorium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact1@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 7,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 8,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 5,
+    "FacilityName": "School 4",
+    "FacilityAddress": "555 W 15th Avenue",
+    "Location": "Cafeteria",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "Advance": false,
+    "LocalArea": "Local Neighbourhood",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "111-222-3333",
+    "Email": "contact2@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 9,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 10,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 6,
+    "FacilityName": "School 5",
+    "FacilityAddress": "666 W 16th Avenue",
+    "Location": "Cafeteria",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "Advance": false,
+    "LocalArea": "Local Neighbourhood",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "111-222-3333",
+    "Email": "contact2@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 11,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 12,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 7,
+    "FacilityName": "University 1",
+    "FacilityAddress": "777 W 17th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact3@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 13,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 14,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 8,
+    "FacilityName": "University 2",
+    "FacilityAddress": "888 W 18th Avenue",
+    "Location": "Cafeteria",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact1@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 15,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 16,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 9,
+    "FacilityName": "University 3",
+    "FacilityAddress": "999 W 19th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact3@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 17,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 18,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 10,
+    "FacilityName": "University 4",
+    "FacilityAddress": "111 W 11th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact3@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 19,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 20,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 11,
+    "FacilityName": "University 5",
+    "FacilityAddress": "222 W 12th Avenue",
+    "Location": "Cafeteria",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact1@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 21,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {"pollingDateId": 22,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 12,
+    "FacilityName": "University 6",
+    "FacilityAddress": "333 W 13th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact3@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 23,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 24,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 13,
+    "FacilityName": "Community Centre 1",
+    "FacilityAddress": "444 W 14th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact4@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 25,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 26,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 14,
+    "FacilityName": "Community Centre 2",
+    "FacilityAddress": "555 W 15th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact4@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 27,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 28,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 15,
+    "FacilityName": "Community Centre 3",
+    "FacilityAddress": "666 W 16th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact4@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 29,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 30,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 16,
+    "FacilityName": "Community Centre 4",
+    "FacilityAddress": "777 W 17th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact4@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 31,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 32,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 17,
+    "FacilityName": "Church 1",
+    "FacilityAddress": "888 W 18th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact5@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 33,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 34,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 18,
+    "FacilityName": "Church 2",
+    "FacilityAddress": "999 W 19th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact5@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 35,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 36,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 19,
+    "FacilityName": "Church 3",
+    "FacilityAddress": "111 W 11th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact5@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 37,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 38,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 20,
+    "FacilityName": "Church 4",
+    "FacilityAddress": "222 W 12th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 0.00000000,
+    "Longitude": 0.00000000,
+    "AdvanceOnly": false,
+    "LocalArea": "Local Neighborhood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "111-222-3333",
+    "Email": "contact5@organization.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDateId": 39,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:00:00",
+        "endTime": "2018/05/16 13:00:00"
+      },
+      {
+        "pollingDateId": 40,
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:00:00",
+        "endTime": "2018/05/16 20:00:00"
+      }
+    ]
+  }
+]

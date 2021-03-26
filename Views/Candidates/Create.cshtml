@@ -1,0 +1,141 @@
+﻿@model Web.ViewModels.CandidateViewModel
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["candidates_create_title"];
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+</script>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="panel panel-default">
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Candidate.Name" class="control-label"></label>
+            <input asp-for="Candidate.Name" class="form-control" required />
+            <span asp-validation-for="Candidate.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Candidate.Picture" class="control-label"></label>
+            <input asp-for="Candidate.Picture" type="file" name="Image">
+            <span asp-validation-for="Candidate.Picture" class="text-danger">@ViewData["ImageMessage"]</span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Candidate.OrganizationId" class="control-label">@Html.DisplayNameFor(c => c.Candidate.Organization.Name)</label>
+            <select asp-for="Candidate.OrganizationId" class="form-control" asp-items="Model.Organizations"></select>
+            <span asp-validation-for="Candidate.OrganizationId" class="text-danger"></span>
+        </div>
+        <div>
+            @Html.LabelFor(c => c.Candidate.CandidateRaces, new { @class = "control-label" })
+            @if (Model.Races.ToList().Count == 0)
+            {
+                <div>
+                    <span>No races available</span>
+                </div>
+            }
+            else
+            {
+                <div class="multi-select">
+                    @foreach (var race in Model.Races)
+                    {
+                        <div>
+                            <input type="checkbox" id="@race.Value" name="RaceIds" value="@race.Value" required/>
+                            <label for="@race.Value">@race.Text</label>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+
+        <div>
+            <hr />
+            <h4><label asp-for="Candidate.Details" class="control-label"></label></h4>
+            <hr />
+            <input type="hidden" id="removedDetails" name="RemovedDetails" value="" required/>
+        </div>
+        <div id="allDetails">
+            <div class="detail-group">
+                @{ await Html.RenderPartialAsync("CandidateDetail", Model); }
+            </div>
+        </div>
+        <div>
+            <h4><label asp-for="Candidate.Contacts" class="control-label"></label></h4>
+            <hr />
+            <input type="hidden" id="removedContacts" name="RemovedContacts" value="" required/>
+        </div>
+        <div id="allContacts">
+            <div class="contact-group">
+                @{ await Html.RenderPartialAsync("CandidateContact", Model); }
+            </div>
+        </div>
+
+        <script>
+            function addRTE() {
+              tinymce.init({
+                selector: ".rich-text-editor",
+                editor_selector: "rte",
+                menubar: "edit view format tools",
+                  browser_spellcheck: true,
+              });
+              setTimeout(function() {
+              $(".mce-notification-warning").remove();
+            }, 500);
+            }
+            function addDetail() {
+                let count = getCount(".detail-group");
+
+                $("#allDetails").append($(document.createElement("div")).attr("class", "detail-group")
+                    .load('@Url.Action("GetDetailFields", "Candidates")',
+                        { "count": count },
+                        function (response, status, xhr) {
+                            if (status === "error") {
+                                alert("An error occurred while loading the detail fields.");
+                            }
+                            addRTE();
+                        })
+                );
+            }
+
+            function addContact() {
+                let count = getCount(".contact-group");
+
+                $("#allContacts").append($(document.createElement("div")).attr("class", "contact-group")
+                    .load('@Url.Action("GetContactFields", "Candidates")',
+                        { "count": count },
+                        function (response, status, xhr) {
+                            if (status === "error") {
+                                alert("An error occurred while loading the contact fields.");
+                            }
+                        })
+                );
+            }
+        </script>
+
+        <div>
+            <button type="button" id="AddDetailField" class="btn btn-primary" onClick="addDetail()">@Localizer["candidates_addDetailButton"]</button>
+            &nbsp;|&nbsp;
+            <button type="button" id="AddContactField" class="btn btn-primary" onClick="addContact()">@Localizer["candidates_addContactButton"]</button>
+        </div>
+        <div class="form-group">
+            <input type="submit" value=@Localizer["createButton"] class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+<div>
+    <a class="btn btn-primary" asp-action="Index">@Localizer["backButton"]</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

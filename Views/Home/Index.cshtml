@@ -1,0 +1,78 @@
+﻿@model Web.ViewModels.DashboardViewModel;
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@* @inject IViewLocalizer Localizer *@
+@inject IStringLocalizer<SharedResource> Localizer
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@Localizer["home_index_subtitle"]</h1>
+    <h3>@Model.ElectionName</h3>
+</div>
+
+<br />
+
+
+<section class="content-header">
+    <h1 class="display-3">@Localizer["home_index_dashboard"]</h1>
+    <br />
+</section>
+
+<section class="content align-content-center">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-xs-6">
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>@Model.CandidatesCount</h3>
+                    <p>@Localizer["home_index_candidates"]</p>
+                </div>
+                <div class="icon">
+                    <i class="material-icons">people</i>
+                </div>
+                <a class="small-box-footer" asp-area="" asp-controller="Candidates" asp-action="Index">
+                    @Localizer["home_index_moreInfo"] <i class="material-icons">chevron_right</i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-6">
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>@Model.PollingPlacesCount<sup style="font-size: 20px"></sup></h3>
+                    <p>@Localizer["home_index_pollingPlaces"]</p>
+                </div>
+                <div class="icon">
+                    <i class="material-icons">account_box</i>
+                </div>
+                <a class="small-box-footer" asp-area="" asp-controller="PollingPlaces" asp-action="Index">
+                    @Localizer["home_index_moreInfo"] <i class="material-icons">chevron_right</i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-6">
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>@Model.BallotIssuesCount</h3>
+                    <p>@Localizer["home_index_ballotIssues"]</p>
+                </div>
+                <div class="icon">
+                    <i class="material-icons">format_list_bulleted</i>
+                </div>
+                <a class="small-box-footer" asp-area="" asp-controller="BallotIssues" asp-action="Index">
+                    @Localizer["home_index_moreInfo"] <i class="material-icons">chevron_right</i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-xs-12">
+            <div class="small-box bg-blue">
+                <a class="small-box-footer" asp-area="" asp-controller="Home" asp-action="Diagram" target="_blank">
+                    @Localizer["home_index_DRED"] <i class="material-icons">chevron_right</i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,134 @@
+﻿@model Web.Models.PollingPlace
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["pollingPlaces_edit_title"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="panel panel-default">
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="PollingPlaceId"/>
+        <div class="form-group">
+            <label asp-for="PollingPlaceName" class="control-label"></label>
+            <input asp-for="PollingPlaceName" class="form-control"/>
+            <span asp-validation-for="PollingPlaceName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Address" class="control-label"></label>
+            <input asp-for="Address" class="form-control"/>
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PollingStationName" class="control-label"></label>
+            <input asp-for="PollingStationName" class="form-control"/>
+            <span asp-validation-for="PollingStationName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Latitude" class="control-label"></label>
+            <input asp-for="Latitude" class="form-control"/>
+            <span asp-validation-for="Latitude" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Longitude" class="control-label"></label>
+            <input asp-for="Longitude" class="form-control"/>
+            <span asp-validation-for="Longitude" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AdvanceOnly" class="control-label"></label>
+            <input asp-for="AdvanceOnly" class="form-control"/>
+            <span asp-validation-for="AdvanceOnly" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LocalArea" class="control-label"></label>
+            <input asp-for="LocalArea" class="form-control"/>
+            <span asp-validation-for="LocalArea" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control"/>
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="WheelchairInfo" class="control-label"></label>
+            <input asp-for="WheelchairInfo" class="form-control"/>
+            <span asp-validation-for="WheelchairInfo" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ParkingInfo" class="control-label"></label>
+            <input asp-for="ParkingInfo" class="form-control"/>
+            <span asp-validation-for="ParkingInfo" class="text-danger"></span>
+        </div>
+
+        <h4>
+            <label asp-for="PollingPlaceDates" class="control-label"></label>
+        </h4>
+        <input type="hidden" id="removedDates" name="removedDates" value=""/>
+        <div id="polling-dates">
+
+            @for (var i = 0; i < Model.PollingPlaceDates.Count; i++)
+            {
+                <div class="date-group">
+                    <div class="one-line">
+                        <span>@Localizer["Date " + (i + 1)]</span>
+                        <button type="button" role="button" class="btn btn-primary btn-sm" onclick="removeDate(@i)">@Localizer["pollingPlaces_edit_delete"]</button>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PollingPlaceDates[i].PollingDate, new {@class = "control-label"})
+                        @Html.EditorFor(model => model.PollingPlaceDates[i].PollingDate, new {htmlAttributes = new {@class = "form-control", @type = "date"}})
+                        @Html.ValidationMessageFor(model => model.PollingPlaceDates[i].PollingDate, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PollingPlaceDates[i].StartTime, new {@class = "control-label"})
+                        @Html.EditorFor(model => model.PollingPlaceDates[i].StartTime, new {htmlAttributes = new {@class = "form-control", @type = "time"}})
+                        @Html.ValidationMessageFor(model => model.PollingPlaceDates[i].StartTime, "", new {@class = "text-danger"})
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PollingPlaceDates[i].EndTime, new {@class = "control-label"})
+                        @Html.EditorFor(model => model.PollingPlaceDates[i].EndTime, new {htmlAttributes = new {@class = "form-control", @type = "time"}})
+                        @Html.ValidationMessageFor(model => model.PollingPlaceDates[i].EndTime, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            }
+        </div>
+
+        <script>
+            function addDate() {
+                let count = getCount(".date-group");
+
+                $("#polling-dates").append($(document.createElement("div")).attr("class", "date-group")
+                    .load('@Url.Action("GetDateFields", "PollingPlaces")',
+                        { "count": count },
+                        function (response, status, xhr) {
+                            if (status === "error") {
+                                alert("An error occurred while loading the date fields.");
+                            }
+                        })
+                );
+            }
+        </script>
+        <div class="form-group one-line">
+            <button id="AddDateField" type="button" role="button" class="btn btn-primary" onClick="addDate()">
+                @Localizer["pollingPlaces_edit_add"]
+            </button>
+            <input type="submit" value=@Localizer["saveButton"] class="btn btn-success"/>
+        </div>
+    </form>
+</div>
+<div>
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

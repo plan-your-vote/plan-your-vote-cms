@@ -1,0 +1,129 @@
+﻿@model Web.ViewModels.CandidatesByRaceViewModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@if (Model.Races.Count > 0)
+{
+    @foreach (var race in Model.Races)
+    {
+        <div class="one-line">
+            <h5 class="font-weight-bold">@Html.DisplayFor(model => race.PositionName)</h5>
+            <a class="btn btn-primary" asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["candidates_list_reorderButton"]</a>
+        </div>
+        <table class="table candidate-list">
+            <thead>
+            <tr>
+                <th scope="col" class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Name)
+                </th>
+                <th scope="col" class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Picture)
+                </th>
+                <th scope="col" class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.CandidatesByRace.First().First().Candidate.Organization)
+                </th>
+                @* <th class="col-sm-2"></th> *@
+            </tr>
+            </thead>
+            <tbody>
+            @{
+                var group = Model.CandidatesByRace.Where(g => g.First().RaceId == race.RaceId);
+            }
+
+            @if (group != null && group.ToList().Count > 0)
+            {
+                @foreach (var candidateRace in group.First())
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(cr => candidateRace.Candidate.Name)
+                        </td>
+                        <td>
+                            <img width="80" height="80" src="@Html.DisplayFor(cr => candidateRace.Candidate.Picture)"/>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(cr => candidateRace.Candidate.Organization.Name)
+                        </td>
+                        @* <td class="button-group"> *@
+                        @*     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a> *@
+                        @*     <a class="btn btn-primary" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a> *@
+                        @*     <a class="btn btn-primary" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a> *@
+                        @* </td> *@
+                    </tr>
+                    <tr>
+                        <td class="text-right" colspan="3">
+                            <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["editButton"]</a>
+                            <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["detailButton"]</a>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["deleteButton"]</a>
+
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="3">
+                        No candidates found
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        <hr/>
+    }
+}
+<h5>Candidates Not Running</h5>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UnlistedCandidates.First().Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnlistedCandidates.First().Picture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnlistedCandidates.First().Organization)
+        </th>
+        @* <th class="col-sm-2"></th> *@
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.UnlistedCandidates.Count > 0)
+    {
+        @foreach (var candidate in Model.UnlistedCandidates)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => candidate.Name)
+                </td>
+                <td>
+                    <img width="80" height="80" src="@Html.DisplayFor(model => candidate.Picture)"/>
+                </td>
+                <td>
+                    @Html.DisplayFor(model => candidate.Organization.Name)
+                </td>
+            </tr>
+            <tr>
+                <td class="text-right" colspan="3">
+
+                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["editButton"]</a>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["detailButton"]</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["deleteButton"]</a>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="3">
+                No candidates found
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

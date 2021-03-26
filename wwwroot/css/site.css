@@ -1,0 +1,192 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    /*margin-bottom: 60px;*/
+    background-color: #e2e2e2 !important;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+.btn-link.logout:hover {
+    background-color: transparent !important;
+}
+
+.small-box-footer .material-icons {
+    vertical-align: middle !important;
+}
+
+.inner h3 {
+    color: white !important;
+}
+
+.icon .material-icons {
+    font-size: 80px !important;
+    top: -25px;
+}
+
+.small-box {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23) !important;
+}
+
+/* Views Styling
+-------------------------------------------------- */
+.button-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.vert-center {
+    display: flex;
+    align-items: center;
+}
+
+.multi-select {
+    max-height: 120px;
+    overflow: auto;
+}
+
+.hide {
+    display: none;
+}
+
+dt {
+    clear: both;
+}
+
+dd {
+    margin-bottom: 4px;
+}
+
+/* CandidateList --------------------------------*/
+/*.table thead tr th, .table tbody tr td {*/
+/*    border: none;*/
+/*}*/
+
+.candidate-list .justify-content-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.candidate-list tr:nth-child(2n+1) td{
+    border-bottom: none !important;
+}
+
+.candidate-list tr:nth-child(2n) td{
+    border-top: none !important;
+}
+
+.candidate-list td {
+    vertical-align: baseline !important;
+}
+
+.candidate-sort-btns {
+    display: flex;
+    flex-direction: row;
+    flex-flow: nowrap;
+    justify-content: space-evenly;
+}
+
+.user-management-btns {
+    
+    border-top: none !important;
+}
+
+.user-management-btns div {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+}
+
+.user-management-btns div a {
+    margin-right: 1rem;
+}
+
+.one-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.margin-left-0 {
+    margin-left: 0;
+}
+
+@media (max-width: 768px){
+    h1{
+        font-size: 2.5rem;
+    }
+    
+    h2{
+        font-size: 2rem;
+    }
+    h3{
+        font-size: 1.5rem;
+    }
+    .candidate-sort-btns {
+       flex-direction: column;
+    }
+}
+
+/* set language*/
+
+#selectLanguage {
+    display: inline-flex;
+    background-color: white;
+    padding: 0 15px;
+    border-radius: 5px;
+}
+
+/* Election page */
+#copyBtn {
+    width: 100%;
+}

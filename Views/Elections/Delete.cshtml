@@ -1,0 +1,47 @@
+﻿@model Web.Models.Election
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["elections_delete_title"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h3>@Localizer["deleteWarning"]</h3>
+<div class="panel panel-default">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ElectionName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ElectionName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ElectionId" />
+        <input type="submit" value=@Localizer["deleteButton"] class="btn btn-danger" /> |
+        <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
+    </form>
+</div>

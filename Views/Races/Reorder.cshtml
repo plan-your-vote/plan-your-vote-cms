@@ -1,0 +1,80 @@
+﻿@model IList<Web.Models.Race>
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["races_reorder_title"];
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+</script>
+
+<h1>@ViewData["Title"]</h1>
+<div class="panel panel-default">
+    <p class="lead">
+        Drag items to reorder them.
+    </p>
+    @if (Model.Count == 0)
+    {
+        <span>No races found</span>
+    }
+    else
+    {
+        <form asp-action="Reorder">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().BallotOrder)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.First().PositionName)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="ballot-order">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            @Html.HiddenFor(model => model[i].RaceId)
+                            @Html.HiddenFor(model => model[i].PositionName)
+                            @Html.HiddenFor(model => model[i].NumberNeeded)
+                            <td>
+                                @Html.TextBoxFor(model => model[i].BallotOrder, new { @class = "order", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model[i].BallotOrder, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(model => model[i].PositionName)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="form-group">
+                <input type="submit" value=@Localizer["saveButton"] class="btn btn-primary" />
+            </div>
+        </form>
+    }
+</div>
+<div>
+    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#ballot-order').sortable({
+        update: function (event, ui) {
+            let inputs = $('input.order');
+            for (let i = 0; i < inputs.length; i++) {
+                inputs[i].value = i + 1;
+            }
+        }
+    });
+});
+</script>

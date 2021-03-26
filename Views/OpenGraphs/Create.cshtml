@@ -1,0 +1,59 @@
+﻿@model Web.Models.OpenGraph
+
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["Create"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<h4> @Localizer["openGraphs_subtitle"]</h4>
+<hr />
+<div class="row panel panel-default">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="URL" class="control-label"></label>
+                <input asp-for="URL" class="form-control" />
+                <span asp-validation-for="URL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <input asp-for="Image" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Determiner" class="control-label"></label>
+                <input asp-for="Determiner" class="form-control" />
+                <span asp-validation-for="Determiner" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Locale" class="control-label"></label>
+                <input asp-for="Locale" class="form-control" />
+                <span asp-validation-for="Locale" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SiteName" class="control-label"></label>
+                <input asp-for="SiteName" class="form-control" />
+                <span asp-validation-for="SiteName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">@Localizer["backButton"]</a>
+</div>
+

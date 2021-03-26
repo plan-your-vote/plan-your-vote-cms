@@ -1,0 +1,92 @@
+﻿@model Web.Models.BallotIssue
+@using  Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Localization
+@using Web
+@inject IStringLocalizer<SharedResource> Localizer
+
+@{
+    ViewData["Title"] = @Localizer["ballotIssues_create_title"];
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+        asp-fallback-test="window.jQuery"
+        crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+</script>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="panel panel-default">
+    <form asp-action="Create">
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.BallotIssueTitle, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.BallotIssueTitle, new { @class = "form-control", @rows = 2 })
+                @Html.ValidationMessageFor(model => model.BallotIssueTitle, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @rows = 4 })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+
+            <label class="control-label">@Html.LabelFor(model => model.BallotIssueOptions)</label>
+            <div id="options">
+                @if (Model.BallotIssueOptions != null)
+                {
+                    @for (int i = 0; i < Model.BallotIssueOptions.Count; i++)
+                    {
+                        <div class="row option">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    @Html.TextAreaFor(model => model.BallotIssueOptions[i].IssueOptionInfo, new { @class = "form-control option-text", @rows = 2 })
+                                </div>
+                            </div>
+                            <div class="col-md-2 form-group">
+                                <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary" onClick="removeOption(@i)">@Localizer["ballotIssues_removeOptionButton"]</button>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+            <div>
+                <span class="text-danger">@ViewData["IssueOptionsError"]</span>
+            </div>
+        </div>
+
+        <script>
+            function addOption() {
+                let count = getCount(".option-text");
+
+                $("#options").append($(document.createElement("div"))
+                    .load('@Url.Action("GetOptionFields", "BallotIssues")',
+                        { "count": count },
+                        function (response, status, xhr) {
+                            if (status === "error") {
+                                alert("An error occurred while loading the option fields.");
+                            }
+                        })
+                );
+            }
+        </script>
+        <div>
+            <div class="form-group">
+                <button type="button" role="button" class="btn btn-primary" onClick="addOption()">@Localizer["ballotIssues_addOptionButton"]</button>
+            </div>
+            <div class="form-group">
+                <input type="submit" value=@Localizer["createButton"] class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-info">@Localizer["backButton"]</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<root>
+    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+        <xsd:element name="root" msdata:IsDataSet="true">
+            
+        </xsd:element>
+    </xsd:schema>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+
+    <!-- Models Localization -->
+    <!-- Models shared keys -->
+    <!-- Models - BallotIssue -->
+         <!--Model: BallotIssue-->
+    <data name="BallotIssueId" xml:space="preserve">
+        <value>Numéro de bulletin de vote</value>
+    </data>
+    
+    <data name="ElectionId" xml:space="preserve">
+        <value>ID d'élection</value>
+    </data>
+    
+    <data name="Election" xml:space="preserve">
+        <value>Élection</value>
+    </data>
+    
+    <data name="BallotIssue" xml:space="preserve">
+        <value>Bulletin de vote</value>
+    </data>
+    
+    <data name="Description" xml:space="preserve">
+        <value>La description</value>
+    </data>
+    
+    <data name="BallotIssueOptions" xml:space="preserve">
+        <value>Options de bulletin de vote</value>
+    </data>
+    
+    
+        <!--Model: Candidate-->
+    <data name="CandidateId" xml:space="preserve">
+        <value>ID du candidat</value>
+    </data>
+    
+    <data name="Name" xml:space="preserve">
+        <value>prénom</value>
+    </data>
+    
+    <data name="Picture" xml:space="preserve">
+        <value>Image</value>
+    </data>    
+    
+    <data name="CandidateDetails" xml:space="preserve">
+        <value>Détails du candidat</value>
+    </data>
+    
+    <data name="Organization" xml:space="preserve">
+        <value>Organisation</value>
+    </data>
+    
+    <data name="CandidateRaces" xml:space="preserve">
+        <value>Courses de candidats</value>
+    </data>
+    
+    <data name="Contacts" xml:space="preserve">
+        <value>Contacts</value>
+    </data>
+    
+        <!--CandidateDetail-->
+    <data name="ID" xml:space="preserve">
+        <value>ID</value>
+    </data>
+
+    <data name="Title" xml:space="preserve">
+        <value>Titre</value>
+    </data>
+    
+    <data name="Text" xml:space="preserve">
+        <value>Texte</value>
+    </data>
+
+    <data name="Language" xml:space="preserve">
+        <value>La langue</value>
+    </data>
+    
+    
+        <!--Model: CandidateRace-->
+    <data name="CandidateRaceId" xml:space="preserve">
+        <value>Identifiant de course du candidat</value>
+    </data>
+    
+    <data name="Race" xml:space="preserve">
+        <value>Course</value>
+    </data>
+    
+    <data name="BallotOrder" xml:space="preserve">
+        <value>Ordre de vote</value>
+    </data>
+    
+    
+        <!--Model: Contact-->
+    <data name="ContactId" xml:space="preserve">
+        <value>ID de contact</value>
+    </data>
+    
+    <data name="ContactMethod" xml:space="preserve">
+        <value>Méthode de contact</value>
+    </data>
+    
+    <data name="ContactValue" xml:space="preserve">
+        <value>Valeur de contact</value>
+    </data>
+    
+    
+        <!--Model: Election-->
+    <data name="StartDate" xml:space="preserve">
+        <value>Date de début</value>
+    </data>
+    
+    <data name="EndDate" xml:space="preserve">
+        <value>Date de fin</value>
+    </data>
+    
+    <data name="ElectionName" xml:space="preserve">
+        <value>Nom de l'élection</value>
+    </data>
+    
+        <!--Model: Image-->
+    <data name="ThemeName" xml:space="preserve">
+        <value>Nom du thème</value>
+    </data>
+    
+    <data name="Placement" xml:space="preserve">
+        <value>Placement</value>
+    </data>
+    
+    <data name="Type" xml:space="preserve">
+        <value>Type</value>
+    </data>
+    
+    <data name="Value" xml:space="preserve">
+        <value>Valeur</value>
+    </data>
+    
+    <data name="Format" xml:space="preserve">
+        <value>Format</value>
+    </data>
+
+        <!--Model: IssueOption-->
+    <data name="IssueOptionId" xml:space="preserve">
+        <value>Numéro d'option d'émission</value>
+    </data>
+    
+    <data name="IssueOptionInfo" xml:space="preserve">
+        <value>Information sur l'option d'émission</value>
+    </data>
+
+    
+        <!--Model: MapConfiguration-->
+    <data name="KeyVaultName" xml:space="preserve">
+        <value>Nom du coffre-fort</value>
+    </data>
+    
+    <data name="SecretName" xml:space="preserve">
+        <value>Nom secret</value>
+    </data>
+   
+        <!--Model: Organization-->
+    <data name="OrganizationId" xml:space="preserve">
+        <value>Identifiant d'organisation</value>
+    </data>
+    
+        <!--Model: PollingPlace-->
+    <data name="PollingPlaceId" xml:space="preserve">
+        <value>ID de lieu de scrutin</value>
+    </data>
+    
+    <data name="PollingPlace" xml:space="preserve">
+        <value>Lieu de vote</value>
+    </data>
+    
+    <data name="PollingStation" xml:space="preserve">
+        <value>Bureau de vote</value>
+    </data>
+    
+    <data name="Address" xml:space="preserve">
+        <value>Adresse</value>
+    </data>
+    
+    <data name="WheelchairInfo" xml:space="preserve">
+        <value>Informations sur les fauteuils roulants</value>
+    </data>
+    
+    <data name="ParkingInfo" xml:space="preserve">
+        <value>Informations de stationnement</value>
+    </data>
+    
+    <data name="Latitude" xml:space="preserve">
+        <value>Latitude</value>
+    </data>
+    
+    <data name="Longitude" xml:space="preserve">
+        <value>Longitude</value>
+    </data>
+    
+    <data name="AdvanceOnly" xml:space="preserve">
+        <value>Advance Only</value>
+    </data>
+    
+    <data name="LocalArea" xml:space="preserve">
+        <value>Zone locale</value>
+    </data>
+    
+    <data name="Phone" xml:space="preserve">
+        <value>Téléphone</value>
+    </data>
+    
+    <data name="Email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    
+    <data name="PollingPlaceDates" xml:space="preserve">
+        <value>Dates du lieu de scrutin</value>
+    </data>
+    
+    
+        <!--Model: PollingPlaceDate-->
+    <data name="PollingDateId" xml:space="preserve">
+        <value>Date de scrutin ID</value>
+    </data>
+    
+        <!--Model: Race-->
+    <data name="RaceId" xml:space="preserve">
+        <value>Identifiant de course</value>
+    </data>
+    
+    <data name="PositionName" xml:space="preserve">
+        <value>Nom de poste</value>
+    </data>
+    
+    <data name="NumberNeeded" xml:space="preserve">
+        <value>Nombre nécessaire</value>
+    </data>
+    
+        <!--Model: Template-->
+    <data name="MediaName" xml:space="preserve">
+        <value>Nom du média</value>
+    </data>
+    
+    <data name="Message" xml:space="preserve">
+        <value>Message</value>
+    </data>
+    
+    <data name="Link" xml:space="preserve">
+        <value>Lien</value>
+    </data>
+    
+        <!--Model: State-->
+    <data name="StateId" xml:space="preserve">
+        <value>ID d'état</value>
+    </data>
+    
+    <data name="RunningElectionID" xml:space="preserve">
+        <value>Courant élection ID</value>
+    </data>
+    
+    <data name="RunningElection" xml:space="preserve">
+        <value>Élection en cours</value>
+    </data>
+    
+    <data name="ManagedElectionID" xml:space="preserve">
+        <value>Identité électorale gérée</value>
+    </data>   
+    
+    <data name="ManagedElection" xml:space="preserve">
+        <value>Élection gérée</value>
+    </data>
+    
+        <!--Model: Step-->
+    <data name="StepNumber" xml:space="preserve">
+        <value>Numéro d'étape</value>
+    </data>
+    
+    <data name="StepTitle" xml:space="preserve">
+        <value>Titre de l'étape</value>
+    </data>
+    
+    <data name="Step Description" xml:space="preserve">
+        <value>Description de l'étape</value>
+    </data>    
+    
+        <!--Model: VoteEvent-->
+    <data name="VoteEventId" xml:space="preserve">
+        <value>Vote ID d'événement</value>
+    </data>
+    
+    <data name="VoteTitle" xml:space="preserve">
+        <value>Titre du vote</value>
+    </data>
+    
+    <data name="VoteDesc" xml:space="preserve">
+        <value>Description du vote</value>
+    </data>
+    
+    <data name="LogoURL" xml:space="preserve">
+        <value>URL du logo</value>
+    </data>
+    
+    <data name="PageBackgroundColor" xml:space="preserve">
+        <value>Couleur de fond de la page</value>
+    </data>
+    
+    <data name="PageTextColor" xml:space="preserve">
+        <value>Couleur du texte de la page</value>
+    </data>
+    
+    <data name="PageFontSize" xml:space="preserve">
+        <value>Taille de police de la page</value>
+    </data>
+    
+    <data name="PageFontFamily" xml:space="preserve">
+        <value>Page famille de polices</value>
+    </data>
+    <!-- Models End -->
+
+    <!-- View Localization -->
+    <!-- View Shared Buttons -->
+    <data name="editButton" xml:space="preserve">
+        <value>MODIFIER</value>
+    </data>
+    <data name="detailButton" xml:space="preserve">
+        <value>DÉTAILS</value>
+    </data>
+    <data name="deleteButton" xml:space="preserve">
+        <value>SUPPRIMER</value>
+    </data>
+    <data name="createNewButton" xml:space="preserve">
+        <value>CRÉER UN NOUVEAU</value>
+    </data>
+    <data name="backButton" xml:space="preserve">
+        <value>RETOUR À LA LISTE</value>
+    </data>
+    <data name="saveButton" xml:space="preserve">
+        <value>ENREGISTRER</value>
+    </data>
+    <data name="createButton" xml:space="preserve">
+        <value>CRÉER</value>
+    </data>
+    <data name="copyButton" xml:space="preserve">
+        <value>COPIE</value>
+    </data>
+
+    <!-- View Shared Messages -->
+    <data name="deleteWarning" xml:space="preserve">
+        <value>Êtes-vous sûr de vouloir supprimer ceci?</value>
+    </data>
+    
+    <!-- View - BallotIssues -->
+    <!-- View - BallotIssues - Index -->
+    <data name="ballot_index_question" xml:space="preserve">
+        <value>Des questions</value>
+    </data>
+
+
+    <!-- View Localization -->
+    <!-- SocialMedias -->
+
+    <data name="socialMedia_create_title" xml:space="preserve">
+        <value>Créer une nouvelle icône de réseau social</value>
+    </data>
+
+    <data name="socialMedia_delete_title" xml:space="preserve">
+        <value>Supprimer l'icône des médias sociaux</value>
+    </data>
+
+    <data name="socialMedia_detail_title" xml:space="preserve">
+        <value>Social Media Icon Details</value>
+    </data>
+
+    <data name="socialMedia_edit_title" xml:space="preserve">
+        <value>Icône Modifier les médias sociaux</value>
+    </data>
+
+    <data name="socialMedia_index_title" xml:space="preserve">
+        <value>Icônes de médias sociaux</value>
+    </data>
+
+    <!-- state -->
+    <data name="state_edit_title" xml:space="preserve">
+        <value>Changer d'élection</value>
+    </data>
+
+    <data name="state_index_title" xml:space="preserve">
+        <value>Gérer les élections</value>
+    </data>
+    <data name="state_index_changeButton" xml:space="preserve">
+        <value>CHANGEMENT</value>
+    </data>
+
+    <!-- Steps -->
+    <data name="steps_create_title" xml:space="preserve">
+        <value>Créer une nouvelle étape</value>
+    </data>
+    <data name="steps_delete_title" xml:space="preserve">
+        <value>Supprimer l'étape</value>
+    </data>
+    <data name="steps_details_title" xml:space="preserve">
+        <value>Détails de l'étape</value>
+    </data>
+    <data name="steps_edit_title" xml:space="preserve">
+        <value>Étape d'édition</value>
+    </data>
+    <data name="steps_index_title" xml:space="preserve">
+        <value>Pas</value>
+    </data>
+    
+    <!-- Themes -->
+    <data name="themes_index_title" xml:space="preserve">
+        <value>Change le thème</value>
+    </data>
+    
+    <data name="themes_index_error" xml:space="preserve">
+        <value>Erreur:</value>
+    </data>
+
+    <data name="themes_index_success" xml:space="preserve">
+        <value>Succès!</value>
+    </data>
+
+    <data name="themes_index_logo" xml:space="preserve">
+        <value>Logo:</value>
+    </data>
+    <data name="themes_index_selectLabel" xml:space="preserve">
+        <value>THÈMES SÉLECTIONNÉS:</value>
+    </data>
+
+    <!-- UserManagement -->
+
+    <data name="userManagement_index_title" xml:space="preserve">
+        <value>Gestion des utilisateurs</value>
+    </data>
+    
+    <data name="userManagement_edit_title" xml:space="preserve">
+        <value>Modifier le rôle de l'utilisateur</value>
+    </data>
+
+    <data name="userManagement_index_registerButton" xml:space="preserve">
+        <value>AJOUTER UN NOUVEL UTILISATEUR</value>
+    </data>
+
+    <!-- BallotIssues -->
+    <!-- BallotIssues Shared-->
+    <data name="ballotIssues_addOptionButton" xml:space="preserve">
+        <value>Ajouter une option</value>
+    </data>
+    <data name="ballotIssues_removeOptionButton" xml:space="preserve">
+        <value>Supprimer l'option</value>
+    </data>
+    <!-- BallotIssues Views-->
+    <data name="ballotIssues_create_title" xml:space="preserve">
+        <value>Créer une nouvelle question</value>
+    </data>
+
+    <data name="ballotIssues_delete_title" xml:space="preserve">
+        <value>Supprimer la question</value>
+    </data>
+
+    <data name="ballotIssues_details_title" xml:space="preserve">
+        <value>Question Détails</value>
+    </data>
+
+    <data name="ballotIssues_edit_title" xml:space="preserve">
+        <value>Modifier la question</value>
+    </data>
+
+    <data name="ballotIssues_index_title" xml:space="preserve">
+        <value>Des questions</value>
+    </data>
+    
+    <!-- Candidates -->
+    <!-- Candidates Shared-->
+    <data name="candidates_removeContactButton" xml:space="preserve">
+        <value>Supprimer contact</value>
+    </data>
+    <data name="candidates_removeDetailButton" xml:space="preserve">
+        <value>Supprimer les détails</value>
+    </data>
+    <data name="candidates_addDetailButton" xml:space="preserve">
+        <value>Ajouter un détail de candidat</value>
+    </data>
+    <data name="candidates_addContactButton" xml:space="preserve">
+        <value>Ajouter un contact</value>
+    </data>
+    <!-- Candidates views-->
+    <data name="candidates_create_title" xml:space="preserve">
+        <value>Créer un nouveau candidat</value>
+    </data>
+
+    <data name="candidates_delete_title" xml:space="preserve">
+        <value>Supprimer le candidat</value>
+    </data>
+    <data name="candidates_details_title" xml:space="preserve">
+        <value>Détails du candidat</value>
+    </data>
+
+    <data name="candidates_edit_title" xml:space="preserve">
+        <value>Modifier le candidat</value>
+    </data>
+
+    <data name="candidates_index_title" xml:space="preserve">
+        <value>Candidats</value>
+    </data>
+
+    <data name="candidates_reorder_title" xml:space="preserve">
+        <value>Réorganiser les candidats</value>
+    </data>
+
+    <data name="candidates_index_order" xml:space="preserve">
+        <value>Ordre de vote</value>
+    </data>
+    <data name="candidates_index_orderAZ" xml:space="preserve">
+        <value>Nom A-Z</value>
+    </data>
+    
+    <data name="candidates_index_orderZA" xml:space="preserve">
+        <value>Nom Z-A</value>
+    </data>
+    
+    <data name="candidates_list_reorderButton" xml:space="preserve">
+        <value>MODIFIER LA COMMANDE DE BULLETIN</value>
+    </data>  
+
+    
+    <!-- Elections -->
+    <data name="elections_create_title" xml:space="preserve">
+        <value>Créer une nouvelle élection</value>
+    </data>
+
+    <data name="elections_delete_title" xml:space="preserve">
+        <value>Supprimer l'élection</value>
+    </data>
+    
+    <data name="elections_details_title" xml:space="preserve">
+        <value>Détails de l'élection</value>
+    </data>
+
+    <data name="elections_edit_title" xml:space="preserve">
+        <value>Modifier l'élection</value>
+    </data>
+
+    <data name="elections_index_title" xml:space="preserve">
+        <value>Toutes les élections</value>
+    </data>
+    
+
+    <!-- Home -->
+    <data name="home_index_subtitle" xml:space="preserve">
+        <value>Planifiez votre vote - CMS</value>
+    </data>
+
+    <data name="home_index_dashboard" xml:space="preserve">
+        <value>Tableau de bord</value>
+    </data>
+
+    <data name="home_index_candidates" xml:space="preserve">
+        <value>Candidats</value>
+    </data>
+
+    <data name="home_index_moreInfo" xml:space="preserve">
+        <value>Plus d'informations</value>
+    </data>
+
+    <data name="home_index_pollingPlaces" xml:space="preserve">
+        <value>Lieux de vote</value>
+    </data>
+
+    <data name="home_index_ballotIssues" xml:space="preserve">
+        <value>Questions de vote</value>
+    </data>
+
+    <data name="home_index_DRED" xml:space="preserve">
+        <value>Diagramme d'entité relationnelle de base de données</value>
+    </data>
+
+    <data name="home_privacy_msg" xml:space="preserve">
+        <value>Utilisez cette page pour détailler la politique de confidentialité de votre site.</value>
+    </data>
+
+    <data name="home_privacy_title" xml:space="preserve">
+        <value>Politique de confidentialité</value>
+    </data>
+
+
+    <!-- Images -->
+
+    <data name="images_create_title" xml:space="preserve">
+        <value>Créer une nouvelle image</value>
+    </data>
+
+    <data name="images_delete_title" xml:space="preserve">
+        <value>Supprimer l'image</value>
+    </data>
+
+    <data name="images_details_title" xml:space="preserve">
+        <value>Détails de l'image</value>
+    </data>
+
+    <data name="images_edit_title" xml:space="preserve">
+        <value>Éditer l'image</value>
+    </data>
+
+    <data name="images_index_title" xml:space="preserve">
+        <value>Images</value>
+    </data>
+
+    <!-- Open Graphs -->
+    <data name="openGraphs_create_title" xml:space="preserve">
+        <value>Créer</value>
+    </data>
+    <data name="openGraphs_subtitle" xml:space="preserve">
+        <value>Ouvrir graphique</value>
+    </data>
+    <data name="openGraphs_delete_title" xml:space="preserve">
+        <value>Supprimer</value>
+    </data>
+    <data name="openGraphs_details_title" xml:space="preserve">
+        <value>Détails</value>
+    </data>
+    <data name="openGraphs_edit_title" xml:space="preserve">
+        <value>Modifier</value>
+    </data>
+    <data name="openGraphs_index_title" xml:space="preserve">
+        <value>Indice</value>
+    </data>
+
+    <!-- Organizations -->
+    <data name="organizations_create_title" xml:space="preserve">
+        <value>Créer une nouvelle organisation</value>
+    </data>
+
+    <data name="organizations_delete_title" xml:space="preserve">
+        <value>Supprimer l'organisation</value>
+    </data>
+
+    <data name="organizations_details_title" xml:space="preserve">
+        <value>Détails d'organisation</value>
+    </data>
+
+    <data name="organizations_edit_title" xml:space="preserve">
+        <value>Modifier l'organisation</value>
+    </data>
+
+    <data name="organizations_index_title" xml:space="preserve">
+        <value>Les organisations</value>
+    </data>
+
+    <data name="organizations_index_create" xml:space="preserve">
+        <value>Créer un nouveau</value>
+    </data>
+
+    <!-- Polling Places -->
+    <data name="pollingPlaces_create_title" xml:space="preserve">
+        <value>Créer un nouveau lieu de vote</value>
+    </data>
+
+    <data name="pollingPlaces_create_add" xml:space="preserve">
+        <value>Ajouter une date / heure de fonctionnement</value>
+    </data>
+
+    <data name="pollingPlaces_delete_title" xml:space="preserve">
+        <value>Supprimer le lieu de scrutin</value>
+    </data>
+
+    <data name="pollingPlaces_details_title" xml:space="preserve">
+        <value>Détails du lieu de vote</value>
+    </data>
+
+    <data name="pollingPlaces_edit_title" xml:space="preserve">
+        <value>Modifier le lieu de vote</value>
+    </data>
+
+    <data name="pollingPlaces_edit_delete" xml:space="preserve">
+        <value>Supprimer la date</value>
+    </data>
+
+    <data name="pollingPlaces_edit_add" xml:space="preserve">
+        <value>Ajouter une date / heure de fonctionnement</value>
+    </data>
+
+    <data name="pollingPlaces_index_title" xml:space="preserve">
+        <value>Lieux de vote</value>
+    </data>
+
+    <data name="pollingPlaces_index_create" xml:space="preserve">
+        <value>Créer un nouveau</value>
+    </data>
+
+    <data name="pollingPlaces_pollingDate_removeDate" xml:space="preserve">
+        <value>Supprimer la date</value>
+    </data>
+
+    <!-- Races -->
+    <data name="races_create_title" xml:space="preserve">
+        <value>Créer une nouvelle course</value>
+    </data>
+    <data name="races_delete_title" xml:space="preserve">
+        <value>Supprimer la race</value>
+    </data>
+
+    <data name="races_details_title" xml:space="preserve">
+        <value>Détails de la course</value>
+    </data>
+
+    <data name="races_edit_title" xml:space="preserve">
+        <value>Editer la course</value>
+    </data>
+
+    <data name="races_index_title" xml:space="preserve">
+        <value>Les courses</value>
+    </data>
+
+    <data name="races_index_create" xml:space="preserve">
+        <value>Créer un nouveau</value>
+    </data>
+
+    <data name="races_index_reorder" xml:space="preserve">
+        <value>Modifier l'ordre de vote</value>
+    </data>
+
+    <data name="races_reorder_title" xml:space="preserve">
+        <value>Réorganiser les courses</value>
+    </data>
+
+    <!-- Shared Views -->
+    <!-- Cookie Consent Partial -->
+    <data name="shared_cookie_alertMsg" xml:space="preserve">
+        <value>Utilisez cet espace pour résumer votre politique de confidentialité et d'utilisation des cookies.</value>
+    </data>
+    <data name="shared_cookie_learnMore" xml:space="preserve">
+        <value>Apprendre encore plus</value>
+    </data>
+    <data name="shared_cookie_acceptButton" xml:space="preserve">
+        <value>Acceptez</value>
+    </data>
+    <!-- Layout -->
+    <data name="shared_layout_brand" xml:space="preserve">
+        <value>Planifiez votre vote</value>
+    </data>
+    <data name="shared_layout_navElections" xml:space="preserve">
+        <value>Élections</value>
+    </data>
+    <data name="shared_layout_ElectoinsOptionManage" xml:space="preserve">
+        <value>Gérer les élections</value>
+    </data>
+    <data name="shared_layout_ElectionsOptionAll" xml:space="preserve">
+        <value>Toutes les élections</value>
+    </data>
+    <data name="shared_layout_navElectionDetails" xml:space="preserve">
+        <value>Détails de l'élection</value>
+    </data>
+    <data name="shared_layout_ElectionDetailsOptionSteps" xml:space="preserve">
+        <value>Pas</value>
+    </data>
+    <data name="shared_layout_ElectionDetailsOptionRace" xml:space="preserve">
+        <value>Les courses</value>
+    </data>
+    <data name="shared_layout_ElectionDetailsOptionQuestions" xml:space="preserve">
+        <value>Des questions</value>
+    </data>
+    <data name="shared_layout_ElectionDetailsOptionPolling" xml:space="preserve">
+        <value>Lieux de vote</value>
+    </data>
+    <data name="shared_layout_navCandidateDetails" xml:space="preserve">
+        <value>Détails du candidat</value>
+    </data>
+    <data name="shared_layout_CandidateDetailsOptionCandidates" xml:space="preserve">
+        <value>Candidats</value>
+    </data>
+    <data name="shared_layout_CandidateDetailsOptionCreate" xml:space="preserve">
+        <value>Créer un candidat</value>
+    </data>
+    <data name="shared_layout_CandidateDetailsOptionOrganizations" xml:space="preserve">
+        <value>Les organisations</value>
+    </data>
+    <data name="shared_layout_navUIDetails" xml:space="preserve">
+        <value>Détails de l'interface</value>
+    </data>
+    <data name="shared_layout_UIDetailsOptionImages" xml:space="preserve">
+        <value>Images</value>
+    </data>
+    <data name="shared_layout_UIDetailsOptionThemes" xml:space="preserve">
+        <value>Des thèmes</value>
+    </data>
+    <data name="shared_layout_UIDetailsOptionSMI" xml:space="preserve">
+        <value>Icônes de médias sociaux</value>
+    </data>
+    <data name="shared_layout_navUserManagement" xml:space="preserve">
+        <value>Gestion des utilisateurs</value>
+    </data>
+    <data name="shared_layout_footerBrand" xml:space="preserve">
+        <value>2019 - Planifiez votre vote -</value>
+    </data>
+    <data name="shared_layout_footerPrivacy" xml:space="preserve">
+        <value>Intimité</value>
+    </data>
+
+    <!-- Login Partial -->
+    <data name="shared_login_login" xml:space="preserve">
+        <value>S'identifier</value>
+    </data>
+    <data name="shared_login_logout" xml:space="preserve">
+        <value>Connectez - Out</value>
+    </data>
+    <data name="shared_login_register" xml:space="preserve">
+        <value>registre</value>
+    </data>
+    
+</root>
