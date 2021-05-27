@@ -44,7 +44,7 @@ jobs:
         uses: azure/webapps-deploy@v2
         with: 
           app-name: ${{ env.AZURE_WEBAPP_NAME }} # Replace with your app name
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_034ec2cb27134bafa085fd9c4ff1d42e }} # Define secret variable in repository settings as per action documentation
+          publish-profile: ${{ secrets.PYV_CMS_KL }} # Define secret variable in repository settings as per action documentation
           package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
 
 # For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
