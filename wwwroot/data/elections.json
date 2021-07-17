@@ -1,0 +1,14 @@
+﻿[
+  {
+    "ElectionName": "City of Vancouver 2018 Municipal Election",
+    "EndDate": "2019-10-21",
+    "StartDate" : "2018-9-14",
+    "Description" : "City of Vancouver 2018 Municipal Election"
+  },
+  {
+    "ElectionName": "Canadian Federal Election 2019",
+    "EndDate": "2020-03-21",
+    "StartDate": "2020-02-01",
+    "Description": "Canadian Federal Election 2019"
+  }
+]

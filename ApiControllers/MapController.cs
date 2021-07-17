@@ -51,7 +51,7 @@ namespace Web.ApiControllers
                     accessToken = MapConfiguration.MapBoxToken;
                 }
             }
-            catch (KeyVaultErrorException kvee)
+            catch 
             {
                 // TODO
             }

@@ -1,7 +1,4 @@
-﻿@using Microsoft.Extensions.Localization
-@using Web
-@inject IStringLocalizer<SharedResource> Localizer
-
+﻿@inject LocService SharedLocalizer
 @model Web.ViewModels.CandidateViewModel
 
 @{
@@ -10,7 +7,7 @@
 
 <div class="one-line">
     <p class="lead">Contact @(lastIndex+1)</p>
-    <button type="button" id="removeContact_@lastIndex" class="btn btn-primary margin-bottom" onclick="removeContact(@lastIndex)">@Localizer["candidates_removeContactButton"]</button>
+    <button type="button" id="removeContact_@lastIndex" class="btn btn-primary margin-bottom" onclick="removeContact(@lastIndex)">@SharedLocalizer.GetLocalizedHtmlString("candidates_removeContactButton")</button>
 </div>
 <div class="form-group">
     @Html.LabelFor(c => c.Candidate.Contacts[lastIndex].ContactMethod, new { @class = "control-label" })

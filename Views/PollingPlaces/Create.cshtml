@@ -1,11 +1,8 @@
 ﻿@model Web.Models.PollingPlace
-@using  Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
-@using Web
-@inject IStringLocalizer<SharedResource> Localizer
+@inject LocService SharedLocalizer
 
 @{
-    ViewData["Title"] = @Localizer["pollingPlaces_create_title"];
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("pollingPlaces_create_title");
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -100,15 +97,15 @@
             }
         </script>
         <button id="AddDateField" type="button" role="button" class="btn btn-primary" onClick="addDate()">
-            @Localizer["pollingPlaces_create_add"]
+            @SharedLocalizer.GetLocalizedHtmlString("pollingPlaces_create_add")
         </button>
         <div class="form-group">
-            <input type="submit" value=@Localizer["createButton"] class="btn btn-primary" />
+            <input type="submit" value=@SharedLocalizer.GetLocalizedHtmlString("createButton") class="btn btn-primary" />
         </div>
     </form>
 </div>
     <div>
-        <a class="btn btn-primary" asp-action="Index">@Localizer["backButton"]</a>
+        <a class="btn btn-primary" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("backButton")</a>
     </div>
 
     @section Scripts {

@@ -1,15 +1,11 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@using  Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
-@using Web
-@* @inject IViewLocalizer Localizer *@
-@inject IStringLocalizer<SharedResource> Localizer
+@inject LocService SharedLocalizer
 
 @{
-    ViewData["login"] = @Localizer["shared_login_login"];
-    ViewData["logout"] = @Localizer["shared_login_logout"];
+    ViewData["login"] = @SharedLocalizer.GetLocalizedHtmlString("shared_login_login");
+    ViewData["logout"] = @SharedLocalizer.GetLocalizedHtmlString("shared_login_logout");
 }
 
 <ul class="nav navbar-nav">
@@ -17,7 +13,8 @@
     {
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                @if(UserManager.GetUserAsync(User).Result != null) {
+                @if (UserManager.GetUserAsync(User).Result != null)
+                {
                     @UserManager.GetUserAsync(User).Result.UserName
                 }
             </a>

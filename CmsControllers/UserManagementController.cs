@@ -113,7 +113,7 @@ namespace Web.CmsControllers
             {
                 var identityUser = await _userManager.FindByIdAsync(userRoleViewModel.IdentityUserID);
 
-                if (identityUser.UserName != Constants.Account.ADMIN_USERNAME)
+                if (identityUser.UserName != Constants.Account.AdminUsername)
                 {
                     var rolesNameList = await _userManager.GetRolesAsync(identityUser);
                     await _userManager.RemoveFromRolesAsync(identityUser, rolesNameList.ToArray());

@@ -1,10 +1,10 @@
 ﻿@page
 @model LoginModel
 @using  Microsoft.AspNetCore.Mvc.Localization
-@inject IViewLocalizer Localizer
+@inject LocService SharedLocalizer
 
 @{
-    ViewData["Title"] = @Localizer["Log in"];
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("Log in");
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -12,16 +12,16 @@
     <div class="col-md-4 panel panel-default">
         <section>
             <form id="account" method="post">
-                <h4>@Localizer["Use a local account to log in."]</h4>
+                <h4>@SharedLocalizer.GetLocalizedHtmlString("Use a local account to log in.")</h4>
                 <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Input.UserName">@Localizer["Username"]</label>
+                    <label asp-for="Input.UserName">@SharedLocalizer.GetLocalizedHtmlString("Username")</label>
                     <input asp-for="Input.UserName" class="form-control" />
                     <span asp-validation-for="Input.UserName" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.Password">@Localizer["Password"]</label>
+                    <label asp-for="Input.Password">@SharedLocalizer.GetLocalizedHtmlString("Password")</label>
                     <input asp-for="Input.Password" class="form-control" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
@@ -34,14 +34,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary">@Localizer["Log in"]</button>
+                    <button type="submit" class="btn btn-primary">@SharedLocalizer.GetLocalizedHtmlString("Log in")</button>
                 </div>
                 <div class="form-group">
                     <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">@Localizer["Forgot your password ?"]</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">@SharedLocalizer.GetLocalizedHtmlString("Forgot your password ?")</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@Localizer["Register as a new user"]</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@SharedLocalizer.GetLocalizedHtmlString("Register as a new user")</a>
                     </p>
                 </div>
             </form>

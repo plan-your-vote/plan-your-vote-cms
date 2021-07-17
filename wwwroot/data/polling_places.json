@@ -1,0 +1,3278 @@
+[
+  {
+    "VotingPlaceID": 1,
+    "FacilityName": "Vancouver City Hall",
+    "FacilityAddress": "453 W 12th Avenue",
+    "Location": "Town Hall Room & Media Centre",
+    "Latitude": 49.26131589,
+    "Longitude": -123.1139357,
+    "AdvanceOnly": false,
+    "LocalArea": "Mount Pleasant",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "134-124-7345",
+    "Email": "ctrenouth0@slideshare.net",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 06:58:54",
+        "endTime": "2018/05/16 20:08:14"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:18:02",
+        "endTime": "2018/05/16 20:52:39"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 2,
+    "FacilityName": "Simon Fraser Elementary School",
+    "FacilityAddress": "100 W 15th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.25717274,
+    "Longitude": -123.1083818,
+    "Advance": false,
+    "LocalArea": "Mount Pleasant",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "371-786-4891",
+    "Email": "lcirlos1@hibu.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 21:24:22",
+        "endTime": "2018/05/17 07:52:21"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 07:05:16",
+        "endTime": "2018/05/14 23:09:32"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 3,
+    "FacilityName": "St. Patrick Regional Secondary School",
+    "FacilityAddress": "115 E 11th Avenue",
+    "Location": "Cafeteria",
+    "Latitude": 49.26140455,
+    "Longitude": -123.1026044,
+    "AdvanceOnly": false,
+    "LocalArea": "Mount Pleasant",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "479-409-4015",
+    "Email": "gkimbly2@alibaba.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 15:02:30",
+        "endTime": "2018/05/15 22:45:32"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 15:49:11",
+        "endTime": "2018/05/15 21:07:32"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 4,
+    "FacilityName": "Mount Pleasant Community Centre",
+    "FacilityAddress": "1 Kingsway",
+    "Location": "Gymnasium",
+    "Latitude": 49.26413586,
+    "Longitude": -123.1000813,
+    "AdvanceOnly": false,
+    "LocalArea": "Mount Pleasant",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "521-509-0911",
+    "Email": "mpalleske3@bizjournals.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 06:38:26",
+        "endTime": "2018/05/16 21:06:44"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 12:00:49",
+        "endTime": "2018/05/14 20:15:45"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 5,
+    "FacilityName": "Kivan Club",
+    "FacilityAddress": "2875 St. George St",
+    "Location": "Gymnasium",
+    "Latitude": 49.25881758,
+    "Longitude": -123.0935763,
+    "AdvanceOnly": false,
+    "LocalArea": "Mount Pleasant",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "241-863-7347",
+    "Email": "tfishbourne4@time.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 17:04:18",
+        "endTime": "2018/05/14 17:50:55"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 09:10:57",
+        "endTime": "2018/05/15 13:34:27"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 6,
+    "FacilityName": "Mount Pleasant Neighbourhood House",
+    "FacilityAddress": "800 E Broadway",
+    "Location": "East & West Hall",
+    "Latitude": 49.2621446,
+    "Longitude": -123.0867735,
+    "AdvanceOnly": false,
+    "LocalArea": "Mount Pleasant",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "920-351-8546",
+    "Email": "jchomicz5@123-reg.co.uk",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 07:30:41",
+        "endTime": "2018/05/17 14:33:28"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 06:10:47",
+        "endTime": "2018/05/16 22:00:25"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 7,
+    "FacilityName": "Creekside Community Recreation Centre",
+    "FacilityAddress": "1 Athletes Way",
+    "Location": "Gymnasium",
+    "Latitude": 49.27178777,
+    "Longitude": -123.1057142,
+    "AdvanceOnly": false,
+    "LocalArea": "Mount Pleasant",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "710-725-1017",
+    "Email": "avolkes6@topsy.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 14:11:52",
+        "endTime": "2018/05/14 16:35:19"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 16:44:55",
+        "endTime": "2018/05/16 23:12:57"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 8,
+    "FacilityName": "St. Mary's Ukrainian Catholic Centre",
+    "FacilityAddress": "3150 Ash St",
+    "Location": "Main Hall",
+    "Latitude": 49.25791915,
+    "Longitude": -123.1175041,
+    "AdvanceOnly": false,
+    "LocalArea": "Fairview",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "290-597-8400",
+    "Email": "ubourchier7@comsenz.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 17:20:39",
+        "endTime": "2018/05/16 23:13:49"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 23:04:30",
+        "endTime": "2018/05/14 18:39:21"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 9,
+    "FacilityName": "Park Inn & Suites by Radisson",
+    "FacilityAddress": "898 W Broadway",
+    "Location": "Oak Room",
+    "Latitude": 49.26302492,
+    "Longitude": -123.1227141,
+    "AdvanceOnly": false,
+    "LocalArea": "Fairview",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "156-302-2073",
+    "Email": "fbarrow8@flickr.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 06:14:11",
+        "endTime": "2018/05/15 22:11:09"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 08:30:05",
+        "endTime": "2018/05/16 20:01:47"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 10,
+    "FacilityName": "False Creek Elementary School",
+    "FacilityAddress": "900 School Green",
+    "Location": "Gymnasium",
+    "Latitude": 49.26709999,
+    "Longitude": -123.126681,
+    "AdvanceOnly": false,
+    "LocalArea": "Fairview",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "255-843-9346",
+    "Email": "istephens9@amazon.co.jp",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 21:09:45",
+        "endTime": "2018/05/17 22:11:55"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 16:09:40",
+        "endTime": "2018/05/16 21:35:11"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 11,
+    "FacilityName": "L'Ecole Bilingue Elementary School",
+    "FacilityAddress": "1166 W 14th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.25831752,
+    "Longitude": -123.1303641,
+    "AdvanceOnly": false,
+    "LocalArea": "Fairview",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "630-346-4203",
+    "Email": "tpavyera@gravatar.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 06:46:48",
+        "endTime": "2018/05/15 13:28:23"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 14:45:45",
+        "endTime": "2018/05/16 13:01:53"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 12,
+    "FacilityName": "Holy Trinity Anglican Church",
+    "FacilityAddress": "1440 W 12th Avenue",
+    "Location": "Parish Hall",
+    "Latitude": 49.2604528,
+    "Longitude": -123.1369055,
+    "AdvanceOnly": false,
+    "LocalArea": "Fairview",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "318-559-7966",
+    "Email": "ltimebyb@dion.ne.jp",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 11:27:39",
+        "endTime": "2018/05/17 11:51:13"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 14:18:25",
+        "endTime": "2018/05/17 21:45:59"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 13,
+    "FacilityName": "Grace Vancouver Church",
+    "FacilityAddress": "1696 W 7th Avenue",
+    "Location": "Sanctuary",
+    "Latitude": 49.2651679,
+    "Longitude": -123.143092,
+    "AdvanceOnly": false,
+    "LocalArea": "Fairview",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "621-193-2705",
+    "Email": "mwapplesc@unblog.fr",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 18:10:16",
+        "endTime": "2018/05/17 18:20:42"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 12:35:49",
+        "endTime": "2018/05/15 21:50:37"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 14,
+    "FacilityName": "False Creek Community Centre",
+    "FacilityAddress": "1318 Cartwright St",
+    "Location": "Lind Hall",
+    "Latitude": 49.26955514,
+    "Longitude": -123.1342298,
+    "AdvanceOnly": false,
+    "LocalArea": "Fairview",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "685-141-4749",
+    "Email": "mflemmingd@timesonline.co.uk",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 21:59:50",
+        "endTime": "2018/05/17 22:17:29"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 17:22:20",
+        "endTime": "2018/05/15 20:53:49"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 15,
+    "FacilityName": "Vancouver Aquatic Centre",
+    "FacilityAddress": "1050 Beach Avenue",
+    "Location": "Top Landing",
+    "Latitude": 49.27933213,
+    "Longitude": -123.137535,
+    "AdvanceOnly": false,
+    "LocalArea": "West End",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "403-425-8620",
+    "Email": "stunee@bloglines.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 17:03:34",
+        "endTime": "2018/05/14 15:47:03"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:22:06",
+        "endTime": "2018/05/16 09:12:17"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 16,
+    "FacilityName": "Best Western Plus Sands Hotel",
+    "FacilityAddress": "1755 Davie St",
+    "Location": "Pacific Ballroom",
+    "Latitude": 49.2870198,
+    "Longitude": -123.1408943,
+    "AdvanceOnly": false,
+    "LocalArea": "West End",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "949-207-4193",
+    "Email": "vjaslemf@cpanel.net",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 06:23:54",
+        "endTime": "2018/05/15 12:32:33"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 16:31:00",
+        "endTime": "2018/05/16 10:13:46"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 17,
+    "FacilityName": "Lord Roberts Elementary School",
+    "FacilityAddress": "1100 Bidwell St",
+    "Location": "Gymnasium",
+    "Latitude": 49.28676518,
+    "Longitude": -123.1379234,
+    "AdvanceOnly": false,
+    "LocalArea": "West End",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "971-952-4417",
+    "Email": "xjedrychowskig@dion.ne.jp",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 13:23:02",
+        "endTime": "2018/05/14 07:26:14"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 07:31:16",
+        "endTime": "2018/05/17 15:05:23"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 18,
+    "FacilityName": "King George Secondary School",
+    "FacilityAddress": "1755 Barclay St",
+    "Location": "Gymnasium",
+    "Latitude": 49.28983,
+    "Longitude": -123.136461,
+    "AdvanceOnly": false,
+    "LocalArea": "West End",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "997-921-9348",
+    "Email": "cjiroutekh@ftc.gov",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 07:19:27",
+        "endTime": "2018/05/14 23:19:33"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 16:40:53",
+        "endTime": "2018/05/14 16:16:29"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 19,
+    "FacilityName": "Gordon Neighbourhood House",
+    "FacilityAddress": "1019 Broughton St",
+    "Location": "Room 1",
+    "Latitude": 49.28566415,
+    "Longitude": -123.1337018,
+    "AdvanceOnly": false,
+    "LocalArea": "West End",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "566-460-1428",
+    "Email": "fpinnicki@imgur.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 22:22:45",
+        "endTime": "2018/05/17 22:59:18"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 11:16:50",
+        "endTime": "2018/05/17 21:58:27"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 20,
+    "FacilityName": "Roberts Elementary Annex",
+    "FacilityAddress": "1150 Nelson St",
+    "Location": "Gymnasium",
+    "Latitude": 49.28314421,
+    "Longitude": -123.1297377,
+    "AdvanceOnly": false,
+    "LocalArea": "West End",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "562-326-5849",
+    "Email": "dtheurerj@marketwatch.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:09:30",
+        "endTime": "2018/05/16 06:26:39"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 18:36:51",
+        "endTime": "2018/05/15 06:50:54"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 21,
+    "FacilityName": "St. Andrew's - Wesley United Church",
+    "FacilityAddress": "1018 Nelson St",
+    "Location": "The Salons",
+    "Latitude": 49.28113964,
+    "Longitude": -123.1265336,
+    "AdvanceOnly": false,
+    "LocalArea": "West End",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "674-303-8208",
+    "Email": "lchafneyk@gizmodo.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 18:37:41",
+        "endTime": "2018/05/17 22:18:15"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 09:06:04",
+        "endTime": "2018/05/16 07:38:05"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 22,
+    "FacilityName": "The Listel Hotel",
+    "FacilityAddress": "1300 Robson St",
+    "Location": "Sculpture Gallery",
+    "Latitude": 49.28706804,
+    "Longitude": -123.1292475,
+    "AdvanceOnly": false,
+    "LocalArea": "West End",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "163-365-0528",
+    "Email": "rkeaveneyl@google.co.uk",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 23:29:35",
+        "endTime": "2018/05/15 21:20:40"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 15:04:47",
+        "endTime": "2018/05/16 22:40:54"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 23,
+    "FacilityName": "Coal Harbour Community Centre",
+    "FacilityAddress": "480 Broughton St",
+    "Location": "Multi-Purpose Room",
+    "Latitude": 49.29017074,
+    "Longitude": -123.1249045,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "136-955-9187",
+    "Email": "dsofem@wp.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 09:19:18",
+        "endTime": "2018/05/17 17:22:11"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 22:38:22",
+        "endTime": "2018/05/17 16:33:02"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 24,
+    "FacilityName": "Vancouver Art Gallery",
+    "FacilityAddress": "750 Hornby St",
+    "Location": "Annex Workshop",
+    "Latitude": 49.28127633,
+    "Longitude": -123.122837,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "997-628-7138",
+    "Email": "crawsthornen@weebly.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 16:05:49",
+        "endTime": "2018/05/14 18:34:29"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 07:28:38",
+        "endTime": "2018/05/17 23:48:58"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 25,
+    "FacilityName": "Gathering Place Community Centre",
+    "FacilityAddress": "609 Helmcken St",
+    "Location": "Theatre",
+    "Latitude": 49.27796806,
+    "Longitude": -123.1235518,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "558-418-3237",
+    "Email": "acorrino@ed.gov",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 12:47:16",
+        "endTime": "2018/05/14 18:50:20"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 22:04:50",
+        "endTime": "2018/05/14 20:13:16"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 26,
+    "FacilityName": "Roundhouse Community Arts and Recreation Centre",
+    "FacilityAddress": "181 Roundhouse Mews",
+    "Location": "Gymnasium",
+    "Latitude": 49.27330836,
+    "Longitude": -123.1217472,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "510-807-7550",
+    "Email": "ecorpep@tiny.cc",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 18:33:38",
+        "endTime": "2018/05/17 13:00:27"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 22:06:34",
+        "endTime": "2018/05/16 10:21:22"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 27,
+    "FacilityName": "Vancouver Public Library - Centre Branch",
+    "FacilityAddress": "350 W Georgia St",
+    "Location": "Alice MacKay Room",
+    "Latitude": 49.27969813,
+    "Longitude": -123.1155562,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "125-559-8060",
+    "Email": "rickovitsq@pagesperso-orange.fr",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 23:15:17",
+        "endTime": "2018/05/17 14:40:59"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 13:31:32",
+        "endTime": "2018/05/17 15:18:12"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 28,
+    "FacilityName": "Crosstown Elementary School",
+    "FacilityAddress": "55 Expo Boulevard",
+    "Location": "Gymnasium",
+    "Latitude": 49.27870357,
+    "Longitude": -123.106873,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "204-970-9163",
+    "Email": "cmacdowallr@networksolutions.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 23:25:16",
+        "endTime": "2018/05/15 12:56:14"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 14:24:46",
+        "endTime": "2018/05/16 18:50:11"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 29,
+    "FacilityName": "Carnegie Community Centre",
+    "FacilityAddress": "401 Main St",
+    "Location": "Theatre",
+    "Latitude": 49.28105199,
+    "Longitude": -123.1001272,
+    "AdvanceOnly": false,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "878-989-5141",
+    "Email": "eelders@trellian.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 20:44:37",
+        "endTime": "2018/05/16 12:01:41"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 06:44:59",
+        "endTime": "2018/05/15 10:02:46"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 30,
+    "FacilityName": "Strathcona Community Centre",
+    "FacilityAddress": "601 Keefer St",
+    "Location": "Gymnasium",
+    "Latitude": 49.27977979,
+    "Longitude": -123.0915462,
+    "AdvanceOnly": false,
+    "LocalArea": "Strathcona",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "930-209-4767",
+    "Email": "bseelt@eepurl.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 08:13:04",
+        "endTime": "2018/05/17 07:53:34"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:48:19",
+        "endTime": "2018/05/16 08:06:58"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 31,
+    "FacilityName": "Ray-Cam Co-operative Centre",
+    "FacilityAddress": "920 E Hastings St",
+    "Location": "Gymnasium",
+    "Latitude": 49.2807396,
+    "Longitude": -123.0843025,
+    "AdvanceOnly": false,
+    "LocalArea": "Strathcona",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "476-427-4609",
+    "Email": "mmcrobertu@deliciousdays.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 11:18:31",
+        "endTime": "2018/05/16 16:49:04"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 23:58:25",
+        "endTime": "2018/05/15 21:12:15"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 32,
+    "FacilityName": "Vancouver Aboriginal Friendship Centre",
+    "FacilityAddress": "1607 E Hastings St",
+    "Location": "Judge Alfred Scow Gym",
+    "Latitude": 49.28155377,
+    "Longitude": -123.0714649,
+    "AdvanceOnly": false,
+    "LocalArea": "Grandview-Woodland",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "998-999-2937",
+    "Email": "tbrongerv@webs.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 22:48:24",
+        "endTime": "2018/05/15 15:30:41"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 18:44:34",
+        "endTime": "2018/05/14 06:47:20"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 33,
+    "FacilityName": "Britannia Community Services Centre",
+    "FacilityAddress": "1661 Napier St",
+    "Location": "Gymnasium D",
+    "Latitude": 49.27564861,
+    "Longitude": -123.0737717,
+    "AdvanceOnly": false,
+    "LocalArea": "Grandview-Woodland",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "536-972-4682",
+    "Email": "dbacopw@spiegel.de",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 14:15:51",
+        "endTime": "2018/05/17 15:43:55"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 09:15:59",
+        "endTime": "2018/05/17 06:40:15"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 34,
+    "FacilityName": "Grandview/¿uuqinak'uuh Elementary School",
+    "FacilityAddress": "2055 Woodland Drive",
+    "Location": "Gymnasium",
+    "Latitude": 49.26610986,
+    "Longitude": -123.0746117,
+    "AdvanceOnly": false,
+    "LocalArea": "Grandview-Woodland",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "721-474-7957",
+    "Email": "mkettlestringesx@usnews.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 17:29:45",
+        "endTime": "2018/05/16 23:16:45"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 11:47:34",
+        "endTime": "2018/05/16 17:32:48"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 35,
+    "FacilityName": "Queen Victoria Secord Annex",
+    "FacilityAddress": "1850 E 3rd Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.26718096,
+    "Longitude": -123.0664999,
+    "AdvanceOnly": false,
+    "LocalArea": "Grandview-Woodland",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "722-664-3979",
+    "Email": "hkelky@vimeo.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 12:35:45",
+        "endTime": "2018/05/15 21:59:48"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 11:20:01",
+        "endTime": "2018/05/15 08:03:47"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 36,
+    "FacilityName": "Lord Nelson Elementary School",
+    "FacilityAddress": "2235 Kitchener St",
+    "Location": "Gymnasium",
+    "Latitude": 49.27249974,
+    "Longitude": -123.0594093,
+    "AdvanceOnly": false,
+    "LocalArea": "Grandview-Woodland",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "918-124-6382",
+    "Email": "kbrinsonz@1688.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:50:25",
+        "endTime": "2018/05/16 21:01:03"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 17:29:00",
+        "endTime": "2018/05/14 12:36:57"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 37,
+    "FacilityName": "Templeton Secondary School",
+    "FacilityAddress": "727 Templeton Drive",
+    "Location": "Main Gymnasium",
+    "Latitude": 49.27791751,
+    "Longitude": -123.0625729,
+    "AdvanceOnly": false,
+    "LocalArea": "Grandview-Woodland",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "629-800-9565",
+    "Email": "momullen10@clickbank.net",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 23:29:46",
+        "endTime": "2018/05/14 11:09:41"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 23:01:48",
+        "endTime": "2018/05/15 23:00:55"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 38,
+    "FacilityName": "Tillicum Elementary Annex (Hastings)",
+    "FacilityAddress": "2450 Cambridge St",
+    "Location": "Gymnasium",
+    "Latitude": 49.28624995,
+    "Longitude": -123.0554243,
+    "AdvanceOnly": false,
+    "LocalArea": "Hastings-Sunrise",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "385-931-3317",
+    "Email": "eswatradge11@multiply.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 22:51:27",
+        "endTime": "2018/05/14 18:49:08"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 11:58:17",
+        "endTime": "2018/05/14 07:57:52"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 39,
+    "FacilityName": "Hastings Elementary School",
+    "FacilityAddress": "2625 Franklin St",
+    "Location": "Gymnasium",
+    "Latitude": 49.28252409,
+    "Longitude": -123.050642,
+    "AdvanceOnly": false,
+    "LocalArea": "Hastings-Sunrise",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "456-554-1140",
+    "Email": "nledgley12@apache.org",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 07:38:35",
+        "endTime": "2018/05/15 21:36:31"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 13:26:37",
+        "endTime": "2018/05/16 17:59:36"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 40,
+    "FacilityName": "Hastings Community Centre",
+    "FacilityAddress": "3096 E Hastings St",
+    "Location": "Gymnasium",
+    "Latitude": 49.28067,
+    "Longitude": -123.03942,
+    "AdvanceOnly": false,
+    "LocalArea": "Hastings-Sunrise",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "450-952-3927",
+    "Email": "bluxton13@youtube.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 23:37:49",
+        "endTime": "2018/05/15 17:25:47"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 06:24:33",
+        "endTime": "2018/05/14 12:52:42"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 41,
+    "FacilityName": "Sir John Franklin Elementary School",
+    "FacilityAddress": "250 Skeena St",
+    "Location": "Gymnasium",
+    "Latitude": 49.28254391,
+    "Longitude": -123.0270231,
+    "AdvanceOnly": false,
+    "LocalArea": "Hastings-Sunrise",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "289-609-5028",
+    "Email": "rnarramore14@bing.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 13:09:22",
+        "endTime": "2018/05/14 15:14:46"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 19:04:06",
+        "endTime": "2018/05/15 21:34:07"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 42,
+    "FacilityName": "Garibaldi Elementary Annex",
+    "FacilityAddress": "1025 Slocan St",
+    "Location": "Gymnasium",
+    "Latitude": 49.2753899,
+    "Longitude": -123.0500498,
+    "AdvanceOnly": false,
+    "LocalArea": "Hastings-Sunrise",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "721-224-1843",
+    "Email": "ecallaby15@sbwire.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 09:57:52",
+        "endTime": "2018/05/15 22:37:51"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 19:10:06",
+        "endTime": "2018/05/14 08:39:55"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 43,
+    "FacilityName": "Chief Maquinna Elementary School",
+    "FacilityAddress": "2684 E 2nd Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.26803101,
+    "Longitude": -123.0507999,
+    "AdvanceOnly": false,
+    "LocalArea": "Hastings-Sunrise",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "631-503-4539",
+    "Email": "asaing16@comsenz.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 16:31:50",
+        "endTime": "2018/05/14 15:36:31"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 09:48:00",
+        "endTime": "2018/05/16 15:41:17"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 44,
+    "FacilityName": "Thunderbird Elementary School",
+    "FacilityAddress": "2325 Cassiar St",
+    "Location": "Gymnasium",
+    "Latitude": 49.26360784,
+    "Longitude": -123.0321037,
+    "AdvanceOnly": false,
+    "LocalArea": "Hastings-Sunrise",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "523-680-2156",
+    "Email": "dfishby17@nps.gov",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 16:06:55",
+        "endTime": "2018/05/15 10:46:26"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 21:31:35",
+        "endTime": "2018/05/16 06:12:53"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 45,
+    "FacilityName": "Broadway Church",
+    "FacilityAddress": "2700 E Broadway",
+    "Location": "Gymnasium",
+    "Latitude": 49.26113657,
+    "Longitude": -123.0489298,
+    "AdvanceOnly": false,
+    "LocalArea": "Renfrew-Collingwood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "692-856-0899",
+    "Email": "tharbison18@patch.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 23:11:21",
+        "endTime": "2018/05/15 16:22:55"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 21:21:23",
+        "endTime": "2018/05/17 13:16:51"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 46,
+    "FacilityName": "Renfrew Park Community Centre",
+    "FacilityAddress": "2929 E 22nd Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.25242491,
+    "Longitude": -123.0429581,
+    "AdvanceOnly": false,
+    "LocalArea": "Renfrew-Collingwood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "210-492-4302",
+    "Email": "sbiggans19@altervista.org",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 21:36:12",
+        "endTime": "2018/05/15 21:07:39"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 12:18:24",
+        "endTime": "2018/05/16 11:57:25"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 47,
+    "FacilityName": "Renfrew Elementary School",
+    "FacilityAddress": "3315 E 22nd Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.25074939,
+    "Longitude": -123.0319542,
+    "AdvanceOnly": false,
+    "LocalArea": "Renfrew-Collingwood",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "825-293-0710",
+    "Email": "jbroadbear1a@europa.eu",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 17:34:35",
+        "endTime": "2018/05/16 15:12:02"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 19:31:00",
+        "endTime": "2018/05/17 10:40:20"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 48,
+    "FacilityName": "Windermere Secondary School",
+    "FacilityAddress": "3155 E 27th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.2474729,
+    "Longitude": -123.0378463,
+    "AdvanceOnly": false,
+    "LocalArea": "Renfrew-Collingwood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "521-727-4739",
+    "Email": "mnansom1b@go.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 11:13:23",
+        "endTime": "2018/05/16 14:27:49"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 20:16:46",
+        "endTime": "2018/05/17 23:47:34"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 49,
+    "FacilityName": "John Norquay Elementary School",
+    "FacilityAddress": "4710 Slocan St",
+    "Location": "Large Gymnasium",
+    "Latitude": 49.24149653,
+    "Longitude": -123.0511285,
+    "AdvanceOnly": false,
+    "LocalArea": "Renfrew-Collingwood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "101-334-1185",
+    "Email": "iwank1c@princeton.edu",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 21:16:07",
+        "endTime": "2018/05/14 13:20:09"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 18:22:28",
+        "endTime": "2018/05/16 14:12:28"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 50,
+    "FacilityName": "George T. Cunningham Elementary School",
+    "FacilityAddress": "2330 E 37th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.23682457,
+    "Longitude": -123.0574502,
+    "AdvanceOnly": false,
+    "LocalArea": "Renfrew-Collingwood",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "622-905-9823",
+    "Email": "cmarchenko1d@apache.org",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 13:48:05",
+        "endTime": "2018/05/16 06:49:13"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 21:13:01",
+        "endTime": "2018/05/16 23:53:12"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 51,
+    "FacilityName": "Collingwood Neighbourhood House",
+    "FacilityAddress": "5288 Joyce St",
+    "Location": "Gymnasium",
+    "Latitude": 49.23661345,
+    "Longitude": -123.0328014,
+    "AdvanceOnly": false,
+    "LocalArea": "Renfrew-Collingwood",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "242-623-0488",
+    "Email": "hsanbrook1e@sfgate.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 16:31:33",
+        "endTime": "2018/05/14 17:00:48"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 18:03:53",
+        "endTime": "2018/05/16 10:04:00"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 52,
+    "FacilityName": "Dr. H. N. MacCorkindale Elementary School",
+    "FacilityAddress": "6100 Battison St",
+    "Location": "Gymnasium",
+    "Latitude": 49.22774305,
+    "Longitude": -123.0293788,
+    "AdvanceOnly": false,
+    "LocalArea": "Killarney",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "139-944-8846",
+    "Email": "bgirsch1f@php.net",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 21:18:27",
+        "endTime": "2018/05/17 07:34:31"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 19:34:59",
+        "endTime": "2018/05/16 22:45:04"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 53,
+    "FacilityName": "Champlain Heights Community Centre",
+    "FacilityAddress": "3350 Maquinna Drive",
+    "Location": "Gymnasium",
+    "Latitude": 49.21444807,
+    "Longitude": -123.0320664,
+    "AdvanceOnly": false,
+    "LocalArea": "Killarney",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "938-232-3833",
+    "Email": "acharlewood1g@webmd.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 07:55:54",
+        "endTime": "2018/05/14 18:01:37"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 18:26:15",
+        "endTime": "2018/05/17 09:09:04"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 54,
+    "FacilityName": "Captain James Cook Elementary School",
+    "FacilityAddress": "3340 E 54th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.21900444,
+    "Longitude": -123.0358143,
+    "AdvanceOnly": false,
+    "LocalArea": "Killarney",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "574-391-1343",
+    "Email": "bcolbrun1h@blogspot.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 11:22:02",
+        "endTime": "2018/05/17 11:56:14"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 09:29:57",
+        "endTime": "2018/05/16 14:14:43"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 55,
+    "FacilityName": "École Anne-Hébert Elementary",
+    "FacilityAddress": "7051 Killarney St",
+    "Location": "Gymnasium",
+    "Latitude": 49.21926351,
+    "Longitude": -123.0463917,
+    "AdvanceOnly": false,
+    "LocalArea": "Killarney",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "674-651-6095",
+    "Email": "fmaffi1i@bizjournals.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 23:01:22",
+        "endTime": "2018/05/17 20:05:25"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 13:50:32",
+        "endTime": "2018/05/15 18:26:10"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 56,
+    "FacilityName": "Killarney Community Centre",
+    "FacilityAddress": "6260 Killarney St",
+    "Location": "Gymnasium",
+    "Latitude": 49.22740993,
+    "Longitude": -123.0443906,
+    "AdvanceOnly": false,
+    "LocalArea": "Killarney",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "942-682-0581",
+    "Email": "shartly1j@printfriendly.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 22:25:07",
+        "endTime": "2018/05/14 06:54:02"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 07:07:40",
+        "endTime": "2018/05/14 18:35:04"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 57,
+    "FacilityName": "Waverley Elementary School",
+    "FacilityAddress": "6111 Elliott St",
+    "Location": "Gymnasium",
+    "Latitude": 49.22770488,
+    "Longitude": -123.0554926,
+    "AdvanceOnly": false,
+    "LocalArea": "Victoria-Fraserview",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "205-292-9559",
+    "Email": "kgumme1k@51.la",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 06:26:22",
+        "endTime": "2018/05/17 06:39:45"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 08:34:59",
+        "endTime": "2018/05/16 08:54:38"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 58,
+    "FacilityName": "David Oppenheimer Elementary School",
+    "FacilityAddress": "2421 Scarboro Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.21364397,
+    "Longitude": -123.0579581,
+    "AdvanceOnly": false,
+    "LocalArea": "Victoria-Fraserview",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "432-462-6666",
+    "Email": "rachrameev1l@fastcompany.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 08:05:53",
+        "endTime": "2018/05/15 07:57:14"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 06:01:53",
+        "endTime": "2018/05/16 19:09:24"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 59,
+    "FacilityName": "David Thompson Secondary School",
+    "FacilityAddress": "1755 E 55th Avenue",
+    "Location": "Cafeteria",
+    "Latitude": 49.22088897,
+    "Longitude": -123.0705456,
+    "AdvanceOnly": false,
+    "LocalArea": "Victoria-Fraserview",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "487-240-9262",
+    "Email": "jkilkenny1m@yellowpages.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 23:18:01",
+        "endTime": "2018/05/15 18:47:33"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 15:29:35",
+        "endTime": "2018/05/17 18:08:47"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 60,
+    "FacilityName": "Gladstone Secondary School",
+    "FacilityAddress": "4105 Gladstone St",
+    "Location": "Large Gymnasium (A120)",
+    "Latitude": 49.24861121,
+    "Longitude": -123.0616134,
+    "AdvanceOnly": false,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "557-292-2376",
+    "Email": "dwatterson1n@goo.ne.jp",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 22:16:16",
+        "endTime": "2018/05/16 22:06:57"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 16:56:36",
+        "endTime": "2018/05/14 15:36:08"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 61,
+    "FacilityName": "Trout Lake Community Centre",
+    "FacilityAddress": "3360 Victoria Drive",
+    "Location": "Gymnasium",
+    "Latitude": 49.255,
+    "Longitude": -123.065,
+    "AdvanceOnly": false,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "239-992-1302",
+    "Email": "wdenzilow1o@mozilla.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 12:17:38",
+        "endTime": "2018/05/16 16:18:24"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 10:12:08",
+        "endTime": "2018/05/15 07:46:22"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 62,
+    "FacilityName": "Laura Secord Elementary School",
+    "FacilityAddress": "2500 Lakewood Drive",
+    "Location": "Gymnasium",
+    "Latitude": 49.26173677,
+    "Longitude": -123.0607351,
+    "AdvanceOnly": false,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "561-483-4045",
+    "Email": "djosselsohn1p@shutterfly.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 14:32:03",
+        "endTime": "2018/05/16 06:45:50"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 09:43:00",
+        "endTime": "2018/05/15 08:13:17"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 63,
+    "FacilityName": "Queen Alexandra Elementary School",
+    "FacilityAddress": "1300 E Broadway",
+    "Location": "Gymnasium",
+    "Latitude": 49.26189678,
+    "Longitude": -123.0764421,
+    "AdvanceOnly": false,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "210-611-0060",
+    "Email": "mdurrett1q@blogs.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 14:31:50",
+        "endTime": "2018/05/15 11:24:44"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:17:50",
+        "endTime": "2018/05/16 08:44:51"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 64,
+    "FacilityName": "Lord Selkirk Elementary School",
+    "FacilityAddress": "1750 E 22nd Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.24967959,
+    "Longitude": -123.0687764,
+    "AdvanceOnly": false,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "819-228-0072",
+    "Email": "rhubball1r@intel.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 21:13:30",
+        "endTime": "2018/05/16 17:01:03"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 14:43:05",
+        "endTime": "2018/05/14 12:03:06"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 65,
+    "FacilityName": "Selkirk Elementary Annex",
+    "FacilityAddress": "4444 Dumfries St",
+    "Location": "Gymnasium",
+    "Latitude": 49.24531477,
+    "Longitude": -123.07279,
+    "AdvanceOnly": false,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "785-270-3686",
+    "Email": "cquested1s@sbwire.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 08:20:37",
+        "endTime": "2018/05/15 18:49:44"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 16:50:53",
+        "endTime": "2018/05/17 22:19:47"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 66,
+    "FacilityName": "Kensington Community Centre",
+    "FacilityAddress": "5175 Dumfries St",
+    "Location": "Gymnasium",
+    "Latitude": 49.23848156,
+    "Longitude": -123.0754802,
+    "AdvanceOnly": false,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "843-632-8644",
+    "Email": "kgeist1t@whitehouse.gov",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 06:24:18",
+        "endTime": "2018/05/17 17:26:06"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 23:24:43",
+        "endTime": "2018/05/17 23:26:28"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 67,
+    "FacilityName": "McBride Elementary Annex",
+    "FacilityAddress": "4750 St. Catherines St",
+    "Location": "Gymnasium",
+    "Latitude": 49.24184089,
+    "Longitude": -123.0850238,
+    "AdvanceOnly": false,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "806-735-9495",
+    "Email": "lveale1u@behance.net",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 23:05:10",
+        "endTime": "2018/05/14 23:09:27"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 10:40:48",
+        "endTime": "2018/05/16 13:22:32"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 68,
+    "FacilityName": "Charles Dickens Elementary Annex",
+    "FacilityAddress": "3877 Glen Drive",
+    "Location": "Gymnasium",
+    "Latitude": 49.25020997,
+    "Longitude": -123.0828519,
+    "AdvanceOnly": false,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "504-409-4656",
+    "Email": "rduggon1v@ebay.co.uk",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 09:04:10",
+        "endTime": "2018/05/14 13:40:01"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 13:15:12",
+        "endTime": "2018/05/16 15:07:31"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 69,
+    "FacilityName": "David Livingstone Elementary School",
+    "FacilityAddress": "315 E 23rd Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.25067363,
+    "Longitude": -123.0976776,
+    "AdvanceOnly": false,
+    "LocalArea": "Riley Park",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "860-282-4486",
+    "Email": "spisculli1w@deliciousdays.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 18:16:07",
+        "endTime": "2018/05/14 17:35:54"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 07:29:11",
+        "endTime": "2018/05/16 20:38:35"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 70,
+    "FacilityName": "General Wolfe Elementary School",
+    "FacilityAddress": "4251 Ontario St",
+    "Location": "Gymnasium",
+    "Latitude": 49.24731231,
+    "Longitude": -123.1062834,
+    "AdvanceOnly": false,
+    "LocalArea": "Riley Park",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "710-288-5020",
+    "Email": "dmaruska1x@tamu.edu",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 16:12:04",
+        "endTime": "2018/05/15 20:45:18"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 11:44:35",
+        "endTime": "2018/05/14 06:48:35"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 71,
+    "FacilityName": "Hillcrest Centre",
+    "FacilityAddress": "4575 Clancy Loranger Way",
+    "Location": "Gymnasium",
+    "Latitude": 49.24477338,
+    "Longitude": -123.108197,
+    "AdvanceOnly": false,
+    "LocalArea": "Riley Park",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "713-932-2375",
+    "Email": "tgreenland1y@nymag.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 08:03:17",
+        "endTime": "2018/05/16 16:57:21"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 21:54:11",
+        "endTime": "2018/05/16 22:54:09"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 72,
+    "FacilityName": "General Brock Elementary School",
+    "FacilityAddress": "4860 Main St",
+    "Location": "Gymnasium",
+    "Latitude": 49.24154285,
+    "Longitude": -123.1003802,
+    "AdvanceOnly": false,
+    "LocalArea": "Riley Park",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "629-854-5907",
+    "Email": "sismail1z@wiley.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 10:18:10",
+        "endTime": "2018/05/15 19:59:49"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 09:18:58",
+        "endTime": "2018/05/16 13:05:40"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 73,
+    "FacilityName": "John Oliver Secondary School",
+    "FacilityAddress": "530 E 41st Avenue",
+    "Location": "Girls Gymnasium",
+    "Latitude": 49.23197931,
+    "Longitude": -123.0926825,
+    "AdvanceOnly": false,
+    "LocalArea": "Sunset",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "865-743-1839",
+    "Email": "atreverton20@t.co",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 20:16:37",
+        "endTime": "2018/05/16 18:11:06"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 10:15:13",
+        "endTime": "2018/05/16 11:44:13"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 74,
+    "FacilityName": "Culloden Court Community Hall",
+    "FacilityAddress": "1375 E 47th Avenue",
+    "Location": "Community Room",
+    "Latitude": 49.22835509,
+    "Longitude": -123.078585,
+    "AdvanceOnly": false,
+    "LocalArea": "Sunset",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "172-748-8175",
+    "Email": "smcgriele21@washington.edu",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 10:00:29",
+        "endTime": "2018/05/17 08:07:17"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 17:58:40",
+        "endTime": "2018/05/15 07:36:20"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 75,
+    "FacilityName": "Sunset Community Centre",
+    "FacilityAddress": "6810 Main St",
+    "Location": "Gymnasium",
+    "Latitude": 49.22286659,
+    "Longitude": -123.1006104,
+    "AdvanceOnly": false,
+    "LocalArea": "Sunset",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "506-426-5608",
+    "Email": "lwoollcott22@thetimes.co.uk",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 13:11:33",
+        "endTime": "2018/05/14 16:30:04"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 06:05:23",
+        "endTime": "2018/05/17 11:41:16"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 76,
+    "FacilityName": "Moberly Arts & Cultural Centre",
+    "FacilityAddress": "7646 Prince Albert St",
+    "Location": "Main Hall",
+    "Latitude": 49.21558856,
+    "Longitude": -123.0865597,
+    "AdvanceOnly": false,
+    "LocalArea": "Sunset",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "396-143-5739",
+    "Email": "iosmond23@soup.io",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 11:09:26",
+        "endTime": "2018/05/16 15:35:55"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 18:55:22",
+        "endTime": "2018/05/16 10:38:31"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 77,
+    "FacilityName": "Khalsa Diwan Society",
+    "FacilityAddress": "8000 Ross St",
+    "Location": "Museum Hall",
+    "Latitude": 49.21190169,
+    "Longitude": -123.08249,
+    "AdvanceOnly": false,
+    "LocalArea": "Sunset",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "516-170-5690",
+    "Email": "challworth24@moonfruit.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 08:52:06",
+        "endTime": "2018/05/14 08:47:47"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 21:59:44",
+        "endTime": "2018/05/16 08:49:12"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 78,
+    "FacilityName": "Westside Baptist Church",
+    "FacilityAddress": "8506 Ash St",
+    "Location": "Main Hall",
+    "Latitude": 49.20815078,
+    "Longitude": -123.1185288,
+    "AdvanceOnly": false,
+    "LocalArea": "Marpole",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "469-575-5994",
+    "Email": "meamer25@msu.edu",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 22:48:08",
+        "endTime": "2018/05/14 22:35:51"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 20:30:16",
+        "endTime": "2018/05/14 15:26:04"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 79,
+    "FacilityName": "Scottish Cultural Centre",
+    "FacilityAddress": "8886 Hudson St",
+    "Location": "Caledonian Hall",
+    "Latitude": 49.20444924,
+    "Longitude": -123.1343865,
+    "AdvanceOnly": false,
+    "LocalArea": "Marpole",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "826-339-3977",
+    "Email": "vtarte26@netlog.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 12:37:12",
+        "endTime": "2018/05/14 22:24:33"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 16:56:16",
+        "endTime": "2018/05/15 06:08:01"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 80,
+    "FacilityName": "Marpole United Church",
+    "FacilityAddress": "1296 W 67th Avenue",
+    "Location": "Sanctuary",
+    "Latitude": 49.2103691,
+    "Longitude": -123.133945,
+    "AdvanceOnly": false,
+    "LocalArea": "Marpole",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "737-974-3185",
+    "Email": "bsauter27@dedecms.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 11:59:45",
+        "endTime": "2018/05/17 12:11:34"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 22:05:34",
+        "endTime": "2018/05/17 08:03:08"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 81,
+    "FacilityName": "Marpole - Oakridge Community Centre",
+    "FacilityAddress": "990 W 59th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.21623758,
+    "Longitude": -123.128962,
+    "AdvanceOnly": false,
+    "LocalArea": "Marpole",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "946-578-1271",
+    "Email": "ckiraly28@odnoklassniki.ru",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 15:25:16",
+        "endTime": "2018/05/14 20:49:36"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 23:06:07",
+        "endTime": "2018/05/15 15:05:17"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 82,
+    "FacilityName": "Trinity Baptist Church",
+    "FacilityAddress": "1460 W 49th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.22610992,
+    "Longitude": -123.1391615,
+    "AdvanceOnly": false,
+    "LocalArea": "Oakridge",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "851-969-8487",
+    "Email": "lcrumby29@google.es",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 09:35:07",
+        "endTime": "2018/05/17 18:19:36"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 13:31:46",
+        "endTime": "2018/05/15 09:22:18"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 83,
+    "FacilityName": "Langara College",
+    "FacilityAddress": "100 W 49th Avenue",
+    "Location": "South Side Cafeteria",
+    "Latitude": 49.22447101,
+    "Longitude": -123.108811,
+    "AdvanceOnly": false,
+    "LocalArea": "Oakridge",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "138-419-6400",
+    "Email": "kisgate2a@blogger.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 10:43:22",
+        "endTime": "2018/05/16 08:19:20"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 08:54:18",
+        "endTime": "2018/05/15 07:51:24"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 84,
+    "FacilityName": "Sir William Van Horne Elementary School",
+    "FacilityAddress": "5855 Ontario St",
+    "Location": "Gymnasium",
+    "Latitude": 49.23179484,
+    "Longitude": -123.1069441,
+    "AdvanceOnly": false,
+    "LocalArea": "Oakridge",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "434-889-8824",
+    "Email": "hsingers2b@photobucket.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 06:42:03",
+        "endTime": "2018/05/15 18:29:11"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 08:47:53",
+        "endTime": "2018/05/15 06:17:29"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 85,
+    "FacilityName": "Oakridge Centre",
+    "FacilityAddress": "650 W 41st Avenue",
+    "Location": "Auditorium",
+    "Latitude": 49.23206524,
+    "Longitude": -123.1188548,
+    "AdvanceOnly": false,
+    "LocalArea": "Oakridge",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "677-779-2883",
+    "Email": "wsexcey2c@telegraph.co.uk",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 08:57:58",
+        "endTime": "2018/05/14 17:05:07"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 11:10:27",
+        "endTime": "2018/05/16 06:36:06"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 86,
+    "FacilityName": "Eric Hamber Secondary School",
+    "FacilityAddress": "5025 Willow St",
+    "Location": "Gymnasium",
+    "Latitude": 49.24021776,
+    "Longitude": -123.1257512,
+    "AdvanceOnly": false,
+    "LocalArea": "South Cambie",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "343-462-6169",
+    "Email": "bmaccaffery2d@scientificamerican.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 15:46:53",
+        "endTime": "2018/05/14 11:22:56"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 08:34:32",
+        "endTime": "2018/05/15 17:19:05"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 87,
+    "FacilityName": "Emily Carr Elementary School",
+    "FacilityAddress": "4070 Oak St",
+    "Location": "Gymnasium",
+    "Latitude": 49.24987075,
+    "Longitude": -123.126073,
+    "AdvanceOnly": false,
+    "LocalArea": "South Cambie",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "425-182-5849",
+    "Email": "dygo2e@hubpages.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 19:33:08",
+        "endTime": "2018/05/16 18:01:37"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 18:09:04",
+        "endTime": "2018/05/14 12:49:09"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 88,
+    "FacilityName": "Douglas Park Community Centre",
+    "FacilityAddress": "801 W 22nd Avenue",
+    "Location": "Auditorium",
+    "Latitude": 49.25291725,
+    "Longitude": -123.1212774,
+    "AdvanceOnly": false,
+    "LocalArea": "South Cambie",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "735-143-6651",
+    "Email": "clindmark2f@comsenz.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 21:03:45",
+        "endTime": "2018/05/17 06:08:49"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 14:45:32",
+        "endTime": "2018/05/15 09:41:26"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 89,
+    "FacilityName": "Fairview Baptist Church",
+    "FacilityAddress": "1708 W 16th Avenue",
+    "Location": "Daycare",
+    "Latitude": 49.25684803,
+    "Longitude": -123.1443963,
+    "AdvanceOnly": false,
+    "LocalArea": "Shaughnessy",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "488-144-2633",
+    "Email": "lgrayson2g@last.fm",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 19:15:52",
+        "endTime": "2018/05/15 12:50:42"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 07:19:47",
+        "endTime": "2018/05/17 11:39:52"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 90,
+    "FacilityName": "Shaughnessy Elementary School",
+    "FacilityAddress": "4250 Marguerite St",
+    "Location": "Gymnasium",
+    "Latitude": 49.24844651,
+    "Longitude": -123.1437965,
+    "AdvanceOnly": false,
+    "LocalArea": "Shaughnessy",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "271-586-2103",
+    "Email": "gallso2h@jiathis.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 09:45:54",
+        "endTime": "2018/05/17 09:43:06"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 23:27:08",
+        "endTime": "2018/05/14 22:05:06"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 91,
+    "FacilityName": "Point Grey Secondary School",
+    "FacilityAddress": "5350 East Boulevard",
+    "Location": "Cafeteria",
+    "Latitude": 49.23728904,
+    "Longitude": -123.1534306,
+    "AdvanceOnly": false,
+    "LocalArea": "Shaughnessy",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "136-932-8102",
+    "Email": "mmicallef2i@shop-pro.jp",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 18:51:07",
+        "endTime": "2018/05/16 10:41:36"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 23:28:23",
+        "endTime": "2018/05/14 09:31:09"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 92,
+    "FacilityName": "Kerrisdale Community Centre",
+    "FacilityAddress": "5851 West Boulevard",
+    "Location": "Gymnasium",
+    "Latitude": 49.23318536,
+    "Longitude": -123.1570929,
+    "AdvanceOnly": false,
+    "LocalArea": "Kerrisdale",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "784-100-5919",
+    "Email": "nendon2j@google.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 22:25:20",
+        "endTime": "2018/05/14 13:46:48"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 10:03:18",
+        "endTime": "2018/05/14 16:28:59"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 93,
+    "FacilityName": "Maple Grove Elementary School",
+    "FacilityAddress": "6199 Cypress St",
+    "Location": "Gymnasium",
+    "Latitude": 49.22984389,
+    "Longitude": -123.1502112,
+    "AdvanceOnly": false,
+    "LocalArea": "Kerrisdale",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "860-969-1305",
+    "Email": "ckentish2k@bloglines.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 23:44:29",
+        "endTime": "2018/05/17 16:10:30"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 06:23:01",
+        "endTime": "2018/05/16 10:59:57"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 94,
+    "FacilityName": "Dr. R. E. McKechnie Elementary School",
+    "FacilityAddress": "7455 Maple St",
+    "Location": "Gymnasium",
+    "Latitude": 49.21763055,
+    "Longitude": -123.1535505,
+    "AdvanceOnly": false,
+    "LocalArea": "Kerrisdale",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "122-127-4268",
+    "Email": "sgladyer2l@ezinearticles.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 10:21:05",
+        "endTime": "2018/05/17 09:32:01"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 17:15:40",
+        "endTime": "2018/05/15 23:32:41"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 95,
+    "FacilityName": "Kerrisdale Elementary Annex",
+    "FacilityAddress": "3250 W 43rd Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.23282073,
+    "Longitude": -123.1769391,
+    "AdvanceOnly": false,
+    "LocalArea": "Kerrisdale",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "570-912-9965",
+    "Email": "adennerley2m@independent.co.uk",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 14:41:46",
+        "endTime": "2018/05/17 09:31:14"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 17:15:32",
+        "endTime": "2018/05/16 10:59:53"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 96,
+    "FacilityName": "Prince of Wales Secondary School",
+    "FacilityAddress": "2250 Eddington Drive",
+    "Location": "Boy's Gymnasium",
+    "Latitude": 49.24547178,
+    "Longitude": -123.1572844,
+    "AdvanceOnly": false,
+    "LocalArea": "Arbutus-Ridge",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "914-781-2768",
+    "Email": "dkivelle2n@lulu.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 12:46:47",
+        "endTime": "2018/05/14 16:07:42"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 17:28:40",
+        "endTime": "2018/05/15 20:49:25"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 97,
+    "FacilityName": "Trafalgar Elementary School",
+    "FacilityAddress": "4170 Trafalgar St",
+    "Location": "Gymnasium",
+    "Latitude": 49.25012956,
+    "Longitude": -123.1642634,
+    "AdvanceOnly": false,
+    "LocalArea": "Arbutus-Ridge",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "525-446-4691",
+    "Email": "sadriani2o@boston.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 06:53:58",
+        "endTime": "2018/05/17 14:19:34"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 17:29:39",
+        "endTime": "2018/05/15 18:37:52"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 98,
+    "FacilityName": "Carnarvon Elementary School",
+    "FacilityAddress": "3400 Balaclava St",
+    "Location": "Activity Room",
+    "Latitude": 49.25607118,
+    "Longitude": -123.173674,
+    "AdvanceOnly": false,
+    "LocalArea": "Arbutus-Ridge",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "160-268-2224",
+    "Email": "gmostin2p@prweb.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 14:46:36",
+        "endTime": "2018/05/16 10:04:19"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 23:56:13",
+        "endTime": "2018/05/17 17:35:22"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 99,
+    "FacilityName": "Kitsilano War Memorial Community Centre",
+    "FacilityAddress": "2690 Larch St",
+    "Location": "Gymnasium",
+    "Latitude": 49.26205535,
+    "Longitude": -123.1601056,
+    "AdvanceOnly": false,
+    "LocalArea": "Kitsilano",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "224-142-3025",
+    "Email": "wyersin2q@cbc.ca",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 23:15:18",
+        "endTime": "2018/05/14 10:43:57"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 20:34:30",
+        "endTime": "2018/05/16 22:38:57"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 100,
+    "FacilityName": "Lord Tennyson Elementary School",
+    "FacilityAddress": "1936 W 10th Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.2623451,
+    "Longitude": -123.1493672,
+    "AdvanceOnly": false,
+    "LocalArea": "Kitsilano",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "607-810-5392",
+    "Email": "tgrimwade2r@va.gov",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 07:10:05",
+        "endTime": "2018/05/14 15:38:55"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 17:34:58",
+        "endTime": "2018/05/14 10:39:41"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 101,
+    "FacilityName": "Henry Hudson Elementary School",
+    "FacilityAddress": "1551 Cypress St",
+    "Location": "Gymnasium",
+    "Latitude": 49.27203844,
+    "Longitude": -123.1486629,
+    "AdvanceOnly": false,
+    "LocalArea": "Kitsilano",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "954-567-3628",
+    "Email": "drothchild2s@loc.gov",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 09:59:07",
+        "endTime": "2018/05/17 07:59:33"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 19:39:22",
+        "endTime": "2018/05/14 20:11:26"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 102,
+    "FacilityName": "Kitsilano Neighbourhood House",
+    "FacilityAddress": "2305 W 7th Avenue",
+    "Location": "Community Hall",
+    "Latitude": 49.26590632,
+    "Longitude": -123.1580628,
+    "AdvanceOnly": false,
+    "LocalArea": "Kitsilano",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "821-877-1068",
+    "Email": "adelmonti2t@1688.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 12:51:20",
+        "endTime": "2018/05/14 10:20:06"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 06:41:44",
+        "endTime": "2018/05/15 07:15:31"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 103,
+    "FacilityName": "General Gordon Elementary School",
+    "FacilityAddress": "2268 Bayswater St",
+    "Location": "Gymnasium",
+    "Latitude": 49.26594712,
+    "Longitude": -123.1703949,
+    "AdvanceOnly": false,
+    "LocalArea": "Kitsilano",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "608-549-4598",
+    "Email": "ilorenzetto2u@bloomberg.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 13:22:54",
+        "endTime": "2018/05/15 16:58:51"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 23:45:45",
+        "endTime": "2018/05/14 23:34:13"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 104,
+    "FacilityName": "Redemption Church",
+    "FacilityAddress": "3512 W 7th Avenue",
+    "Location": "Sanctuary",
+    "Latitude": 49.26576521,
+    "Longitude": -123.1820873,
+    "AdvanceOnly": false,
+    "LocalArea": "Kitsilano",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "621-789-2113",
+    "Email": "cguidera2v@cargocollective.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 13:23:33",
+        "endTime": "2018/05/14 07:55:23"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 15:21:12",
+        "endTime": "2018/05/14 20:54:59"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 105,
+    "FacilityName": "West Point Grey Community Centre",
+    "FacilityAddress": "4397 W 2nd Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.27179717,
+    "Longitude": -123.2045335,
+    "AdvanceOnly": false,
+    "LocalArea": "West Point Grey",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "831-550-8978",
+    "Email": "jbosdet2w@blogs.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 19:29:11",
+        "endTime": "2018/05/17 23:44:14"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 13:01:35",
+        "endTime": "2018/05/17 12:52:54"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 106,
+    "FacilityName": "St. Helen's Anglican Church",
+    "FacilityAddress": "4405 W 8th Avenue",
+    "Location": "Parish Hall",
+    "Latitude": 49.26577148,
+    "Longitude": -123.206642,
+    "AdvanceOnly": false,
+    "LocalArea": "West Point Grey",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "195-113-9255",
+    "Email": "rhamments2x@liveinternet.ru",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 11:07:06",
+        "endTime": "2018/05/17 06:05:06"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 06:12:09",
+        "endTime": "2018/05/16 18:05:55"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 107,
+    "FacilityName": "Lord Byng Secondary School",
+    "FacilityAddress": "3939 W 16th Avenue",
+    "Location": "Girls Gymnasium",
+    "Latitude": 49.25901991,
+    "Longitude": -123.1925809,
+    "AdvanceOnly": false,
+    "LocalArea": "West Point Grey",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "962-450-4660",
+    "Email": "raveling2y@tiny.cc",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 16:55:11",
+        "endTime": "2018/05/17 22:50:21"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 14:16:01",
+        "endTime": "2018/05/14 18:03:19"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 108,
+    "FacilityName": "Queen Elizabeth Elementary School",
+    "FacilityAddress": "4102 W 16th Avenue",
+    "Location": "Auditorium",
+    "Latitude": 49.25717302,
+    "Longitude": -123.2009343,
+    "AdvanceOnly": false,
+    "LocalArea": "Dunbar-Southlands",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "178-248-9604",
+    "Email": "mlippitt2z@wikimedia.org",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 09:50:39",
+        "endTime": "2018/05/14 17:24:24"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 12:41:51",
+        "endTime": "2018/05/15 20:44:14"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 109,
+    "FacilityName": "Lord Kitchener Elementary School",
+    "FacilityAddress": "3455 W King Edward Avenue",
+    "Location": "Gymnasium",
+    "Latitude": 49.25058181,
+    "Longitude": -123.1802456,
+    "AdvanceOnly": false,
+    "LocalArea": "Dunbar-Southlands",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "704-157-8496",
+    "Email": "wsaladin30@last.fm",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 06:39:05",
+        "endTime": "2018/05/15 13:48:38"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 06:22:21",
+        "endTime": "2018/05/15 23:29:34"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 110,
+    "FacilityName": "Dunbar Community Centre",
+    "FacilityAddress": "4747 Dunbar St",
+    "Location": "Gymnasium",
+    "Latitude": 49.24281543,
+    "Longitude": -123.188252,
+    "AdvanceOnly": false,
+    "LocalArea": "Dunbar-Southlands",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "No Parking",
+    "Phone": "871-570-5279",
+    "Email": "rlansdown31@unesco.org",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 11:18:25",
+        "endTime": "2018/05/16 14:14:45"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 23:27:10",
+        "endTime": "2018/05/14 16:29:27"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 111,
+    "FacilityName": "Southlands Elementary School",
+    "FacilityAddress": "5351 Camosun St",
+    "Location": "Gymnasium",
+    "Latitude": 49.23754442,
+    "Longitude": -123.1978035,
+    "AdvanceOnly": false,
+    "LocalArea": "Dunbar-Southlands",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "127-775-2240",
+    "Email": "akivelle32@parallels.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 08:54:32",
+        "endTime": "2018/05/15 06:10:48"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 16:20:44",
+        "endTime": "2018/05/16 20:17:38"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 112,
+    "FacilityName": "Musqueam Community Centre",
+    "FacilityAddress": "6777 Salish Drive",
+    "Location": "Classrooms 1 and 2",
+    "Latitude": 49.22426629,
+    "Longitude": -123.1991879,
+    "AdvanceOnly": false,
+    "LocalArea": "Dunbar-Southlands",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "313-513-8189",
+    "Email": "sandreix33@opensource.org",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 23:28:09",
+        "endTime": "2018/05/15 14:18:19"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 19:06:17",
+        "endTime": "2018/05/17 19:02:17"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 200,
+    "FacilityName": "Vancouver City Hall",
+    "FacilityAddress": "453 W 12th Avenue",
+    "Location": "Townhall Room and Media Centre",
+    "Latitude": 49.26131589,
+    "Longitude": -123.1139357,
+    "AdvanceOnly": true,
+    "LocalArea": "Mount Pleasant",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "215-219-4027",
+    "Email": "kgitting34@blinklist.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 20:38:36",
+        "endTime": "2018/05/16 15:48:04"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 11:44:30",
+        "endTime": "2018/05/17 23:39:16"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 201,
+    "FacilityName": "West End Community Centre",
+    "FacilityAddress": "870 Denman St",
+    "Location": "Auditorium",
+    "Latitude": 49.289919,
+    "Longitude": -123.136089,
+    "AdvanceOnly": true,
+    "LocalArea": "West End",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Underground Parking",
+    "Phone": "872-396-7118",
+    "Email": "ggrimsdyke35@archive.org",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 12:12:35",
+        "endTime": "2018/05/14 19:04:52"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 19:33:24",
+        "endTime": "2018/05/14 16:27:33"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 202,
+    "FacilityName": "Roundhouse Community Arts and Recreation Centre",
+    "FacilityAddress": "181 Roundhouse Mews",
+    "Location": "Gymnasium",
+    "Latitude": 49.27330836,
+    "Longitude": -123.1217472,
+    "AdvanceOnly": true,
+    "LocalArea": "Downtown",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "473-188-8435",
+    "Email": "tpow36@google.com.br",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 07:55:51",
+        "endTime": "2018/05/15 11:20:56"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 18:00:25",
+        "endTime": "2018/05/15 14:15:38"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 203,
+    "FacilityName": "Britannia Community Services Centre",
+    "FacilityAddress": "1661 Napier St",
+    "Location": "Gymnasium D",
+    "Latitude": 49.27564861,
+    "Longitude": -123.0737717,
+    "AdvanceOnly": true,
+    "LocalArea": "Grandview-Woodland",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "210-964-3480",
+    "Email": "hthunderman37@is.gd",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 07:13:59",
+        "endTime": "2018/05/14 19:57:34"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 14:57:14",
+        "endTime": "2018/05/15 21:03:22"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 204,
+    "FacilityName": "Hastings Community Centre",
+    "FacilityAddress": "3096 E Hastings St",
+    "Location": "Auditorium",
+    "Latitude": 49.28067,
+    "Longitude": -123.03942,
+    "AdvanceOnly": true,
+    "LocalArea": "Hastings-Sunrise",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Parking Lot",
+    "Phone": "942-472-2778",
+    "Email": "bmattke38@ovh.net",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 12:11:36",
+        "endTime": "2018/05/14 07:01:09"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 07:00:30",
+        "endTime": "2018/05/14 21:22:37"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 205,
+    "FacilityName": "Renfrew Park Community Centre",
+    "FacilityAddress": "2929 E 22nd Avenue",
+    "Location": "Room 110",
+    "Latitude": 49.25242491,
+    "Longitude": -123.0429581,
+    "AdvanceOnly": true,
+    "LocalArea": "Renfrew-Collingwood",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "No Parking",
+    "Phone": "704-147-7136",
+    "Email": "gphoebe39@booking.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 18:59:41",
+        "endTime": "2018/05/17 23:09:59"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 21:40:39",
+        "endTime": "2018/05/15 18:03:50"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 206,
+    "FacilityName": "Killarney Community Centre",
+    "FacilityAddress": "6260 Killarney St",
+    "Location": "Seniors Centre Dining Room",
+    "Latitude": 49.22740993,
+    "Longitude": -123.0443906,
+    "AdvanceOnly": true,
+    "LocalArea": "Killarney",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "774-244-7656",
+    "Email": "bchipman3a@ucla.edu",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 23:39:33",
+        "endTime": "2018/05/16 06:04:17"
+      },
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 15:49:50",
+        "endTime": "2018/05/14 10:20:52"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 207,
+    "FacilityName": "Trout Lake Community Centre",
+    "FacilityAddress": "3360 Victoria Drive",
+    "Location": "Grandview and Lakewood Rooms (combined)",
+    "Latitude": 49.255,
+    "Longitude": -123.065,
+    "AdvanceOnly": true,
+    "LocalArea": "Kensington-Cedar Cottage",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "784-264-3881",
+    "Email": "jtrainer3b@cdbaby.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 18:06:39",
+        "endTime": "2018/05/15 12:48:47"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 14:17:46",
+        "endTime": "2018/05/17 10:34:11"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 208,
+    "FacilityName": "Sunset Community Centre",
+    "FacilityAddress": "6810 Main St",
+    "Location": "Hall",
+    "Latitude": 49.22286659,
+    "Longitude": -123.1006104,
+    "AdvanceOnly": true,
+    "LocalArea": "Sunset",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "252-568-3243",
+    "Email": "gkennicott3c@vkontakte.ru",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 13:36:47",
+        "endTime": "2018/05/15 11:04:19"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 22:13:10",
+        "endTime": "2018/05/15 12:53:47"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 209,
+    "FacilityName": "Marpole - Oakridge Community Centre",
+    "FacilityAddress": "990 W 59th Avenue",
+    "Location": "Auditorium",
+    "Latitude": 49.21623758,
+    "Longitude": -123.128962,
+    "AdvanceOnly": true,
+    "LocalArea": "Marpole",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Around the back with wheelchair parking",
+    "Phone": "445-672-3285",
+    "Email": "jipwell3d@discovery.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 17:07:56",
+        "endTime": "2018/05/15 20:26:13"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 12:49:38",
+        "endTime": "2018/05/17 19:30:59"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 210,
+    "FacilityName": "Kerrisdale Community Centre",
+    "FacilityAddress": "5851 West Boulevard",
+    "Location": "Auditorium",
+    "Latitude": 49.23318536,
+    "Longitude": -123.1570929,
+    "AdvanceOnly": true,
+    "LocalArea": "Kerrisdale",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Parking Lot",
+    "Phone": "600-908-3468",
+    "Email": "erevett3e@vinaora.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 19:45:56",
+        "endTime": "2018/05/17 06:27:18"
+      },
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 20:20:06",
+        "endTime": "2018/05/15 19:33:33"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 211,
+    "FacilityName": "Kitsilano War Memorial Community Centre",
+    "FacilityAddress": "2690 Larch St",
+    "Location": "Gymnasium",
+    "Latitude": 49.26205535,
+    "Longitude": -123.1601056,
+    "AdvanceOnly": true,
+    "LocalArea": "Kitsilano",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Underground Parking",
+    "Phone": "523-567-9007",
+    "Email": "slicquorish3f@whitehouse.gov",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 09:16:25",
+        "endTime": "2018/05/15 06:25:35"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 21:20:41",
+        "endTime": "2018/05/16 13:38:53"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 400,
+    "FacilityName": "University Hill Secondary School",
+    "FacilityAddress": "3228 Ross Drive",
+    "Location": "Gymnasium",
+    "Latitude": 49.25409087,
+    "Longitude": -123.2392624,
+    "AdvanceOnly": false,
+    "LocalArea": "UEL & UBC Lands",
+    "WheelchairAccess": "No wheelchair access",
+    "Parking": "Street Parking",
+    "Phone": "967-467-2137",
+    "Email": "vheindrich3g@usnews.com",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/14 00:00:00",
+        "startTime": "2018/05/14 20:51:38",
+        "endTime": "2018/05/14 07:46:42"
+      },
+      {
+        "pollingDate": "2018/05/16 00:00:00",
+        "startTime": "2018/05/16 20:53:44",
+        "endTime": "2018/05/16 23:18:27"
+      }
+    ]
+  },
+  {
+    "VotingPlaceID": 401,
+    "FacilityName": "UBC AMS Student Nest",
+    "FacilityAddress": "6133 Student Union Blvd",
+    "Location": "2306/2309",
+    "Latitude": 49.26664699,
+    "Longitude": -123.2498954,
+    "AdvanceOnly": false,
+    "LocalArea": "UEL & UBC Lands",
+    "WheelchairAccess": "Wheelchair accessible by ramp",
+    "Parking": "Street Parking",
+    "Phone": "264-796-7003",
+    "Email": "dsimkiss3h@virginia.edu",
+    "PollingPlaceDates": [
+      {
+        "pollingDate": "2018/05/15 00:00:00",
+        "startTime": "2018/05/15 08:49:46",
+        "endTime": "2018/05/15 17:41:31"
+      },
+      {
+        "pollingDate": "2018/05/17 00:00:00",
+        "startTime": "2018/05/17 19:10:40",
+        "endTime": "2018/05/17 23:51:57"
+      }
+    ]
+  }
+]

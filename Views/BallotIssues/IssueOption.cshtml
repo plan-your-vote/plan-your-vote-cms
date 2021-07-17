@@ -1,7 +1,5 @@
 ﻿@model Web.Models.BallotIssue
-@using Microsoft.Extensions.Localization
-@using Web
-@inject IStringLocalizer<SharedResource> Localizer
+@inject LocService SharedLocalizer
 
 @{ 
     var lastIndex = Model.BallotIssueOptions.Count - 1;
@@ -14,6 +12,6 @@
         </div>
     </div>
     <div class="col-md-2 form-group">
-        <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary btn-sm" onClick="removeOption(@lastIndex)">@Localizer["ballotIssues_removeOptionButton"]</button>
+        <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary btn-sm" onClick="removeOption(@lastIndex)">@SharedLocalizer.GetLocalizedHtmlString("ballotIssues_removeOptionButton")</button>
     </div>
 </div>

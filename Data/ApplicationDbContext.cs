@@ -22,7 +22,7 @@ namespace Web.Data
             builder.Entity<CandidateDetail>()
                 .HasOne(cd => cd.Candidate)
                 .WithMany(c => c.Details);
-            builder.Seed();
+            //builder.Seed();
         }
 
         public DbSet<State> StateSingleton { get; set; }
