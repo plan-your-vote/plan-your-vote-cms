@@ -7,13 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Resources\Views\**" />
-	  <Content Remove="Resources\Views\**" />
-	  <EmbeddedResource Remove="Resources\Views\**" />
-	  <None Remove="Resources\Views\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<Compile Remove="Models\ViewHelper.cs" />
 	</ItemGroup>
 

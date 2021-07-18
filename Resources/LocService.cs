@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Localization;
+using System.Reflection;
+
 
 // https://damienbod.com/2017/11/01/shared-localization-in-asp-net-core-mvc/
 // https://github.com/damienbod/AspNetCoreMvcSharedLocalization/tree/master/AspNetCoreMvcSharedLocalization
 
 namespace Web.Resources
 {
-    using System.Reflection;
-
-    using Microsoft.Extensions.Localization;
-
     public class LocService
     {
         private readonly IStringLocalizer _localizer;
