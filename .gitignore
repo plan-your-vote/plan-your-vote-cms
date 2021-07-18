@@ -1,7 +1,9 @@
 ## CUSTOM
 ## no databases
 *.db
+## uploads is a temp folder so there is not need to push to source control
 uploads
+## bin & obj are temp folders that are generated at compile time
 bin
 obj
 
