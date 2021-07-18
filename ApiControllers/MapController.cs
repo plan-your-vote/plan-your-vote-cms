@@ -26,7 +26,8 @@ namespace Web.ApiControllers
         public static string AccessToken { get; set; }
         public static MapConfiguration MapConfiguration { get; set; }
 
-        public static async Task<string> GetAccessToken()
+        //public static async Task<string> GetAccessToken()
+        public static string GetAccessToken()
         {
             string accessToken = AccessToken;
 
@@ -34,20 +35,20 @@ namespace Web.ApiControllers
             {
                 if (string.IsNullOrEmpty(accessToken))
                 {
-                    /*
-                    SecretBundle secret = null;
+                    
+                    //SecretBundle secret = null;
 
-                    KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
+                    //KeyVaultClient keyVaultClient = new KeyVaultClient(new KeyVaultClient.AuthenticationCallback(new AzureServiceTokenProvider().KeyVaultTokenCallback));
 
-                    secret = await keyVaultClient
-                        .GetSecretAsync($"https://{MapConfiguration.KeyVaultName}.vault.azure.net/secrets/{MapConfiguration.SecretName}")
-                        .ConfigureAwait(false);
+                    //secret = await keyVaultClient
+                    //    .GetSecretAsync($"https://{MapConfiguration.KeyVaultName}.vault.azure.net/secrets/{MapConfiguration.SecretName}")
+                    //    .ConfigureAwait(false);
 
-                    if (secret != null)
-                    {
-                        accessToken = secret.Value;
-                    }
-                    */
+                    //if (secret != null)
+                    //{
+                    //    accessToken = secret.Value;
+                    //}
+                    
                     accessToken = MapConfiguration.MapBoxToken;
                 }
             }

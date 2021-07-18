@@ -1,4 +1,9 @@
-﻿<h1>File upload of seed <i> @ViewBag.Importing  </i> data</h1>
+﻿@inject LocService SharedLocalizer
+
+<h1>@SharedLocalizer.GetLocalizedHtmlString("file_upload_of") 
+    <i> @ViewBag.Importing  </i> 
+    @SharedLocalizer.GetLocalizedHtmlString("data_for_import")
+</h1>
 
 @*
     To post files to server we need form with post method,
@@ -7,7 +12,7 @@
 *@
 <form method="post" enctype="multipart/form-data">
     <input type="file" name="file" />
-    <button type="submit">Upload</button>
+    <button type="submit"> @SharedLocalizer.GetLocalizedHtmlString("upload")</button>
 </form>
 
 @*

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Web.Data;
 using Web.Models;
 using Web.Models.JSON;
+using Web.Resources;
 
 namespace Web.CmsControllers
 {
@@ -24,25 +25,29 @@ namespace Web.CmsControllers
         private readonly ILogger<ImportsController> _logger;
         private readonly IWebHostEnvironment _env;
         private readonly IConfiguration _configuration;
+        private readonly LocService _locService;
 
         public ImportsController(ApplicationDbContext context, IConfiguration configuration,
-            ILogger<ImportsController> logger, IWebHostEnvironment env)
+            ILogger<ImportsController> logger, IWebHostEnvironment env, LocService locService)
         {
             _context = context;
             _logger = logger;
             _env = env;
             _configuration = configuration;
+            _locService = locService;
         }
 
         public IActionResult LoadElectionsFromJsonFile()
         {
-            ViewBag.Importing = "Elections";
+            ViewBag.Importing = _locService.GetLocalizedHtmlString("Election");
             return View("Upload");
         }
 
         [HttpPost]
         public IActionResult LoadElectionsFromJsonFile(IFormFile file)
         {
+            string strType = _locService.GetLocalizedHtmlString("Election");
+
             if (file != null)
             {
                 // Delete existing elections
@@ -55,25 +60,32 @@ namespace Web.CmsControllers
                 _context.Elections.AddRange(data);
                 _context.SaveChanges();
 
-                ViewBag.Message = $"File successfully uploaded to {absoluteFileName} comprising {data.Count} items of elections data.";
+                string uploadMsg = $@"{_locService.GetLocalizedHtmlString("file_uploaded_to")} 
+                        {absoluteFileName}";
+                string countMsg = $@"{data.Count} {strType} {_locService.GetLocalizedHtmlString("items")}.";
+
+                ViewBag.Message = $"{uploadMsg} - {countMsg}.";
             }
             else
             {
-                ViewBag.Message = $"ERROR: Please choose an elections JSON file to upload.";
+                string strFormat = _locService.GetLocalizedHtmlString("choose_json_file_to_upload");
+                ViewBag.Message = String.Format(strFormat, strType);
             }
-            ViewBag.Importing = "Elections";
+            ViewBag.Importing = strType;
             return View("Upload");
         }
 
         public IActionResult LoadIssueOptionsFromJsonFile()
         {
-            ViewBag.Importing = "Issue-Options";
+            ViewBag.Importing = _locService.GetLocalizedHtmlString("BallotIssue");
             return View("Upload");
         }
 
         [HttpPost]
         public IActionResult LoadIssueOptionsFromJsonFile(IFormFile file)
         {
+            string strType = _locService.GetLocalizedHtmlString("BallotIssueOptions");
+
             if (file != null)
             {
                 // Delete existing issue options
@@ -86,25 +98,31 @@ namespace Web.CmsControllers
                  _context.IssueOptions.AddRange(data);
                 _context.SaveChanges();
 
-                ViewBag.Message = $"File successfully uploaded to {absoluteFileName} comprising {data.Count} items of issue-option data.";
+                string uploadMsg = $@"{_locService.GetLocalizedHtmlString("file_uploaded_to")} 
+                        {absoluteFileName}";
+                string countMsg = $@"{data.Count} {strType} {_locService.GetLocalizedHtmlString("items")}.";
+
+                ViewBag.Message = $"{uploadMsg} - {countMsg}.";
             }
             else
             {
-                ViewBag.Message = $"ERROR: Please choose an issue-options JSON file to upload.";
+                string strFormat = _locService.GetLocalizedHtmlString("choose_json_file_to_upload");
+                ViewBag.Message = String.Format(strFormat, strType);
             }
-            ViewBag.Importing = "Issue-Options";
+            ViewBag.Importing = strType;
             return View("Upload");
         }
 
         public IActionResult LoadStepsFromJsonFile()
         {
-            ViewBag.Importing = "Steps";
+            ViewBag.Importing = _locService.GetLocalizedHtmlString("shared_layout_ElectionDetailsOptionSteps");
             return View("Upload");
         }
 
         [HttpPost]
         public IActionResult LoadStepsFromJsonFile(IFormFile file)
         {
+            string strType = _locService.GetLocalizedHtmlString("shared_layout_ElectionDetailsOptionSteps");
             if (file != null)
             {
                 // Delete existing issue options
@@ -117,25 +135,34 @@ namespace Web.CmsControllers
                 _context.Steps.AddRange(data);
                 _context.SaveChanges();
 
-                ViewBag.Message = $"File successfully uploaded to {absoluteFileName} comprising {data.Count} items of step data.";
+                string uploadMsg = $@"{_locService.GetLocalizedHtmlString("file_uploaded_to")} 
+                        {absoluteFileName}";
+                string countMsg = $@"{data.Count} 
+                        {strType} 
+                        {_locService.GetLocalizedHtmlString("items")}.";
+
+                ViewBag.Message = $"{uploadMsg} - {countMsg}.";
             }
             else
             {
-                ViewBag.Message = $"ERROR: Please choose an steps JSON file to upload.";
+                string strFormat = _locService.GetLocalizedHtmlString("choose_json_file_to_upload");
+                ViewBag.Message = String.Format(strFormat, strType);
             }
-            ViewBag.Importing = "Steps";
+            ViewBag.Importing = strType;
             return View("Upload");
         }
 
         public IActionResult LoadBallotIssuesFromJsonFile()
         {
-            ViewBag.Importing = "Ballot-Issues";
+            ViewBag.Importing = _locService.GetLocalizedHtmlString("BallotIssue");
             return View("Upload");
         }
 
         [HttpPost]
         public IActionResult LoadBallotIssuesFromJsonFile(IFormFile file)
         {
+            string strType = _locService.GetLocalizedHtmlString("BallotIssue");
+
             if (file != null)
             {
                 // Delete existing ballot issues
@@ -148,26 +175,33 @@ namespace Web.CmsControllers
                 _context.BallotIssues.AddRange(data);
                 _context.SaveChanges();
 
-                ViewBag.Message = $"File successfully uploaded to {absoluteFileName} comprising {data.Count} items of ballots-issues data.";
+                string uploadMsg = $@"{_locService.GetLocalizedHtmlString("file_uploaded_to")} 
+                        {absoluteFileName}";
+                string countMsg = $@"{data.Count} {strType} {_locService.GetLocalizedHtmlString("items")}.";
+
+                ViewBag.Message = $"{uploadMsg} - {countMsg}.";
             }
             else
             {
-                ViewBag.Message = $"ERROR: Please choose an ballot-issues JSON file to upload.";
+                string strFormat = _locService.GetLocalizedHtmlString("choose_json_file_to_upload");
+                ViewBag.Message = String.Format(strFormat, strType);
             }
-            ViewBag.Importing = "Ballot_Issues";
+            ViewBag.Importing = strType;
             return View("Upload");
         }
 
         public IActionResult LoadPollingPlacesFromJsonFile()
         {
-            ViewBag.Importing = "Polling-Places";
+            ViewBag.Importing = _locService.GetLocalizedHtmlString("home_index_pollingPlaces");
             return View("Upload");
         }
 
         [HttpPost]
         public IActionResult LoadPollingPlacesFromJsonFile(IFormFile file)
         {
-             if (file != null)
+            string strType = _locService.GetLocalizedHtmlString("home_index_pollingPlaces");
+
+            if (file != null)
             {
                 // Delete existing polling dates
                 _context.PollingPlaceDates.RemoveRange(_context.PollingPlaceDates);
@@ -181,25 +215,32 @@ namespace Web.CmsControllers
                 _context.PollingPlaces.AddRange(data);
                 _context.SaveChanges();
 
-                ViewBag.Message = $"File successfully uploaded to {absoluteFileName} comprising {data.Count} items of polling places data.";
+                string uploadMsg = $@"{_locService.GetLocalizedHtmlString("file_uploaded_to")} 
+                        {absoluteFileName}";
+                string countMsg = $@"{data.Count} {strType} {_locService.GetLocalizedHtmlString("items")}.";
+
+                ViewBag.Message = $"{uploadMsg} - {countMsg}.";
             }
             else
             {
-                ViewBag.Message = $"ERROR: Please choose an polling-places JSON file to upload.";
+                string strFormat = _locService.GetLocalizedHtmlString("choose_json_file_to_upload");
+                ViewBag.Message = String.Format(strFormat, strType);
             }
-            ViewBag.Importing = "Polling-Places";
+            ViewBag.Importing = strType;
             return View("Upload");
         }
 
         public IActionResult LoadCandidatesFromJsonFile()
         {
-            ViewBag.Importing = "Candidates";
+            ViewBag.Importing = _locService.GetLocalizedHtmlString("candidates_index_title");
             return View("Upload");
         }
 
         [HttpPost]
         public IActionResult LoadCandidatesFromJsonFile(IFormFile file)
         {
+            string strType = _locService.GetLocalizedHtmlString("candidates_index_title");
+
             List<JSONCandidate> candidateData;
             string uploadDirecotroy;
 
@@ -249,14 +290,19 @@ namespace Web.CmsControllers
 
                 SeedData.GetCandidatesAndContacts(_context, candidateData);
 
-                ViewBag.Message = $"File successfully uploaded to {absoluteFileName} comprising {candidateData.Count} items of data.";
+                string uploadMsg = $@"{_locService.GetLocalizedHtmlString("file_uploaded_to")} 
+                        {absoluteFileName}";
+                string countMsg = $@"{candidateData.Count} {strType} {_locService.GetLocalizedHtmlString("items")}.";
+
+                ViewBag.Message = $"{uploadMsg} - {countMsg}.";
             }
             else
             {
 
-                ViewBag.Message = $"ERROR: Please choose a candidates JSON file to upload.";
+                string strFormat = _locService.GetLocalizedHtmlString("choose_json_file_to_upload");
+                ViewBag.Message = String.Format(strFormat, strType);
             }
-            ViewBag.Importing = "Candidates";
+            ViewBag.Importing = strType;
             return View("Upload");
         }
 
@@ -285,9 +331,9 @@ namespace Web.CmsControllers
             var fileName = System.IO.Path.GetFileName(file.FileName);
 
             if (_configuration["Uploads:DestinationDirectory"] != null)
-                uploadDirectory = _configuration["Uploads:DestinationDirectory"];
+                uploadDirectory = _configuration["Uploads:DestinationDirectory"] + Path.DirectorySeparatorChar;
             else
-                uploadDirectory = "uploads/";
+                uploadDirectory = "uploads" + Path.DirectorySeparatorChar;
 
             var uploadPath = Path.Combine(_env.ContentRootPath, uploadDirectory);
 

@@ -22,17 +22,17 @@ namespace Web.Models
         [Required(ErrorMessage = "Please select an image to upload.")]
         public string Picture { get; set; }
 
-        [Display(Name = "CandidateDetails")]
+        [Display(Name = "Candidate Details")]
         [Required(ErrorMessage = "Please enter candidate details.")]
         public List<CandidateDetail> Details { get; set; }
 
-        [Display(Name = "OrganizationId")]
+        [Display(Name = "Org Id")]
         public int OrganizationId { get; set; }
 
         [Display(Name = "Organization")]
         public Organization Organization { get; set; }
 
-        [Display(Name = "CandidateRaces")]
+        [Display(Name = "Candidate Races")]
         public List<CandidateRace> CandidateRaces { get; set; }
 
         [Display(Name = "Contacts")]
