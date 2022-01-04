@@ -11,55 +11,28 @@ namespace Web
         internal const int DefaultElectionId = 1; // Hardcoded
 
         internal static void Initialize(ApplicationDbContext context) {
-           var themes = GetThemes().ToArray();
-           context.Themes.AddRange(themes);
-           context.SaveChanges();
-           var images = GetImages().ToArray();
-           context.Images.AddRange(images);
-           context.SaveChanges();
-           if (context.Themes?.Any() != true)
-           {
-               themes = GetThemes().ToArray();
-               context.Themes.AddRange(themes);
-               context.SaveChanges();
-           }
-           if (context.Images?.Any() != true)
-           {
-               images = GetImages().ToArray();
-               context.Images.AddRange(images);
-               context.SaveChanges();
-           }
-           if (context.SocialMedias?.Any() != true)
-           {
-               var socialMedias = GetSocialMedias().ToArray();
-               context.SocialMedias.AddRange(socialMedias);
-               context.SaveChanges();
-           }
-       }
+            if (context.Themes?.Any() != true)
+            {
+                var themes = GetThemes().ToArray();
+                context.Themes.AddRange(themes);
+                context.SaveChanges();
+            }
 
-        // internal static void Initialize(ApplicationDbContext context)
-        // {
-        //     if (context.Themes?.Any() != true)
-        //     {
-        //         var themes = GetThemes().ToArray();
-        //         context.Themes.AddRange(themes);
-        //         context.SaveChanges();
-        //     }
+            if (context.Images?.Any() != true)
+            {
+                var images = GetImages().ToArray();
+                context.Images.AddRange(images);
+                context.SaveChanges();
+            }
 
-        //     if (context.Images?.Any() != true)
-        //     {
-        //         var images = GetImages().ToArray();
-        //         context.Images.AddRange(images);
-        //         context.SaveChanges();
-        //     }
+            if (context.SocialMedias?.Any() != true)
+            {
+                var socialMedias = GetSocialMedias().ToArray();
+                context.SocialMedias.AddRange(socialMedias);
+                context.SaveChanges();
+            }
+        }
 
-        //     if (context.SocialMedias?.Any() != true)
-        //     {
-        //         var socialMedias = GetSocialMedias().ToArray();
-        //         context.SocialMedias.AddRange(socialMedias);
-        //         context.SaveChanges();
-        //     }
-        // }
 
         private static List<Image> GetImages()
         {

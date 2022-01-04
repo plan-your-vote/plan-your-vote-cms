@@ -717,4 +717,22 @@
   <data name="shared_layout_navSiteContents" xml:space="preserve">
     <value>Contenu du site</value>
   </data>
+  <data name="choose_json_file_to_upload" xml:space="preserve">
+    <value>ERREUR : Veuillez choisir {0} fichier JSON à télécharger.</value>
+  </data>
+  <data name="data_for_import" xml:space="preserve">
+    <value>données à importer</value>
+  </data>
+  <data name="file_uploaded_to" xml:space="preserve">
+    <value>Fichier téléchargé avec succès vers</value>
+  </data>
+  <data name="file_upload_of" xml:space="preserve">
+    <value>Téléchargement de fichier de</value>
+  </data>
+  <data name="items" xml:space="preserve">
+    <value>éléments</value>
+  </data>
+  <data name="upload" xml:space="preserve">
+    <value>Télécharger</value>
+  </data>
 </root>

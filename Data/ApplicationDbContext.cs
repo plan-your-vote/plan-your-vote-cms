@@ -6,10 +6,9 @@ namespace Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options)
-        {
+        public ApplicationDbContext() { }
 
-        }
+        public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -22,7 +21,7 @@ namespace Web.Data
             builder.Entity<CandidateDetail>()
                 .HasOne(cd => cd.Candidate)
                 .WithMany(c => c.Details);
-            builder.Seed();
+            //builder.Seed();
         }
 
         public DbSet<State> StateSingleton { get; set; }

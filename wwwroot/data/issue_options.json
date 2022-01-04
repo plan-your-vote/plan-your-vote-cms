@@ -1,0 +1,26 @@
+﻿[
+  {
+    "BallotIssueId": 1,
+    "IssueOptionInfo": "Yes"
+  },
+  {
+    "BallotIssueId": 1,
+    "IssueOptionInfo": "No"
+  },
+  {
+    "BallotIssueId": 2,
+    "IssueOptionInfo": "Yes"
+  },
+  {
+    "BallotIssueId": 2,
+    "IssueOptionInfo": "No"
+  },
+  {
+    "BallotIssueId": 3,
+    "IssueOptionInfo": "Yes"
+  },
+  {
+    "BallotIssueId": 3,
+    "IssueOptionInfo": "No"
+  }
+]

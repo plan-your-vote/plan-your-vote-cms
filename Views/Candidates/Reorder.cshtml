@@ -1,11 +1,8 @@
 ﻿@model IList<Web.Models.CandidateRace>
-@using  Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
-@using Web
-@inject IStringLocalizer<SharedResource> Localizer
+@inject LocService SharedLocalizer
 
 @{
-    ViewData["Title"] = @Localizer["candidates_reorder_title"];
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("candidates_reorder_title");
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -67,13 +64,13 @@
             </table>
 
             <div class="form-group">
-                <input type="submit" value=@Localizer["saveButton"] class="btn btn-primary" />
+                <input type="submit" value=@SharedLocalizer.GetLocalizedHtmlString("saveButton") class="btn btn-primary" />
             </div>
         </form>
     }
 </div>
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["backButton"]</a>
+    <a class="btn btn-primary" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("backButton")</a>
 </div>
 
 <script>

@@ -1,12 +1,8 @@
-﻿@using  Microsoft.AspNetCore.Mvc.Localization
-@* @inject IViewLocalizer Localizer *@
-@using Microsoft.Extensions.Localization
-@using Web
-@inject IStringLocalizer<SharedResource> Localizer
+﻿@inject LocService SharedLocalizer
 
 @{
-    ViewData["Title"] = @Localizer["home_privacy_title"];
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("home_privacy_title");
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>@Localizer["home_privacy_msg"]</p>
+<p>@SharedLocalizer.GetLocalizedHtmlString("home_privacy_msg")</p>

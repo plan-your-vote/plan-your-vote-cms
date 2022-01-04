@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Web.Data
@@ -10,15 +11,21 @@ namespace Web.Data
     {
         public static UserManager<IdentityUser> userManager;
         public static RoleManager<IdentityRole> roleManager;
+        public static ApplicationDbContext _context;
 
-        public static async void InitializeAsync(IApplicationBuilder app)
+        public static async void InitializeAsync(IApplicationBuilder app, ApplicationDbContext context)
         {
-            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                userManager = serviceScope.ServiceProvider.GetService<UserManager<IdentityUser>>();
-                roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+            _context = context;
 
-                await InsertUserAsync().ConfigureAwait(false);
+            if (!_context.Users.Any())
+            {
+                using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+                {
+                    userManager = serviceScope.ServiceProvider.GetService<UserManager<IdentityUser>>();
+                    roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+
+                    await InsertUserAsync().ConfigureAwait(false);
+                }
             }
         }
 
@@ -28,18 +35,18 @@ namespace Web.Data
                 Constants.Account.ROLE_ADMIN,
                 Constants.Account.ROLE_ADMIN);
             await AddNewUserToRole(
-                Constants.Account.ADMIN_EMAIL,
-                Constants.Account.ADMIN_USERNAME,
-                Constants.Account.DEFAULT_PASSWORD,
+                Constants.Account.AdminEmail,
+                Constants.Account.AdminUsername,
+                Constants.Account.DefaultPassword,
                 Constants.Account.ROLE_ADMIN);
 
             await CreateRole(
                 Constants.Account.ROLE_EDITOR,
                 Constants.Account.ROLE_EDITOR);
             await AddNewUserToRole(
-                Constants.Account.EDITOR_EMAIL,
-                Constants.Account.EDITOR_USERNAME,
-                Constants.Account.DEFAULT_PASSWORD,
+                Constants.Account.EditorEmail,
+                Constants.Account.EditorUsername,
+                Constants.Account.DefaultPassword,
                 Constants.Account.ROLE_EDITOR);
         }
 

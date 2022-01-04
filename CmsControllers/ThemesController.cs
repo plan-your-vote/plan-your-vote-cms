@@ -22,11 +22,11 @@ namespace Web.CmsControllers
     public class ThemesController : Controller
     {
 		
-		private readonly IHostingEnvironment _env;
+		private readonly IWebHostEnvironment _env;
 
         private readonly ApplicationDbContext _context;
 
-        public ThemesController(ApplicationDbContext context, IHostingEnvironment env)
+        public ThemesController(ApplicationDbContext context, IWebHostEnvironment env)
         {
             _context = context;
 			_env = env;

@@ -1,0 +1,36 @@
+﻿@inject LocService SharedLocalizer
+
+<h1>@SharedLocalizer.GetLocalizedHtmlString("file_upload_of") 
+    <i> @ViewBag.Importing  </i> 
+    @SharedLocalizer.GetLocalizedHtmlString("data_for_import")
+</h1>
+
+@*
+    To post files to server we need form with post method,
+    and additionally browser must use multipart/form-data
+    encoding. Otherwise file will not be sent.
+*@
+<form method="post" enctype="multipart/form-data">
+    <input type="file" name="file" />
+    <button type="submit"> @SharedLocalizer.GetLocalizedHtmlString("upload")</button>
+</form>
+
+@*
+    If upload succeeded we will show nice message to user.
+*@
+@if (ViewBag.Message != null)
+{
+    string msg = ViewBag.Message;
+    if (msg.ToLower().Contains("error"))
+    {
+        <div class="alert alert-danger" style="margin-top:20px">
+            @ViewBag.Message
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success" style="margin-top:20px">
+            @ViewBag.Message
+        </div>
+    }
+}

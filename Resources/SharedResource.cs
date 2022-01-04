@@ -1,7 +1,4 @@
-namespace Web
+namespace Web.Resources
 {
-    public class SharedResource
-    {
-        
-    }
+    public class SharedResource { }
 }

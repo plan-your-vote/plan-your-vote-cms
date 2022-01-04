@@ -1,8 +1,5 @@
 ﻿@model Web.ViewModels.CandidatesByRaceViewModel
-@using Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
-@using Web
-@inject IStringLocalizer<SharedResource> Localizer
+@inject LocService SharedLocalizer
 
 @if (Model.Races.Count > 0)
 {
@@ -10,7 +7,7 @@
     {
         <div class="one-line">
             <h5 class="font-weight-bold">@Html.DisplayFor(model => race.PositionName)</h5>
-            <a class="btn btn-primary" asp-action="Reorder" asp-route-id="@race.RaceId">@Localizer["candidates_list_reorderButton"]</a>
+            <a class="btn btn-primary" asp-action="Reorder" asp-route-id="@race.RaceId">@SharedLocalizer.GetLocalizedHtmlString("candidates_list_reorderButton")</a>
         </div>
         <table class="table candidate-list">
             <thead>
@@ -47,16 +44,16 @@
                             @Html.DisplayFor(cr => candidateRace.Candidate.Organization.Name)
                         </td>
                         @* <td class="button-group"> *@
-                        @*     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["Edit"]</a> *@
-                        @*     <a class="btn btn-primary" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["Details"]</a> *@
-                        @*     <a class="btn btn-primary" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["Delete"]</a> *@
+                        @*     <a class="btn btn-primary" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@SharedLocalizer.GetLocalizedHtmlString("Edit")</a> *@
+                        @*     <a class="btn btn-primary" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@SharedLocalizer.GetLocalizedHtmlString("Details")</a> *@
+                        @*     <a class="btn btn-primary" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@SharedLocalizer.GetLocalizedHtmlString("Delete")</a> *@
                         @* </td> *@
                     </tr>
                     <tr>
                         <td class="text-right" colspan="3">
-                            <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@Localizer["editButton"]</a>
-                            <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@Localizer["detailButton"]</a>
-                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@Localizer["deleteButton"]</a>
+                            <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidateRace.CandidateId">@SharedLocalizer.GetLocalizedHtmlString("editButton")</a>
+                            <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidateRace.CandidateId">@SharedLocalizer.GetLocalizedHtmlString("detailButton")</a>
+                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidateRace.CandidateId">@SharedLocalizer.GetLocalizedHtmlString("deleteButton")</a>
 
                         </td>
                     </tr>
@@ -110,9 +107,9 @@
             <tr>
                 <td class="text-right" colspan="3">
 
-                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidate.CandidateId">@Localizer["editButton"]</a>
-                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidate.CandidateId">@Localizer["detailButton"]</a>
-                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidate.CandidateId">@Localizer["deleteButton"]</a>
+                    <a class="btn btn-primary btn-sm" asp-action="Edit" asp-route-id="@candidate.CandidateId">@SharedLocalizer.GetLocalizedHtmlString("editButton")</a>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@candidate.CandidateId">@SharedLocalizer.GetLocalizedHtmlString("detailButton")</a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@candidate.CandidateId">@SharedLocalizer.GetLocalizedHtmlString("deleteButton")</a>
                 </td>
             </tr>
         }

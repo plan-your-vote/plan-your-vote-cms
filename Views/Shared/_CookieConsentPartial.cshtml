@@ -1,8 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http.Features
-@using Microsoft.Extensions.Localization
-@using Web
-
-@inject IStringLocalizer<SharedResource> Localizer
+@inject LocService SharedLocalizer
 
 @{
     var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
@@ -13,9 +10,9 @@
 @if (showBanner)
 {
     <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
-        @Localizer["shared_cookie_alertMsg"] <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["shared_cookie_learnMore"]</a>.
+        @SharedLocalizer.GetLocalizedHtmlString("shared_cookie_alertMsg") <a asp-area="" asp-controller="Home" asp-action="Privacy">@SharedLocalizer.GetLocalizedHtmlString("shared_cookie_learnMore")</a>.
         <button type="button" class="accept-policy close" data-dismiss="alert" aria-label="Close" data-cookie-string="@cookieString">
-            <span aria-hidden="true">@Localizer["shared_cookie_acceptButton"]</span>
+            <span aria-hidden="true">@SharedLocalizer.GetLocalizedHtmlString("shared_cookie_acceptButton")</span>
         </button>
     </div>
     <script>

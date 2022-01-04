@@ -1,11 +1,8 @@
 ﻿@model Web.Models.BallotIssue
-@using  Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
-@using Web
-@inject IStringLocalizer<SharedResource> Localizer
+@inject LocService SharedLocalizer
 
 @{
-    ViewData["Title"] = @Localizer["ballotIssues_edit_title"];
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("ballotIssues_edit_title");
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -44,7 +41,7 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary btn-sm" onClick="removeOption(@i)">@Localizer["ballotIssues_removeOptionButton"]</button>
+                            <button id="RemoveIssueOption" type="button" role="button" class="btn btn-primary btn-sm" onClick="removeOption(@i)">@SharedLocalizer.GetLocalizedHtmlString("ballotIssues_removeOptionButton")</button>
                         </div>
                     </div>
 
@@ -72,15 +69,15 @@
         </script>
 
             <div class="form-group one-line">
-                <button type="button" role="button" class="btn btn-primary" onClick="addOption()">@Localizer["ballotIssues_addOptionButton"]</button>
+                <button type="button" role="button" class="btn btn-primary" onClick="addOption()">@SharedLocalizer.GetLocalizedHtmlString("ballotIssues_addOptionButton")</button>
           
-                <input type="submit" value=@Localizer["saveButton"] class="btn btn-success" />
+                <input type="submit" value=@SharedLocalizer.GetLocalizedHtmlString("saveButton") class="btn btn-success" />
             </div>
     </form>
 </div>
 
 <div>
-    <a class="btn btn-info" asp-action="Index">@Localizer["backButton"]</a>
+    <a class="btn btn-info" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("backButton")</a>
 </div>
 
 @section Scripts {

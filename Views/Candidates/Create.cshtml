@@ -1,11 +1,8 @@
 ﻿@model Web.ViewModels.CandidateViewModel
-@using  Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
-@using Web
-@inject IStringLocalizer<SharedResource> Localizer
+@inject LocService SharedLocalizer
 
 @{
-    ViewData["Title"] = @Localizer["candidates_create_title"];
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("candidates_create_title");
 }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -122,18 +119,18 @@
         </script>
 
         <div>
-            <button type="button" id="AddDetailField" class="btn btn-primary" onClick="addDetail()">@Localizer["candidates_addDetailButton"]</button>
+            <button type="button" id="AddDetailField" class="btn btn-primary" onClick="addDetail()">@SharedLocalizer.GetLocalizedHtmlString("candidates_addDetailButton")</button>
             &nbsp;|&nbsp;
-            <button type="button" id="AddContactField" class="btn btn-primary" onClick="addContact()">@Localizer["candidates_addContactButton"]</button>
+            <button type="button" id="AddContactField" class="btn btn-primary" onClick="addContact()">@SharedLocalizer.GetLocalizedHtmlString("candidates_addContactButton")</button>
         </div>
         <div class="form-group">
-            <input type="submit" value=@Localizer["createButton"] class="btn btn-primary" />
+            <input type="submit" value=@SharedLocalizer.GetLocalizedHtmlString("createButton") class="btn btn-primary" />
         </div>
     </form>
 </div>
 
 <div>
-    <a class="btn btn-primary" asp-action="Index">@Localizer["backButton"]</a>
+    <a class="btn btn-primary" asp-action="Index">@SharedLocalizer.GetLocalizedHtmlString("backButton")</a>
 </div>
 
 @section Scripts {

@@ -1,11 +1,8 @@
 ﻿@model Web.ViewModels.RaceViewModel
-@using  Microsoft.AspNetCore.Mvc.Localization
-@using Microsoft.Extensions.Localization
-@using Web
-@inject IStringLocalizer<SharedResource> Localizer
+@inject LocService SharedLocalizer
 
 @{
-    ViewData["Title"] = @Localizer["races_edit_title"];
+    ViewData["Title"] = @SharedLocalizer.GetLocalizedHtmlString("races_edit_title");
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -58,7 +55,7 @@
     </div>
 </div>
 <div>
-    <a asp-action="Index" class="btn btn-info">@Localizer["backButton"]</a>
+    <a asp-action="Index" class="btn btn-info">@SharedLocalizer.GetLocalizedHtmlString("backButton")</a>
 </div>
 
 @section Scripts {
